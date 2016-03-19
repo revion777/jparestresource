@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
+    <rewriteSystem systemIdStartString="https://devel.net.ilb.ru/meta/schemas" rewritePrefix="classpath:schemas"/>
+</catalog>

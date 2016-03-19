@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings xmlns="http://www.eclipse.org/eclipselink/xsds/persistence/orm"
+                 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                 version="2.5">
+    <converter class="ru.ilb.common.jpa.converters.UUIDConverterString" auto-apply="true"/>
+    <!-- use for optimized binary uuid storage
+    <converter class="ru.ilb.common.jpa.converters.UUIDConverterBytes" auto-apply="true"/>
+    -->
+    <entity class="ru.ilb.meta.jparestresource.document.Document">
+        <named-query name="Document.byUid">
+            <query>Select d from Document d where d.uid=:uid</query>
+        </named-query>
+        <attributes>
+            <id name="id">
+                <generated-value strategy="AUTO"/>
+            </id>
+            <basic name="uid">
+                <column length="36" nullable="false" name="UID"/>
+                <!-- use for optimized binary uuid storage
+                <column length="16" column-definition="BINARY(16) NOT NULL"/>
+                -->
+                <index unique="true"/>
+            </basic>
+            <basic name="direction">
+                <column column-definition="int(1)"/>
+                <convert>DirectionTypeConverter</convert>
+            </basic>
+            <one-to-many name="docfiles" mapped-by="document" fetch="LAZY">
+                <!-- UNI-directinal: 
+                <join-column name="DOCUMENT_ID" referenced-column-name="ID"/> -->
+                <cascade>
+                    <cascade-all/>
+                </cascade>
+            </one-to-many>
+        </attributes>
+    </entity>
+    <entity class="ru.ilb.meta.jparestresource.document.Docfile">
+        <attributes>
+            <id name="id">
+                <generated-value strategy="AUTO"/>
+            </id>
+            <basic name="uid">
+                <column length="36" nullable="false"/>
+                <!-- use for optimized binary uuid storage
+                <column length="16" column-definition="BINARY(16) NOT NULL"/>
+                -->
+                <index unique="true"/>
+            </basic>
+            <!-- BI-directinal: -->
+            <many-to-one name="document">
+                <cascade>
+                    <cascade-all/>
+                </cascade>
+            </many-to-one>
+        </attributes>
+    </entity>
+    <object-type-converter name="DirectionTypeConverter"
+                           object-type="ru.ilb.meta.jparestresource.document.DirectionType" data-type="java.lang.Integer">
+        <conversion-value object-value="IN" data-value="0" />
+        <conversion-value object-value="OUT" data-value="1" />
+    </object-type-converter>
+</entity-mappings>

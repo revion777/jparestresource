@@ -1,0 +1,134 @@
+#set( $symbol_pound = '#' )
+#set( $symbol_dollar = '$' )
+#set( $symbol_escape = '\' )
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:jaxrs="http://cxf.apache.org/jaxrs"
+       xmlns:jaxrs-client="http://cxf.apache.org/jaxrs-client"
+       xmlns:jee="http://www.springframework.org/schema/jee"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
+        http://cxf.apache.org/jaxrs http://cxf.apache.org/schemas/jaxrs.xsd
+        http://cxf.apache.org/jaxrs-client http://cxf.apache.org/schemas/jaxrs-client.xsd
+        http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee.xsd
+        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd" xmlns:aop="http://www.springframework.org/schema/aop">
+
+    <!-- Load defaults from apache cxf -->
+    <import resource="classpath:META-INF/cxf/cxf.xml" />
+    <!--This switches on the load-time weaving for  @Transactional (in case of mode="aspectj"), @Configurable annotated classes -->
+    <context:load-time-weaver/>
+    <!-- This switches on resolving System properties and JNDI resources in strings like ${symbol_dollar}{propname} -->
+    <context:property-placeholder />
+    <!--Activates @Required, @Autowired, @PostConstruct, @PreDestroy and @Resource -->
+    <context:annotation-config/>
+    <!--Activates @Configurable -->
+    <context:spring-configured/>
+
+    <!-- Configure JPA support -->
+    <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean" >
+        <property name="persistenceXmlLocation" value="classpath*:META-INF/persistence.xml"></property>
+    </bean>
+    <!-- Configure JPA declarative transaction support for @Transactional annotated classes -->
+    <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+        <property name="entityManagerFactory" ref="entityManagerFactory"/>
+    </bean>
+    <tx:annotation-driven transaction-manager="transactionManager" mode="aspectj"/>
+    
+    <!-- Configure shared entity manager in it need to injected manually -->
+    <bean id="entityManager" class = "org.springframework.orm.jpa.support.SharedEntityManagerBean">
+        <property name="entityManagerFactory" ref="entityManagerFactory"/>
+    </bean>
+    <!-- Configure LazyAccessorFactoryImpl to serve domain objects for lazy initialized fields, see also com.sun.xml.bind.XmlAccessorFactory jaxb context property -->
+    <bean class="ru.ilb.common.jpa.jaxb.LazyAccessorFactoryImpl" scope="prototype">
+        <property name="entityManager" ref="entityManager"/>
+    </bean>
+    
+
+    <!-- Configure swagger api support, see also jaxrs:features section in jaxrs:server and maven dependencies
+    <bean id="swagger2Feature" class="org.apache.cxf.jaxrs.swagger.Swagger2Feature">
+        <property name="resourcePackage" value="${groupId}.web"/>
+        <property name="scanAllResources" value="true"/>
+        <property name="dynamicBasePath" value="true"/>
+        <property name="replaceTags" value="true"/>
+        <property name="prettyPrint" value="true"/>
+    </bean>-->
+
+    <!-- Configure xslt support, see also web.xml for refreshTemplates env-entry
+    <bean id="uriResolver" class="ru.ilb.common.rs.ext.ServletContextURIResolver"/>
+    <bean id="xsltProvider" class="org.apache.cxf.jaxrs.provider.XSLTJaxbProvider" >
+        <property name="resolver" ref="uriResolver"/>
+        <property name="produceMediaTypes" value="application/xml,application/*+xml,text/xml,text/html,text/csv"/>
+        <property name="refreshTemplates">
+            <jee:jndi-lookup jndi-name="java:/comp/env/refreshTemplates" />
+        </property>
+    </bean>
+    -->
+    <bean id="searchContextProvider" class="org.apache.cxf.jaxrs.ext.search.SearchContextProvider"/>
+
+    <util:map id="namespaceMap" map-class="java.util.Hashtable">
+        <entry key="urn:ru:ilb:meta:${parentArtifactId}:document" value="doc"/>
+    </util:map>
+
+    <!-- Both jaxbProvider and jsonProvider should be configured identically -->
+    <bean id="jaxbProvider" class="org.apache.cxf.jaxrs.provider.JAXBElementProvider">
+        <property name="namespacePrefixes" ref="namespaceMap"/>
+        <property name="marshallerProperties" ref="marshallerProperties"/>
+        <property name="contextProperties" ref="contextProperties"/>
+        <property name="singleJaxbContext" value="true"/>
+    </bean>
+    <bean id="jsonProvider" class="org.apache.cxf.jaxrs.provider.json.JSONProvider">
+        <property name="namespaceMap" ref="namespaceMap"/>
+        <property name="contextProperties" ref="contextProperties"/>
+        <property name="namespaceSeparator" value=":"/>
+        <property name="singleJaxbContext" value="true"/>
+    </bean>
+    <util:map id="marshallerProperties">
+        <entry key="jaxb.formatted.output">
+            <value type="java.lang.Boolean">true</value>
+        </entry>
+    </util:map>
+    <util:map id="contextProperties">
+        <entry key="eclipselink-oxm-xml" value="schemas/${parentArtifactId}/document-oxm.xml"/>
+        <entry key="com.sun.xml.bind.XmlAccessorFactory" value="true" value-type="java.lang.Boolean"/>
+    </util:map>
+
+
+    <!-- Configure param converters for jaxrs:server and jaxrs:client -->
+    <util:map id="mapParamConverters">
+        <entry key="java.util.Date" value="ru.ilb.common.jaxrs.converters.DateParamConverter" value-type=""/>
+    </util:map>
+    <bean id="mapParamConverterProvider" class="ru.ilb.common.jaxrs.providers.MapParamConverterProvider">
+        <property name="converters" ref="mapParamConverters"/>
+    </bean>
+    <!-- Provider to mail fatal errors to server admin -->
+    <bean id="exceptionHandler" class="ru.ilb.common.jaxrs.exceptionhandler.SendMailExceptionHandler">
+        <property name="mailTo" value="${symbol_dollar}{SERVER_ADMIN}"/>
+    </bean>
+
+    <!-- auto register @Component annotated classes -->
+    <context:component-scan base-package="${groupId}.web"/>
+    <jaxrs:server address="/" basePackages="${groupId}.web">
+        <jaxrs:providers>
+            <ref bean="jaxbProvider"/>
+            <ref bean="jsonProvider"/>
+            <ref bean="searchContextProvider"/>
+            <ref bean="mapParamConverterProvider"/>
+            <ref bean="exceptionHandler"/>
+        </jaxrs:providers>
+        <jaxrs:features>
+            <!-- uncomment for swagger api support
+            <ref bean="swagger2Feature" />
+            -->
+        </jaxrs:features>
+        <jaxrs:extensionMappings>
+            <entry key="xml" value="application/xml;charset=UTF-8"/>
+            <entry key="json" value="application/json;charset=UTF-8"/>
+        </jaxrs:extensionMappings>
+    </jaxrs:server>
+</beans>

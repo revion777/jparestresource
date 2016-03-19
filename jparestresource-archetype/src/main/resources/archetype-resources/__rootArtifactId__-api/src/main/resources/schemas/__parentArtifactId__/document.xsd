@@ -1,0 +1,64 @@
+#set( $symbol_pound = '#' )
+#set( $symbol_dollar = '$' )
+#set( $symbol_escape = '\' )
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema elementFormDefault="qualified"
+            xmlns="urn:ru:ilb:meta:${parentArtifactId}:document"
+            targetNamespace="urn:ru:ilb:meta:${parentArtifactId}:document"
+            xmlns:uuid="urn:ru:ilb:meta:basicuuid:basicuuid"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+>
+    <xsd:import namespace="urn:ru:ilb:meta:basicuuid:basicuuid" schemaLocation="https://devel.net.ilb.ru/meta/schemas/basicuuid/basicuuid.xsd"/>
+
+    <xsd:complexType name="DocumentType">
+        <xsd:sequence>
+            <xsd:element name="uid" type="uuid:UUIDType" minOccurs="0"/>
+            <xsd:element name="displayName" type="xsd:string"/>
+            <xsd:element name="description" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="keywords" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="docDate" type="xsd:date" minOccurs="0"/>
+            <xsd:element name="direction" type="DirectionType" minOccurs="0"/>
+            <xsd:element ref="docfile" minOccurs="0" maxOccurs="unbounded"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:element name="document" type="DocumentType"/>
+    <xsd:complexType name="DocfileType">
+        <xsd:sequence>
+            <xsd:element name="uid" type="uuid:UUIDType" minOccurs="0"/>
+            <xsd:element name="userName" type="xsd:string" />
+            <xsd:element name="userRole" type="xsd:string" />
+            <xsd:element name="confirm" type="xsd:boolean" minOccurs="0" default="false"/>
+            <xsd:element name="comment" type="xsd:string" minOccurs="0" />
+            <xsd:element name="document" type="DocumentType" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:element name="docfile" type="DocfileType"/>
+    <xsd:element name="documents">
+        <xsd:complexType>
+            <xsd:annotation>
+                <xsd:documentation>list of documents</xsd:documentation>
+            </xsd:annotation>
+            <xsd:sequence>
+                <xsd:element ref="document" minOccurs="0" maxOccurs="unbounded">
+                    <xsd:annotation>
+                        <xsd:documentation>document instance</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:simpleType name="DirectionType">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="IN"/>
+            <xsd:enumeration value="OUT"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="ReadOptionsType">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="WITH_DOCUMENT"/>
+            <xsd:enumeration value="WITH_DOCFILES"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+</xsd:schema>
