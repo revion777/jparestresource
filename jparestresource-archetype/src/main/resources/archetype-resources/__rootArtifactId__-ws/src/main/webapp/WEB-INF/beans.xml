@@ -52,7 +52,7 @@
 
     <!-- Configure swagger api support, see also jaxrs:features section in jaxrs:server and maven dependencies
     <bean id="swagger2Feature" class="org.apache.cxf.jaxrs.swagger.Swagger2Feature">
-        <property name="resourcePackage" value="${groupId}.web"/>
+        <property name="resourcePackage" value="${package}.web"/>
         <property name="scanAllResources" value="true"/>
         <property name="dynamicBasePath" value="true"/>
         <property name="replaceTags" value="true"/>
@@ -112,8 +112,8 @@
     </bean>
 
     <!-- auto register @Component annotated classes -->
-    <context:component-scan base-package="${groupId}.web"/>
-    <jaxrs:server address="/" basePackages="${groupId}.web">
+    <context:component-scan base-package="${package}.web"/>
+    <jaxrs:server address="/" basePackages="${package}.web">
         <jaxrs:providers>
             <ref bean="jaxbProvider"/>
             <ref bean="jsonProvider"/>

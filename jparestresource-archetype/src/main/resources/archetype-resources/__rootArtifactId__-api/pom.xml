@@ -17,12 +17,12 @@
         <dependency>
             <groupId>ru.ilb.common</groupId>
             <artifactId>common-jaxb</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>${ilb-common.version}</version>
         </dependency>
         <dependency>
             <groupId>ru.ilb.common</groupId>
             <artifactId>common-meta</artifactId>
-            <version>1.0</version>
+            <version>${ilb-common.version}</version>
         </dependency>
         <dependency>
             <groupId>org.jvnet.jaxb2_commons</groupId>
@@ -115,7 +115,7 @@
                                         <extraarg>-inheritResourceParams</extraarg>
                                         <extraarg>-javaDocs</extraarg>
                                         <extraarg>-tMap</extraarg>
-                                        <extraarg>{urn:ru:ilb:meta:basicuuid:basicuuid}UUIDType=java.util.UUID</extraarg>
+                                        <extraarg>{urn:ru:ilb:basicuuid:basicuuid}UUIDType=java.util.UUID</extraarg>
                                         <extraarg>-catalog</extraarg>
                                         <extraarg>${basedir}/src/main/resources/META-INF/jax-rs-catalog.xml</extraarg>
                                         <extraarg>-xjc-Xannotate</extraarg>

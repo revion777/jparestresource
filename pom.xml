@@ -66,7 +66,6 @@
                 <configuration>
                     <defaultEncoding>${project.build.sourceEncoding}</defaultEncoding>
                     <encoding>${project.build.sourceEncoding}</encoding>
-                    <packageName>com.sample.app</packageName>
                     <archetypeFilteredExtentions>java,xml,xsd,xjb,wadl,sql,sh</archetypeFilteredExtentions>
                 </configuration>
             </plugin>

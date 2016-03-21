@@ -28,7 +28,24 @@
     </pluginManagement>
   </build>
 
+  <developers>
+    <developer>
+      <name>PJSC "Bystrobank"</name>
+      <email>github@bystrobank.ru</email>
+    </developer>
+  </developers>
+
+  <licenses>
+    <license>
+      <name>Apache 2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+      <distribution>repo</distribution>
+      <comments>A business-friendly OSS license</comments>
+    </license>
+  </licenses>
+
   <scm>
-    <connection>scm:svn:https://svn.net.ilb.ru/repos/jparestresource/trunk/jparestresource</connection>
+    <connection>scm:git:https://github.com/ilb/jparestresource.git</connection>
+    <url>https://github.com/ilb/jparestresource</url>
   </scm>
 </project>

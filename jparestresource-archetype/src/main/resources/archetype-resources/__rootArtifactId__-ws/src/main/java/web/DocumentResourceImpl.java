@@ -6,7 +6,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ${groupId}.web;
+package ${package}.web;
 
 import java.util.List;
 import java.util.UUID;
@@ -18,10 +18,10 @@ import org.apache.cxf.annotations.SchemaValidation;
 import org.eclipse.persistence.config.QueryHints;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
-import ru.ilb.meta.${parentArtifactId}.document.Document;
-import ru.ilb.meta.${parentArtifactId}.document.Documents;
-import ${groupId}.api.DocumentsResource;
-import ru.ilb.meta.${parentArtifactId}.document.ReadOptionsType;
+import ${package}.document.Document;
+import ${package}.document.Documents;
+import ${package}.api.DocumentsResource;
+import ${package}.document.ReadOptionsType;
 
 @SchemaValidation(schemas = "schemas/${parentArtifactId}/document.xsd")
 @Path("documents")

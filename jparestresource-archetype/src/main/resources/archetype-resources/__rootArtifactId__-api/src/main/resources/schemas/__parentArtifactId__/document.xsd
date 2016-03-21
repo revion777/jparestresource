@@ -3,12 +3,12 @@
 #set( $symbol_escape = '\' )
 <?xml version="1.0" encoding="UTF-8"?>
 <xsd:schema elementFormDefault="qualified"
-            xmlns="urn:ru:ilb:meta:${parentArtifactId}:document"
-            targetNamespace="urn:ru:ilb:meta:${parentArtifactId}:document"
-            xmlns:uuid="urn:ru:ilb:meta:basicuuid:basicuuid"
+            xmlns="urn:ru:ilb:${parentArtifactId}:document"
+            targetNamespace="urn:ru:ilb:${parentArtifactId}:document"
+            xmlns:uuid="urn:ru:ilb:basicuuid:basicuuid"
             xmlns:xsd="http://www.w3.org/2001/XMLSchema"
 >
-    <xsd:import namespace="urn:ru:ilb:meta:basicuuid:basicuuid" schemaLocation="https://devel.net.ilb.ru/meta/schemas/basicuuid/basicuuid.xsd"/>
+    <xsd:import namespace="urn:ru:ilb:basicuuid:basicuuid" schemaLocation="https://devel.net.ilb.ru/meta/schemas/basicuuid/basicuuid.xsd"/>
 
     <xsd:complexType name="DocumentType">
         <xsd:sequence>

@@ -7,8 +7,8 @@
     xmlns:xsd="http://www.w3.org/2001/XMLSchema"
     xmlns:html="http://www.w3.org/1999/xhtml"
     xmlns="http://wadl.dev.java.net/2009/02"
-    xmlns:doc="urn:ru:ilb:meta:${parentArtifactId}:document"
-    xmlns:uuid="urn:ru:ilb:meta:basicuuid:basicuuid"
+    xmlns:doc="urn:ru:ilb:${parentArtifactId}:document"
+    xmlns:uuid="urn:ru:ilb:basicuuid:basicuuid"
 >
 	 
     <doc title="${parentArtifactId} API">

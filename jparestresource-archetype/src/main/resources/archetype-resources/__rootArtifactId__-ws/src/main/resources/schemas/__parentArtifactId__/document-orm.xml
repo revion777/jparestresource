@@ -9,7 +9,7 @@
     <!-- use for optimized binary uuid storage
     <converter class="ru.ilb.common.jpa.converters.UUIDConverterBytes" auto-apply="true"/>
     -->
-    <entity class="ru.ilb.meta.${parentArtifactId}.document.Document">
+    <entity class="${package}.document.Document">
         <named-query name="Document.byUid">
             <query>Select d from Document d where d.uid=:uid</query>
         </named-query>
@@ -37,7 +37,7 @@
             </one-to-many>
         </attributes>
     </entity>
-    <entity class="ru.ilb.meta.${parentArtifactId}.document.Docfile">
+    <entity class="${package}.document.Docfile">
         <attributes>
             <id name="id">
                 <generated-value strategy="AUTO"/>
@@ -58,7 +58,7 @@
         </attributes>
     </entity>
     <object-type-converter name="DirectionTypeConverter"
-                           object-type="ru.ilb.meta.${parentArtifactId}.document.DirectionType" data-type="java.lang.Integer">
+                           object-type="${package}.document.DirectionType" data-type="java.lang.Integer">
         <conversion-value object-value="IN" data-value="0" />
         <conversion-value object-value="OUT" data-value="1" />
     </object-type-converter>

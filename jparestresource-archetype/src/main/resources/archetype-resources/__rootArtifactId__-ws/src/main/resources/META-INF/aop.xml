@@ -9,7 +9,7 @@
         <aspect name="org.springframework.cache.aspectj.AnnotationCacheAspect" />
     </aspects>
     <weaver options="-XnoInline -Xreweavable -verbose -showWeaveInfo">
-        <include within="${groupId}..*" />
+        <include within="${package}..*" />
         <include within="ru.ilb.common.jpa.jaxb..*" />
     </weaver>
 </aspectj>

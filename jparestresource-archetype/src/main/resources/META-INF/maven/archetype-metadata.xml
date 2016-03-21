@@ -9,11 +9,19 @@
         <include>archetype.sh</include>
       </includes>
     </fileSet>
+    <fileSet encoding="UTF-8">
+      <directory></directory>
+      <includes>
+        <include>LICENSE</include>
+        <include>README.md</include>
+        <include>.gitignore</include>
+      </includes>
+    </fileSet>
   </fileSets>
   <modules>
     <module id="${rootArtifactId}-api" dir="__rootArtifactId__-api" name="${rootArtifactId}-api">
       <fileSets>
-        <fileSet filtered="true" encoding="UTF-8">
+        <fileSet filtered="true" packaged="true" encoding="UTF-8">
           <directory>src/main/java</directory>
           <includes>
             <include>**/*.java</include>
@@ -32,7 +40,7 @@
     </module>
     <module id="${rootArtifactId}-ws" dir="__rootArtifactId__-ws" name="${rootArtifactId}-ws">
       <fileSets>
-        <fileSet filtered="true" encoding="UTF-8">
+        <fileSet filtered="true" packaged="true" encoding="UTF-8">
           <directory>src/main/java</directory>
           <includes>
             <include>**/*.java</include>

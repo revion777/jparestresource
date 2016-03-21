@@ -8,34 +8,51 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <apache-cxf.version>3.1.4</apache-cxf.version>
+        <maven-release-plugin.version>2.5.2</maven-release-plugin.version>
+        <ilb-common.version>1.2</ilb-common.version>
     </properties>
+    <licenses>
+        <license>
+            <name>Apache 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+            <comments>A business-friendly OSS license</comments>
+        </license>
+    </licenses>
+    <developers>
+        <developer>
+            <name>PJSC "Bystrobank"</name>
+            <email>github@bystrobank.ru</email>
+        </developer>
+    </developers>
     <scm>
-        <connection>scm:svn:https://svn.net.ilb.ru/repos/${rootArtifactId}/trunk/${rootArtifactId}</connection>
+        <connection>scm:git:https://github.com/ilb/${rootArtifactId}.git</connection>
+        <url>https://github.com/ilb/${rootArtifactId}</url>
+        <tag>HEAD</tag>
     </scm>
     <distributionManagement>
-        <repository>
-            <id>nexus-releases</id>
-            <name>Nexus Release Repository</name>
-            <url>http://devel.net.ilb.ru:28052/nexus/content/repositories/releases</url>
-        </repository>
         <snapshotRepository>
-            <id>nexus-snapshots</id>
-            <name>Nexus Snapshot Repository</name>
-            <url>http://devel.net.ilb.ru:28052/nexus/content/repositories/snapshots</url>
+            <id>ossrh</id>
+            <name>Sonatype Nexus snapshot repository</name>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
         </snapshotRepository>
+        <repository>
+            <id>ossrh</id>
+            <name>Sonatype Nexus release repository</name>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
     </distributionManagement>
     <build>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-release-plugin</artifactId>
-                <version>2.5</version>
+                <version>${maven-release-plugin.version}</version>
                 <configuration>
-                    <tagBase>https://svn.net.ilb.ru/repos/${rootArtifactId}/tags</tagBase>
-                    <branchBase>https://svn.net.ilb.ru/repos/${rootArtifactId}/branches</branchBase>
-                    <preparationGoals>clean install</preparationGoals>
+                    <useReleaseProfile>false</useReleaseProfile>
+                    <releaseProfiles>release</releaseProfiles>
                     <goals>deploy</goals>
-                    <autoVersionSubmodules>true</autoVersionSubmodules>
+                    <arguments>-Dgpg.passphrase=${gpg.passphrase}</arguments>
                 </configuration>
             </plugin>
             <plugin>
@@ -45,7 +62,6 @@
                 <configuration>
                     <defaultEncoding>${project.build.sourceEncoding}</defaultEncoding>
                     <encoding>${project.build.sourceEncoding}</encoding>
-                    <packageName>com.sample.app</packageName>
                     <archetypeFilteredExtentions>java,xml,xsd,xjb,wadl,sql,sh</archetypeFilteredExtentions>
                 </configuration>
             </plugin>
