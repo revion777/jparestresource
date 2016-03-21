@@ -5,7 +5,7 @@
                xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc"
                xmlns:annox="http://annox.dev.java.net"
                xmlns:inheritance="http://jaxb2-commons.dev.java.net/basic/inheritance"
-               xmlns:uuid="urn:ru:ilb:meta:basicuuid:basicuuid"
+               xmlns:uuid="urn:ru:ilb:basicuuid:basicuuid"
                jaxb:version="2.1"
                xmlns:jpa="http://annox.dev.java.net/javax.persistence"
                jaxb:extensionBindingPrefixes="xjc annox inheritance"
@@ -24,7 +24,7 @@
         
     </jaxb:globalBindings>
     <jaxb:bindings multiple="true" node="//xsd:complexType">
-        <inheritance:extends>ru.ilb.meta.jparestresource.objects.PersistentObject</inheritance:extends>
+        <inheritance:extends>ru.ilb.jparestresource.document.PersistentObject</inheritance:extends>
 <!--        <annox:annotate>
             <annox:annotate annox:class="com.sun.xml.internal.bind.XmlAccessorFactory" value="ru.ilb.common.jpa.jaxb.MyAccessorFactoryImpl"/>
         </annox:annotate>-->

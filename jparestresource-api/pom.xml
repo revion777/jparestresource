@@ -115,7 +115,7 @@
                                         <extraarg>-inheritResourceParams</extraarg>
                                         <extraarg>-javaDocs</extraarg>
                                         <extraarg>-tMap</extraarg>
-                                        <extraarg>{urn:ru:ilb:meta:basicuuid:basicuuid}UUIDType=java.util.UUID</extraarg>
+                                        <extraarg>{urn:ru:ilb:basicuuid:basicuuid}UUIDType=java.util.UUID</extraarg>
                                         <extraarg>-catalog</extraarg>
                                         <extraarg>${basedir}/src/main/resources/META-INF/jax-rs-catalog.xml</extraarg>
                                         <extraarg>-xjc-Xannotate</extraarg>

@@ -15,10 +15,10 @@ import org.apache.cxf.annotations.SchemaValidation;
 import org.eclipse.persistence.config.QueryHints;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
-import ru.ilb.meta.jparestresource.document.Document;
-import ru.ilb.meta.jparestresource.document.Documents;
+import ru.ilb.jparestresource.document.Document;
+import ru.ilb.jparestresource.document.Documents;
 import ru.ilb.jparestresource.api.DocumentsResource;
-import ru.ilb.meta.jparestresource.document.ReadOptionsType;
+import ru.ilb.jparestresource.document.ReadOptionsType;
 
 @SchemaValidation(schemas = "schemas/jparestresource/document.xsd")
 @Path("documents")
