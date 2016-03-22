@@ -1,4 +1,4 @@
-@javax.xml.bind.annotation.XmlSchema(namespace = "urn:ru:ilb:meta:jparestresource:document", elementFormDefault = javax.xml.bind.annotation.XmlNsForm.QUALIFIED)
+@javax.xml.bind.annotation.XmlSchema(namespace = "urn:ru:ilb:jparestresource:document", elementFormDefault = javax.xml.bind.annotation.XmlNsForm.QUALIFIED)
 @XmlAccessorFactory(LazyAccessorFactoryImpl.class)
 package ru.ilb.jparestresource.document;
 

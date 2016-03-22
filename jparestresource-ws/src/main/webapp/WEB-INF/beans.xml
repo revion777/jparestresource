@@ -69,7 +69,7 @@
     <bean id="searchContextProvider" class="org.apache.cxf.jaxrs.ext.search.SearchContextProvider"/>
 
     <util:map id="namespaceMap" map-class="java.util.Hashtable">
-        <entry key="urn:ru:ilb:meta:jparestresource:document" value="doc"/>
+        <entry key="urn:ru:ilb:jparestresource:document" value="doc"/>
     </util:map>
 
     <!-- Both jaxbProvider and jsonProvider should be configured identically -->
@@ -78,17 +78,25 @@
         <property name="marshallerProperties" ref="marshallerProperties"/>
         <property name="contextProperties" ref="contextProperties"/>
         <property name="singleJaxbContext" value="true"/>
+        <property name="schemaHandler" ref="schemaHandler"/>
     </bean>
     <bean id="jsonProvider" class="org.apache.cxf.jaxrs.provider.json.JSONProvider">
         <property name="namespaceMap" ref="namespaceMap"/>
         <property name="contextProperties" ref="contextProperties"/>
         <property name="namespaceSeparator" value=":"/>
         <property name="singleJaxbContext" value="true"/>
+        <property name="schemaHandler" ref="schemaHandler"/>
     </bean>
+    <bean id="schemaHandler" class="org.apache.cxf.jaxrs.utils.schemas.SchemaHandler">
+        <property name="catalogLocation" value="classpath:schemas/jparestresource/catalog.xml"/>
+        <property name="schemaLocations" ref="schemaLocations"/>
+    </bean>
+    <util:list id="schemaLocations">
+        <value>classpath:schemas/jparestresource/document.xsd</value>
+    </util:list>
+
     <util:map id="marshallerProperties">
-        <entry key="jaxb.formatted.output">
-            <value type="java.lang.Boolean">true</value>
-        </entry>
+        <entry key="jaxb.formatted.output" value="true" value-type="java.lang.Boolean"/>
     </util:map>
     <util:map id="contextProperties">
         <entry key="eclipselink-oxm-xml" value="schemas/jparestresource/document-oxm.xml"/>
@@ -110,7 +118,7 @@
 
     <!-- auto register @Component annotated classes -->
     <context:component-scan base-package="ru.ilb.jparestresource.web"/>
-    <jaxrs:server address="/" basePackages="ru.ilb.jparestresource.web">
+    <jaxrs:server address="/" basePackages="ru.ilb.jparestresource.web,ru.ilb.common.jaxrs.providers">
         <jaxrs:providers>
             <ref bean="jaxbProvider"/>
             <ref bean="jsonProvider"/>

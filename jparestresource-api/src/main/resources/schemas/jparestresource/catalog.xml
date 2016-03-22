@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="public">
+    <!--<rewriteSystem systemIdStartString="https://devel.net.ilb.ru/meta/schemas" rewritePrefix="classpath:schemas"/>-->
+
+    <public publicId="urn:ru:ilb:basicuuid:basicuuid" uri="classpath:schemas/basicuuid/basicuuid.xsd" />
+    <uri name="urn:ru:ilb:basicuuid:basicuuid" uri="classpath:schemas/basicuuid/basicuuid.xsd" />
+</catalog>

@@ -11,7 +11,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.ws.rs.Path;
-import org.apache.cxf.annotations.SchemaValidation;
 import org.eclipse.persistence.config.QueryHints;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,7 +19,6 @@ import ru.ilb.jparestresource.document.Documents;
 import ru.ilb.jparestresource.api.DocumentsResource;
 import ru.ilb.jparestresource.document.ReadOptionsType;
 
-@SchemaValidation(schemas = "schemas/jparestresource/document.xsd")
 @Path("documents")
 public class DocumentResourceImpl implements DocumentsResource {
 

@@ -19,6 +19,13 @@
             <artifactId>common-jaxb</artifactId>
             <version>${ilb-common.version}</version>
         </dependency>
+        <!-- to debug sources only -->
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-wadl2java-plugin</artifactId>
+            <version>${apache-cxf.version}</version>
+            <scope>compile</scope>
+        </dependency>
         <dependency>
             <groupId>ru.ilb.common</groupId>
             <artifactId>common-meta</artifactId>
@@ -117,13 +124,13 @@
                                         <extraarg>-tMap</extraarg>
                                         <extraarg>{urn:ru:ilb:basicuuid:basicuuid}UUIDType=java.util.UUID</extraarg>
                                         <extraarg>-catalog</extraarg>
-                                        <extraarg>${basedir}/src/main/resources/META-INF/jax-rs-catalog.xml</extraarg>
+                                        <extraarg>${basedir}/src/main/resources/schemas/jparestresource/catalog.xml</extraarg>
                                         <extraarg>-xjc-Xannotate</extraarg>
                                         <extraarg>-xjc-Xinheritance</extraarg>
                                         <extraarg>-xjc-Xcopyable</extraarg>
                                         <extraarg>-xjc-Xsetters</extraarg>
                                         <extraarg>-xjc-Xsetters-mode=direct</extraarg>
-<!--                                        <extraarg>-xjc-Xxew</extraarg>
+                                        <!--                                        <extraarg>-xjc-Xxew</extraarg>
                                         <extraarg>-xjc-Xxew:instantiate lazy</extraarg>-->
                                         <extraarg>-xjc-Xfluent-api</extraarg>
                                         <extraarg>-xjc-enableIntrospection</extraarg>
@@ -154,7 +161,7 @@
                         <artifactId>jaxb2-basics-annotate</artifactId>
                         <version>1.0.1</version>
                     </dependency>
-<!--                    <dependency>
+                    <!--                    <dependency>
                         <groupId>com.github.jaxb-xew-plugin</groupId>
                         <artifactId>jaxb-xew-plugin</artifactId>
                         <version>1.4</version>

@@ -10,6 +10,9 @@
         <named-query name="Document.byUid">
             <query>Select d from Document d where d.uid=:uid</query>
         </named-query>
+        <entity-listeners>
+            <entity-listener class="ru.ilb.jparestresource.listeners.DocumentListener"/>
+        </entity-listeners>
         <attributes>
             <id name="id">
                 <generated-value strategy="AUTO"/>

@@ -5,7 +5,7 @@
             xmlns:uuid="urn:ru:ilb:basicuuid:basicuuid"
             xmlns:xsd="http://www.w3.org/2001/XMLSchema"
 >
-    <xsd:import namespace="urn:ru:ilb:basicuuid:basicuuid" schemaLocation="https://devel.net.ilb.ru/meta/schemas/basicuuid/basicuuid.xsd"/>
+    <xsd:import namespace="urn:ru:ilb:basicuuid:basicuuid"/>
 
     <xsd:complexType name="DocumentType">
         <xsd:sequence>
