@@ -7,11 +7,18 @@ package ru.ilb.jparestresource.web;
 
 import java.util.List;
 import java.util.UUID;
+import javax.annotation.PostConstruct;
+import javax.annotation.Resource;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.ws.rs.Path;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import org.apache.cxf.jaxrs.provider.JAXBElementProvider;
 import org.eclipse.persistence.config.QueryHints;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import ru.ilb.jparestresource.document.Document;
@@ -25,8 +32,13 @@ public class DocumentResourceImpl implements DocumentsResource {
     @PersistenceContext(unitName = "jparestresource")
     private EntityManager em;
 
+    @Resource(name="jaxbProvider")
+    JAXBElementProvider jaxbElementProvider;
+
     @Autowired
     EntityManagerIntr entityManagerIntr;
+
+    private static final Logger LOG = LoggerFactory.getLogger(DocumentResourceImpl.class);
 
     @Override
     @Transactional
@@ -34,8 +46,8 @@ public class DocumentResourceImpl implements DocumentsResource {
         Documents res = new Documents();
 
         TypedQuery<Document> query = em.createQuery("SELECT d FROM Document d", Document.class);
-        if(options!=null){
-            if(options.contains(ReadOptionsType.WITH_DOCFILES)){
+        if (options != null) {
+            if (options.contains(ReadOptionsType.WITH_DOCFILES)) {
                 query.setHint(QueryHints.LEFT_FETCH, "d.docfiles");
             }
         }
@@ -73,6 +85,21 @@ public class DocumentResourceImpl implements DocumentsResource {
     public void remove(UUID uid) {
         Document doc = find(uid);
         em.remove(doc);
+    }
+
+    @PostConstruct
+    @Transactional
+    public void init() {
+        try {
+            JAXBContext jaxbContext=jaxbElementProvider.getJAXBContext(Documents.class, null);
+            Documents documents=(Documents) jaxbContext.createUnmarshaller().unmarshal(Documents.class.getResourceAsStream("/META-INF/xml/testdata.xml"));
+            for(Document doc:documents.getDocuments()){
+                create(doc);
+            }
+        } catch (JAXBException ex) {
+            LOG.error("init error", ex);
+        }
+        
     }
 
 }

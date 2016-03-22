@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doc:documents xmlns:doc="urn:ru:ilb:jparestresource:document">
+   <doc:document>
+      <doc:uid>5530460f-760c-4ba1-8dfa-1e27f8e8e9ce</doc:uid>
+      <doc:displayName>Subscription documents</doc:displayName>
+      <doc:description>Desctiption follows</doc:description>
+      <doc:keywords>journals</doc:keywords>
+      <doc:docDate>2015-01-01</doc:docDate>
+      <doc:direction>IN</doc:direction>
+   </doc:document>
+   <doc:document>
+      <doc:uid>4ba9494e-2f24-4771-bee4-d592e331e98f</doc:uid>
+      <doc:displayName>Loan treaty</doc:displayName>
+      <doc:description>Some document</doc:description>
+      <doc:keywords></doc:keywords>
+      <doc:docDate>2015-04-25</doc:docDate>
+      <doc:direction>IN</doc:direction>
+   </doc:document>
+   <doc:document>
+      <doc:uid>11077c08-a482-433c-9dad-c0e4f18a99f8</doc:uid>
+      <doc:displayName>Loan application</doc:displayName>
+      <doc:description>Client loan application form</doc:description>
+      <doc:keywords></doc:keywords>
+      <doc:docDate>2015-06-14</doc:docDate>
+      <doc:direction>IN</doc:direction>
+   </doc:document>
+   <doc:document>
+      <doc:uid>31ad044f-eaa8-4a81-b711-aeef181767b5</doc:uid>
+      <doc:displayName>Drivers License</doc:displayName>
+      <doc:description></doc:description>
+      <doc:keywords></doc:keywords>
+      <doc:docDate>2015-08-16</doc:docDate>
+      <doc:direction>IN</doc:direction>
+   </doc:document>
+   <doc:document>
+      <doc:uid>838ecda9-bb49-4c6e-b8f0-1a2f244c7669</doc:uid>
+      <doc:displayName>ID Card</doc:displayName>
+      <doc:description></doc:description>
+      <doc:keywords></doc:keywords>
+      <doc:docDate>2015-02-01</doc:docDate>
+      <doc:direction>OUT</doc:direction>
+   </doc:document>
+   <doc:document>
+      <doc:uid>2e78cd2f-b5a7-450a-9d94-6d3cbd55d097</doc:uid>
+      <doc:displayName>Passport</doc:displayName>
+      <doc:description></doc:description>
+      <doc:keywords></doc:keywords>
+      <doc:docDate>2015-10-06</doc:docDate>
+      <doc:direction>IN</doc:direction>
+   </doc:document>
+   <doc:document>
+      <doc:uid>77743439-dc1f-4054-b335-d3d58f17bdac</doc:uid>
+      <doc:displayName>Loan checks</doc:displayName>
+      <doc:description>Check results</doc:description>
+      <doc:keywords></doc:keywords>
+      <doc:docDate>2015-04-25</doc:docDate>
+      <doc:direction>IN</doc:direction>
+   </doc:document>
+   <doc:document>
+      <doc:uid>f1aafad7-218d-4252-9a5e-03caa5ed53d7</doc:uid>
+      <doc:displayName>Questionnaire</doc:displayName>
+      <doc:description>Client questionnaire</doc:description>
+      <doc:keywords>Questionnaire</doc:keywords>
+      <doc:docDate>2015-01-10</doc:docDate>
+      <doc:direction>IN</doc:direction>
+   </doc:document>
+</doc:documents>
