@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="public">
-    <!--<rewriteSystem systemIdStartString="https://devel.net.ilb.ru/meta/schemas" rewritePrefix="classpath:schemas"/>-->
+    <!-- this for xsd:import with schemaLocation
+    <rewriteSystem systemIdStartString="https://devel.net.ilb.ru/meta/schemas" rewritePrefix="classpath:schemas"/>
+    -->
 
+    <!-- this is for xsd compilation -->
     <public publicId="urn:ru:ilb:basicuuid:basicuuid" uri="classpath:schemas/basicuuid/basicuuid.xsd" />
+    <!-- this is for org.apache.cxf.jaxrs.utils.schemas.SchemaHandler -->
     <uri name="urn:ru:ilb:basicuuid:basicuuid" uri="classpath:schemas/basicuuid/basicuuid.xsd" />
 </catalog>
