@@ -6,7 +6,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ${package}.web;
+package ${groupId}.web;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,8 +16,8 @@ import org.eclipse.persistence.jpa.JpaEntityManager;
 import org.eclipse.persistence.sessions.CopyGroup;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
-import ${package}.document.Document;
-import ${package}.document.ReadOptionsType;
+import ${groupId}.${object_urn}.${object_class};
+import ${groupId}.${object_urn}.ReadOptionsType;
 
 /**
  *
@@ -36,11 +36,11 @@ class EntityManagerIntr {
         return copyGroup;
     }
 
-    private CopyGroup getDocumentCopyGroup(List<ReadOptionsType> readOptions) {
-        return getCustomCopyGroup(getDocumentAttributes(readOptions));
+    private CopyGroup get${object_class}CopyGroup(List<ReadOptionsType> readOptions) {
+        return getCustomCopyGroup(get${object_class}Attributes(readOptions));
     }
 
-    private List<String> getDocumentAttributes(List<ReadOptionsType> readOptions) {
+    private List<String> get${object_class}Attributes(List<ReadOptionsType> readOptions) {
         List<String> attributes = new ArrayList<>();
         attributes.add("uid");
         attributes.add("displayName");
@@ -57,8 +57,8 @@ class EntityManagerIntr {
 
     private CopyGroup getCopyGroup(Class clazz, List<String> attributes, List<ReadOptionsType> options) {
         CopyGroup result = null;
-        if (clazz.equals(Document.class)) {
-            result = getDocumentCopyGroup(options);
+        if (clazz.equals(${object_class}.class)) {
+            result = get${object_class}CopyGroup(options);
         }
         return result;
     }

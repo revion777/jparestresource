@@ -2,10 +2,10 @@
 #set( $symbol_dollar = '$' )
 #set( $symbol_escape = '\' )
 <?xml version="1.0" encoding="UTF-8"?>
-<doc:document xmlns:doc="urn:ru:ilb:${parentArtifactId}:document">
-   <doc:displayName>Subscription documents</doc:displayName>
+<doc:${object_urn} xmlns:doc="urn:ru:ilb:${parentArtifactId}:${object_urn}">
+   <doc:displayName>Subscription ${object_urn}s</doc:displayName>
    <doc:description>Desctiption follows</doc:description>
    <doc:keywords>journals</doc:keywords>
    <doc:docDate>2015-01-01</doc:docDate>
    <doc:direction>IN</doc:direction>
-</doc:document>
+</doc:${object_urn}>

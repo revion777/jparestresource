@@ -52,7 +52,7 @@
 
     <!-- Configure swagger api support, see also jaxrs:features section in jaxrs:server and maven dependencies
     <bean id="swagger2Feature" class="org.apache.cxf.jaxrs.swagger.Swagger2Feature">
-        <property name="resourcePackage" value="${package}.web"/>
+        <property name="resourcePackage" value="${groupId}.web"/>
         <property name="scanAllResources" value="true"/>
         <property name="dynamicBasePath" value="true"/>
         <property name="replaceTags" value="true"/>
@@ -72,7 +72,7 @@
     <bean id="searchContextProvider" class="org.apache.cxf.jaxrs.ext.search.SearchContextProvider"/>
 
     <util:map id="namespaceMap" map-class="java.util.Hashtable">
-        <entry key="urn:ru:ilb:${parentArtifactId}:document" value="doc"/>
+        <entry key="urn:ru:ilb:${parentArtifactId}:${object_urn}" value="doc"/>
     </util:map>
 
     <!-- Both jaxbProvider and jsonProvider should be configured identically -->
@@ -95,14 +95,14 @@
         <property name="schemaLocations" ref="schemaLocations"/>
     </bean>
     <util:list id="schemaLocations">
-        <value>classpath:schemas/${parentArtifactId}/document.xsd</value>
+        <value>classpath:schemas/${parentArtifactId}/${object_urn}.xsd</value>
     </util:list>
 
     <util:map id="marshallerProperties">
         <entry key="jaxb.formatted.output" value="true" value-type="java.lang.Boolean"/>
     </util:map>
     <util:map id="contextProperties">
-        <entry key="eclipselink-oxm-xml" value="schemas/${parentArtifactId}/document-oxm.xml"/>
+        <entry key="eclipselink-oxm-xml" value="schemas/${parentArtifactId}/${object_urn}-oxm.xml"/>
         <entry key="com.sun.xml.bind.XmlAccessorFactory" value="true" value-type="java.lang.Boolean"/>
     </util:map>
 
@@ -120,8 +120,8 @@
     </bean>
 
     <!-- auto register @Component annotated classes -->
-    <context:component-scan base-package="${package}.web"/>
-    <jaxrs:server address="/" basePackages="${package}.web,ru.ilb.common.jaxrs.providers">
+    <context:component-scan base-package="${groupId}.web"/>
+    <jaxrs:server address="/" basePackages="${groupId}.web,ru.ilb.common.jaxrs.providers">
         <jaxrs:providers>
             <ref bean="jaxbProvider"/>
             <ref bean="jsonProvider"/>

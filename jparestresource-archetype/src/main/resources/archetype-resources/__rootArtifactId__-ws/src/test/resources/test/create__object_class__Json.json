@@ -1,0 +1,12 @@
+#set( $symbol_pound = '#' )
+#set( $symbol_dollar = '$' )
+#set( $symbol_escape = '\' )
+{
+    "doc:${object_urn}": {
+        "doc:displayName": "Subscription ${object_urn}s",
+        "doc:description": "Desctiption follows",
+        "doc:keywords": "journals",
+        "doc:docDate": "2015-01-01",
+        "doc:direction": "IN"
+    }
+}

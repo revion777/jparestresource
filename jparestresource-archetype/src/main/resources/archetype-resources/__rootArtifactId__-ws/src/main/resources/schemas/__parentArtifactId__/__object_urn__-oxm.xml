@@ -3,12 +3,12 @@
 #set( $symbol_escape = '\' )
 <?xml version="1.0"?>
 <xml-bindings xmlns="http://www.eclipse.org/eclipselink/xsds/persistence/oxm"
-    package-name="${package}.document"
+    package-name="${groupId}.${object_urn}"
     xml-accessor-type="FIELD">
     <java-types>
         <java-type name="Docfile">
             <java-attributes>
-                <xml-element java-attribute="document">
+                <xml-element java-attribute="${object_urn}">
                     <xml-inverse-reference mapped-by="docfiles"/>
                 </xml-element>
             </java-attributes>

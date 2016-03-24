@@ -3,14 +3,14 @@
 #set( $symbol_escape = '\' )
 <?xml version="1.0" encoding="UTF-8"?>
 <xsd:schema elementFormDefault="qualified"
-            xmlns="urn:ru:ilb:${parentArtifactId}:document"
-            targetNamespace="urn:ru:ilb:${parentArtifactId}:document"
+            xmlns="urn:ru:ilb:${parentArtifactId}:${object_urn}"
+            targetNamespace="urn:ru:ilb:${parentArtifactId}:${object_urn}"
             xmlns:uuid="urn:ru:ilb:basicuuid:basicuuid"
             xmlns:xsd="http://www.w3.org/2001/XMLSchema"
 >
     <xsd:import namespace="urn:ru:ilb:basicuuid:basicuuid"/>
 
-    <xsd:complexType name="DocumentType">
+    <xsd:complexType name="${object_class}Type">
         <xsd:sequence>
             <xsd:element name="uid" type="uuid:UUIDType" minOccurs="0"/>
             <xsd:element name="displayName" type="xsd:string"/>
@@ -21,7 +21,7 @@
             <xsd:element ref="docfile" minOccurs="0" maxOccurs="unbounded"/>
         </xsd:sequence>
     </xsd:complexType>
-    <xsd:element name="document" type="DocumentType"/>
+    <xsd:element name="${object_urn}" type="${object_class}Type"/>
     <xsd:complexType name="DocfileType">
         <xsd:sequence>
             <xsd:element name="uid" type="uuid:UUIDType" minOccurs="0"/>
@@ -29,19 +29,19 @@
             <xsd:element name="userRole" type="xsd:string" />
             <xsd:element name="confirm" type="xsd:boolean" minOccurs="0" default="false"/>
             <xsd:element name="comment" type="xsd:string" minOccurs="0" />
-            <xsd:element name="document" type="DocumentType" minOccurs="0"/>
+            <xsd:element name="${object_urn}" type="${object_class}Type" minOccurs="0"/>
         </xsd:sequence>
     </xsd:complexType>
     <xsd:element name="docfile" type="DocfileType"/>
-    <xsd:element name="documents">
+    <xsd:element name="${object_urn}s">
         <xsd:complexType>
             <xsd:annotation>
-                <xsd:documentation>list of documents</xsd:documentation>
+                <xsd:${object_urn}ation>list of ${object_urn}s</xsd:${object_urn}ation>
             </xsd:annotation>
             <xsd:sequence>
-                <xsd:element ref="document" minOccurs="0" maxOccurs="unbounded">
+                <xsd:element ref="${object_urn}" minOccurs="0" maxOccurs="unbounded">
                     <xsd:annotation>
-                        <xsd:documentation>document instance</xsd:documentation>
+                        <xsd:${object_urn}ation>${object_urn} instance</xsd:${object_urn}ation>
                     </xsd:annotation>
                 </xsd:element>
             </xsd:sequence>

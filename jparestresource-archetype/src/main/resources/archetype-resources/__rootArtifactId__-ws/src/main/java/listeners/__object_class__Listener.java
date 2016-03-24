@@ -16,21 +16,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ${package}.listeners;
+package ${groupId}.listeners;
 
 import java.util.UUID;
 import javax.persistence.PrePersist;
-import ${package}.document.Document;
+import ${groupId}.${object_urn}.${object_class};
 
 /**
  *
  * @author slavb
  */
-public class DocumentListener {
+public class ${object_class}Listener {
     @PrePersist
-    public void onPrePersist(Document document) {
-        if (document.getUid() == null) {
-            document.setUid(UUID.randomUUID());
+    public void onPrePersist(${object_class} ${object_urn}) {
+        if (${object_urn}.getUid() == null) {
+            ${object_urn}.setUid(UUID.randomUUID());
         }
     }
 }

@@ -2,6 +2,14 @@
 <archetype-descriptor xsi:schemaLocation="http://maven.apache.org/plugins/maven-archetype-plugin/archetype-descriptor/1.0.0 http://maven.apache.org/xsd/archetype-descriptor-1.0.0.xsd" name="jparestresource"
     xmlns="http://maven.apache.org/plugins/maven-archetype-plugin/archetype-descriptor/1.0.0"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <requiredProperties>
+    <requiredProperty key="object_urn">
+      <defaultValue>document</defaultValue>
+    </requiredProperty>
+    <requiredProperty key="object_class">
+      <defaultValue>Document</defaultValue>
+    </requiredProperty>
+  </requiredProperties>
   <fileSets>
     <fileSet filtered="true" encoding="UTF-8">
       <directory></directory>
@@ -63,6 +71,7 @@
           <directory>src/main/webapp</directory>
           <includes>
             <include>**/*.xml</include>
+            <include>**/*.html</include>
           </includes>
         </fileSet>
         <fileSet encoding="UTF-8">
@@ -71,24 +80,18 @@
             <include>**/*.properties</include>
           </includes>
         </fileSet>
-        <fileSet encoding="UTF-8">
-          <directory>src/main/webapp</directory>
-          <includes>
-            <include>**/*.html</include>
-          </includes>
-        </fileSet>
         <fileSet filtered="true" encoding="UTF-8">
           <directory>src/test/resources</directory>
           <includes>
             <include>**/*.sh</include>
             <include>**/*.xml</include>
+            <include>**/*.json</include>
           </includes>
         </fileSet>
         <fileSet encoding="UTF-8">
           <directory>src/test/resources</directory>
           <includes>
             <include>**/*.txt</include>
-            <include>**/*.json</include>
           </includes>
         </fileSet>
         <fileSet filtered="true" encoding="UTF-8">

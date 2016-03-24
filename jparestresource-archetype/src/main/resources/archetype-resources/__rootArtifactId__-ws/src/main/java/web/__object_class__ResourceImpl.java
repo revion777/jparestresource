@@ -6,7 +6,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ${package}.web;
+package ${groupId}.web;
 
 import java.util.List;
 import java.util.UUID;
@@ -24,13 +24,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
-import ${package}.document.Document;
-import ${package}.document.Documents;
-import ${package}.api.DocumentsResource;
-import ${package}.document.ReadOptionsType;
+import ${groupId}.${object_urn}.${object_class};
+import ${groupId}.${object_urn}.${object_class}s;
+import ${groupId}.api.${object_class}sResource;
+import ${groupId}.${object_urn}.ReadOptionsType;
 
-@Path("documents")
-public class DocumentResourceImpl implements DocumentsResource {
+@Path("${object_urn}s")
+public class ${object_class}ResourceImpl implements ${object_class}sResource {
 
     @PersistenceContext(unitName = "${parentArtifactId}")
     private EntityManager em;
@@ -41,52 +41,52 @@ public class DocumentResourceImpl implements DocumentsResource {
     @Autowired
     EntityManagerIntr entityManagerIntr;
 
-    private static final Logger LOG = LoggerFactory.getLogger(DocumentResourceImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(${object_class}ResourceImpl.class);
 
     @Override
     @Transactional
-    public Documents list(List<ReadOptionsType> options) {
-        Documents res = new Documents();
+    public ${object_class}s list(List<ReadOptionsType> options) {
+        ${object_class}s res = new ${object_class}s();
 
-        TypedQuery<Document> query = em.createQuery("SELECT d FROM Document d", Document.class);
+        TypedQuery<${object_class}> query = em.createQuery("SELECT d FROM ${object_class} d", ${object_class}.class);
         if (options != null) {
             if (options.contains(ReadOptionsType.WITH_DOCFILES)) {
                 query.setHint(QueryHints.LEFT_FETCH, "d.docfiles");
             }
         }
-        List<Document> result = query.getResultList();
-        //res.getDocuments().addAll(entityManagerIntr.copy(result, null, null));
-        res.getDocuments().addAll(result);
+        List<${object_class}> result = query.getResultList();
+        //res.get${object_class}s().addAll(entityManagerIntr.copy(result, null, null));
+        res.get${object_class}s().addAll(result);
         return res;
     }
 
     @Override
     @Transactional
-    public Document find(UUID uid) {
-        TypedQuery<Document> query = em.createNamedQuery("Document.byUid", Document.class);
+    public ${object_class} find(UUID uid) {
+        TypedQuery<${object_class}> query = em.createNamedQuery("${object_class}.byUid", ${object_class}.class);
         query.setParameter("uid", uid);
-        Document doc = query.getSingleResult();
+        ${object_class} doc = query.getSingleResult();
         return doc;
     }
 
     @Override
     @Transactional
-    public UUID create(Document document) {
-        em.persist(document);
-        return document.getUid();
+    public UUID create(${object_class} ${object_urn}) {
+        em.persist(${object_urn});
+        return ${object_urn}.getUid();
     }
 
     @Override
     @Transactional
-    public void edit(UUID uid, Document document) {
-        Document doc = find(uid);
-        document.copyTo(doc);
+    public void edit(UUID uid, ${object_class} ${object_urn}) {
+        ${object_class} doc = find(uid);
+        ${object_urn}.copyTo(doc);
     }
 
     @Override
     @Transactional
     public void remove(UUID uid) {
-        Document doc = find(uid);
+        ${object_class} doc = find(uid);
         em.remove(doc);
     }
 
@@ -94,9 +94,9 @@ public class DocumentResourceImpl implements DocumentsResource {
     @Transactional
     public void init() {
         try {
-            JAXBContext jaxbContext=jaxbElementProvider.getJAXBContext(Documents.class, null);
-            Documents documents=(Documents) jaxbContext.createUnmarshaller().unmarshal(Documents.class.getResourceAsStream("/META-INF/xml/testdata.xml"));
-            for(Document doc:documents.getDocuments()){
+            JAXBContext jaxbContext=jaxbElementProvider.getJAXBContext(${object_class}s.class, null);
+            ${object_class}s ${object_urn}s=(${object_class}s) jaxbContext.createUnmarshaller().unmarshal(${object_class}s.class.getResourceAsStream("/META-INF/xml/testdata.xml"));
+            for(${object_class} doc:${object_urn}s.get${object_class}s()){
                 create(doc);
             }
         } catch (JAXBException ex) {
