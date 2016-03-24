@@ -1,3 +1,4 @@
+#script to update jparestresource-archetype module from project
 set -e
 rm -rf jparestresource-archetype
 mvn clean archetype:create-from-project
