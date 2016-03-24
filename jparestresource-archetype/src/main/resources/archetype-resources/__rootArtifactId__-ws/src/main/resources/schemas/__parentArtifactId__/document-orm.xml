@@ -5,23 +5,26 @@
 <entity-mappings xmlns="http://www.eclipse.org/eclipselink/xsds/persistence/orm"
                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                  version="2.5">
-    <converter class="ru.ilb.common.jpa.converters.UUIDConverterString" auto-apply="true"/>
-    <!-- use for optimized binary uuid storage
-    <converter class="ru.ilb.common.jpa.converters.UUIDConverterBytes" auto-apply="true"/>
+    <!-- Store uuid as string
+        <converter class="ru.ilb.common.jpa.converters.UUIDConverterString" auto-apply="true"/>
     -->
+    <!-- Optimized binary uuid storage -->
+    <converter class="ru.ilb.common.jpa.converters.UUIDConverterBytes" auto-apply="true"/>
     <entity class="${package}.document.Document">
         <named-query name="Document.byUid">
             <query>Select d from Document d where d.uid=:uid</query>
         </named-query>
+        <entity-listeners>
+            <entity-listener class="${package}.listeners.DocumentListener"/>
+        </entity-listeners>
         <attributes>
             <id name="id">
                 <generated-value strategy="AUTO"/>
             </id>
             <basic name="uid">
                 <column length="36" nullable="false" name="UID"/>
-                <!-- use for optimized binary uuid storage
+                <!-- optimized binary uuid storage -->
                 <column length="16" column-definition="BINARY(16) NOT NULL"/>
-                -->
                 <index unique="true"/>
             </basic>
             <basic name="direction">
@@ -44,9 +47,8 @@
             </id>
             <basic name="uid">
                 <column length="36" nullable="false"/>
-                <!-- use for optimized binary uuid storage
+                <!-- optimized binary uuid storage -->
                 <column length="16" column-definition="BINARY(16) NOT NULL"/>
-                -->
                 <index unique="true"/>
             </basic>
             <!-- BI-directinal: -->

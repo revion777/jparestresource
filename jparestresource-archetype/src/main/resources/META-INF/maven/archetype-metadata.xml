@@ -36,6 +36,12 @@
             <include>**/*.xsd</include>
           </includes>
         </fileSet>
+        <fileSet filtered="true" encoding="UTF-8">
+          <directory></directory>
+          <includes>
+            <include>nbactions.xml</include>
+          </includes>
+        </fileSet>
       </fileSets>
     </module>
     <module id="${rootArtifactId}-ws" dir="__rootArtifactId__-ws" name="${rootArtifactId}-ws">
@@ -74,7 +80,15 @@
         <fileSet filtered="true" encoding="UTF-8">
           <directory>src/test/resources</directory>
           <includes>
+            <include>**/*.sh</include>
             <include>**/*.xml</include>
+          </includes>
+        </fileSet>
+        <fileSet encoding="UTF-8">
+          <directory>src/test/resources</directory>
+          <includes>
+            <include>**/*.txt</include>
+            <include>**/*.json</include>
           </includes>
         </fileSet>
         <fileSet filtered="true" encoding="UTF-8">

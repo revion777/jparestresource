@@ -1,7 +1,7 @@
 #set( $symbol_pound = '#' )
 #set( $symbol_dollar = '$' )
 #set( $symbol_escape = '\' )
-@javax.xml.bind.annotation.XmlSchema(namespace = "urn:ru:ilb:meta:${parentArtifactId}:document", elementFormDefault = javax.xml.bind.annotation.XmlNsForm.QUALIFIED)
+@javax.xml.bind.annotation.XmlSchema(namespace = "urn:ru:ilb:${parentArtifactId}:document", elementFormDefault = javax.xml.bind.annotation.XmlNsForm.QUALIFIED)
 @XmlAccessorFactory(LazyAccessorFactoryImpl.class)
 package ${package}.document;
 
