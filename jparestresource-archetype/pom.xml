@@ -9,7 +9,7 @@
 
   <groupId>ru.ilb.jparestresource</groupId>
   <artifactId>jparestresource-archetype</artifactId>
-  <version>1.1-SNAPSHOT</version>
+  <version>1.0-SNAPSHOT</version>
   <packaging>maven-archetype</packaging>
 
   <name>jparestresource-archetype</name>
@@ -33,6 +33,8 @@
     </pluginManagement>
   </build>
 
+  <description>Example Rest JPA application</description>
+
   <developers>
     <developer>
       <name>PJSC "Bystrobank"</name>
@@ -52,6 +54,5 @@
   <scm>
     <connection>scm:git:https://github.com/ilb/jparestresource.git</connection>
     <url>https://github.com/ilb/jparestresource</url>
-    <tag>HEAD</tag>
   </scm>
 </project>
