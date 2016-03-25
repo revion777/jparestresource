@@ -12,9 +12,15 @@
   </requiredProperties>
   <fileSets>
     <fileSet filtered="true" encoding="UTF-8">
-      <directory></directory>
+      <directory>archetype</directory>
       <includes>
-        <include>archetype.sh</include>
+        <include>**/*.sh</include>
+      </includes>
+    </fileSet>
+    <fileSet encoding="UTF-8">
+      <directory>archetype</directory>
+      <includes>
+        <include>**/*.properties</include>
       </includes>
     </fileSet>
     <fileSet encoding="UTF-8">
