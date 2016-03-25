@@ -57,4 +57,12 @@
             </plugin>
         </plugins>
     </build>
+    <profiles>
+        <profile>
+            <id>archetype</id>
+            <modules>
+                <module>${rootArtifactId}-archetype</module>
+            </modules>
+        </profile>
+    </profiles>
 </project>

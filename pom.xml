@@ -61,4 +61,12 @@
             </plugin>
         </plugins>
     </build>
+    <profiles>
+        <profile>
+            <id>archetype</id>
+            <modules>
+                <module>jparestresource-archetype</module>
+            </modules>
+        </profile>
+    </profiles>
 </project>
