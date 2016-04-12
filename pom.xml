@@ -51,6 +51,23 @@
             <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
         </repository>
     </distributionManagement>
+    <!-- use local svn and maven repository
+    <scm>
+        <connection>scm:svn:https://svn.net.ilb.ru/repos/${name}/trunk</connection>
+    </scm>
+    <distributionManagement>
+        <repository>
+            <id>nexus-releases</id>
+            <name>Nexus Release Repository</name>
+            <url>http://devel.net.ilb.ru:28052/nexus/content/repositories/releases</url>
+        </repository>
+        <snapshotRepository>
+            <id>nexus-snapshots</id>
+            <name>Nexus Snapshot Repository</name>
+            <url>http://devel.net.ilb.ru:28052/nexus/content/repositories/snapshots</url>
+        </snapshotRepository>
+    </distributionManagement>
+    -->
     <build>
         <pluginManagement>
             <plugins>
