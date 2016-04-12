@@ -32,15 +32,8 @@
     <xsd:element name="docfile" type="DocfileType"/>
     <xsd:element name="documents">
         <xsd:complexType>
-            <xsd:annotation>
-                <xsd:documentation>list of documents</xsd:documentation>
-            </xsd:annotation>
             <xsd:sequence>
-                <xsd:element ref="document" minOccurs="0" maxOccurs="unbounded">
-                    <xsd:annotation>
-                        <xsd:documentation>document instance</xsd:documentation>
-                    </xsd:annotation>
-                </xsd:element>
+                <xsd:element ref="document" minOccurs="0" maxOccurs="unbounded"/>
             </xsd:sequence>
         </xsd:complexType>
     </xsd:element>
