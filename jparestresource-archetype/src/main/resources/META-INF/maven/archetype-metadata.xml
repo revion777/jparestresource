@@ -20,6 +20,7 @@
     <fileSet encoding="UTF-8">
       <directory>archetype</directory>
       <includes>
+        <include>**/*.diff</include>
         <include>**/*.properties</include>
       </includes>
     </fileSet>
