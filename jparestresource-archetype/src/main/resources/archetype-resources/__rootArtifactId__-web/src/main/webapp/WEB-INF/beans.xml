@@ -121,7 +121,7 @@
 
     <!-- auto register @Component annotated classes -->
     <context:component-scan base-package="${groupId}.web"/>
-    <jaxrs:server address="/" basePackages="${groupId}.web,ru.ilb.common.jaxrs.providers">
+    <jaxrs:server address="/" basePackages="${groupId}.web,ru.ilb.common.jaxrs.providers,ru.ilb.common.jaxrs.exceptionhandler">
         <jaxrs:providers>
             <ref bean="jaxbProvider"/>
             <ref bean="jsonProvider"/>

@@ -26,7 +26,7 @@
         <xjc:javaType name="java.util.UUID" xmlType="uuid:UUIDType" adapter="ru.ilb.common.jaxb.adapters.UUIDXmlAdapter" />
         
     </jaxb:globalBindings>
-    <jaxb:bindings multiple="true" node="//xsd:complexType">
+    <jaxb:bindings multiple="true" node="//xsd:complexType[not(xsd:complexContent/xsd:extension)]">
         <inheritance:extends>${groupId}.${object_urn}.PersistentObject</inheritance:extends>
 <!--        <annox:annotate>
             <annox:annotate annox:class="com.sun.xml.internal.bind.XmlAccessorFactory" value="ru.ilb.common.jpa.jaxb.MyAccessorFactoryImpl"/>
