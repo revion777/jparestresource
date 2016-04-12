@@ -115,7 +115,7 @@
                                     <wadl>${basedir}/src/main/resources/schemas/${rootArtifactId}/${rootArtifactId}.wadl</wadl>
                                     <packagename>ru.ilb.${rootArtifactId}.api</packagename>
                                     <bindingFiles>
-                                        <bindingFile>${basedir}/src/main/resources/schemas/${rootArtifactId}/document.xjb</bindingFile>
+                                        <bindingFile>${basedir}/src/main/resources/schemas/${rootArtifactId}/${object_urn}.xjb</bindingFile>
                                     </bindingFiles>
                                     <extraargs>
                                         <extraarg>-verbose</extraarg>

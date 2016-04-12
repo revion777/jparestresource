@@ -35,15 +35,8 @@
     <xsd:element name="docfile" type="DocfileType"/>
     <xsd:element name="${object_urn}s">
         <xsd:complexType>
-            <xsd:annotation>
-                <xsd:${object_urn}ation>list of ${object_urn}s</xsd:${object_urn}ation>
-            </xsd:annotation>
             <xsd:sequence>
-                <xsd:element ref="${object_urn}" minOccurs="0" maxOccurs="unbounded">
-                    <xsd:annotation>
-                        <xsd:${object_urn}ation>${object_urn} instance</xsd:${object_urn}ation>
-                    </xsd:annotation>
-                </xsd:element>
+                <xsd:element ref="${object_urn}" minOccurs="0" maxOccurs="unbounded"/>
             </xsd:sequence>
         </xsd:complexType>
     </xsd:element>
