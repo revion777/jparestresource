@@ -41,11 +41,6 @@
     <bean id="entityManager" class = "org.springframework.orm.jpa.support.SharedEntityManagerBean">
         <property name="entityManagerFactory" ref="entityManagerFactory"/>
     </bean>
-    <!-- Configure LazyAccessorFactoryImpl to serve domain objects for lazy initialized fields, see also com.sun.xml.bind.XmlAccessorFactory jaxb context property -->
-    <bean class="ru.ilb.common.jpa.jaxb.LazyAccessorFactoryImpl" scope="prototype">
-        <property name="entityManager" ref="entityManager"/>
-    </bean>
-    
 
     <!-- Configure swagger api support, see also jaxrs:features section in jaxrs:server and maven dependencies
     <bean id="swagger2Feature" class="org.apache.cxf.jaxrs.swagger.Swagger2Feature">
