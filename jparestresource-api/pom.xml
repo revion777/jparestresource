@@ -20,12 +20,12 @@
             <version>${ilb-common.version}</version>
         </dependency>
         <!-- to debug sources only -->
-        <dependency>
+<!--        <dependency>
             <groupId>org.apache.cxf</groupId>
             <artifactId>cxf-wadl2java-plugin</artifactId>
             <version>${apache-cxf.version}</version>
             <scope>compile</scope>
-        </dependency>
+        </dependency>-->
         <dependency>
             <groupId>ru.ilb.basicuuid</groupId>
             <artifactId>basicuuid-api</artifactId>
