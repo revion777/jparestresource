@@ -66,6 +66,10 @@
     <util:map id="namespaceMap" map-class="java.util.Hashtable">
         <entry key="urn:ru:ilb:jparestresource:document" value="doc"/>
     </util:map>
+<!--    <bean class="ru.ilb.common.jaxrs.providers.JaxbContextResolver" >
+        <property name="contextProperties" ref="contextProperties"/>
+        <property name="extraClass" ref="extraClass"/>
+    </bean>-->
 
     <!-- Both jaxbProvider and jsonProvider should be configured identically -->
     <bean id="jaxbProvider" class="org.apache.cxf.jaxrs.provider.JAXBElementProvider">
@@ -82,6 +86,14 @@
         <property name="singleJaxbContext" value="true"/>
         <property name="schemaHandler" ref="schemaHandler"/>
     </bean>
+    <!--    <bean id="jsonProvider" class="ru.ilb.common.jaxrs.providers.MOXyJsonProvider">  org.eclipse.persistence.jaxb.rs  
+        <property name="namespacePrefixMapper" ref="namespaceMap"/>
+        <property name="namespaceSeparator" value=":"/>
+        <property name="formattedOutput" value="true"/>
+        <property name="includeRoot" value="true"/>
+        <property name="marshalEmptyCollections" value="false"/>
+        <property name="schemaHandler" ref="schemaHandler"/>
+    </bean>-->
     <bean id="schemaHandler" class="org.apache.cxf.jaxrs.utils.schemas.SchemaHandler">
         <property name="catalogLocation" value="classpath:schemas/jparestresource/catalog.xml"/>
         <property name="schemaLocations" ref="schemaLocations"/>
@@ -89,6 +101,8 @@
     <util:list id="schemaLocations">
         <value>classpath:schemas/jparestresource/document.xsd</value>
     </util:list>
+    <!--    <util:list id="extraClass" value-type="java.lang.Class">
+    </util:list>-->
 
     <util:map id="marshallerProperties">
         <entry key="jaxb.formatted.output" value="true" value-type="java.lang.Boolean"/>
