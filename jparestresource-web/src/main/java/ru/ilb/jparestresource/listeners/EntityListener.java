@@ -17,15 +17,15 @@ package ru.ilb.jparestresource.listeners;
 
 import java.util.UUID;
 import javax.persistence.PrePersist;
-import ru.ilb.jparestresource.document.Document;
+import ru.ilb.jparestresource.document.EntityType;
 
 /**
  *
  * @author slavb
  */
-public class DocumentListener {
+public class EntityListener {
     @PrePersist
-    public void onPrePersist(Document document) {
+    public void onPrePersist(EntityType document) {
         if (document.getUid() == null) {
             document.setUid(UUID.randomUUID());
         }

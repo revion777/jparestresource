@@ -14,17 +14,28 @@ import org.jvnet.jaxb2_commons.locator.ObjectLocator;
  * @author slavb
  */
 @XmlTransient
-public class PersistentObject {
+public abstract class PersistentObject {
 
     @XmlTransient
-    protected Integer id;
+    protected Long id;
+    
+    @XmlTransient
+    protected Long versionId;    
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
+    }
+
+    public Long getVersionId() {
+        return versionId;
+    }
+
+    public void setVersionId(Long versionId) {
+        this.versionId = versionId;
     }
 
     public Object copyTo(ObjectLocator locator, Object target, CopyStrategy strategy) {

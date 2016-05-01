@@ -4,6 +4,10 @@
         "doc:description": "Desctiption follows",
         "doc:keywords": "journals",
         "doc:docDate": "2015-01-01",
-        "doc:direction": "IN"
+        "doc:direction": "IN",
+        "doc:docfile": [{
+                "doc:userName": "test",
+                "doc:confirm": false
+            }]
     }
 }

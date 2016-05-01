@@ -90,6 +90,7 @@
         <property name="namespacePrefixMapper" ref="namespaceMap"/>
         <property name="namespaceSeparator" value=":"/>
         <property name="formattedOutput" value="true"/>
+        <property name="attributePrefix" value="@"/>
         <property name="includeRoot" value="true"/>
         <property name="marshalEmptyCollections" value="false"/>
         <property name="schemaHandler" ref="schemaHandler"/>

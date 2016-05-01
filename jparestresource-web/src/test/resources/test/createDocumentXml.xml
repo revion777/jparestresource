@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<doc:document xmlns:doc="urn:ru:ilb:jparestresource:document">
-   <doc:displayName>Subscription documents</doc:displayName>
-   <doc:description>Desctiption follows</doc:description>
-   <doc:keywords>journals</doc:keywords>
-   <doc:docDate>2015-01-01</doc:docDate>
-   <doc:direction>IN</doc:direction>
+<doc:document xmlns:doc="urn:ru:ilb:jparestresource:document" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="urn:ru:ilb:jparestresource:document ../../../../../jparestresource-api/src/main/resources/schemas/jparestresource/document.xsd">
+    <doc:displayName>Subscription documents</doc:displayName>
+    <doc:description>Desctiption follows</doc:description>
+    <doc:keywords>journals</doc:keywords>
+    <doc:docDate>2015-01-01</doc:docDate>
+    <doc:direction>IN</doc:direction>
+    <doc:docfile>
+        <doc:userName>testuser</doc:userName>
+        <doc:confirm>false</doc:confirm>
+    </doc:docfile>
 </doc:document>

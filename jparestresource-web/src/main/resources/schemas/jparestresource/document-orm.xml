@@ -7,23 +7,32 @@
     -->
     <!-- Optimized binary uuid storage -->
     <converter class="ru.ilb.common.jpa.converters.UUIDConverterBytes" auto-apply="true"/>
-    <entity class="ru.ilb.jparestresource.document.Document">
-        <named-query name="Document.byUid">
-            <query>Select d from Document d where d.uid=:uid</query>
-        </named-query>
-        <entity-listeners>
-            <entity-listener class="ru.ilb.jparestresource.listeners.DocumentListener"/>
-        </entity-listeners>
+    <mapped-superclass class="ru.ilb.jparestresource.document.PersistentObject">
         <attributes>
             <id name="id">
                 <generated-value strategy="AUTO"/>
             </id>
+            <version name="versionId"/>
+        </attributes>
+    </mapped-superclass>
+    <mapped-superclass class="ru.ilb.jparestresource.document.EntityType">
+        <entity-listeners>
+            <entity-listener class="ru.ilb.jparestresource.listeners.EntityListener"/>
+        </entity-listeners>
+        <attributes>
             <basic name="uid">
-                <column length="36" nullable="false" name="UID"/>
+                <!--<column length="36" nullable="false" name="UID"/>-->
                 <!-- optimized binary uuid storage -->
-                <column length="16" column-definition="BINARY(16) NOT NULL"/>
+                <column length="16" nullable="false" column-definition="BINARY(16) NOT NULL"/>
                 <index unique="true"/>
             </basic>
+        </attributes>
+    </mapped-superclass>
+    <entity class="ru.ilb.jparestresource.document.Document">
+        <named-query name="Document.byUid">
+            <query>Select d from Document d where d.uid=:uid</query>
+        </named-query>
+        <attributes>
             <basic name="direction">
                 <column column-definition="int(1)"/>
                 <convert>DirectionTypeConverter</convert>
@@ -39,15 +48,6 @@
     </entity>
     <entity class="ru.ilb.jparestresource.document.Docfile">
         <attributes>
-            <id name="id">
-                <generated-value strategy="AUTO"/>
-            </id>
-            <basic name="uid">
-                <column length="36" nullable="false"/>
-                <!-- optimized binary uuid storage -->
-                <column length="16" column-definition="BINARY(16) NOT NULL"/>
-                <index unique="true"/>
-            </basic>
             <!-- BI-directinal: -->
             <many-to-one name="document">
                 <cascade>
