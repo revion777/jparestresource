@@ -52,7 +52,7 @@
     </bean>-->
 
     <!-- Configure xslt support, see also web.xml for refreshTemplates env-entry
-    <bean id="uriResolver" class="ru.ilb.common.rs.ext.ServletContextURIResolver"/>
+    <bean id="uriResolver" class="ru.ilb.common.jaxrs.xml.transform.ServletContextURIResolver"/>
     <bean id="xsltProvider" class="org.apache.cxf.jaxrs.provider.XSLTJaxbProvider" >
         <property name="resolver" ref="uriResolver"/>
         <property name="produceMediaTypes" value="application/xml,application/*+xml,text/xml,text/html,text/csv"/>
