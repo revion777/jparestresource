@@ -26,6 +26,9 @@
     <context:annotation-config/>
     <!--Activates @Configurable -->
     <context:spring-configured/>
+    
+    <!-- uncomment to enable AsyncTaskManager support -->
+    <!--<bean id="asyncTaskManager" class="ru.ilb.common.jaxrs.async.AsyncTaskManager" destroy-method="destroy"/>-->
 
     <!-- Configure JPA support -->
     <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean" >
