@@ -29,6 +29,9 @@
     <context:annotation-config/>
     <!--Activates @Configurable -->
     <context:spring-configured/>
+    
+    <!-- uncomment to enable AsyncTaskManager support -->
+    <!--<bean id="asyncTaskManager" class="ru.ilb.common.jaxrs.async.AsyncTaskManager" destroy-method="destroy"/>-->
 
     <!-- Configure JPA support -->
     <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean" >
@@ -55,7 +58,7 @@
     </bean>-->
 
     <!-- Configure xslt support, see also web.xml for refreshTemplates env-entry
-    <bean id="uriResolver" class="ru.ilb.common.rs.ext.ServletContextURIResolver"/>
+    <bean id="uriResolver" class="ru.ilb.common.jaxrs.xml.transform.ServletContextURIResolver"/>
     <bean id="xsltProvider" class="org.apache.cxf.jaxrs.provider.XSLTJaxbProvider" >
         <property name="resolver" ref="uriResolver"/>
         <property name="produceMediaTypes" value="application/xml,application/*+xml,text/xml,text/html,text/csv"/>
@@ -69,6 +72,10 @@
     <util:map id="namespaceMap" map-class="java.util.Hashtable">
         <entry key="urn:ru:ilb:${parentArtifactId}:${object_urn}" value="doc"/>
     </util:map>
+    <bean id="jaxbContextResolver" class="ru.ilb.common.jaxrs.jaxb.JaxbContextResolver" >
+        <property name="contextProperties" ref="contextProperties"/>
+        <property name="extraClass" ref="extraClass"/>
+    </bean>
 
     <!-- Both jaxbProvider and jsonProvider should be configured identically -->
     <bean id="jaxbProvider" class="org.apache.cxf.jaxrs.provider.JAXBElementProvider">
@@ -78,11 +85,20 @@
         <property name="singleJaxbContext" value="true"/>
         <property name="schemaHandler" ref="schemaHandler"/>
     </bean>
-    <bean id="jsonProvider" class="org.apache.cxf.jaxrs.provider.json.JSONProvider">
+    <!--    <bean id="jsonProvider" class="org.apache.cxf.jaxrs.provider.json.JSONProvider">
         <property name="namespaceMap" ref="namespaceMap"/>
         <property name="contextProperties" ref="contextProperties"/>
         <property name="namespaceSeparator" value=":"/>
         <property name="singleJaxbContext" value="true"/>
+        <property name="schemaHandler" ref="schemaHandler"/>
+    </bean>-->
+    <bean id="jsonProvider" class="ru.ilb.common.jaxrs.json.MOXyJsonProvider">
+        <property name="namespacePrefixMapper" ref="namespaceMap"/>
+        <property name="namespaceSeparator" value=":"/>
+        <property name="formattedOutput" value="true"/>
+        <property name="attributePrefix" value="@"/>
+        <property name="includeRoot" value="true"/>
+        <property name="marshalEmptyCollections" value="false"/>
         <property name="schemaHandler" ref="schemaHandler"/>
     </bean>
     <bean id="schemaHandler" class="org.apache.cxf.jaxrs.utils.schemas.SchemaHandler">
@@ -91,6 +107,8 @@
     </bean>
     <util:list id="schemaLocations">
         <value>classpath:schemas/${parentArtifactId}/${object_urn}.xsd</value>
+    </util:list>
+    <util:list id="extraClass" value-type="java.lang.Class">
     </util:list>
 
     <util:map id="marshallerProperties">
@@ -118,6 +136,7 @@
     <context:component-scan base-package="${groupId}.web"/>
     <jaxrs:server address="/" basePackages="${groupId}.web,ru.ilb.common.jaxrs.providers,ru.ilb.common.jaxrs.exceptionhandler">
         <jaxrs:providers>
+            <ref bean="jaxbContextResolver"/>
             <ref bean="jaxbProvider"/>
             <ref bean="jsonProvider"/>
             <ref bean="searchContextProvider"/>

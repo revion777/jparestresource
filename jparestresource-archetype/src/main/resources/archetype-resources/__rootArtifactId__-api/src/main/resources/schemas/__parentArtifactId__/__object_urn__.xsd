@@ -10,27 +10,39 @@
 >
     <xsd:import namespace="urn:ru:ilb:basicuuid:basicuuid"/>
 
-    <xsd:complexType name="${object_class}Type">
+    <xsd:complexType name="EntityType" abstract="true">
         <xsd:sequence>
             <xsd:element name="uid" type="uuid:UUIDType" minOccurs="0"/>
-            <xsd:element name="displayName" type="xsd:string"/>
-            <xsd:element name="description" type="xsd:string" minOccurs="0"/>
-            <xsd:element name="keywords" type="xsd:string" minOccurs="0"/>
-            <xsd:element name="docDate" type="xsd:date" minOccurs="0"/>
-            <xsd:element name="direction" type="DirectionType" minOccurs="0"/>
-            <xsd:element ref="docfile" minOccurs="0" maxOccurs="unbounded"/>
         </xsd:sequence>
+    </xsd:complexType>
+    <xsd:element name="entity" type="EntityType"/>
+    <xsd:complexType name="${object_class}Type">
+        <xsd:complexContent>
+            <xsd:extension base="EntityType">
+                <xsd:sequence>
+                    <xsd:element name="displayName" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="description" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="keywords" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="docDate" type="xsd:date" minOccurs="0"/>
+                    <xsd:element name="direction" type="DirectionType" minOccurs="0"/>
+                    <xsd:element ref="docfile" minOccurs="0" maxOccurs="unbounded"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
     </xsd:complexType>
     <xsd:element name="${object_urn}" type="${object_class}Type"/>
     <xsd:complexType name="DocfileType">
-        <xsd:sequence>
-            <xsd:element name="uid" type="uuid:UUIDType" minOccurs="0"/>
-            <xsd:element name="userName" type="xsd:string" />
-            <xsd:element name="userRole" type="xsd:string" />
-            <xsd:element name="confirm" type="xsd:boolean" minOccurs="0" default="false"/>
-            <xsd:element name="comment" type="xsd:string" minOccurs="0" />
-            <xsd:element name="${object_urn}" type="${object_class}Type" minOccurs="0"/>
-        </xsd:sequence>
+        <xsd:complexContent>
+            <xsd:extension base="EntityType">
+                <xsd:sequence>
+                    <xsd:element name="userName" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="userRole" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="confirm" type="xsd:boolean" minOccurs="0"/>
+                    <xsd:element name="comment" type="xsd:string" minOccurs="0" />
+                    <xsd:element ref="${object_urn}" minOccurs="0"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
     </xsd:complexType>
     <xsd:element name="docfile" type="DocfileType"/>
     <xsd:element name="${object_urn}s">

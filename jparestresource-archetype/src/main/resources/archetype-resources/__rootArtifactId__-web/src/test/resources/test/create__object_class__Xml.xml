@@ -2,10 +2,15 @@
 #set( $symbol_dollar = '$' )
 #set( $symbol_escape = '\' )
 <?xml version="1.0" encoding="UTF-8"?>
-<doc:${object_urn} xmlns:doc="urn:ru:ilb:${parentArtifactId}:${object_urn}">
-   <doc:displayName>Subscription ${object_urn}s</doc:displayName>
-   <doc:description>Desctiption follows</doc:description>
-   <doc:keywords>journals</doc:keywords>
-   <doc:docDate>2015-01-01</doc:docDate>
-   <doc:direction>IN</doc:direction>
+<doc:${object_urn} xmlns:doc="urn:ru:ilb:${parentArtifactId}:${object_urn}" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="urn:ru:ilb:${parentArtifactId}:${object_urn} ../../../../../${parentArtifactId}-api/src/main/resources/schemas/${parentArtifactId}/${object_urn}.xsd">
+    <doc:displayName>Subscription ${object_urn}s</doc:displayName>
+    <doc:description>Desctiption follows</doc:description>
+    <doc:keywords>journals</doc:keywords>
+    <doc:docDate>2015-01-01</doc:docDate>
+    <doc:direction>IN</doc:direction>
+    <doc:docfile>
+        <doc:userName>testuser</doc:userName>
+        <doc:confirm>false</doc:confirm>
+    </doc:docfile>
 </doc:${object_urn}>

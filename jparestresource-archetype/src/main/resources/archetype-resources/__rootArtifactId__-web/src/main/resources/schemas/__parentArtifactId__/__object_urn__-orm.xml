@@ -10,23 +10,32 @@
     -->
     <!-- Optimized binary uuid storage -->
     <converter class="ru.ilb.common.jpa.converters.UUIDConverterBytes" auto-apply="true"/>
-    <entity class="${groupId}.${object_urn}.${object_class}">
-        <named-query name="${object_class}.byUid">
-            <query>Select d from ${object_class} d where d.uid=:uid</query>
-        </named-query>
-        <entity-listeners>
-            <entity-listener class="${groupId}.listeners.${object_class}Listener"/>
-        </entity-listeners>
+    <mapped-superclass class="${groupId}.${object_urn}.PersistentObject">
         <attributes>
             <id name="id">
                 <generated-value strategy="AUTO"/>
             </id>
+            <version name="versionId"/>
+        </attributes>
+    </mapped-superclass>
+    <mapped-superclass class="${groupId}.${object_urn}.EntityType">
+        <entity-listeners>
+            <entity-listener class="${groupId}.listeners.EntityListener"/>
+        </entity-listeners>
+        <attributes>
             <basic name="uid">
-                <column length="36" nullable="false" name="UID"/>
+                <!--<column length="36" nullable="false" name="UID"/>-->
                 <!-- optimized binary uuid storage -->
-                <column length="16" column-definition="BINARY(16) NOT NULL"/>
+                <column length="16" nullable="false" column-definition="BINARY(16) NOT NULL"/>
                 <index unique="true"/>
             </basic>
+        </attributes>
+    </mapped-superclass>
+    <entity class="${groupId}.${object_urn}.${object_class}">
+        <named-query name="${object_class}.byUid">
+            <query>Select d from ${object_class} d where d.uid=:uid</query>
+        </named-query>
+        <attributes>
             <basic name="direction">
                 <column column-definition="int(1)"/>
                 <convert>DirectionTypeConverter</convert>
@@ -42,15 +51,6 @@
     </entity>
     <entity class="${groupId}.${object_urn}.Docfile">
         <attributes>
-            <id name="id">
-                <generated-value strategy="AUTO"/>
-            </id>
-            <basic name="uid">
-                <column length="36" nullable="false"/>
-                <!-- optimized binary uuid storage -->
-                <column length="16" column-definition="BINARY(16) NOT NULL"/>
-                <index unique="true"/>
-            </basic>
             <!-- BI-directinal: -->
             <many-to-one name="${object_urn}">
                 <cascade>

@@ -20,15 +20,15 @@ package ${groupId}.listeners;
 
 import java.util.UUID;
 import javax.persistence.PrePersist;
-import ${groupId}.${object_urn}.${object_class};
+import ${groupId}.${object_urn}.EntityType;
 
 /**
  *
  * @author slavb
  */
-public class ${object_class}Listener {
+public class EntityListener {
     @PrePersist
-    public void onPrePersist(${object_class} ${object_urn}) {
+    public void onPrePersist(EntityType ${object_urn}) {
         if (${object_urn}.getUid() == null) {
             ${object_urn}.setUid(UUID.randomUUID());
         }
