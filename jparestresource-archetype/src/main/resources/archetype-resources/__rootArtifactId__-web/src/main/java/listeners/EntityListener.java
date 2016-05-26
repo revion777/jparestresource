@@ -16,11 +16,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ${groupId}.listeners;
+package ${package}.listeners;
 
 import java.util.UUID;
 import javax.persistence.PrePersist;
-import ${groupId}.${object_urn}.EntityType;
+import ${package}.${parentArtifactId}.EntityType;
 
 /**
  *
@@ -28,9 +28,9 @@ import ${groupId}.${object_urn}.EntityType;
  */
 public class EntityListener {
     @PrePersist
-    public void onPrePersist(EntityType ${object_urn}) {
-        if (${object_urn}.getUid() == null) {
-            ${object_urn}.setUid(UUID.randomUUID());
+    public void onPrePersist(EntityType document) {
+        if (document.getUid() == null) {
+            document.setUid(UUID.randomUUID());
         }
     }
 }

@@ -10,7 +10,7 @@
     -->
     <!-- Optimized binary uuid storage -->
     <converter class="ru.ilb.common.jpa.converters.UUIDConverterBytes" auto-apply="true"/>
-    <mapped-superclass class="${groupId}.${object_urn}.PersistentObject">
+    <mapped-superclass class="${package}.${parentArtifactId}.PersistentObject">
         <attributes>
             <id name="id">
                 <generated-value strategy="AUTO"/>
@@ -18,9 +18,9 @@
             <version name="versionId"/>
         </attributes>
     </mapped-superclass>
-    <mapped-superclass class="${groupId}.${object_urn}.EntityType">
+    <mapped-superclass class="${package}.${parentArtifactId}.EntityType">
         <entity-listeners>
-            <entity-listener class="${groupId}.listeners.EntityListener"/>
+            <entity-listener class="${package}.listeners.EntityListener"/>
         </entity-listeners>
         <attributes>
             <basic name="uid">
@@ -31,7 +31,7 @@
             </basic>
         </attributes>
     </mapped-superclass>
-    <entity class="${groupId}.${object_urn}.${object_class}">
+    <entity class="${package}.${parentArtifactId}.${object_class}">
         <named-query name="${object_class}.byUid">
             <query>Select d from ${object_class} d where d.uid=:uid</query>
         </named-query>
@@ -40,7 +40,7 @@
                 <column column-definition="int(1)"/>
                 <convert>DirectionTypeConverter</convert>
             </basic>
-            <one-to-many name="docfiles" mapped-by="${object_urn}" fetch="LAZY">
+            <one-to-many name="docfiles" mapped-by="document" fetch="LAZY">
                 <!-- UNI-directinal: 
                 <join-column name="DOCUMENT_ID" referenced-column-name="ID"/> -->
                 <cascade>
@@ -49,10 +49,10 @@
             </one-to-many>
         </attributes>
     </entity>
-    <entity class="${groupId}.${object_urn}.Docfile">
+    <entity class="${package}.${parentArtifactId}.Docfile">
         <attributes>
             <!-- BI-directinal: -->
-            <many-to-one name="${object_urn}">
+            <many-to-one name="document">
                 <cascade>
                     <cascade-all/>
                 </cascade>
@@ -60,7 +60,7 @@
         </attributes>
     </entity>
     <object-type-converter name="DirectionTypeConverter"
-                           object-type="${groupId}.${object_urn}.DirectionType" data-type="java.lang.Integer">
+                           object-type="${package}.${parentArtifactId}.DirectionType" data-type="java.lang.Integer">
         <conversion-value object-value="IN" data-value="0" />
         <conversion-value object-value="OUT" data-value="1" />
     </object-type-converter>

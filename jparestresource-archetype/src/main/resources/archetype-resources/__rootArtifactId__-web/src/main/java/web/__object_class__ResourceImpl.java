@@ -6,7 +6,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ${groupId}.web;
+package ${package}.web;
 
 import java.util.List;
 import java.util.UUID;
@@ -25,12 +25,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
-import ${groupId}.${object_urn}.${object_class};
-import ${groupId}.${object_urn}.${object_class}s;
-import ${groupId}.api.${object_class}sResource;
-import ${groupId}.${object_urn}.ReadOptionsType;
+import ${package}.${parentArtifactId}.${object_class};
+import ${package}.${parentArtifactId}.${object_class}s;
+import ${package}.api.${object_class}sResource;
+import ${package}.${parentArtifactId}.ReadOptionsType;
 
-@Path("${object_urn}s")
+@Path("documents")
 public class ${object_class}ResourceImpl implements ${object_class}sResource {
 
     @PersistenceContext(unitName = "${parentArtifactId}")
@@ -72,16 +72,16 @@ public class ${object_class}ResourceImpl implements ${object_class}sResource {
 
     @Override
     @Transactional
-    public UUID create(${object_class} ${object_urn}) {
-        em.persist(${object_urn});
-        return ${object_urn}.getUid();
+    public UUID create(${object_class} document) {
+        em.persist(document);
+        return document.getUid();
     }
 
     @Override
     @Transactional
-    public void edit(UUID uid, ${object_class} ${object_urn}) {
+    public void edit(UUID uid, ${object_class} document) {
         ${object_class} doc = find(uid);
-        ${object_urn}.copyTo(doc);
+        document.copyTo(doc);
     }
 
     @Override
@@ -96,8 +96,8 @@ public class ${object_class}ResourceImpl implements ${object_class}sResource {
     public void init() {
         try {
             JAXBContext jaxbContext=jaxbElementProvider.getJAXBContext(${object_class}s.class, null);
-            ${object_class}s ${object_urn}s=(${object_class}s) jaxbContext.createUnmarshaller().unmarshal(${object_class}s.class.getResourceAsStream("/META-INF/xml/testdata.xml"));
-            for(${object_class} doc:${object_urn}s.get${object_class}s()){
+            ${object_class}s documents=(${object_class}s) jaxbContext.createUnmarshaller().unmarshal(${object_class}s.class.getResourceAsStream("/META-INF/xml/testdata.xml"));
+            for(${object_class} doc:documents.get${object_class}s()){
                 create(doc);
             }
         } catch (JAXBException ex) {

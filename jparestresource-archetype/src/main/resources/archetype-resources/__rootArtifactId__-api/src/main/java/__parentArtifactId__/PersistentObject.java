@@ -6,7 +6,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ${groupId}.${object_urn};
+package ${package}.${parentArtifactId};
 
 import javax.xml.bind.annotation.XmlTransient;
 import org.jvnet.jaxb2_commons.lang.CopyStrategy;

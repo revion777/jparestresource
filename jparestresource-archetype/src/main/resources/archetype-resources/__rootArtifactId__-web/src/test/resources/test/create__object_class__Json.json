@@ -2,8 +2,8 @@
 #set( $symbol_dollar = '$' )
 #set( $symbol_escape = '\' )
 {
-    "doc:${object_urn}": {
-        "doc:displayName": "Subscription ${object_urn}s",
+    "doc:document": {
+        "doc:displayName": "Subscription documents",
         "doc:description": "Desctiption follows",
         "doc:keywords": "journals",
         "doc:docDate": "2015-01-01",

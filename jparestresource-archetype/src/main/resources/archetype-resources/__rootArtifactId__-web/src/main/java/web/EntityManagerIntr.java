@@ -6,7 +6,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ${groupId}.web;
+package ${package}.web;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,8 +16,8 @@ import org.eclipse.persistence.jpa.JpaEntityManager;
 import org.eclipse.persistence.sessions.CopyGroup;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
-import ${groupId}.${object_urn}.${object_class};
-import ${groupId}.${object_urn}.ReadOptionsType;
+import ${package}.${parentArtifactId}.${object_class};
+import ${package}.${parentArtifactId}.ReadOptionsType;
 
 /**
  *

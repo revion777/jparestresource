@@ -3,8 +3,8 @@
 #set( $symbol_escape = '\' )
 <?xml version="1.0" encoding="UTF-8"?>
 <xsd:schema elementFormDefault="qualified"
-            xmlns="urn:ru:ilb:${parentArtifactId}:${object_urn}"
-            targetNamespace="urn:ru:ilb:${parentArtifactId}:${object_urn}"
+            xmlns="urn:ru:ilb:${parentArtifactId}:${parentArtifactId}"
+            targetNamespace="urn:ru:ilb:${parentArtifactId}:${parentArtifactId}"
             xmlns:uuid="urn:ru:ilb:basicuuid:basicuuid"
             xmlns:xsd="http://www.w3.org/2001/XMLSchema"
 >
@@ -30,7 +30,7 @@
             </xsd:extension>
         </xsd:complexContent>
     </xsd:complexType>
-    <xsd:element name="${object_urn}" type="${object_class}Type"/>
+    <xsd:element name="document" type="${object_class}Type"/>
     <xsd:complexType name="DocfileType">
         <xsd:complexContent>
             <xsd:extension base="EntityType">
@@ -39,16 +39,16 @@
                     <xsd:element name="userRole" type="xsd:string" minOccurs="0" />
                     <xsd:element name="confirm" type="xsd:boolean" minOccurs="0"/>
                     <xsd:element name="comment" type="xsd:string" minOccurs="0" />
-                    <xsd:element ref="${object_urn}" minOccurs="0"/>
+                    <xsd:element ref="document" minOccurs="0"/>
                 </xsd:sequence>
             </xsd:extension>
         </xsd:complexContent>
     </xsd:complexType>
     <xsd:element name="docfile" type="DocfileType"/>
-    <xsd:element name="${object_urn}s">
+    <xsd:element name="documents">
         <xsd:complexType>
             <xsd:sequence>
-                <xsd:element ref="${object_urn}" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element ref="document" minOccurs="0" maxOccurs="unbounded"/>
             </xsd:sequence>
         </xsd:complexType>
     </xsd:element>
