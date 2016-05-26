@@ -13,8 +13,8 @@ import org.eclipse.persistence.jpa.JpaEntityManager;
 import org.eclipse.persistence.sessions.CopyGroup;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
-import ru.ilb.jparestresource.document.Document;
-import ru.ilb.jparestresource.document.ReadOptionsType;
+import ru.ilb.jparestresource.jparestresource.Document;
+import ru.ilb.jparestresource.jparestresource.ReadOptionsType;
 
 /**
  *

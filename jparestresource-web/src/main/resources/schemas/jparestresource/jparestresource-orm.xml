@@ -7,7 +7,7 @@
     -->
     <!-- Optimized binary uuid storage -->
     <converter class="ru.ilb.common.jpa.converters.UUIDConverterBytes" auto-apply="true"/>
-    <mapped-superclass class="ru.ilb.jparestresource.document.PersistentObject">
+    <mapped-superclass class="ru.ilb.jparestresource.jparestresource.PersistentObject">
         <attributes>
             <id name="id">
                 <generated-value strategy="AUTO"/>
@@ -15,7 +15,7 @@
             <version name="versionId"/>
         </attributes>
     </mapped-superclass>
-    <mapped-superclass class="ru.ilb.jparestresource.document.EntityType">
+    <mapped-superclass class="ru.ilb.jparestresource.jparestresource.EntityType">
         <entity-listeners>
             <entity-listener class="ru.ilb.jparestresource.listeners.EntityListener"/>
         </entity-listeners>
@@ -28,7 +28,7 @@
             </basic>
         </attributes>
     </mapped-superclass>
-    <entity class="ru.ilb.jparestresource.document.Document">
+    <entity class="ru.ilb.jparestresource.jparestresource.Document">
         <named-query name="Document.byUid">
             <query>Select d from Document d where d.uid=:uid</query>
         </named-query>
@@ -46,7 +46,7 @@
             </one-to-many>
         </attributes>
     </entity>
-    <entity class="ru.ilb.jparestresource.document.Docfile">
+    <entity class="ru.ilb.jparestresource.jparestresource.Docfile">
         <attributes>
             <!-- BI-directinal: -->
             <many-to-one name="document">
@@ -57,7 +57,7 @@
         </attributes>
     </entity>
     <object-type-converter name="DirectionTypeConverter"
-                           object-type="ru.ilb.jparestresource.document.DirectionType" data-type="java.lang.Integer">
+                           object-type="ru.ilb.jparestresource.jparestresource.DirectionType" data-type="java.lang.Integer">
         <conversion-value object-value="IN" data-value="0" />
         <conversion-value object-value="OUT" data-value="1" />
     </object-type-converter>

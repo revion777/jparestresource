@@ -116,7 +116,7 @@
                                     <wadl>${basedir}/src/main/resources/schemas/jparestresource/jparestresource.wadl</wadl>
                                     <packagename>ru.ilb.jparestresource.api</packagename>
                                     <bindingFiles>
-                                        <bindingFile>${basedir}/src/main/resources/schemas/jparestresource/document.xjb</bindingFile>
+                                        <bindingFile>${basedir}/src/main/resources/schemas/jparestresource/jparestresource.xjb</bindingFile>
                                     </bindingFiles>
                                     <extraargs>
                                         <extraarg>-verbose</extraarg>

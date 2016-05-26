@@ -67,7 +67,7 @@
     <bean id="searchContextProvider" class="org.apache.cxf.jaxrs.ext.search.SearchContextProvider"/>
 
     <util:map id="namespaceMap" map-class="java.util.Hashtable">
-        <entry key="urn:ru:ilb:jparestresource:document" value="doc"/>
+        <entry key="urn:ru:ilb:jparestresource:jparestresource" value="doc"/>
     </util:map>
     <bean id="jaxbContextResolver" class="ru.ilb.common.jaxrs.jaxb.JaxbContextResolver" >
         <property name="contextProperties" ref="contextProperties"/>
@@ -103,7 +103,7 @@
         <property name="schemaLocations" ref="schemaLocations"/>
     </bean>
     <util:list id="schemaLocations">
-        <value>classpath:schemas/jparestresource/document.xsd</value>
+        <value>classpath:schemas/jparestresource/jparestresource.xsd</value>
     </util:list>
     <util:list id="extraClass" value-type="java.lang.Class">
     </util:list>
@@ -112,7 +112,7 @@
         <entry key="jaxb.formatted.output" value="true" value-type="java.lang.Boolean"/>
     </util:map>
     <util:map id="contextProperties">
-        <entry key="eclipselink-oxm-xml" value="schemas/jparestresource/document-oxm.xml"/>
+        <entry key="eclipselink-oxm-xml" value="schemas/jparestresource/jparestresource-oxm.xml"/>
         <entry key="com.sun.xml.bind.XmlAccessorFactory" value="true" value-type="java.lang.Boolean"/>
     </util:map>
 

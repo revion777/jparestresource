@@ -17,7 +17,7 @@ package ru.ilb.jparestresource.listeners;
 
 import java.util.UUID;
 import javax.persistence.PrePersist;
-import ru.ilb.jparestresource.document.EntityType;
+import ru.ilb.jparestresource.jparestresource.EntityType;
 
 /**
  *

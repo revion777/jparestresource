@@ -22,10 +22,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
-import ru.ilb.jparestresource.document.Document;
-import ru.ilb.jparestresource.document.Documents;
+import ru.ilb.jparestresource.jparestresource.Document;
+import ru.ilb.jparestresource.jparestresource.Documents;
 import ru.ilb.jparestresource.api.DocumentsResource;
-import ru.ilb.jparestresource.document.ReadOptionsType;
+import ru.ilb.jparestresource.jparestresource.ReadOptionsType;
 
 @Path("documents")
 public class DocumentResourceImpl implements DocumentsResource {

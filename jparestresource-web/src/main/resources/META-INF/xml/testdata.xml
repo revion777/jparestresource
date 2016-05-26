@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<doc:documents xmlns:doc="urn:ru:ilb:jparestresource:document" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-               xsi:schemaLocation="urn:ru:ilb:jparestresource:document ../../../../../../jparestresource-api/src/main/resources/schemas/jparestresource/document.xsd" >
+<doc:documents xmlns:doc="urn:ru:ilb:jparestresource:jparestresource" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+               xsi:schemaLocation="urn:ru:ilb:jparestresource:jparestresource ../../../../../../jparestresource-api/src/main/resources/schemas/jparestresource/document.xsd" >
     <doc:document>
         <doc:uid>5530460f-760c-4ba1-8dfa-1e27f8e8e9ce</doc:uid>
         <doc:displayName>Subscription documents</doc:displayName>
