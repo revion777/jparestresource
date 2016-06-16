@@ -96,13 +96,15 @@
         <property name="singleJaxbContext" value="true"/>
         <property name="schemaHandler" ref="schemaHandler"/>
     </bean>
-    <!--    <bean id="jsonProvider" class="org.apache.cxf.jaxrs.provider.json.JSONProvider">
+    <!-- jettison json provider, also need to uncomment jettison dependency in pom.xml
+    <bean id="jsonProvider" class="org.apache.cxf.jaxrs.provider.json.JSONProvider">
         <property name="namespaceMap" ref="namespaceMap"/>
         <property name="contextProperties" ref="contextProperties"/>
         <property name="namespaceSeparator" value=":"/>
         <property name="singleJaxbContext" value="true"/>
         <property name="schemaHandler" ref="schemaHandler"/>
     </bean>-->
+    <!-- moxy json provider -->
     <bean id="jsonProvider" class="ru.ilb.common.jaxrs.json.MOXyJsonProvider">
         <property name="namespacePrefixMapper" ref="namespaceMap"/>
         <property name="namespaceSeparator" value=":"/>
@@ -112,6 +114,9 @@
         <property name="marshalEmptyCollections" value="false"/>
         <property name="schemaHandler" ref="schemaHandler"/>
     </bean>
+    <!-- jackson json provider, also need to uncomment jackson-jaxrs-json-provider dependency in pom.xml
+    <bean id="jsonProvider" class="com.fasterxml.jackson.jaxrs.json.JacksonJaxbJsonProvider"/>
+    -->
     <bean id="schemaHandler" class="org.apache.cxf.jaxrs.utils.schemas.SchemaHandler">
         <property name="catalogLocation" value="classpath:schemas/${parentArtifactId}/catalog.xml"/>
         <property name="schemaLocations" ref="schemaLocations"/>
