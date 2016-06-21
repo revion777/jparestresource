@@ -41,6 +41,15 @@
     <!-- uncomment to enable AsyncTaskManager support -->
     <!--<bean id="asyncTaskManager" class="ru.ilb.common.jaxrs.async.AsyncTaskManager" destroy-method="destroy"/>-->
 
+    <!-- uncomment to enable jdbc transaction support using JdbcTemplate -->
+    <!--
+    <tx:annotation-driven transaction-manager="transactionManager" mode="aspectj"/>
+    <jee:jndi-lookup id="dataSource" jndi-name="jdbc/jparesresource"/>
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+    -->
+
     <!-- Configure JPA support -->
     <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean" >
         <property name="persistenceXmlLocation" value="classpath*:META-INF/persistence.xml"></property>
