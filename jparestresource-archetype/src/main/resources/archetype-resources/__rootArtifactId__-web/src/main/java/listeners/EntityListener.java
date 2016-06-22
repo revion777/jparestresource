@@ -20,7 +20,7 @@ package ${package}.listeners;
 
 import java.util.UUID;
 import javax.persistence.PrePersist;
-import ${package}.${parentArtifactId}.EntityType;
+import ${package}.core.EntityType;
 
 /**
  *

@@ -5,20 +5,14 @@
 <xsd:schema elementFormDefault="qualified"
             xmlns="urn:ru:ilb:${parentArtifactId}:${parentArtifactId}"
             targetNamespace="urn:ru:ilb:${parentArtifactId}:${parentArtifactId}"
-            xmlns:uuid="urn:ru:ilb:basicuuid:basicuuid"
+            xmlns:core="urn:ru:ilb:${parentArtifactId}:core"
             xmlns:xsd="http://www.w3.org/2001/XMLSchema"
 >
-    <xsd:import namespace="urn:ru:ilb:basicuuid:basicuuid"/>
+    <xsd:import namespace="urn:ru:ilb:${parentArtifactId}:core" schemaLocation="./core.xsd"/>
 
-    <xsd:complexType name="EntityType" abstract="true">
-        <xsd:sequence>
-            <xsd:element name="uid" type="uuid:UUIDType" minOccurs="0"/>
-        </xsd:sequence>
-    </xsd:complexType>
-    <xsd:element name="entity" type="EntityType"/>
     <xsd:complexType name="${object_class}Type">
         <xsd:complexContent>
-            <xsd:extension base="EntityType">
+            <xsd:extension base="core:EntityType">
                 <xsd:sequence>
                     <xsd:element name="displayName" type="xsd:string" minOccurs="0"/>
                     <xsd:element name="description" type="xsd:string" minOccurs="0"/>
@@ -33,7 +27,7 @@
     <xsd:element name="document" type="${object_class}Type"/>
     <xsd:complexType name="DocfileType">
         <xsd:complexContent>
-            <xsd:extension base="EntityType">
+            <xsd:extension base="core:EntityType">
                 <xsd:sequence>
                     <xsd:element name="userName" type="xsd:string" minOccurs="0"/>
                     <xsd:element name="userRole" type="xsd:string" minOccurs="0" />

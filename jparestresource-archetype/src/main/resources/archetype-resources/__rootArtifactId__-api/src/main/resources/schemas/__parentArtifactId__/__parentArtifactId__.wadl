@@ -8,7 +8,7 @@
     xmlns:html="http://www.w3.org/1999/xhtml"
     xmlns="http://wadl.dev.java.net/2009/02"
     xmlns:tns="urn:ru:ilb:${parentArtifactId}:${parentArtifactId}"
-    xmlns:uuid="urn:ru:ilb:basicuuid:basicuuid"
+    xmlns:core="urn:ru:ilb:${parentArtifactId}:core"
 >
 	 
     <doc title="${parentArtifactId} API">
@@ -40,13 +40,13 @@
                     <representation mediaType="application/json"/>
                 </request>
                 <response>
-                    <representation mediaType="text/plain" element="uuid:UUIDType">
+                    <representation mediaType="text/plain" element="core:UUIDType">
                         <doc>UUID of created object</doc>
                     </representation>
                 </response>
             </method>
             <resource path="{uid}">
-                <param name="uid" type="uuid:UUIDType" style="template">
+                <param name="uid" type="core:UUIDType" style="template">
                     <doc>document uid</doc>
                 </param>
                 <method name="GET" id="find">
