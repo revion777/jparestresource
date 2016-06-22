@@ -7,7 +7,7 @@
     -->
     <!-- Optimized binary uuid storage -->
     <converter class="ru.ilb.common.jpa.converters.UUIDConverterBytes" auto-apply="true"/>
-    <mapped-superclass class="ru.ilb.jparestresource.jparestresource.PersistentObject">
+    <mapped-superclass class="ru.ilb.jparestresource.core.PersistentObjectType">
         <attributes>
             <id name="id">
                 <generated-value strategy="AUTO"/>
@@ -15,7 +15,7 @@
             <version name="versionId"/>
         </attributes>
     </mapped-superclass>
-    <mapped-superclass class="ru.ilb.jparestresource.jparestresource.EntityType">
+    <mapped-superclass class="ru.ilb.jparestresource.core.EntityType">
         <entity-listeners>
             <entity-listener class="ru.ilb.jparestresource.listeners.EntityListener"/>
         </entity-listeners>
