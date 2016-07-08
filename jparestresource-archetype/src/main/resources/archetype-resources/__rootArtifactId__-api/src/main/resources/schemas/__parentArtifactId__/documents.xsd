@@ -3,8 +3,8 @@
 #set( $symbol_escape = '\' )
 <?xml version="1.0" encoding="UTF-8"?>
 <xsd:schema elementFormDefault="qualified"
-            xmlns="urn:ru:ilb:${parentArtifactId}:${parentArtifactId}"
-            targetNamespace="urn:ru:ilb:${parentArtifactId}:${parentArtifactId}"
+            xmlns="urn:ru:ilb:${parentArtifactId}:documents"
+            targetNamespace="urn:ru:ilb:${parentArtifactId}:documents"
             xmlns:core="urn:ru:ilb:${parentArtifactId}:core"
             xmlns:xsd="http://www.w3.org/2001/XMLSchema"
 >

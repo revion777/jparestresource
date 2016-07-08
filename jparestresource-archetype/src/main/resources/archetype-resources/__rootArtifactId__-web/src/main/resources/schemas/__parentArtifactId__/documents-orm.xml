@@ -31,7 +31,7 @@
             </basic>
         </attributes>
     </mapped-superclass>
-    <entity class="${package}.${parentArtifactId}.${object_class}">
+    <entity class="${package}.documents.${object_class}">
         <named-query name="${object_class}.byUid">
             <query>Select d from ${object_class} d where d.uid=:uid</query>
         </named-query>
@@ -49,7 +49,7 @@
             </one-to-many>
         </attributes>
     </entity>
-    <entity class="${package}.${parentArtifactId}.Docfile">
+    <entity class="${package}.documents.Docfile">
         <attributes>
             <!-- BI-directinal: -->
             <many-to-one name="document">
@@ -60,7 +60,7 @@
         </attributes>
     </entity>
     <object-type-converter name="DirectionTypeConverter"
-                           object-type="${package}.${parentArtifactId}.DirectionType" data-type="java.lang.Integer">
+                           object-type="${package}.documents.DirectionType" data-type="java.lang.Integer">
         <conversion-value object-value="IN" data-value="0" />
         <conversion-value object-value="OUT" data-value="1" />
     </object-type-converter>

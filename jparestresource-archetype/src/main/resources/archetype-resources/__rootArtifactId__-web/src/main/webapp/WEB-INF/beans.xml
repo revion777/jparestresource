@@ -53,7 +53,7 @@
     </bean>
     -->
 
-    <!-- Configure JPA support -->
+    <!-- Configure JPA support, comment if no JPA needed -->
     <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean" >
         <property name="persistenceXmlLocation" value="classpath*:META-INF/persistence.xml"></property>
     </bean>
@@ -90,7 +90,7 @@
     <bean id="searchContextProvider" class="org.apache.cxf.jaxrs.ext.search.SearchContextProvider"/>
 
     <util:map id="namespaceMap" map-class="java.util.Hashtable">
-        <entry key="urn:ru:ilb:${parentArtifactId}:${parentArtifactId}" value="doc"/>
+        <entry key="urn:ru:ilb:${parentArtifactId}:documents" value=""/>
     </util:map>
     <bean id="jaxbContextResolver" class="ru.ilb.common.jaxrs.jaxb.JaxbContextResolver" >
         <property name="contextProperties" ref="contextProperties"/>
@@ -113,8 +113,8 @@
         <property name="singleJaxbContext" value="true"/>
         <property name="schemaHandler" ref="schemaHandler"/>
     </bean>-->
-    <!-- moxy json provider -->
-    <bean id="jsonProvider" class="ru.ilb.common.jaxrs.json.MOXyJsonProvider">
+    <!-- moxy json provider, emulate jettison behavior -->
+<!--    <bean id="jsonProvider" class="ru.ilb.common.jaxrs.json.MOXyJsonProvider">
         <property name="namespacePrefixMapper" ref="namespaceMap"/>
         <property name="namespaceSeparator" value=":"/>
         <property name="formattedOutput" value="true"/>
@@ -122,6 +122,10 @@
         <property name="includeRoot" value="true"/>
         <property name="marshalEmptyCollections" value="false"/>
         <property name="schemaHandler" ref="schemaHandler"/>
+    </bean>-->
+    <!-- moxy json provider, default behavior -->
+    <bean id="jsonProvider" class="org.eclipse.persistence.jaxb.rs.MOXyJsonProvider">
+        <property name="formattedOutput" value="true"/>
     </bean>
     <!-- jackson json provider, also need to uncomment jackson-jaxrs-json-provider dependency in pom.xml
     <bean id="jsonProvider" class="com.fasterxml.jackson.jaxrs.json.JacksonJaxbJsonProvider"/>
@@ -131,7 +135,7 @@
         <property name="schemaLocations" ref="schemaLocations"/>
     </bean>
     <util:list id="schemaLocations">
-        <value>classpath:schemas/${parentArtifactId}/${parentArtifactId}.xsd</value>
+        <value>classpath:schemas/${parentArtifactId}/documents.xsd</value>
     </util:list>
     <util:list id="extraClass" value-type="java.lang.Class">
     </util:list>
@@ -140,7 +144,7 @@
         <entry key="jaxb.formatted.output" value="true" value-type="java.lang.Boolean"/>
     </util:map>
     <util:map id="contextProperties">
-        <entry key="eclipselink-oxm-xml" value="schemas/${parentArtifactId}/${parentArtifactId}-oxm.xml"/>
+        <entry key="eclipselink-oxm-xml" value="schemas/${parentArtifactId}/documents-oxm.xml"/>
         <entry key="com.sun.xml.bind.XmlAccessorFactory" value="true" value-type="java.lang.Boolean"/>
     </util:map>
 
@@ -156,6 +160,9 @@
     <bean id="exceptionHandler" class="ru.ilb.common.jaxrs.exceptionhandler.SendMailExceptionHandler">
         <property name="mailTo" value="${symbol_dollar}{SERVER_ADMIN}"/>
     </bean>
+    
+    <!-- inbound request logging -->
+    <bean id="logInbound" class="org.apache.cxf.interceptor.LoggingInInterceptor"/>
 
     <!-- auto register @Component annotated classes -->
     <context:component-scan base-package="${package}.web"/>
@@ -173,6 +180,10 @@
             <ref bean="swagger2Feature" />
             -->
         </jaxrs:features>
+        <jaxrs:inInterceptors>
+            <!-- uncomment to enable inbound request logging -->
+            <!--<ref bean="logInbound"/>-->
+        </jaxrs:inInterceptors>
         <jaxrs:extensionMappings>
             <entry key="xml" value="application/xml;charset=UTF-8"/>
             <entry key="json" value="application/json;charset=UTF-8"/>

@@ -7,7 +7,7 @@
     xmlns:xsd="http://www.w3.org/2001/XMLSchema"
     xmlns:html="http://www.w3.org/1999/xhtml"
     xmlns="http://wadl.dev.java.net/2009/02"
-    xmlns:tns="urn:ru:ilb:${parentArtifactId}:${parentArtifactId}"
+    xmlns:tns="urn:ru:ilb:${parentArtifactId}:documents"
     xmlns:core="urn:ru:ilb:${parentArtifactId}:core"
 >
 	 
@@ -15,7 +15,7 @@
         ${parentArtifactId} API
     </doc>
     <grammars>
-        <include href="${parentArtifactId}.xsd" />
+        <include href="documents.xsd" />
     </grammars>
 	
     <resources base="http://localhost:8080/${parentArtifactId}/web">
@@ -26,6 +26,9 @@
             <method name="GET" id="list">
                 <request>
                     <param name="options" type="tns:ReadOptionsType" style="query" repeating="true"/>
+                    <param name="filter" type="xsd:string" style="query"/>
+                    <param name="limit" type="xsd:int" style="query"/>
+                    <param name="order" type="xsd:string" style="query"/>
                 </request>
                 <doc>List of documents</doc>
                 <response status="200">

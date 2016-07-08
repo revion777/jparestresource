@@ -2,15 +2,13 @@
 #set( $symbol_dollar = '$' )
 #set( $symbol_escape = '\' )
 {
-    "doc:document": {
-        "doc:displayName": "Subscription documents",
-        "doc:description": "Desctiption follows",
-        "doc:keywords": "journals",
-        "doc:docDate": "2015-01-01",
-        "doc:direction": "IN",
-        "doc:docfile": [{
-                "doc:userName": "test",
-                "doc:confirm": false
-            }]
-    }
+    "displayName": "Subscription documents",
+    "description": "Desctiption follows",
+    "keywords": "journals",
+    "docDate": "2015-01-01",
+    "direction": "IN",
+    "docfile": [{
+            "userName": "test",
+            "confirm": false
+        }]
 }
