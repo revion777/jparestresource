@@ -130,7 +130,7 @@
                                         <extraarg>${basedir}/src/main/resources/schemas/jparestresource/catalog.xml</extraarg>
                                         <extraarg>-xjc-Xannotate</extraarg>
                                         <extraarg>-xjc-Xinheritance</extraarg>
-                                        <extraarg>-xjc-Xcopyable</extraarg>
+                                        <!--<extraarg>-xjc-Xcopyable</extraarg>-->
                                         <extraarg>-xjc-Xsetters</extraarg>
                                         <extraarg>-xjc-Xsetters-mode=direct</extraarg>
                                         <!--                                        <extraarg>-xjc-Xxew</extraarg>

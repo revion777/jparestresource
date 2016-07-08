@@ -23,6 +23,9 @@
             <method name="GET" id="list">
                 <request>
                     <param name="options" type="tns:ReadOptionsType" style="query" repeating="true"/>
+                    <param name="filter" type="xsd:string" style="query"/>
+                    <param name="limit" type="xsd:int" style="query"/>
+                    <param name="order" type="xsd:string" style="query"/>
                 </request>
                 <doc>List of documents</doc>
                 <response status="200">
