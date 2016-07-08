@@ -1,0 +1,16 @@
+#set( $symbol_pound = '#' )
+#set( $symbol_dollar = '$' )
+#set( $symbol_escape = '\' )
+<?xml version="1.0" encoding="UTF-8"?>
+<document xmlns="urn:ru:ilb:${parentArtifactId}:${domain_packageName}" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="urn:ru:ilb:${parentArtifactId}:${domain_packageName} ../../../../../${parentArtifactId}-api/src/main/resources/schemas/${parentArtifactId}/${domain_packageName}.xsd">
+    <displayName>Subscription ${domain_packageName}</displayName>
+    <description>Desctiption follows</description>
+    <keywords>journals</keywords>
+    <docDate>2015-01-01</docDate>
+    <direction>IN</direction>
+    <docfile>
+        <userName>testuser</userName>
+        <confirm>false</confirm>
+    </docfile>
+</document>

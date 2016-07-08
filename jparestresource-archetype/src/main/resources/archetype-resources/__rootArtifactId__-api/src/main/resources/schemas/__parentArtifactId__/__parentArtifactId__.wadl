@@ -7,7 +7,7 @@
     xmlns:xsd="http://www.w3.org/2001/XMLSchema"
     xmlns:html="http://www.w3.org/1999/xhtml"
     xmlns="http://wadl.dev.java.net/2009/02"
-    xmlns:tns="urn:ru:ilb:${parentArtifactId}:documents"
+    xmlns:tns="urn:ru:ilb:${parentArtifactId}:${domain_packageName}"
     xmlns:core="urn:ru:ilb:${parentArtifactId}:core"
 >
 	 
@@ -15,13 +15,13 @@
         ${parentArtifactId} API
     </doc>
     <grammars>
-        <include href="documents.xsd" />
+        <include href="${domain_packageName}.xsd" />
     </grammars>
 	
     <resources base="http://localhost:8080/${parentArtifactId}/web">
-        <resource path="documents">
+        <resource path="${domain_packageName}">
             <doc>
-                documents resource
+                ${domain_packageName} resource
             </doc>
             <method name="GET" id="list">
                 <request>
@@ -30,9 +30,9 @@
                     <param name="limit" type="xsd:int" style="query"/>
                     <param name="order" type="xsd:string" style="query"/>
                 </request>
-                <doc>List of documents</doc>
+                <doc>List of ${domain_packageName}</doc>
                 <response status="200">
-                    <representation mediaType="application/xml" element="tns:documents"/>
+                    <representation mediaType="application/xml" element="tns:${domain_packageName}"/>
                     <representation mediaType="application/json"/>
                 </response>
             </method>

@@ -3,7 +3,10 @@
     xmlns="http://maven.apache.org/plugins/maven-archetype-plugin/archetype-descriptor/1.0.0"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <requiredProperties>
-    <requiredProperty key="object_class">
+    <requiredProperty key="domain_packageName">
+      <defaultValue>documents</defaultValue>
+    </requiredProperty>
+    <requiredProperty key="domain_objectName">
       <defaultValue>Document</defaultValue>
     </requiredProperty>
   </requiredProperties>

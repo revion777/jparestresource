@@ -117,7 +117,7 @@
                                     <packagename>ru.ilb.${rootArtifactId}.api</packagename>
                                     <bindingFiles>
                                         <bindingFile>${basedir}/src/main/resources/schemas/${rootArtifactId}/core.xjb</bindingFile>
-                                        <bindingFile>${basedir}/src/main/resources/schemas/${rootArtifactId}/documents.xjb</bindingFile>
+                                        <bindingFile>${basedir}/src/main/resources/schemas/${rootArtifactId}/${domain_packageName}.xjb</bindingFile>
                                     </bindingFiles>
                                     <extraargs>
                                         <extraarg>-verbose</extraarg>

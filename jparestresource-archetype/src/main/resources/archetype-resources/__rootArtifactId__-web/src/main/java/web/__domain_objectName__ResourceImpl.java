@@ -6,7 +6,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ${package}.web;
+package ${groupId}.web;
 
 import java.util.List;
 import java.util.UUID;
@@ -34,13 +34,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import ru.ilb.common.jaxrs.jaxb.JaxbContextResolver;
 import ru.ilb.common.jaxrs.search.JPAOrderedQueryVisitor;
-import ${package}.documents.${object_class};
-import ${package}.documents.${object_class}s;
-import ${package}.api.${object_class}sResource;
-import ${package}.documents.ReadOptionsType;
+import ${groupId}.${domain_packageName}.${domain_objectName};
+import ${groupId}.${domain_packageName}.${domain_objectName}s;
+import ${groupId}.api.${domain_objectName}sResource;
+import ${groupId}.${domain_packageName}.ReadOptionsType;
 
-@Path("documents")
-public class ${object_class}ResourceImpl implements ${object_class}sResource {
+@Path("${domain_packageName}")
+public class ${domain_objectName}ResourceImpl implements ${domain_objectName}sResource {
 
     @PersistenceContext(unitName = "${parentArtifactId}")
     private EntityManager em;
@@ -60,27 +60,27 @@ public class ${object_class}ResourceImpl implements ${object_class}sResource {
         this.searchContext = searchContext;
     }
 
-    private static final Logger LOG = LoggerFactory.getLogger(${object_class}ResourceImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(${domain_objectName}ResourceImpl.class);
 
     @Override
     @Transactional
-    public ${object_class}s list(List<ReadOptionsType> options, String filter, Integer limit, String order) {
-        ${object_class}s res = new ${object_class}s();
-        JPAOrderedQueryVisitor<${object_class}> visitor = new JPAOrderedQueryVisitor<>(em, ${object_class}.class);
-        TypedQuery<${object_class}> query;
+    public ${domain_objectName}s list(List<ReadOptionsType> options, String filter, Integer limit, String order) {
+        ${domain_objectName}s res = new ${domain_objectName}s();
+        JPAOrderedQueryVisitor<${domain_objectName}> visitor = new JPAOrderedQueryVisitor<>(em, ${domain_objectName}.class);
+        TypedQuery<${domain_objectName}> query;
         if(filter!=null ){
-            SearchCondition<${object_class}> sc;
+            SearchCondition<${domain_objectName}> sc;
             try {
-                sc = searchContext.getCondition(filter, ${object_class}.class);
+                sc = searchContext.getCondition(filter, ${domain_objectName}.class);
             } catch (SearchParseException ex){
                 throw new BadRequestException(ex);
             }
             sc.accept(visitor);
-            CriteriaQuery<${object_class}> cq= order!=null ? visitor.getOrderedCriteriaQuery(visitor, order): visitor.getCriteriaQuery();
+            CriteriaQuery<${domain_objectName}> cq= order!=null ? visitor.getOrderedCriteriaQuery(visitor, order): visitor.getCriteriaQuery();
             query=em.createQuery(cq);
             
         } else {
-            query = em.createQuery("SELECT d FROM ${object_class} d", ${object_class}.class);
+            query = em.createQuery("SELECT d FROM ${domain_objectName} d", ${domain_objectName}.class);
         }
         if (options != null) {
             if (options.contains(ReadOptionsType.WITH_DOCFILES)) {
@@ -90,39 +90,39 @@ public class ${object_class}ResourceImpl implements ${object_class}sResource {
         if(limit!=null){
             query.setMaxResults(limit);
         }
-        List<${object_class}> result = query.getResultList();
-        //res.get${object_class}s().addAll(entityManagerIntr.copy(result, null, null));
-        res.get${object_class}s().addAll(result);
+        List<${domain_objectName}> result = query.getResultList();
+        //res.get${domain_objectName}s().addAll(entityManagerIntr.copy(result, null, null));
+        res.get${domain_objectName}s().addAll(result);
         return res;
     }
 
     @Override
     @Transactional
-    public ${object_class} find(UUID uid) {
-        TypedQuery<${object_class}> query = em.createNamedQuery("${object_class}.byUid", ${object_class}.class);
+    public ${domain_objectName} find(UUID uid) {
+        TypedQuery<${domain_objectName}> query = em.createNamedQuery("${domain_objectName}.byUid", ${domain_objectName}.class);
         query.setParameter("uid", uid);
-        ${object_class} doc = query.getSingleResult();
+        ${domain_objectName} doc = query.getSingleResult();
         return doc;
     }
 
     @Override
     @Transactional
-    public UUID create(${object_class} document) {
+    public UUID create(${domain_objectName} document) {
         em.persist(document);
         return document.getUid();
     }
 
     @Override
     @Transactional
-    public void edit(UUID uid, ${object_class} document) {
-        ${object_class} doc = find(uid);
+    public void edit(UUID uid, ${domain_objectName} document) {
+        ${domain_objectName} doc = find(uid);
         BeanUtils.copyProperties(document, doc,new String[] {"id"});
     }
 
     @Override
     @Transactional
     public void remove(UUID uid) {
-        ${object_class} doc = find(uid);
+        ${domain_objectName} doc = find(uid);
         em.remove(doc);
     }
 
@@ -130,9 +130,9 @@ public class ${object_class}ResourceImpl implements ${object_class}sResource {
     @Transactional
     public void init() {
         try {
-            JAXBContext jaxbContext = jaxbContextResolver.getContext(${object_class}s.class);
-            ${object_class}s documents=(${object_class}s) jaxbContext.createUnmarshaller().unmarshal(${object_class}s.class.getResourceAsStream("/META-INF/xml/testdata.xml"));
-            for(${object_class} doc:documents.get${object_class}s()){
+            JAXBContext jaxbContext = jaxbContextResolver.getContext(${domain_objectName}s.class);
+            ${domain_objectName}s ${domain_packageName}=(${domain_objectName}s) jaxbContext.createUnmarshaller().unmarshal(${domain_objectName}s.class.getResourceAsStream("/META-INF/xml/testdata.xml"));
+            for(${domain_objectName} doc:${domain_packageName}.get${domain_objectName}s()){
                 create(doc);
             }
         } catch (JAXBException ex) {

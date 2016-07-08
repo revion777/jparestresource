@@ -6,7 +6,7 @@
     <persistence-unit name="${parentArtifactId}" transaction-type="RESOURCE_LOCAL">
         <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
         <non-jta-data-source>java:/comp/env/jdbc/${parentArtifactId}</non-jta-data-source>
-        <mapping-file>schemas/${parentArtifactId}/documents-orm.xml</mapping-file>
+        <mapping-file>schemas/${parentArtifactId}/${domain_packageName}-orm.xml</mapping-file>
         <exclude-unlisted-classes>false</exclude-unlisted-classes>
         <properties>
             <!-- ГЕНЕРАЦИЯ МЕТАДАННЫХ НА ОСНОВЕ МОДЕЛИ -->
