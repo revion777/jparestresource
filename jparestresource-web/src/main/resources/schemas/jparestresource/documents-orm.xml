@@ -28,7 +28,7 @@
             </basic>
         </attributes>
     </mapped-superclass>
-    <entity class="ru.ilb.jparestresource.jparestresource.Document">
+    <entity class="ru.ilb.jparestresource.documents.Document">
         <named-query name="Document.byUid">
             <query>Select d from Document d where d.uid=:uid</query>
         </named-query>
@@ -46,7 +46,7 @@
             </one-to-many>
         </attributes>
     </entity>
-    <entity class="ru.ilb.jparestresource.jparestresource.Docfile">
+    <entity class="ru.ilb.jparestresource.documents.Docfile">
         <attributes>
             <!-- BI-directinal: -->
             <many-to-one name="document">
@@ -57,7 +57,7 @@
         </attributes>
     </entity>
     <object-type-converter name="DirectionTypeConverter"
-                           object-type="ru.ilb.jparestresource.jparestresource.DirectionType" data-type="java.lang.Integer">
+                           object-type="ru.ilb.jparestresource.documents.DirectionType" data-type="java.lang.Integer">
         <conversion-value object-value="IN" data-value="0" />
         <conversion-value object-value="OUT" data-value="1" />
     </object-type-converter>

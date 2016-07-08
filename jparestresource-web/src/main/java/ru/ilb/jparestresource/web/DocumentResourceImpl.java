@@ -31,10 +31,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import ru.ilb.common.jaxrs.jaxb.JaxbContextResolver;
 import ru.ilb.common.jaxrs.search.JPAOrderedQueryVisitor;
-import ru.ilb.jparestresource.jparestresource.Document;
-import ru.ilb.jparestresource.jparestresource.Documents;
+import ru.ilb.jparestresource.documents.Document;
+import ru.ilb.jparestresource.documents.Documents;
 import ru.ilb.jparestresource.api.DocumentsResource;
-import ru.ilb.jparestresource.jparestresource.ReadOptionsType;
+import ru.ilb.jparestresource.documents.ReadOptionsType;
 
 @Path("documents")
 public class DocumentResourceImpl implements DocumentsResource {

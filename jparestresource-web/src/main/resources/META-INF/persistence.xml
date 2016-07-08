@@ -3,7 +3,7 @@
     <persistence-unit name="jparestresource" transaction-type="RESOURCE_LOCAL">
         <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
         <non-jta-data-source>java:/comp/env/jdbc/jparestresource</non-jta-data-source>
-        <mapping-file>schemas/jparestresource/jparestresource-orm.xml</mapping-file>
+        <mapping-file>schemas/jparestresource/documents-orm.xml</mapping-file>
         <exclude-unlisted-classes>false</exclude-unlisted-classes>
         <properties>
             <!-- ГЕНЕРАЦИЯ МЕТАДАННЫХ НА ОСНОВЕ МОДЕЛИ -->

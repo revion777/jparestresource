@@ -4,7 +4,7 @@
     xmlns:xsd="http://www.w3.org/2001/XMLSchema"
     xmlns:html="http://www.w3.org/1999/xhtml"
     xmlns="http://wadl.dev.java.net/2009/02"
-    xmlns:tns="urn:ru:ilb:jparestresource:jparestresource"
+    xmlns:tns="urn:ru:ilb:jparestresource:documents"
     xmlns:core="urn:ru:ilb:jparestresource:core"
 >
 	 
@@ -12,7 +12,7 @@
         jparestresource API
     </doc>
     <grammars>
-        <include href="jparestresource.xsd" />
+        <include href="documents.xsd" />
     </grammars>
 	
     <resources base="http://localhost:8080/jparestresource/web">
