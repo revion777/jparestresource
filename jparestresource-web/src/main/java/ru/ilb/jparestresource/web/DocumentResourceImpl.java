@@ -27,7 +27,9 @@ import org.eclipse.persistence.config.QueryHints;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
+import ru.ilb.common.jaxrs.jaxb.JaxbContextResolver;
 import ru.ilb.common.jaxrs.search.JPAOrderedQueryVisitor;
 import ru.ilb.jparestresource.jparestresource.Document;
 import ru.ilb.jparestresource.jparestresource.Documents;
@@ -40,11 +42,7 @@ public class DocumentResourceImpl implements DocumentsResource {
     @PersistenceContext(unitName = "jparestresource")
     private EntityManager em;
 
-    @Resource(name="jaxbProvider")
-    JAXBElementProvider jaxbElementProvider;
-
-//    @Autowired
-//    EntityManagerIntr entityManagerIntr;
+    @Autowired JaxbContextResolver jaxbContextResolver;
     
     private UriInfo uriInfo;
     @Context
@@ -129,7 +127,7 @@ public class DocumentResourceImpl implements DocumentsResource {
     @Transactional
     public void init() {
         try {
-            JAXBContext jaxbContext=jaxbElementProvider.getJAXBContext(Documents.class, null);
+            JAXBContext jaxbContext = jaxbContextResolver.getContext(Documents.class);
             Documents documents=(Documents) jaxbContext.createUnmarshaller().unmarshal(Documents.class.getResourceAsStream("/META-INF/xml/testdata.xml"));
             for(Document doc:documents.getDocuments()){
                 create(doc);
