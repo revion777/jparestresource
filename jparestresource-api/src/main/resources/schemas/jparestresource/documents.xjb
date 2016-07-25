@@ -11,6 +11,14 @@
                jaxb:extensionBindingPrefixes="xjc annox inheritance"
                schemaLocation="documents.xsd" node="/xsd:schema"
 >
-
+    <!-- example how to make implementation class, jaxb:baseType required for List<> properties -->
+<!--    <jaxb:bindings node="//xsd:complexType[@name='DocumentType']">
+        <jaxb:class  implClass="ru.ilb.jparestresource.documents.Document"/>
+    </jaxb:bindings>
+    <jaxb:bindings node="//xsd:element[@name='docfile']">
+        <jaxb:property>
+            <jaxb:baseType name="Document"/>
+        </jaxb:property>
+    </jaxb:bindings>-->
 </jaxb:bindings>
 
