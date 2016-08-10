@@ -11,7 +11,7 @@
               removeAbandoned="true"
               removeAbandonedTimeout="100"
               type="javax.sql.DataSource"
-              url="jdbc:mysql://localhost:3306/jparestresource?autoReconnect=true&amp;elideSetAutoCommits=true&amp;useLocalSessionState=true&amp;maintainTimeStats=false&amp;serverTimezone=Europe/Moscow"
+              url="jdbc:mysql://localhost:3306/jparestresource?autoReconnect=true&amp;elideSetAutoCommits=true&amp;useLocalSessionState=true&amp;maintainTimeStats=false&amp;serverTimezone=Europe/Moscow&amp;rewriteBatchedStatements=true"
     />
 
 </Context>
