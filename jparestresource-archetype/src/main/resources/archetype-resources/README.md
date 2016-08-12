@@ -9,7 +9,7 @@ Example Rest JPA application
 
 ##Example project creation based on this archetype in command line
 
-mvn -DarchetypeGroupId=ru.ilb.${rootArtifactId} -DarchetypeArtifactId=${rootArtifactId}-archetype -DarchetypeVersion=1.0-SNAPSHOT -DgroupId=ru.ilb.sampleapplication -DartifactId=sampleapplication -Dversion=1.0-SNAPSHOT -Dpackage=ru.ilb.sampleapplication -Dobject_urn=document -Dobject_class=Document -Darchetype.interactive=false --batch-mode --update-snapshots archetype:generate
+mvn -DarchetypeGroupId=ru.ilb.${rootArtifactId} -DarchetypeArtifactId=${rootArtifactId}-archetype -DarchetypeVersion=1.0-SNAPSHOT -DgroupId=ru.ilb.sampleapplication -DartifactId=sampleapplication -Dversion=1.0-SNAPSHOT -Dpackage=ru.ilb.sampleapplication -Ddomain_packageName=documents -Ddomain_objectName=Document -Darchetype.interactive=false --batch-mode --update-snapshots archetype:generate
 
 
 ##Example project creation based on this archetype in Netbeans

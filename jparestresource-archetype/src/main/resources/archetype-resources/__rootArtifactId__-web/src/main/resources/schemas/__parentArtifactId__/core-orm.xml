@@ -1,0 +1,34 @@
+#set( $symbol_pound = '#' )
+#set( $symbol_dollar = '$' )
+#set( $symbol_escape = '\' )
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings xmlns="http://www.eclipse.org/eclipselink/xsds/persistence/orm"
+                 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                 version="2.5">
+    <!-- Store uuid as string
+        <converter class="ru.ilb.common.jpa.converters.UUIDConverterString" auto-apply="true"/>
+    -->
+    <!-- Optimized binary uuid storage -->
+    <converter class="ru.ilb.common.jpa.converters.UUIDConverterBytes" auto-apply="true"/>
+    <mapped-superclass class="${groupId}.core.PersistentObjectType">
+        <attributes>
+            <id name="id">
+                <generated-value strategy="AUTO"/>
+            </id>
+            <version name="versionId"/>
+        </attributes>
+    </mapped-superclass>
+    <mapped-superclass class="${groupId}.core.EntityType">
+        <entity-listeners>
+            <entity-listener class="${groupId}.listeners.EntityListener"/>
+        </entity-listeners>
+        <attributes>
+            <basic name="uid">
+                <!--<column length="36" nullable="false" name="UID"/>-->
+                <!-- optimized binary uuid storage -->
+                <column length="16" nullable="false" column-definition="BINARY(16) NOT NULL"/>
+                <index unique="true"/>
+            </basic>
+        </attributes>
+    </mapped-superclass>
+</entity-mappings>

@@ -6,6 +6,7 @@
     <persistence-unit name="${parentArtifactId}" transaction-type="RESOURCE_LOCAL">
         <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
         <non-jta-data-source>java:/comp/env/jdbc/${parentArtifactId}</non-jta-data-source>
+        <mapping-file>schemas/${parentArtifactId}/core-orm.xml</mapping-file>
         <mapping-file>schemas/${parentArtifactId}/${domain_packageName}-orm.xml</mapping-file>
         <exclude-unlisted-classes>false</exclude-unlisted-classes>
         <properties>
@@ -35,6 +36,8 @@
             по-уомолчанию INFO. можно  указать FINE для отладки SQL запросов
             -->
             <property name="eclipselink.logging.level" value="FINE"/>
+            <property name="eclipselink.jdbc.batch-writing" value="JDBC"/>
+            <property name="eclipselink.jdbc.batch-writing.size" value="1000"/>
         </properties>
     </persistence-unit>
 </persistence>

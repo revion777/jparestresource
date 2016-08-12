@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document xmlns="urn:ru:ilb:jparestresource:documents" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
               xsi:schemaLocation="urn:ru:ilb:jparestresource:documents ../../../../../jparestresource-api/src/main/resources/schemas/jparestresource/documents.xsd">
-    <displayName>Subscription documents</displayName>
+    <displayName2>ЯЯЯЯSubscription documents</2displayName>
     <description>Desctiption follows</description>
     <keywords>journals</keywords>
     <docDate>2015-01-01</docDate>

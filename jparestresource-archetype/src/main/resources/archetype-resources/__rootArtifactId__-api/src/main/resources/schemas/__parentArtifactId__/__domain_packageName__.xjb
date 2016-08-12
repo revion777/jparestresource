@@ -14,6 +14,16 @@
                jaxb:extensionBindingPrefixes="xjc annox inheritance"
                schemaLocation="${domain_packageName}.xsd" node="/xsd:schema"
 >
-
+    <!-- example how to make implementation class, jaxb:baseType required for List<> properties -->
+    <!--
+    <jaxb:bindings node="//xsd:complexType[@name='${domain_objectName}Type']">
+        <jaxb:class  implClass="${groupId}.${domain_packageName}.${domain_objectName}"/>
+    </jaxb:bindings>
+    <jaxb:bindings multiple="true" node="//xsd:element[@ref='document']">
+        <jaxb:property>
+            <jaxb:baseType name="${domain_objectName}"/>
+        </jaxb:property>
+    </jaxb:bindings>
+    -->
 </jaxb:bindings>
 

@@ -27,9 +27,9 @@
     <fileSet encoding="UTF-8">
       <directory></directory>
       <includes>
+        <include>.gitignore</include>
         <include>LICENSE</include>
         <include>README.md</include>
-        <include>.gitignore</include>
       </includes>
     </fileSet>
   </fileSets>
