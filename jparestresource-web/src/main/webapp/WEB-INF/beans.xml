@@ -8,6 +8,7 @@
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:tx="http://www.springframework.org/schema/tx"
        xmlns:cache="http://www.springframework.org/schema/cache"
+       xmlns:cxf="http://cxf.apache.org/core"
        xsi:schemaLocation="
         http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
@@ -16,7 +17,9 @@
         http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee.xsd
         http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
         http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd
-        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd" xmlns:aop="http://www.springframework.org/schema/aop">
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+        http://cxf.apache.org/core http://cxf.apache.org/schemas/core.xsd" 
+       xmlns:aop="http://www.springframework.org/schema/aop">
 
     <!-- Load defaults from apache cxf -->
     <import resource="classpath:META-INF/cxf/cxf.xml" />
@@ -28,6 +31,13 @@
     <context:annotation-config/>
     <!--Activates @Configurable -->
     <context:spring-configured/>
+    
+    <cxf:bus>
+        <cxf:properties>
+            <entry key="skip.default.json.provider.registration" value="true"/>
+        </cxf:properties>
+    </cxf:bus>
+    
     <!-- uncomment to enable @Cacheable support
     <cache:annotation-driven mode="aspectj"/>
     <bean id="cacheBuilder" class="com.google.common.cache.CacheBuilder" factory-method="from">
@@ -36,7 +46,7 @@
     <bean id="cacheManager" class="org.springframework.cache.guava.GuavaCacheManager">
         <property name="cacheBuilder" ref="cacheBuilder"/>
     </bean>
-    -->
+    -->    
     
     <!-- uncomment to enable AsyncTaskManager support -->
     <!--<bean id="asyncTaskManager" class="ru.ilb.common.jaxrs.async.AsyncTaskManager" destroy-method="destroy"/>-->
@@ -111,7 +121,7 @@
         <property name="schemaHandler" ref="schemaHandler"/>
     </bean>-->
     <!-- moxy json provider, emulate jettison behavior -->
-<!--    <bean id="jsonProvider" class="ru.ilb.common.jaxrs.json.MOXyJsonProvider">
+    <!--    <bean id="jsonProvider" class="ru.ilb.common.jaxrs.json.MOXyJsonProvider">
         <property name="namespacePrefixMapper" ref="namespaceMap"/>
         <property name="namespaceSeparator" value=":"/>
         <property name="formattedOutput" value="true"/>
@@ -178,7 +188,7 @@
             -->
         </jaxrs:features>
         <jaxrs:inInterceptors>
-             <!--uncomment to enable inbound request logging--> 
+            <!--uncomment to enable inbound request logging--> 
             <ref bean="logInbound"/>
         </jaxrs:inInterceptors>
         <jaxrs:extensionMappings>
