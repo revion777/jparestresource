@@ -79,6 +79,7 @@
           <directory>src/main/resources</directory>
           <includes>
             <include>**/*.JAXBContext</include>
+            <include>**/*.Logger</include>
           </includes>
         </fileSet>
         <fileSet filtered="true" encoding="UTF-8">
