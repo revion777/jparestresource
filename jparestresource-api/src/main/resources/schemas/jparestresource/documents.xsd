@@ -11,7 +11,7 @@
         <xsd:complexContent>
             <xsd:extension base="core:EntityType">
                 <xsd:sequence>
-                    <xsd:element name="displayName" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="displayName" type="core:notEmptyString" minOccurs="0"/>
                     <xsd:element name="description" type="xsd:string" minOccurs="0"/>
                     <xsd:element name="keywords" type="xsd:string" minOccurs="0"/>
                     <xsd:element name="docDate" type="xsd:date" minOccurs="0"/>

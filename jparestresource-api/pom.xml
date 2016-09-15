@@ -128,9 +128,10 @@
                                         <extraarg>{urn:ru:ilb:jparestresource:core}UUIDType=java.util.UUID</extraarg>
                                         <extraarg>-catalog</extraarg>
                                         <extraarg>${basedir}/src/main/resources/schemas/jparestresource/catalog.xml</extraarg>
+                                        <extraarg>-beanValidation</extraarg>
                                         <extraarg>-xjc-Xannotate</extraarg>
                                         <extraarg>-xjc-Xinheritance</extraarg>
-                                        <!--<extraarg>-xjc-XJsr303Annotations</extraarg>-->
+                                        <extraarg>-xjc-XJsr303Annotations</extraarg>
                                         <!--<extraarg>-xjc-Xcopyable</extraarg>-->
                                         <extraarg>-xjc-Xsetters</extraarg>
                                         <extraarg>-xjc-Xsetters-mode=direct</extraarg>
@@ -170,11 +171,11 @@
                         <artifactId>cxf-xjc-javadoc</artifactId>
                         <version>3.0.5</version>
                     </dependency>                    
-<!--                    <dependency>
+                    <dependency>
                         <groupId>com.github.krasa</groupId>
                         <artifactId>krasa-jaxb-tools</artifactId>
                         <version>1.5</version>
-                    </dependency>-->
+                    </dependency>
                     <!--                    <dependency>
                         <groupId>com.github.jaxb-xew-plugin</groupId>
                         <artifactId>jaxb-xew-plugin</artifactId>

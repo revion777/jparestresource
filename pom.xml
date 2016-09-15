@@ -13,7 +13,7 @@
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <apache-cxf.version>3.1.6</apache-cxf.version>
+        <apache-cxf.version>3.1.8-SNAPSHOT</apache-cxf.version>
         <additionalparam>-Xdoclint:none</additionalparam>
         <maven-release-plugin.version>2.5.2</maven-release-plugin.version>
         <maven-source-plugin.version>2.4</maven-source-plugin.version>
