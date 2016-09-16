@@ -30,6 +30,5 @@ Place in ${catalina.base}/lib following jars:
 ###Note about Tomcat before 8.0+
 TomcatInstrumentableClassLoader is not intended to work on Tomcat 8.0+, but required in older versions.
 In case of exception javax.persistence.TransactionRequiredException: No EntityManager with actual transaction available for current thread 
-uncomment this line s
-<Loader loaderClass="org.springframework.instrument.classloading.tomcat.TomcatInstrumentableClassLoader"/>
+uncomment this line with org.springframework.instrument.classloading.tomcat.TomcatInstrumentableClassLoader in context.xml
 and place spring-instrument-tomcat-4.3.2.RELEASE.jar in ${catalina.base}/lib
