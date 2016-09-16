@@ -178,7 +178,8 @@
     </bean>
     <!-- Provider to mail fatal errors to server admin -->
     <bean id="exceptionHandler" class="ru.ilb.common.jaxrs.exceptionhandler.SendMailExceptionHandler">
-        <property name="mailTo" value="${SERVER_ADMIN}"/>
+        <!-- specifiy SERVER_ADMIN  using -DSERVER_ADMIN=user@host.domain -->
+        <!--<property name="mailTo" value="${SERVER_ADMIN}"/>-->
     </bean>
     
     <!-- inbound request logging -->
