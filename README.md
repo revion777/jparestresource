@@ -22,14 +22,14 @@ Project will be created. Before first run database should be created and access 
 
 ## Environment configuration
 Place in ${catalina.base}/lib following jars:
-1. eclipselink-2.6.3.jar
-2. javax.json-1.0.4.jar
-3. javax.persistence-2.1.0.jar
-4. mysql-connector-java-5.1.31.jar
+* eclipselink-2.6.3.jar
+* javax.json-1.0.4.jar
+* javax.persistence-2.1.0.jar
+* mysql-connector-java-5.1.31.jar
 
 ###Note about Tomcat before 8.0+
 TomcatInstrumentableClassLoader is not intended to work on Tomcat 8.0+, but required in older versions.
 In case of exception javax.persistence.TransactionRequiredException: No EntityManager with actual transaction available for current thread 
-uncomment this line 
+uncomment this line s
 <Loader loaderClass="org.springframework.instrument.classloading.tomcat.TomcatInstrumentableClassLoader"/>
 and place spring-instrument-tomcat-4.3.2.RELEASE.jar in ${catalina.base}/lib
