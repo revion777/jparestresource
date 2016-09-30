@@ -119,8 +119,13 @@
         </dependency>
         <dependency>
             <groupId>ru.ilb.swagger</groupId>
-            <artifactId>swagger-ui.ext</artifactId>
+            <artifactId>swagger-ui-ext</artifactId>
             <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-rs-service-description-swagger</artifactId>
+            <version>${apache-cxf.version}</version>
         </dependency>
         -->
         <dependency>
