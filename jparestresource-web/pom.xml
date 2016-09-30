@@ -48,6 +48,13 @@
             <artifactId>cxf-rt-rs-client</artifactId>
             <version>${apache-cxf.version}</version>
         </dependency>
+        <!-- dependency to enable CORS support
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-rs-security-cors</artifactId>
+            <version>${apache-cxf.version}</version>
+        </dependency>
+        -->
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-validator</artifactId>
