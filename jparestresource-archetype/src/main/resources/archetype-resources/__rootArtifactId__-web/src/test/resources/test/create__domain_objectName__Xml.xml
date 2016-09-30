@@ -4,7 +4,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document xmlns="urn:ru:ilb:${parentArtifactId}:${domain_packageName}" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
               xsi:schemaLocation="urn:ru:ilb:${parentArtifactId}:${domain_packageName} ../../../../../${parentArtifactId}-api/src/main/resources/schemas/${parentArtifactId}/${domain_packageName}.xsd">
-    <displayName2>ЯЯЯЯSubscription ${domain_packageName}</2displayName>
+    <displayName>ЯЯЯЯSubscription ${domain_packageName}</displayName>
     <description>Desctiption follows</description>
     <keywords>journals</keywords>
     <docDate>2015-01-01</docDate>
