@@ -32,12 +32,6 @@
     <!--Activates @Configurable -->
     <context:spring-configured/>
     
-    <cxf:bus>
-        <cxf:properties>
-            <entry key="skip.default.json.provider.registration" value="true"/>
-        </cxf:properties>
-    </cxf:bus>
-    
     <!-- uncomment to enable @Cacheable support
     <cache:annotation-driven mode="aspectj"/>
     <bean id="cacheBuilder" class="com.google.common.cache.CacheBuilder" factory-method="from">
@@ -182,22 +176,34 @@
     </bean>
     <!-- Provider to mail fatal errors to server admin -->
     <bean id="exceptionHandler" class="ru.ilb.common.jaxrs.exceptionhandler.SendMailExceptionHandler">
-        <!-- specifiy SERVER_ADMIN  using -DSERVER_ADMIN=user@host.domain -->
+        <!-- specify SERVER_ADMIN  using -DSERVER_ADMIN=user@host.domain -->
         <!--<property name="mailTo" value="${SERVER_ADMIN}"/>-->
     </bean>
     
     <!-- inbound request logging -->
     <bean id="logInbound" class="org.apache.cxf.interceptor.LoggingInInterceptor"/>
+    
+    <cxf:bus>
+        <cxf:properties>
+            <entry key="skip.default.json.provider.registration" value="true"/>
+            <entry key="org.apache.cxf.jaxrs.bus.providers" value-ref="busProviders"/>
+        </cxf:properties>
+    </cxf:bus>
+    <!-- register provider directly on the bus as the bus properties and share them between all endpoints and clients using this bus -->
+    <util:list id="busProviders">
+        <ref bean="jaxbContextResolver"/>
+        <ref bean="jaxbProvider"/>
+        <ref bean="jsonProvider"/>
+        <ref bean="mapParamConverterProvider"/>
+        <bean class="ru.ilb.common.jaxrs.providers.UUIDMessageBodyReader"/>
+        <bean class="ru.ilb.common.jaxrs.providers.UUIDMessageBodyWriter"/>
+    </util:list>    
 
     <!-- auto register @Component annotated classes -->
     <context:component-scan base-package="ru.ilb.jparestresource.web"/>
-    <jaxrs:server address="/" basePackages="ru.ilb.jparestresource.web,ru.ilb.common.jaxrs.providers,ru.ilb.common.jaxrs.exceptionhandler">
+    <jaxrs:server address="/" basePackages="ru.ilb.jparestresource.web,ru.ilb.common.jaxrs.exceptionhandler">
         <jaxrs:providers>
-            <ref bean="jaxbContextResolver"/>
-            <ref bean="jaxbProvider"/>
-            <ref bean="jsonProvider"/>
             <ref bean="searchContextProvider"/>
-            <ref bean="mapParamConverterProvider"/>
             <ref bean="exceptionHandler"/>
             <ref bean="validationExceptionMapper"/>
             <!-- uncomment to enable CORS support -->
