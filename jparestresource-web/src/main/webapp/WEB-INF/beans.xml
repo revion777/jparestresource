@@ -182,6 +182,8 @@
     
     <!-- inbound request logging -->
     <bean id="logInbound" class="org.apache.cxf.interceptor.LoggingInInterceptor"/>
+    <bean id="uuidMessageBodyReader" class="ru.ilb.common.jaxrs.providers.UUIDMessageBodyReader"/>
+    <bean id="uuidMessageBodyWriter" class="ru.ilb.common.jaxrs.providers.UUIDMessageBodyWriter"/>
     
     <cxf:bus>
         <cxf:properties>
@@ -195,9 +197,18 @@
         <ref bean="jaxbProvider"/>
         <ref bean="jsonProvider"/>
         <ref bean="mapParamConverterProvider"/>
-        <bean class="ru.ilb.common.jaxrs.providers.UUIDMessageBodyReader"/>
-        <bean class="ru.ilb.common.jaxrs.providers.UUIDMessageBodyWriter"/>
-    </util:list>    
+        <ref bean="uuidMessageBodyReader"/>
+        <ref bean="uuidMessageBodyWriter"/>
+    </util:list>
+    <!-- clean up xml -->
+    <!--    <bean id="replaceOutInterceptor" class="ru.ilb.common.jaxrs.interceptors.ReplaceOutInterceptor">
+        <property name="mediaType" value="application/xml"/>
+        <property name="replacements">
+            <util:map>
+                <entry key="\p{Cc}" value=""/>
+            </util:map>
+        </property>
+    </bean>-->
 
     <!-- auto register @Component annotated classes -->
     <context:component-scan base-package="ru.ilb.jparestresource.web"/>
@@ -206,6 +217,7 @@
             <ref bean="searchContextProvider"/>
             <ref bean="exceptionHandler"/>
             <ref bean="validationExceptionMapper"/>
+            <!--<ref bean="replaceOutInterceptor"/>-->
             <!-- uncomment to enable CORS support -->
             <!--<ref bean="corsFilter" />-->
         </jaxrs:providers>
