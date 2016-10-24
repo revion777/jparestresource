@@ -163,7 +163,7 @@
         <property name="provider" ref="validationProvider" />
     </bean>
 
-    <bean id="validationExceptionMapper" class="ru.ilb.common.jaxrs.exceptionhandler.ValidationExceptionMapper">
+    <bean id="validationExceptionMapper" class="org.apache.cxf.jaxrs.validation.ValidationExceptionMapper">
         <property name="addMessageToResponse" value="true"/>
     </bean>
     

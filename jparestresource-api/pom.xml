@@ -128,8 +128,8 @@
                                         <extraarg>{urn:ru:ilb:jparestresource:core}UUIDType=java.util.UUID</extraarg>
                                         <extraarg>-catalog</extraarg>
                                         <extraarg>${basedir}/src/main/resources/schemas/jparestresource/catalog.xml</extraarg>
-                                        <!-- starting from 3.1.8 -->
-                                        <!--<extraarg>-beanValidation</extraarg>-->
+                                        <!--  -beanValidation starting from 3.1.8 -->
+                                        <extraarg>-beanValidation</extraarg>
                                         <extraarg>-xjc-Xannotate</extraarg>
                                         <extraarg>-xjc-Xinheritance</extraarg>
                                         <extraarg>-xjc-XJsr303Annotations</extraarg>
