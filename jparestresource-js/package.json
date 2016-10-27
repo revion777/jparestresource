@@ -2,6 +2,8 @@
   "name": "jparestresource-js",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://localhost:8080",
+  "homepage": "/jparestresource-js",
   "devDependencies": {
     "react-scripts": "0.7.0"
   },
