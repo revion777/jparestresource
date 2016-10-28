@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import Link from 'react-router'
+//import Link from 'react-router';
 //import './css/Documents.css';
 
-  class Documents extends Component {
+class FiltrableDocumentsTable extends Component {
 
   componentDidMount() {
     this.loadDocuments();
@@ -13,7 +13,17 @@ import Link from 'react-router'
     this.state = {
       documents: null,
       errText: null,
+      filterText: '',
+      showDeleted: false
     };
+
+    this.handleUserInput = this.handleUserInput.bind(this);
+  }
+  handleUserInput(filterText, showDeleted) {
+    this.setState({
+      filterText: filterText,
+      showDeleted: showDeleted
+    });
   }
   checkStatus(response) {
     if (response.status >= 200 && response.status < 300) {
@@ -24,16 +34,15 @@ import Link from 'react-router'
       throw error;
     }
   }
-  parseJSON(response) {
-    return response.json();
-  }
   /**
    *  Загрузка данных о документаз
    */
-  loadDocuments () {
-
-
+  loadDocuments() {
     var url = "/jparestresource-web/web/documents";
+    if(this.state.filterText){
+      url+="?filter=displayName=="+this.state.filterText;
+    }
+    console.log(url);
 
     fetch(url, {
       method: "GET",
@@ -43,7 +52,9 @@ import Link from 'react-router'
       }
     })
       .then(this.checkStatus)
-      .then(this.parseJSON)
+      .then((response) => {
+        return response.json();
+      })
       .then((response) => {
         if (response !== undefined && response.document !== undefined) {
           this.setState({documents: response.document, errText: null});
@@ -55,8 +66,6 @@ import Link from 'react-router'
 
         if (ex.response !== undefined) {
           ex.response.text().then((errorMsg) => {
-            console.log(errorMsg);
-
             this.setState({errText: errorMsg});
           });
         } else {
@@ -64,42 +73,97 @@ import Link from 'react-router'
         }
       });
   }
-
   render() {
-    const documents = this.state.documents;
-    //console.log("documents=",documents);
-    //console.log(this.state.errText);
+    console.log(this.state.documents);
     return (
-      <div className="Documents">
-          {documents && !this.state.errText &&
-              <table className="ui celled table">
-                  <caption>List of Documents</caption>
-                  <thead>
-                      <tr>
-                          <th>Date</th>
-                          <th>Name</th>
-                      </tr>
-                  </thead>
-                  <tbody>
-                      {documents.map((document, index) => (
-                            <tr key={index}>
-                                <td>
-                                    {document.docDate.split('-').reverse().join('.')}
-                                </td>
-                                <td>
-                                    {document.displayName}
-                                </td>
-                            </tr>
-                                  ))}
-                  </tbody>
-              </table>
-          }      
+      <div>
+          <SearchBar
+              filterText={this.state.filterText}
+              showDeleted={this.state.showDeleted}
+              onUserInput={this.handleUserInput}
+              />    
+          {this.state.documents &&
+              <DocumentsTable
+                  documents={this.state.documents}
+                  />
+          }
           {this.state.errText &&
-              <div className="ui red message">Ошибка запроса списка документов: {this.state.errText}</div> }
+              <div className="ui red message">Ошибка запроса списка документов: {this.state.errText}</div>
+          }
+      
       </div>
       );
   }
 }
-;
 
-export default Documents;
+class SearchBar extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  handleChange() {
+    this.props.onUserInput(
+      this.filterTextInput.value,
+      this.showDeletedInput.checked
+      );
+  }
+
+  render() {
+    return (
+      <form>
+          <input
+              type="text"
+              placeholder="Search..."
+              defaultValue={this.props.filterText}
+              ref={(input) => this.filterTextInput = input}
+              />
+              <button type="button" onClick={this.handleChange}>Submit</button>
+          <p>
+              <input
+                  type="checkbox"
+                  checked={this.props.showDeleted}
+                  ref={(input) => this.showDeletedInput = input}
+                  />
+              {' '}
+              Show deleted documents
+          </p>
+      </form>
+      );
+  }
+}
+
+class DocumentsTable extends Component {
+  render() {
+    const documents = this.props.documents;
+    //console.log("documents=",documents);
+    //console.log(this.state.errText);
+    return (
+      <div className="DocumentsTable">
+          <table className="ui celled table">
+              <caption>List of Documents</caption>
+              <thead>
+                  <tr>
+                      <th>Date</th>
+                      <th>Name</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  {documents.map((document, index) => (
+                  <tr key={index}>
+                      <td>
+                          {document.docDate.split('-').reverse().join('.')}
+                      </td>
+                      <td>
+                          {document.displayName}
+                      </td>
+                  </tr>
+                          ))}
+              </tbody>
+          </table>
+      </div>
+      );
+  }
+}
+
+export default FiltrableDocumentsTable;
