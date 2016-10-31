@@ -10,7 +10,17 @@ class FiltrableDocumentsTable extends Component {
 
   constructor(props) {
     super(props);
-    this.state = this.getInitialState();
+    this.state = {
+      documents: null,
+      errText: null,
+      fiterDisplayName: '',
+      showDeleted: false
+    };
+    let query = this.props.location.query;
+
+    if (query.displayName) {
+      this.state.fiterDisplayName = query.displayName;
+    }
   }
   checkStatus(response) {
     if (response.status >= 200 && response.status < 300) {
@@ -22,22 +32,8 @@ class FiltrableDocumentsTable extends Component {
     }
   }
   /**
-   *  Загрузка данных о документаз
+   *  Загрузка данных о документах
    */
-  getInitialState() {
-    let state = {
-      documents: null,
-      errText: null,
-      fiterDisplayName: '',
-      showDeleted: false
-    };
-    let query = this.props.location.query;
-
-    if (query.displayName) {
-      state.fiterDisplayName = query.displayName;
-    }
-    return state;
-  }
   loadDocuments() {
     var url = "/jparestresource-web/web/documents";
     if (this.state.fiterDisplayName) {
