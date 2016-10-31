@@ -182,24 +182,12 @@
     
     <!-- inbound request logging -->
     <bean id="logInbound" class="org.apache.cxf.interceptor.LoggingInInterceptor"/>
-    <bean id="uuidMessageBodyReader" class="ru.ilb.common.jaxrs.providers.UUIDMessageBodyReader"/>
-    <bean id="uuidMessageBodyWriter" class="ru.ilb.common.jaxrs.providers.UUIDMessageBodyWriter"/>
     
     <cxf:bus>
         <cxf:properties>
             <entry key="skip.default.json.provider.registration" value="true"/>
-            <entry key="org.apache.cxf.jaxrs.bus.providers" value-ref="busProviders"/>
         </cxf:properties>
     </cxf:bus>
-    <!-- register provider directly on the bus as the bus properties and share them between all endpoints and clients using this bus -->
-    <util:list id="busProviders">
-        <ref bean="jaxbContextResolver"/>
-        <ref bean="jaxbProvider"/>
-        <ref bean="jsonProvider"/>
-        <ref bean="mapParamConverterProvider"/>
-        <ref bean="uuidMessageBodyReader"/>
-        <ref bean="uuidMessageBodyWriter"/>
-    </util:list>
     <!-- clean up xml -->
     <!--    <bean id="replaceOutInterceptor" class="ru.ilb.common.jaxrs.interceptors.ReplaceOutInterceptor">
         <property name="mediaType" value="application/xml"/>
@@ -212,8 +200,12 @@
 
     <!-- auto register @Component annotated classes -->
     <context:component-scan base-package="ru.ilb.jparestresource.web"/>
-    <jaxrs:server address="/" basePackages="ru.ilb.jparestresource.web,ru.ilb.common.jaxrs.exceptionhandler">
+    <jaxrs:server address="/" basePackages="ru.ilb.jparestresource.web,ru.ilb.common.jaxrs.providers,ru.ilb.common.jaxrs.exceptionhandler">
         <jaxrs:providers>
+            <ref bean="jaxbContextResolver"/>
+            <ref bean="jaxbProvider"/>
+            <ref bean="jsonProvider"/>
+            <ref bean="mapParamConverterProvider"/>
             <ref bean="searchContextProvider"/>
             <ref bean="exceptionHandler"/>
             <ref bean="validationExceptionMapper"/>

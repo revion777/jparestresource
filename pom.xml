@@ -54,7 +54,7 @@
     </distributionManagement>
     <!-- use local svn and maven repository
     <scm>
-        <connection>scm:svn:https://svn.net.ilb.ru/repos/${name}/trunk</connection>
+        <connection>scm:svn:https://svn.ilb.ru/repos/jparestresource/trunk</connection>
     </scm>
     <distributionManagement>
         <repository>
