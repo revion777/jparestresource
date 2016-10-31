@@ -10,20 +10,7 @@ class FiltrableDocumentsTable extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {
-      documents: null,
-      errText: null,
-      filterText: '',
-      showDeleted: false
-    };
-
-    this.handleUserInput = this.handleUserInput.bind(this);
-  }
-  handleUserInput(filterText, showDeleted) {
-    this.setState({
-      filterText: filterText,
-      showDeleted: showDeleted
-    });
+    this.state = this.getInitialState();
   }
   checkStatus(response) {
     if (response.status >= 200 && response.status < 300) {
@@ -37,12 +24,26 @@ class FiltrableDocumentsTable extends Component {
   /**
    *  Загрузка данных о документаз
    */
+  getInitialState() {
+    let state = {
+      documents: null,
+      errText: null,
+      fiterDisplayName: '',
+      showDeleted: false
+    };
+    let query = this.props.location.query;
+
+    if (query.displayName) {
+      state.fiterDisplayName = query.displayName;
+    }
+    return state;
+  }
   loadDocuments() {
     var url = "/jparestresource-web/web/documents";
-    if(this.state.filterText){
-      url+="?filter=displayName=="+this.state.filterText;
+    if (this.state.fiterDisplayName) {
+      url += "?filter=displayName==" + this.state.fiterDisplayName;
     }
-    console.log(url);
+    console.log("fetch url:" + url);
 
     fetch(url, {
       method: "GET",
@@ -74,13 +75,12 @@ class FiltrableDocumentsTable extends Component {
       });
   }
   render() {
-    console.log(this.state.documents);
+    //console.log(this.state.documents);
     return (
       <div>
           <SearchBar
-              filterText={this.state.filterText}
+              fiterDisplayName={this.state.fiterDisplayName}
               showDeleted={this.state.showDeleted}
-              onUserInput={this.handleUserInput}
               />    
           {this.state.documents &&
               <DocumentsTable
@@ -97,28 +97,17 @@ class FiltrableDocumentsTable extends Component {
 }
 
 class SearchBar extends React.Component {
-  constructor(props) {
-    super(props);
-    this.handleChange = this.handleChange.bind(this);
-  }
-
-  handleChange() {
-    this.props.onUserInput(
-      this.filterTextInput.value,
-      this.showDeletedInput.checked
-      );
-  }
-
   render() {
     return (
       <form>
           <input
               type="text"
-              placeholder="Search..."
-              defaultValue={this.props.filterText}
-              ref={(input) => this.filterTextInput = input}
+              name="displayName"
+              placeholder="Search, may use * and ?..."
+              defaultValue={this.props.fiterDisplayName}
+              ref={(input) => this.fiterDisplayNameInput = input}
               />
-              <button type="button" onClick={this.handleChange}>Submit</button>
+          <button type="submit">Submit</button>
           <p>
               <input
                   type="checkbox"
@@ -136,8 +125,6 @@ class SearchBar extends React.Component {
 class DocumentsTable extends Component {
   render() {
     const documents = this.props.documents;
-    //console.log("documents=",documents);
-    //console.log(this.state.errText);
     return (
       <div className="DocumentsTable">
           <table className="ui celled table">
