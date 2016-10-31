@@ -10,17 +10,15 @@ class FiltrableDocumentsTable extends Component {
 
   constructor(props) {
     super(props);
+    let query = this.props.location.query;
     this.state = {
       documents: null,
       errText: null,
-      fiterDisplayName: '',
-      showDeleted: false
+      filter : {
+        displayName: query.displayName?query.displayName: '',
+        showDeleted: false
+      }
     };
-    let query = this.props.location.query;
-
-    if (query.displayName) {
-      this.state.fiterDisplayName = query.displayName;
-    }
   }
   checkStatus(response) {
     if (response.status >= 200 && response.status < 300) {
@@ -36,8 +34,8 @@ class FiltrableDocumentsTable extends Component {
    */
   loadDocuments() {
     var url = "/jparestresource-web/web/documents";
-    if (this.state.fiterDisplayName) {
-      url += "?filter=displayName==" + this.state.fiterDisplayName;
+    if (this.state.filter.displayName) {
+      url += "?filter=displayName==" + this.state.filter.displayName;
     }
     console.log("fetch url:" + url);
 
@@ -75,8 +73,7 @@ class FiltrableDocumentsTable extends Component {
     return (
       <div>
           <SearchBar
-              fiterDisplayName={this.state.fiterDisplayName}
-              showDeleted={this.state.showDeleted}
+              filter={this.state.filter}
               />    
           {this.state.documents &&
               <DocumentsTable
@@ -100,15 +97,13 @@ class SearchBar extends React.Component {
               type="text"
               name="displayName"
               placeholder="Search, may use * and ?..."
-              defaultValue={this.props.fiterDisplayName}
-              ref={(input) => this.fiterDisplayNameInput = input}
+              defaultValue={this.props.filter.displayName}
               />
           <button type="submit">Submit</button>
           <p>
               <input
                   type="checkbox"
-                  checked={this.props.showDeleted}
-                  ref={(input) => this.showDeletedInput = input}
+                  defaultChecked={this.props.filter.showDeleted}
                   />
               {' '}
               Show deleted documents
