@@ -4,3 +4,4 @@
 /target/
 /jparestresource-web/target/
 .svn
+/jparestresource-js/nbproject/private/
