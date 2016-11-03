@@ -14,8 +14,8 @@ class FiltrableDocumentsTable extends Component {
     this.state = {
       documents: null,
       errText: null,
-      filter : {
-        displayName: query.displayName?query.displayName: '',
+      filter: {
+        displayName: query.displayName ? query.displayName : '',
         showDeleted: false
       }
     };
@@ -89,33 +89,29 @@ class FiltrableDocumentsTable extends Component {
   }
 }
 
-class SearchBar extends React.Component {
-  render() {
-    return (
-      <form>
-          <input
-              type="text"
-              name="displayName"
-              placeholder="Search, may use * and ?..."
-              defaultValue={this.props.filter.displayName}
-              />
-          <button type="submit">Submit</button>
-          <p>
-              <input
-                  type="checkbox"
-                  defaultChecked={this.props.filter.showDeleted}
-                  />
-              {' '}
-              Show deleted documents
-          </p>
-      </form>
-      );
-  }
+function SearchBar(props) {
+  return (
+    <form>
+        <input
+            type="text"
+            name="displayName"
+            placeholder="Search, may use * and ?..."
+            defaultValue={props.filter.displayName}
+            />
+        <button type="submit">Submit</button>
+        <p>
+            <input
+                type="checkbox"
+                defaultChecked={props.filter.showDeleted}
+                />
+            {' '}
+            Show deleted documents
+        </p>
+    </form>
+    );
 }
 
-class DocumentsTable extends Component {
-  render() {
-    const documents = this.props.documents;
+function DocumentsTable (props) {
     return (
       <div className="DocumentsTable">
           <table className="ui celled table">
@@ -127,7 +123,7 @@ class DocumentsTable extends Component {
                   </tr>
               </thead>
               <tbody>
-                  {documents.map((document, index) => (
+                  {props.documents.map((document, index) => (
                   <tr key={index}>
                       <td>
                           {document.docDate.split('-').reverse().join('.')}
@@ -141,7 +137,6 @@ class DocumentsTable extends Component {
           </table>
       </div>
       );
-  }
 }
 
 export default FiltrableDocumentsTable;
