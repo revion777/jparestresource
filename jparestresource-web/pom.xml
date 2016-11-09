@@ -200,10 +200,9 @@
                     <source>1.8</source>
                     <target>1.8</target>
                     <fork>true</fork>
+                    <proc>none</proc>
                     <compilerArgs>
                         <arg>-XDignore.symbol.file</arg>
-                        <arg>-proc:none</arg>
-                        <arg>-verbose</arg>
                     </compilerArgs>
                 </configuration>
             </plugin>
@@ -225,7 +224,7 @@
                         <goals>
                             <goal>process</goal>
                         </goals>
-                        <phase>generate-sources</phase>
+                        <phase>process-resources</phase>
                         <configuration>
                             
                             <processors>
@@ -234,10 +233,10 @@
                             <appendSourceArtifacts>true</appendSourceArtifacts>
                             <processSourceArtifacts>
                                 <processSourceArtifact>ru.ilb.jparestresource:jparestresource-api</processSourceArtifact>
+                                <processSourceArtifact>ru.ilb.common:common-jpa</processSourceArtifact>
                             </processSourceArtifacts>
                             
                             <outputDirectory>${project.build.directory}/generated-sources/meta-model</outputDirectory>
-                            <compilerArguments>-Aeclipselink.persistencexml=${basedir}/src/main/resources/META-INF/persistence.xml</compilerArguments>
                         </configuration>
                     </execution>
                 </executions>
