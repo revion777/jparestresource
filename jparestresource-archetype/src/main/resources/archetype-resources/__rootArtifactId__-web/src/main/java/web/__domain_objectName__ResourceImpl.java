@@ -18,10 +18,8 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.ws.rs.BadRequestException;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Context;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.UriInfo;
-import javax.ws.rs.ext.ContextResolver;
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
 import org.apache.cxf.jaxrs.ext.search.SearchCondition;
 import org.apache.cxf.jaxrs.ext.search.SearchContext;
 import org.apache.cxf.jaxrs.ext.search.SearchParseException;
@@ -35,7 +33,9 @@ import ru.ilb.common.jaxrs.search.JPAOrderedQueryVisitor;
 import ${groupId}.${domain_packageName}.${domain_objectName};
 import ${groupId}.${domain_packageName}.${domain_objectName}s;
 import ${groupId}.api.${domain_objectName}sResource;
+import ${groupId}.core.JaxbHelper;
 import ${groupId}.${domain_packageName}.ReadOptionsType;
+import ${groupId}.repositories.${domain_objectName}Repository;
 
 @Path("${domain_packageName}")
 public class ${domain_objectName}ResourceImpl implements ${domain_objectName}sResource {
@@ -43,14 +43,19 @@ public class ${domain_objectName}ResourceImpl implements ${domain_objectName}sRe
     @PersistenceContext(unitName = "${parentArtifactId}")
     private EntityManager em;
 
-    @Autowired ContextResolver<JAXBContext> jaxbContextResolver;
-    
+    @Autowired
+    JaxbHelper jaxbHelper;
+
     private UriInfo uriInfo;
+
     @Context
     public void setUriInfo(UriInfo uriInfo) {
         this.uriInfo = uriInfo;
     }
-    
+
+    @Autowired
+    ${domain_objectName}Repository documentRepository;
+
     private SearchContext searchContext;
 
     @Context
@@ -66,17 +71,17 @@ public class ${domain_objectName}ResourceImpl implements ${domain_objectName}sRe
         ${domain_objectName}s res = new ${domain_objectName}s();
         JPAOrderedQueryVisitor<${domain_objectName}> visitor = new JPAOrderedQueryVisitor<>(em, ${domain_objectName}.class);
         TypedQuery<${domain_objectName}> query;
-        if(filter!=null ){
+        if (filter != null) {
             SearchCondition<${domain_objectName}> sc;
             try {
                 sc = searchContext.getCondition(filter, ${domain_objectName}.class);
-            } catch (SearchParseException ex){
+            } catch (SearchParseException ex) {
                 throw new BadRequestException(ex);
             }
             sc.accept(visitor);
-            CriteriaQuery<${domain_objectName}> cq= order!=null ? visitor.getOrderedCriteriaQuery(visitor, order): visitor.getCriteriaQuery();
-            query=em.createQuery(cq);
-            
+            CriteriaQuery<${domain_objectName}> cq = order != null ? visitor.getOrderedCriteriaQuery(visitor, order) : visitor.getCriteriaQuery();
+            query = em.createQuery(cq);
+
         } else {
             query = em.createQuery("SELECT d FROM ${domain_objectName} d", ${domain_objectName}.class);
         }
@@ -85,7 +90,7 @@ public class ${domain_objectName}ResourceImpl implements ${domain_objectName}sRe
                 query.setHint(QueryHints.LEFT_FETCH, "d.docfiles");
             }
         }
-        if(limit!=null){
+        if (limit != null) {
             query.setMaxResults(limit);
         }
         List<${domain_objectName}> result = query.getResultList();
@@ -97,46 +102,40 @@ public class ${domain_objectName}ResourceImpl implements ${domain_objectName}sRe
     @Override
     @Transactional
     public ${domain_objectName} find(UUID uid) {
-        TypedQuery<${domain_objectName}> query = em.createNamedQuery("${domain_objectName}.byUid", ${domain_objectName}.class);
-        query.setParameter("uid", uid);
-        ${domain_objectName} doc = query.getSingleResult();
+        ${domain_objectName} doc = documentRepository.findByUid(uid);
         return doc;
     }
 
     @Override
     @Transactional
     public UUID create(${domain_objectName} document) {
-        em.persist(document);
+        documentRepository.save(document);
         return document.getUid();
     }
 
     @Override
     @Transactional
     public void edit(UUID uid, ${domain_objectName} document) {
-        ${domain_objectName} doc = find(uid);
-        BeanUtils.copyProperties(document, doc,new String[] {"id"});
+        ${domain_objectName} doc = documentRepository.findByUid(uid);
+        BeanUtils.copyProperties(document, doc, new String[]{"id"});
     }
 
     @Override
     @Transactional
     public void remove(UUID uid) {
-        ${domain_objectName} doc = find(uid);
-        em.remove(doc);
+        ${domain_objectName} doc = documentRepository.findByUid(uid);
+        documentRepository.delete(doc);
     }
 
+    /**
+     * Example data initialisation
+     */
     @PostConstruct
     @Transactional
     public void init() {
-        try {
-            JAXBContext jaxbContext = jaxbContextResolver.getContext(${domain_objectName}s.class);
-            ${domain_objectName}s ${domain_packageName}=(${domain_objectName}s) jaxbContext.createUnmarshaller().unmarshal(${domain_objectName}s.class.getResourceAsStream("/META-INF/xml/testdata.xml"));
-            for(${domain_objectName} doc:${domain_packageName}.get${domain_objectName}s()){
-                create(doc);
-            }
-        } catch (JAXBException ex) {
-            LOG.error("init error", ex);
-        }
-        
+        ${domain_objectName}s ${domain_packageName} = jaxbHelper.unmarshal(getClass().getResourceAsStream("/META-INF/xml/testdata.xml"), ${domain_objectName}s.class,MediaType.APPLICATION_XML);
+        documentRepository.save(${domain_packageName}.get${domain_objectName}s());
+
     }
 
 }

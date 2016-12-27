@@ -12,6 +12,7 @@
        xmlns:tx="http://www.springframework.org/schema/tx"
        xmlns:cache="http://www.springframework.org/schema/cache"
        xmlns:cxf="http://cxf.apache.org/core"
+       xmlns:jpa="http://www.springframework.org/schema/data/jpa"
        xsi:schemaLocation="
         http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
@@ -21,7 +22,8 @@
         http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
         http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
-        http://cxf.apache.org/core http://cxf.apache.org/schemas/core.xsd" 
+        http://cxf.apache.org/core http://cxf.apache.org/schemas/core.xsd
+        http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa.xsd" 
        xmlns:aop="http://www.springframework.org/schema/aop">
 
     <!-- Load defaults from apache cxf -->
@@ -71,17 +73,16 @@
     <bean id="entityManager" class = "org.springframework.orm.jpa.support.SharedEntityManagerBean">
         <property name="entityManagerFactory" ref="entityManagerFactory"/>
     </bean>
+    <jpa:repositories base-package="${groupId}.repositories"/>
     <!-- uncomment to enable CORS support, see https://cwiki.apache.org/confluence/display/CXF20DOC/JAX-RS+CORS, and pom dependency -->
     <!--<bean id="corsFilter" class="org.apache.cxf.rs.security.cors.CrossOriginResourceSharingFilter"/>-->
 
-    <!-- Configure swagger api support, see also jaxrs:features section in jaxrs:server and maven dependencies
+    <!-- Configure swagger api support, see also jaxrs:features section in jaxrs:server and maven dependencies -->
     <bean id="swagger2Feature" class="org.apache.cxf.jaxrs.swagger.Swagger2Feature">
         <property name="resourcePackage" value="${groupId}.web"/>
         <property name="scanAllResources" value="true"/>
-        <property name="dynamicBasePath" value="true"/>
-        <property name="replaceTags" value="true"/>
         <property name="prettyPrint" value="true"/>
-    </bean>-->
+    </bean>
 
     <!-- Configure xslt support, see also web.xml for refreshTemplates env-entry
     <bean id="uriResolver" class="ru.ilb.common.jaxrs.xml.transform.ServletContextURIResolver"/>
@@ -202,7 +203,7 @@
     </bean>-->
 
     <!-- auto register @Component annotated classes -->
-    <context:component-scan base-package="${groupId}.web"/>
+    <context:component-scan base-package="${groupId}.web,${groupId}.core"/>
     <jaxrs:server address="/" basePackages="${groupId}.web,ru.ilb.common.jaxrs.providers,ru.ilb.common.jaxrs.exceptionhandler">
         <jaxrs:providers>
             <ref bean="jaxbContextResolver"/>
@@ -217,9 +218,8 @@
             <!--<ref bean="corsFilter" />-->
         </jaxrs:providers>
         <jaxrs:features>
-            <!-- uncomment for swagger api support
+            <!-- swagger api support -->
             <ref bean="swagger2Feature" />
-            -->
         </jaxrs:features>
         <jaxrs:inInterceptors>
             <!--uncomment to enable inbound request logging--> 
@@ -232,6 +232,7 @@
         </jaxrs:outInterceptors>        
         <jaxrs:extensionMappings>
             <entry key="xml" value="application/xml;charset=UTF-8"/>
+            <!-- comment to enable swagger api support. fixed in cxf 3.1.10 -->
             <entry key="json" value="application/json;charset=UTF-8"/>
         </jaxrs:extensionMappings>
     </jaxrs:server>

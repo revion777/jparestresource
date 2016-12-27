@@ -6,9 +6,6 @@
                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                  version="2.5">
     <entity class="${groupId}.${domain_packageName}.${domain_objectName}">
-        <named-query name="${domain_objectName}.byUid">
-            <query>Select d from ${domain_objectName} d where d.uid=:uid</query>
-        </named-query>
         <attributes>
             <basic name="direction">
                 <column column-definition="int(1)"/>
