@@ -3,9 +3,6 @@
                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                  version="2.5">
     <entity class="ru.ilb.jparestresource.documents.Document">
-        <named-query name="Document.byUid">
-            <query>Select d from Document d where d.uid=:uid</query>
-        </named-query>
         <attributes>
             <basic name="direction">
                 <column column-definition="int(1)"/>

@@ -1,3 +1,1 @@
-
-Exception Description: An error occurred unmarshalling the document
-Internal Exception: org.xml.sax.SAXParseException; cvc-complex-type.2.4.a: Invalid content was found starting with element ''. One of '{"urn:ru:ilb:jparestresource:documents":displayName, "urn:ru:ilb:jparestresource:documents":description, "urn:ru:ilb:jparestresource:documents":keywords, "urn:ru:ilb:jparestresource:documents":docDate, "urn:ru:ilb:jparestresource:documents":direction, "urn:ru:ilb:jparestresource:documents":docfile}' is expected.
+7779c19f-8600-4bbf-8d7e-9cc2e6a987cb

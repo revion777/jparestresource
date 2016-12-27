@@ -9,6 +9,7 @@
        xmlns:tx="http://www.springframework.org/schema/tx"
        xmlns:cache="http://www.springframework.org/schema/cache"
        xmlns:cxf="http://cxf.apache.org/core"
+       xmlns:jpa="http://www.springframework.org/schema/data/jpa"
        xsi:schemaLocation="
         http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
@@ -18,7 +19,8 @@
         http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
         http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
-        http://cxf.apache.org/core http://cxf.apache.org/schemas/core.xsd" 
+        http://cxf.apache.org/core http://cxf.apache.org/schemas/core.xsd
+        http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa.xsd" 
        xmlns:aop="http://www.springframework.org/schema/aop">
 
     <!-- Load defaults from apache cxf -->
@@ -68,6 +70,7 @@
     <bean id="entityManager" class = "org.springframework.orm.jpa.support.SharedEntityManagerBean">
         <property name="entityManagerFactory" ref="entityManagerFactory"/>
     </bean>
+    <jpa:repositories base-package="ru.ilb.jparestresource.repositories"/>
     <!-- uncomment to enable CORS support, see https://cwiki.apache.org/confluence/display/CXF20DOC/JAX-RS+CORS, and pom dependency -->
     <!--<bean id="corsFilter" class="org.apache.cxf.rs.security.cors.CrossOriginResourceSharingFilter"/>-->
 
@@ -197,7 +200,7 @@
     </bean>-->
 
     <!-- auto register @Component annotated classes -->
-    <context:component-scan base-package="ru.ilb.jparestresource.web"/>
+    <context:component-scan base-package="ru.ilb.jparestresource.web,ru.ilb.jparestresource.core"/>
     <jaxrs:server address="/" basePackages="ru.ilb.jparestresource.web,ru.ilb.common.jaxrs.providers,ru.ilb.common.jaxrs.exceptionhandler">
         <jaxrs:providers>
             <ref bean="jaxbContextResolver"/>
