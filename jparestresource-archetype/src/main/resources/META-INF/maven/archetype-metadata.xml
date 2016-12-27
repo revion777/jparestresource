@@ -105,6 +105,7 @@
           <directory></directory>
           <includes>
             <include>nb-configuration.xml</include>
+            <include>nbactions.xml</include>
           </includes>
         </fileSet>
       </fileSets>

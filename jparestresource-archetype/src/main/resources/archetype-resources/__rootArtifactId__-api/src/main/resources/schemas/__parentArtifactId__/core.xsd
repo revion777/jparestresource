@@ -16,7 +16,7 @@
     </xsd:simpleType>
     
     <xsd:complexType name="PersistentObjectType" abstract="true">
-        <xsd:attribute name="id" type="xsd:integer"/>
+        <xsd:attribute name="id" type="xsd:long"/>
         <xsd:attribute name="versionId" type="xsd:int"/>
     </xsd:complexType>
 
