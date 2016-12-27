@@ -71,14 +71,12 @@
     <!-- uncomment to enable CORS support, see https://cwiki.apache.org/confluence/display/CXF20DOC/JAX-RS+CORS, and pom dependency -->
     <!--<bean id="corsFilter" class="org.apache.cxf.rs.security.cors.CrossOriginResourceSharingFilter"/>-->
 
-    <!-- Configure swagger api support, see also jaxrs:features section in jaxrs:server and maven dependencies
+    <!-- Configure swagger api support, see also jaxrs:features section in jaxrs:server and maven dependencies -->
     <bean id="swagger2Feature" class="org.apache.cxf.jaxrs.swagger.Swagger2Feature">
         <property name="resourcePackage" value="ru.ilb.jparestresource.web"/>
         <property name="scanAllResources" value="true"/>
-        <property name="dynamicBasePath" value="true"/>
-        <property name="replaceTags" value="true"/>
         <property name="prettyPrint" value="true"/>
-    </bean>-->
+    </bean>
 
     <!-- Configure xslt support, see also web.xml for refreshTemplates env-entry
     <bean id="uriResolver" class="ru.ilb.common.jaxrs.xml.transform.ServletContextURIResolver"/>
@@ -214,9 +212,8 @@
             <!--<ref bean="corsFilter" />-->
         </jaxrs:providers>
         <jaxrs:features>
-            <!-- uncomment for swagger api support
+            <!-- swagger api support -->
             <ref bean="swagger2Feature" />
-            -->
         </jaxrs:features>
         <jaxrs:inInterceptors>
             <!--uncomment to enable inbound request logging--> 
@@ -229,6 +226,7 @@
         </jaxrs:outInterceptors>        
         <jaxrs:extensionMappings>
             <entry key="xml" value="application/xml;charset=UTF-8"/>
+            <!-- comment to enable swagger api support. fixed in cxf 3.1.10 -->
             <entry key="json" value="application/json;charset=UTF-8"/>
         </jaxrs:extensionMappings>
     </jaxrs:server>
