@@ -8,7 +8,6 @@ package ru.ilb.jparestresource.web;
 import java.util.List;
 import java.util.UUID;
 import javax.annotation.PostConstruct;
-import javax.annotation.Resource;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
@@ -17,19 +16,18 @@ import javax.ws.rs.BadRequestException;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
+import javax.ws.rs.ext.ContextResolver;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import org.apache.cxf.jaxrs.ext.search.SearchCondition;
 import org.apache.cxf.jaxrs.ext.search.SearchContext;
 import org.apache.cxf.jaxrs.ext.search.SearchParseException;
-import org.apache.cxf.jaxrs.provider.JAXBElementProvider;
 import org.eclipse.persistence.config.QueryHints;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
-import ru.ilb.common.jaxrs.jaxb.JaxbContextResolver;
 import ru.ilb.common.jaxrs.search.JPAOrderedQueryVisitor;
 import ru.ilb.jparestresource.documents.Document;
 import ru.ilb.jparestresource.documents.Documents;
@@ -42,7 +40,7 @@ public class DocumentResourceImpl implements DocumentsResource {
     @PersistenceContext(unitName = "jparestresource")
     private EntityManager em;
 
-    @Autowired JaxbContextResolver jaxbContextResolver;
+    @Autowired ContextResolver<JAXBContext> jaxbContextResolver;
     
     private UriInfo uriInfo;
     @Context
