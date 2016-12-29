@@ -19,6 +19,11 @@
             <artifactId>common-jaxb</artifactId>
             <version>${ilb-common.version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.migesok</groupId>
+            <artifactId>jaxb-java-time-adapters</artifactId>
+            <version>1.1.3</version>        
+        </dependency>        
         <!-- to debug sources only -->
         <!--        <dependency>
             <groupId>org.apache.cxf</groupId>
@@ -46,61 +51,14 @@
     </dependencies>
 
     <properties>
-        <maven.compiler.source>1.7</maven.compiler.source>
-        <maven.compiler.target>1.7</maven.compiler.target>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
         <jaxb2-basics.version>0.9.4</jaxb2-basics.version>
     </properties>
 
     <build>
         <finalName>${project.name}</finalName>
         <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-antrun-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>createThriftDir</id>
-                        <phase>generate-sources</phase>
-                        <configuration>
-                            <tasks>
-                                <mkdir dir="${project.build.directory}/classes/schemas/jparestresource" />
-                            </tasks>
-                        </configuration>
-                        <goals>
-                            <goal>run</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <!--  uncomment to extract parts of artifacts, eg. episodes. add multiple <artifactItem> lines
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-dependency-plugin</artifactId>
-                <version>2.1</version>
-                <executions>
-                    <execution>
-                        <id>unpack</id>
-                        <phase>generate-sources</phase>
-                        <goals>
-                            <goal>unpack</goal>
-                        </goals>
-                        <configuration>
-                            <artifactItems>
-                                <artifactItem>
-                                    <groupId>ru.ilb.basicuuid</groupId>
-                                    <artifactId>basicuuid-api</artifactId>
-                                    <type>jar</type>
-                                    <overWrite>false</overWrite>
-                                    <outputDirectory>${project.build.directory}/schemas-build-root</outputDirectory>
-                                </artifactItem>
-                            </artifactItems>
-                            <includes>schemas/**</includes>
-                            <overWriteReleases>false</overWriteReleases>
-                            <overWriteSnapshots>true</overWriteSnapshots>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>-->
             <plugin>
                 <groupId>org.apache.cxf</groupId>
                 <artifactId>cxf-wadl2java-plugin</artifactId>
@@ -136,12 +94,16 @@
                                         <!--<extraarg>-xjc-Xcopyable</extraarg>-->
                                         <extraarg>-xjc-Xsetters</extraarg>
                                         <extraarg>-xjc-Xsetters-mode=direct</extraarg>
-                                        <!--                                        <extraarg>-xjc-Xxew</extraarg>
-                                        <extraarg>-xjc-Xxew:instantiate lazy</extraarg>-->
+                                        <!--
+                                        <extraarg>-xjc-Xxew</extraarg>
+                                        <extraarg>-xjc-Xxew:instantiate lazy</extraarg>
+                                        -->
                                         <extraarg>-xjc-Xfluent-api</extraarg>
                                         <extraarg>-xjc-enableIntrospection</extraarg>
+                                        <!--                                       
                                         <extraarg>-xjc-episode</extraarg>
                                         <extraArg>-xjc${project.build.directory}/classes/schemas/jparestresource/jparestresource.episode</extraArg>
+                                        -->
                                     </extraargs>
                                 </wadlOption>
                             </wadlOptions>
