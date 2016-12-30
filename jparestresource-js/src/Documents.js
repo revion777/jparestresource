@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Checkbox, Form, Table, Message } from 'semantic-ui-react'
 //import Link from 'react-router';
 //import './css/Documents.css';
 
@@ -16,7 +17,7 @@ class FiltrableDocumentsTable extends Component {
       errText: null,
       filter: {
         displayName: query.displayName ? query.displayName : '',
-        showDeleted: false
+        showDeleted: query.showDeleted === 'on',
       }
     };
   }
@@ -68,75 +69,84 @@ class FiltrableDocumentsTable extends Component {
         }
       });
   }
+
+  filterOnChangeHandler = (name, value) => {
+    const filter = Object.assign(this.state.filter, { [name]: value } );
+    this.setState({ filter });
+  };
+
   render() {
     //console.log(this.state.documents);
     return (
       <div>
-          <SearchBar
-              filter={this.state.filter}
-              />    
-          {this.state.documents &&
-              <DocumentsTable
-                  documents={this.state.documents}
-                  />
-          }
-          {this.state.errText &&
-              <div className="ui red message">Ошибка запроса списка документов: {this.state.errText}</div>
-          }
-      
+        <SearchBar
+          filter={this.state.filter}
+          onChange={this.filterOnChangeHandler}
+        />
+        {(this.state.documents) &&
+          <DocumentsTable
+            documents={this.state.documents}
+          />
+        }
+        {this.state.errText &&
+          <Message error>Ошибка запроса списка документов: {this.state.errText}</Message>
+        }
+
       </div>
-      );
+    );
   }
 }
 
-function SearchBar(props) {
+const SearchBar = (props) => {
   return (
-    <form>
-        <input
-            type="text"
-            name="displayName"
-            placeholder="Search, may use * and ?..."
-            defaultValue={props.filter.displayName}
-            />
-        <button type="submit">Submit</button>
-        <p>
-            <input
-                type="checkbox"
-                defaultChecked={props.filter.showDeleted}
-                />
-            {' '}
-            Show deleted documents
-        </p>
-    </form>
-    );
-}
+    <Form>
+      <Form.Field inline>
+        <Form.Input
+          type="text"
+          name="displayName"
+          action='Submit'
+          placeholder='Search, may use * and ?...'
+          value={props.filter.displayName}
+          onChange={(e) => {props.onChange('displayName', e.target.value);}}
+        />
+        <Checkbox
+          name="showDeleted"
+          defaultChecked={props.filter.showDeleted}
+          label='Show deleted documents'
+          onChange={() => {props.onChange('showDeleted', !props.filter.showDeleted);}}
+        />
+      </Form.Field>
+    </Form>
+  );
+};
 
 function DocumentsTable (props) {
-    return (
-      <div className="DocumentsTable">
-          <table className="ui celled table">
-              <caption>List of Documents</caption>
-              <thead>
-                  <tr>
-                      <th>Date</th>
-                      <th>Name</th>
-                  </tr>
-              </thead>
-              <tbody>
-                  {props.documents.map((document, index) => (
-                  <tr key={index}>
-                      <td>
-                          {document.docDate.split('-').reverse().join('.')}
-                      </td>
-                      <td>
-                          {document.displayName}
-                      </td>
-                  </tr>
-                          ))}
-              </tbody>
-          </table>
-      </div>
-      );
+  if (!props.documents.length) {
+    return (<Message warning>Документы не найдены</Message>);
+  }
+  return (
+    <Table striped celled>
+      <caption>List of Documents</caption>
+      <Table.Header>
+        <Table.Row>
+          <Table.HeaderCell>Date</Table.HeaderCell>
+          <Table.HeaderCell>Name</Table.HeaderCell>
+        </Table.Row>
+      </Table.Header>
+      <Table.Body>
+        {props.documents.map((document, index) => (
+          <Table.Row key={index}>
+            <Table.Cell>
+              {document.docDate.split('-').reverse().join('.')}
+            </Table.Cell>
+            <Table.Cell>
+              {document.displayName}
+            </Table.Cell>
+          </Table.Row>
+        ))}
+      </Table.Body>
+    </Table>
+  );
 }
 
 export default FiltrableDocumentsTable;
