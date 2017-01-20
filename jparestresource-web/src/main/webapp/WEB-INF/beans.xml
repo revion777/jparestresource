@@ -232,7 +232,7 @@
         <jaxrs:extensionMappings>
             <entry key="xml" value="application/xml;charset=UTF-8"/>
             <!-- comment to enable swagger api support. fixed in cxf 3.1.10 -->
-            <entry key="json" value="application/json;charset=UTF-8"/>
+            <!--<entry key="json" value="application/json;charset=UTF-8"/>-->
         </jaxrs:extensionMappings>
     </jaxrs:server>
     

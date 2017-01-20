@@ -5,6 +5,7 @@
  */
 package ru.ilb.jparestresource.web;
 
+import io.swagger.annotations.Api;
 import java.util.List;
 import java.util.UUID;
 import javax.annotation.PostConstruct;
@@ -35,6 +36,7 @@ import ru.ilb.jparestresource.documents.ReadOptionsType;
 import ru.ilb.jparestresource.repositories.DocumentRepository;
 
 @Path("documents")
+@Api("documents")
 public class DocumentResourceImpl implements DocumentsResource {
 
     @PersistenceContext(unitName = "jparestresource")
