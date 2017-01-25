@@ -16,11 +16,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ${groupId}.listeners;
+package ${package}.listeners;
 
 import java.util.UUID;
 import javax.persistence.PrePersist;
-import ${groupId}.core.EntityType;
+import ${package}.core.EntityType;
 
 /**
  *

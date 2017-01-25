@@ -10,7 +10,7 @@
     -->
     <!-- Optimized binary uuid storage -->
     <converter class="ru.ilb.common.jpa.converters.UUIDConverterBytes" auto-apply="true"/>
-    <mapped-superclass class="${groupId}.core.PersistentObjectType">
+    <mapped-superclass class="${package}.core.PersistentObjectType">
         <attributes>
             <id name="id">
                 <generated-value strategy="AUTO"/>
@@ -18,9 +18,9 @@
             <version name="versionId"/>
         </attributes>
     </mapped-superclass>
-    <mapped-superclass class="${groupId}.core.EntityType">
+    <mapped-superclass class="${package}.core.EntityType">
         <entity-listeners>
-            <entity-listener class="${groupId}.listeners.EntityListener"/>
+            <entity-listener class="${package}.listeners.EntityListener"/>
         </entity-listeners>
         <attributes>
             <basic name="uid">

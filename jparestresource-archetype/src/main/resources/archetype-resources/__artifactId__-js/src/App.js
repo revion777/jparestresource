@@ -23,10 +23,10 @@ class App extends Component {
             Home
           </Link>
 
-          <Link to="/${domain_packageName}"
-            className={classnames('item', { active:  window.location.pathname === '/${domain_packageName}'})}
+          <Link to="/documents"
+            className={classnames('item', { active:  window.location.pathname === '/documents'})}
           >
-            ${domain_objectName}s
+            Documents
           </Link>
         </Menu>
 

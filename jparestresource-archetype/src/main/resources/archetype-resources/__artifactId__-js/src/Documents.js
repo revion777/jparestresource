@@ -4,19 +4,19 @@
 import React, { Component } from 'react';
 import { Checkbox, Form, Table, Message } from 'semantic-ui-react'
 //import Link from 'react-router';
-//import './css/${domain_objectName}s.css';
+//import './css/Documents.css';
 
-class Filtrable${domain_objectName}sTable extends Component {
+class FiltrableDocumentsTable extends Component {
 
   componentDidMount() {
-    this.load${domain_objectName}s();
+    this.loadDocuments();
   }
 
   constructor(props) {
     super(props);
     let query = this.props.location.query;
     this.state = {
-      ${domain_packageName}: null,
+      documents: null,
       errText: null,
       filter: {
         displayName: query.displayName ? query.displayName : '',
@@ -36,8 +36,8 @@ class Filtrable${domain_objectName}sTable extends Component {
   /**
    *  Загрузка данных о документах
    */
-  load${domain_objectName}s() {
-    var url = "/${artifactId}-web/web/${domain_packageName}";
+  loadDocuments() {
+    var url = "/${artifactId}-web/web/documents";
     if (this.state.filter.displayName) {
       url += "?filter=displayName==" + this.state.filter.displayName;
     }
@@ -56,7 +56,7 @@ class Filtrable${domain_objectName}sTable extends Component {
       })
       .then((response) => {
         if (response !== undefined && response.document !== undefined) {
-          this.setState({${domain_packageName}: response.document, errText: null});
+          this.setState({documents: response.document, errText: null});
         }
 
         return;
@@ -79,16 +79,16 @@ class Filtrable${domain_objectName}sTable extends Component {
   };
 
   render() {
-    //console.log(this.state.${domain_packageName});
+    //console.log(this.state.documents);
     return (
       <div>
         <SearchBar
           filter={this.state.filter}
           onChange={this.filterOnChangeHandler}
         />
-        {(this.state.${domain_packageName}) &&
-          <${domain_objectName}sTable
-            ${domain_packageName}={this.state.${domain_packageName}}
+        {(this.state.documents) &&
+          <DocumentsTable
+            documents={this.state.documents}
           />
         }
         {this.state.errText &&
@@ -115,7 +115,7 @@ const SearchBar = (props) => {
         <Checkbox
           name="showDeleted"
           defaultChecked={props.filter.showDeleted}
-          label='Show deleted ${domain_packageName}'
+          label='Show deleted documents'
           onChange={() => {props.onChange('showDeleted', !props.filter.showDeleted);}}
         />
       </Form.Field>
@@ -123,13 +123,13 @@ const SearchBar = (props) => {
   );
 };
 
-function ${domain_objectName}sTable (props) {
-  if (!props.${domain_packageName}.length) {
+function DocumentsTable (props) {
+  if (!props.documents.length) {
     return (<Message warning>Документы не найдены</Message>);
   }
   return (
     <Table striped celled>
-      <caption>List of ${domain_objectName}s</caption>
+      <caption>List of Documents</caption>
       <Table.Header>
         <Table.Row>
           <Table.HeaderCell>Date</Table.HeaderCell>
@@ -137,7 +137,7 @@ function ${domain_objectName}sTable (props) {
         </Table.Row>
       </Table.Header>
       <Table.Body>
-        {props.${domain_packageName}.map((document, index) => (
+        {props.documents.map((document, index) => (
           <Table.Row key={index}>
             <Table.Cell>
               {document.docDate.split('-').reverse().join('.')}
@@ -152,4 +152,4 @@ function ${domain_objectName}sTable (props) {
   );
 }
 
-export default Filtrable${domain_objectName}sTable;
+export default FiltrableDocumentsTable;

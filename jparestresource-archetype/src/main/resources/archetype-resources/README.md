@@ -12,7 +12,7 @@ ${symbol_pound}${symbol_pound} Project structure
 
 ${symbol_pound}${symbol_pound}Example project creation based on this archetype in command line
 
-mvn -DarchetypeGroupId=${groupId} -DarchetypeArtifactId=${artifactId}-archetype -DarchetypeVersion=${version} -DgroupId=ru.ilb.sampleapplication -DartifactId=sampleapplication -Dversion=${version} -Dpackage=ru.ilb.sampleapplication -Ddomain_packageName=${domain_packageName} -Ddomain_objectName=${domain_objectName} -Darchetype.interactive=false --batch-mode --update-snapshots archetype:generate
+mvn -DarchetypeGroupId=${package} -DarchetypeArtifactId=${artifactId}-archetype -DarchetypeVersion=${version} -DgroupId=ru.ilb.sampleapplication -DartifactId=sampleapplication -Dversion=${version} -Dpackage=ru.ilb.sampleapplication -Ddomain_packageName=documents -Ddomain_objectName=Document -Darchetype.interactive=false --batch-mode --update-snapshots archetype:generate
 
 
 ${symbol_pound}${symbol_pound}Example project creation based on this archetype in Netbeans

@@ -3,7 +3,7 @@
 #set( $symbol_escape = '\' )
 <?xml version="1.0"?>
 <xml-bindings xmlns="http://www.eclipse.org/eclipselink/xsds/persistence/oxm"
-    package-name="${groupId}.${domain_packageName}"
+    package-name="${package}.model"
     xml-accessor-type="FIELD">
     <java-types>
         <java-type name="Docfile">

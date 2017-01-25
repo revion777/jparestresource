@@ -2,10 +2,10 @@
 #set( $symbol_dollar = '$' )
 #set( $symbol_escape = '\' )
 <?xml version="1.0" encoding="UTF-8"?>
-<${domain_packageName} xmlns="urn:ru:ilb:${parentArtifactId}:${domain_packageName}" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-               xsi:schemaLocation="urn:ru:ilb:${parentArtifactId}:${domain_packageName} ../../../../../../${parentArtifactId}-api/src/main/resources/schemas/${parentArtifactId}/${domain_packageName}.xsd" >
+<documents xmlns="urn:ru:ilb:${parentArtifactId}:model" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+               xsi:schemaLocation="urn:ru:ilb:${parentArtifactId}:model ../../../../../../${parentArtifactId}-api/src/main/resources/schemas/${parentArtifactId}/model.xsd" >
     <document uid="5530460f-760c-4ba1-8dfa-1e27f8e8e9ce">
-        <displayName>Subscription ${domain_packageName}</displayName>
+        <displayName>Subscription documents</displayName>
         <description>Desctiption follows</description>
         <keywords>journals</keywords>
         <docDate>2015-01-01</docDate>
@@ -63,4 +63,4 @@
         <docDate>2015-01-10</docDate>
         <direction>IN</direction>
     </document>
-</${domain_packageName}>
+</documents>

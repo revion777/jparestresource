@@ -848,7 +848,7 @@ To help you make up your mind, here is a list of APIs that **need jsdom**:
 
 * Any browser globals like `window` and `document`
 * [`ReactDOM.render()`](https://facebook.github.io/react/docs/top-level-api.html${symbol_pound}reactdom.render)
-* [`TestUtils.renderInto${domain_objectName}()`](https://facebook.github.io/react/docs/test-utils.html${symbol_pound}renderintodocument) ([a shortcut](https://github.com/facebook/react/blob/34761cf9a252964abfaab6faf74d473ad95d1f21/src/test/ReactTestUtils.js${symbol_pound}L83-L91) for the above)
+* [`TestUtils.renderIntoDocument()`](https://facebook.github.io/react/docs/test-utils.html${symbol_pound}renderintodocument) ([a shortcut](https://github.com/facebook/react/blob/34761cf9a252964abfaab6faf74d473ad95d1f21/src/test/ReactTestUtils.js${symbol_pound}L83-L91) for the above)
 * [`mount()`](http://airbnb.io/enzyme/docs/api/mount.html) in [Enzyme](http://airbnb.io/enzyme/index.html)
 
 In contrast, **jsdom is not needed** for the following APIs:

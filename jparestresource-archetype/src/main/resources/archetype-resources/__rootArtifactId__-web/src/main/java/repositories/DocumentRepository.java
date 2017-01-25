@@ -16,20 +16,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ${groupId}.repositories;
+package ${package}.repositories;
 
 import java.util.UUID;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.transaction.annotation.Transactional;
-import ${groupId}.${domain_packageName}.${domain_objectName};
+import ${package}.model.Document;
 
 /**
  *
  * @author slavb
  */
 @Transactional
-public interface ${domain_objectName}Repository extends JpaRepository<${domain_objectName},Long> { 
+public interface DocumentRepository extends JpaRepository<Document,Long> { 
     
-    public ${domain_objectName} findByUid(UUID uid);
+    public Document findByUid(UUID uid);
     
 }

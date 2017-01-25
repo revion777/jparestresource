@@ -6,7 +6,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ${groupId}.web;
+package ${package}.web;
 
 import io.swagger.annotations.Api;
 import java.util.List;
@@ -31,16 +31,16 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import ru.ilb.common.jaxrs.search.JPAOrderedQueryVisitor;
-import ${groupId}.${domain_packageName}.${domain_objectName};
-import ${groupId}.${domain_packageName}.${domain_objectName}s;
-import ${groupId}.api.${domain_objectName}sResource;
-import ${groupId}.core.JaxbHelper;
-import ${groupId}.${domain_packageName}.ReadOptionsType;
-import ${groupId}.repositories.${domain_objectName}Repository;
+import ${package}.model.Document;
+import ${package}.model.Documents;
+import ${package}.api.DocumentsResource;
+import ${package}.utils.JaxbHelper;
+import ${package}.model.ReadOptionsType;
+import ${package}.repositories.DocumentRepository;
 
-@Path("${domain_packageName}")
-@Api("${domain_packageName}")
-public class ${domain_objectName}ResourceImpl implements ${domain_objectName}sResource {
+@Path("documents")
+@Api("documents")
+public class DocumentResourceImpl implements DocumentsResource {
 
     @PersistenceContext(unitName = "${parentArtifactId}")
     private EntityManager em;
@@ -56,7 +56,7 @@ public class ${domain_objectName}ResourceImpl implements ${domain_objectName}sRe
     }
 
     @Autowired
-    ${domain_objectName}Repository documentRepository;
+    DocumentRepository documentRepository;
 
     private SearchContext searchContext;
 
@@ -65,27 +65,27 @@ public class ${domain_objectName}ResourceImpl implements ${domain_objectName}sRe
         this.searchContext = searchContext;
     }
 
-    private static final Logger LOG = LoggerFactory.getLogger(${domain_objectName}ResourceImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(DocumentResourceImpl.class);
 
     @Override
     @Transactional
-    public ${domain_objectName}s list(List<ReadOptionsType> options, String filter, Integer limit, String order) {
-        ${domain_objectName}s res = new ${domain_objectName}s();
-        JPAOrderedQueryVisitor<${domain_objectName}> visitor = new JPAOrderedQueryVisitor<>(em, ${domain_objectName}.class);
-        TypedQuery<${domain_objectName}> query;
+    public Documents list(List<ReadOptionsType> options, String filter, Integer limit, String order) {
+        Documents res = new Documents();
+        JPAOrderedQueryVisitor<Document> visitor = new JPAOrderedQueryVisitor<>(em, Document.class);
+        TypedQuery<Document> query;
         if (filter != null) {
-            SearchCondition<${domain_objectName}> sc;
+            SearchCondition<Document> sc;
             try {
-                sc = searchContext.getCondition(filter, ${domain_objectName}.class);
+                sc = searchContext.getCondition(filter, Document.class);
             } catch (SearchParseException ex) {
                 throw new BadRequestException(ex);
             }
             sc.accept(visitor);
-            CriteriaQuery<${domain_objectName}> cq = order != null ? visitor.getOrderedCriteriaQuery(visitor, order) : visitor.getCriteriaQuery();
+            CriteriaQuery<Document> cq = order != null ? visitor.getOrderedCriteriaQuery(visitor, order) : visitor.getCriteriaQuery();
             query = em.createQuery(cq);
 
         } else {
-            query = em.createQuery("SELECT d FROM ${domain_objectName} d", ${domain_objectName}.class);
+            query = em.createQuery("SELECT d FROM Document d", Document.class);
         }
         if (options != null) {
             if (options.contains(ReadOptionsType.WITH_DOCFILES)) {
@@ -95,37 +95,37 @@ public class ${domain_objectName}ResourceImpl implements ${domain_objectName}sRe
         if (limit != null) {
             query.setMaxResults(limit);
         }
-        List<${domain_objectName}> result = query.getResultList();
-        //res.get${domain_objectName}s().addAll(entityManagerIntr.copy(result, null, null));
-        res.get${domain_objectName}s().addAll(result);
+        List<Document> result = query.getResultList();
+        //res.getDocuments().addAll(entityManagerIntr.copy(result, null, null));
+        res.getDocuments().addAll(result);
         return res;
     }
 
     @Override
     @Transactional
-    public ${domain_objectName} find(UUID uid) {
-        ${domain_objectName} doc = documentRepository.findByUid(uid);
+    public Document find(UUID uid) {
+        Document doc = documentRepository.findByUid(uid);
         return doc;
     }
 
     @Override
     @Transactional
-    public UUID create(${domain_objectName} document) {
+    public UUID create(Document document) {
         documentRepository.save(document);
         return document.getUid();
     }
 
     @Override
     @Transactional
-    public void edit(UUID uid, ${domain_objectName} document) {
-        ${domain_objectName} doc = documentRepository.findByUid(uid);
+    public void edit(UUID uid, Document document) {
+        Document doc = documentRepository.findByUid(uid);
         BeanUtils.copyProperties(document, doc, new String[]{"id"});
     }
 
     @Override
     @Transactional
     public void remove(UUID uid) {
-        ${domain_objectName} doc = documentRepository.findByUid(uid);
+        Document doc = documentRepository.findByUid(uid);
         documentRepository.delete(doc);
     }
 
@@ -135,8 +135,8 @@ public class ${domain_objectName}ResourceImpl implements ${domain_objectName}sRe
     @PostConstruct
     @Transactional
     public void init() {
-        ${domain_objectName}s ${domain_packageName} = jaxbHelper.unmarshal(getClass().getResourceAsStream("/META-INF/xml/testdata.xml"), ${domain_objectName}s.class,MediaType.APPLICATION_XML);
-        documentRepository.save(${domain_packageName}.get${domain_objectName}s());
+        Documents documents = jaxbHelper.unmarshal(getClass().getResourceAsStream("/META-INF/xml/testdata.xml"), Documents.class,MediaType.APPLICATION_XML);
+        documentRepository.save(documents.getDocuments());
 
     }
 

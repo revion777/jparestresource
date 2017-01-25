@@ -2,7 +2,7 @@
 #set( $symbol_dollar = '$' )
 #set( $symbol_escape = '\' )
 {
-    "displayName": "Subscription ${domain_packageName}",
+    "displayName": "Subscription documents",
     "description": "Desctiption follows",
     "keywords": "journals",
     "docDate": "2015-01-01",

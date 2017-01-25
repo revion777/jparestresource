@@ -12,16 +12,16 @@
                jaxb:version="2.1"
                xmlns:jpa="http://annox.dev.java.net/javax.persistence"
                jaxb:extensionBindingPrefixes="xjc annox inheritance"
-               schemaLocation="${domain_packageName}.xsd" node="/xsd:schema"
+               schemaLocation="model.xsd" node="/xsd:schema"
 >
     <!-- example how to make implementation class, jaxb:baseType required for List<> properties -->
     <!--
-    <jaxb:bindings node="//xsd:complexType[@name='${domain_objectName}Type']">
-        <jaxb:class  implClass="${groupId}.${domain_packageName}.${domain_objectName}"/>
+    <jaxb:bindings node="//xsd:complexType[@name='DocumentType']">
+        <jaxb:class  implClass="${package}.documents.Document"/>
     </jaxb:bindings>
     <jaxb:bindings multiple="true" node="//xsd:element[@ref='document']">
         <jaxb:property>
-            <jaxb:baseType name="${domain_objectName}"/>
+            <jaxb:baseType name="Document"/>
         </jaxb:property>
     </jaxb:bindings>
     -->

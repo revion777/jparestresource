@@ -3,14 +3,14 @@
 #set( $symbol_escape = '\' )
 <?xml version="1.0" encoding="UTF-8"?>
 <xsd:schema elementFormDefault="qualified"
-            xmlns="urn:ru:ilb:${parentArtifactId}:${domain_packageName}"
-            targetNamespace="urn:ru:ilb:${parentArtifactId}:${domain_packageName}"
+            xmlns="urn:ru:ilb:${parentArtifactId}:model"
+            targetNamespace="urn:ru:ilb:${parentArtifactId}:model"
             xmlns:core="urn:ru:ilb:${parentArtifactId}:core"
             xmlns:xsd="http://www.w3.org/2001/XMLSchema"
 >
     <xsd:import namespace="urn:ru:ilb:${parentArtifactId}:core" schemaLocation="./core.xsd"/>
 
-    <xsd:complexType name="${domain_objectName}Type">
+    <xsd:complexType name="DocumentType">
         <xsd:complexContent>
             <xsd:extension base="core:EntityType">
                 <xsd:sequence>
@@ -24,7 +24,7 @@
             </xsd:extension>
         </xsd:complexContent>
     </xsd:complexType>
-    <xsd:element name="document" type="${domain_objectName}Type"/>
+    <xsd:element name="document" type="DocumentType"/>
     <xsd:complexType name="DocfileType">
         <xsd:complexContent>
             <xsd:extension base="core:EntityType">
@@ -39,7 +39,7 @@
         </xsd:complexContent>
     </xsd:complexType>
     <xsd:element name="docfile" type="DocfileType"/>
-    <xsd:element name="${domain_packageName}">
+    <xsd:element name="documents">
         <xsd:complexType>
             <xsd:sequence>
                 <xsd:element ref="document" minOccurs="0" maxOccurs="unbounded"/>

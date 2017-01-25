@@ -71,11 +71,11 @@
                             <sourceRoot>${project.build.directory}/generated-sources/xjc</sourceRoot>
                             <wadlOptions>
                                 <wadlOption>
-                                    <wadl>${basedir}/src/main/resources/schemas/${rootArtifactId}/${rootArtifactId}.wadl</wadl>
+                                    <wadl>${basedir}/src/main/resources/schemas/${rootArtifactId}/application.wadl</wadl>
                                     <packagename>ru.ilb.${rootArtifactId}.api</packagename>
                                     <bindingFiles>
                                         <bindingFile>${basedir}/src/main/resources/schemas/${rootArtifactId}/core.xjb</bindingFile>
-                                        <bindingFile>${basedir}/src/main/resources/schemas/${rootArtifactId}/${domain_packageName}.xjb</bindingFile>
+                                        <bindingFile>${basedir}/src/main/resources/schemas/${rootArtifactId}/model.xjb</bindingFile>
                                     </bindingFiles>
                                     <extraargs>
                                         <extraarg>-verbose</extraarg>

@@ -75,7 +75,7 @@
     <bean id="entityManager" class = "org.springframework.orm.jpa.support.SharedEntityManagerBean">
         <property name="entityManagerFactory" ref="entityManagerFactory"/>
     </bean>
-    <jpa:repositories base-package="${groupId}.repositories"/>
+    <jpa:repositories base-package="${package}.repositories"/>
     <!-- uncomment to enable CORS support, see https://cwiki.apache.org/confluence/display/CXF20DOC/JAX-RS+CORS, and pom dependency -->
     <!--<bean id="corsFilter" class="org.apache.cxf.rs.security.cors.CrossOriginResourceSharingFilter"/>-->
 
@@ -85,7 +85,7 @@
     </bean>
     <bean id="swagger2Feature" class="org.apache.cxf.jaxrs.swagger.Swagger2Feature">
         <property name="swagger2Serializers" ref="swagger2Serializers"/>
-        <property name="resourcePackage" value="${groupId}.web"/>
+        <property name="resourcePackage" value="${package}.web"/>
         <property name="scanAllResources" value="true"/>
         <property name="prettyPrint" value="true"/>
     </bean>
@@ -103,7 +103,7 @@
     <bean id="searchContextProvider" class="org.apache.cxf.jaxrs.ext.search.SearchContextProvider"/>
 
     <util:map id="namespaceMap" map-class="java.util.Hashtable">
-        <entry key="urn:ru:ilb:${parentArtifactId}:${domain_packageName}" value=""/>
+        <entry key="urn:ru:ilb:${parentArtifactId}:model" value=""/>
     </util:map>
     <bean id="jaxbContextResolver" class="ru.ilb.common.jaxrs.jaxb.JaxbContextResolver" >
         <property name="contextProperties" ref="contextProperties"/>
@@ -148,7 +148,7 @@
         <property name="schemaLocations" ref="schemaLocations"/>
     </bean>
     <util:list id="schemaLocations">
-        <value>classpath:schemas/${parentArtifactId}/${domain_packageName}.xsd</value>
+        <value>classpath:schemas/${parentArtifactId}/model.xsd</value>
     </util:list>
     <util:list id="extraClass" value-type="java.lang.Class">
     </util:list>
@@ -157,7 +157,7 @@
         <entry key="jaxb.formatted.output" value="true" value-type="java.lang.Boolean"/>
     </util:map>
     <util:map id="contextProperties">
-        <entry key="eclipselink-oxm-xml" value="schemas/${parentArtifactId}/${domain_packageName}-oxm.xml"/>
+        <entry key="eclipselink-oxm-xml" value="schemas/${parentArtifactId}/model-oxm.xml"/>
         <entry key="com.sun.xml.bind.XmlAccessorFactory" value="true" value-type="java.lang.Boolean"/>
     </util:map>
     
@@ -209,8 +209,8 @@
     </bean>-->
 
     <!-- auto register @Component annotated classes -->
-    <context:component-scan base-package="${groupId}.web,${groupId}.core"/>
-    <jaxrs:server address="/" basePackages="${groupId}.web,ru.ilb.common.jaxrs.providers,ru.ilb.common.jaxrs.exceptionhandler">
+    <context:component-scan base-package="${package}.web,${package}.core"/>
+    <jaxrs:server address="/" basePackages="${package}.web,ru.ilb.common.jaxrs.providers,ru.ilb.common.jaxrs.exceptionhandler">
         <jaxrs:providers>
             <ref bean="jaxbContextResolver"/>
             <ref bean="jaxbProvider"/>
