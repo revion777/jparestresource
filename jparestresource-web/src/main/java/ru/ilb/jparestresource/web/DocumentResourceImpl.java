@@ -28,11 +28,11 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import ru.ilb.common.jaxrs.search.JPAOrderedQueryVisitor;
-import ru.ilb.jparestresource.documents.Document;
-import ru.ilb.jparestresource.documents.Documents;
+import ru.ilb.jparestresource.model.Document;
+import ru.ilb.jparestresource.model.Documents;
 import ru.ilb.jparestresource.api.DocumentsResource;
-import ru.ilb.jparestresource.core.JaxbHelper;
-import ru.ilb.jparestresource.documents.ReadOptionsType;
+import ru.ilb.jparestresource.utils.JaxbHelper;
+import ru.ilb.jparestresource.model.ReadOptionsType;
 import ru.ilb.jparestresource.repositories.DocumentRepository;
 
 @Path("documents")

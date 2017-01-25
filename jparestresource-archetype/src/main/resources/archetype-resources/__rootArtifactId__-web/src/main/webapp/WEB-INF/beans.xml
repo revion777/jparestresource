@@ -6,6 +6,7 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:jaxrs="http://cxf.apache.org/jaxrs"
        xmlns:jaxrs-client="http://cxf.apache.org/jaxrs-client"
+       xmlns:http-conf="http://cxf.apache.org/transports/http/configuration"
        xmlns:jee="http://www.springframework.org/schema/jee"
        xmlns:util="http://www.springframework.org/schema/util"
        xmlns:context="http://www.springframework.org/schema/context"
@@ -18,6 +19,7 @@
         http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
         http://cxf.apache.org/jaxrs http://cxf.apache.org/schemas/jaxrs.xsd
         http://cxf.apache.org/jaxrs-client http://cxf.apache.org/schemas/jaxrs-client.xsd
+        http://cxf.apache.org/transports/http/configuration http://cxf.apache.org/schemas/configuration/http-conf.xsd
         http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee.xsd
         http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
         http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd
@@ -78,7 +80,11 @@
     <!--<bean id="corsFilter" class="org.apache.cxf.rs.security.cors.CrossOriginResourceSharingFilter"/>-->
 
     <!-- Configure swagger api support, see also jaxrs:features section in jaxrs:server and maven dependencies -->
+    <bean id="swagger2Serializers" class="org.apache.cxf.jaxrs.swagger.DefaultSwagger2Serializers">
+        <property name="javaDocPath" value="WEB-INF/lib/${parentArtifactId}-api-${version}-javadoc.jar"/>
+    </bean>
     <bean id="swagger2Feature" class="org.apache.cxf.jaxrs.swagger.Swagger2Feature">
+        <property name="swagger2Serializers" ref="swagger2Serializers"/>
         <property name="resourcePackage" value="${groupId}.web"/>
         <property name="scanAllResources" value="true"/>
         <property name="prettyPrint" value="true"/>
@@ -233,7 +239,13 @@
         <jaxrs:extensionMappings>
             <entry key="xml" value="application/xml;charset=UTF-8"/>
             <!-- comment to enable swagger api support. fixed in cxf 3.1.10 -->
-            <entry key="json" value="application/json;charset=UTF-8"/>
+            <!--<entry key="json" value="application/json;charset=UTF-8"/>-->
         </jaxrs:extensionMappings>
     </jaxrs:server>
+    
+    <http-conf:conduit name="*.http-conduit">
+        <!-- disable chunking, not works everywhere -->
+        <http-conf:client AllowChunking="false" />
+    </http-conf:conduit>      
+    
 </beans>

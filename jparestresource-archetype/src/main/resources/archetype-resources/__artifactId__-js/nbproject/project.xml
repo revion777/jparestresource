@@ -1,0 +1,12 @@
+#set( $symbol_pound = '#' )
+#set( $symbol_dollar = '$' )
+#set( $symbol_escape = '\' )
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://www.netbeans.org/ns/project/1">
+    <type>org.netbeans.modules.web.clientproject</type>
+    <configuration>
+        <data xmlns="http://www.netbeans.org/ns/clientside-project/1">
+            <name>${artifactId}-js</name>
+        </data>
+    </configuration>
+</project>

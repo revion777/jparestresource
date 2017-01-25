@@ -18,10 +18,44 @@
         <include>**/*.properties</include>
       </includes>
     </fileSet>
+    <fileSet filtered="true" encoding="UTF-8">
+      <directory>jparestresource-js/nbproject</directory>
+      <includes>
+        <include>**/*.xml</include>
+        <include>**/*.properties</include>
+      </includes>
+    </fileSet>
+    <fileSet filtered="true" encoding="UTF-8">
+      <directory>jparestresource-js/public</directory>
+      <includes>
+        <include>**/*.ico</include>
+        <include>**/*.html</include>
+      </includes>
+    </fileSet>
+    <fileSet filtered="true" encoding="UTF-8">
+      <directory>jparestresource-js/src</directory>
+      <includes>
+        <include>**/*.css</include>
+        <include>**/*.js</include>
+      </includes>
+    </fileSet>
+    <fileSet filtered="true" encoding="UTF-8">
+      <directory>jparestresource-js</directory>
+      <includes>
+        <include>**/*.md</include>
+        <include>**/*.json</include>
+      </includes>
+    </fileSet>
     <fileSet encoding="UTF-8">
       <directory>archetype</directory>
       <includes>
         <include>**/*.diff</include>
+      </includes>
+    </fileSet>
+    <fileSet encoding="UTF-8">
+      <directory>jparestresource-js</directory>
+      <includes>
+        <include>**/*.gitignore</include>
       </includes>
     </fileSet>
     <fileSet filtered="true" encoding="UTF-8">

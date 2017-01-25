@@ -8,6 +8,7 @@
  */
 package ${groupId}.web;
 
+import io.swagger.annotations.Api;
 import java.util.List;
 import java.util.UUID;
 import javax.annotation.PostConstruct;
@@ -38,6 +39,7 @@ import ${groupId}.${domain_packageName}.ReadOptionsType;
 import ${groupId}.repositories.${domain_objectName}Repository;
 
 @Path("${domain_packageName}")
+@Api("${domain_packageName}")
 public class ${domain_objectName}ResourceImpl implements ${domain_objectName}sResource {
 
     @PersistenceContext(unitName = "${parentArtifactId}")

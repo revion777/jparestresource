@@ -71,11 +71,11 @@
                             <sourceRoot>${project.build.directory}/generated-sources/xjc</sourceRoot>
                             <wadlOptions>
                                 <wadlOption>
-                                    <wadl>${basedir}/src/main/resources/schemas/jparestresource/jparestresource.wadl</wadl>
+                                    <wadl>${basedir}/src/main/resources/schemas/jparestresource/application.wadl</wadl>
                                     <packagename>ru.ilb.jparestresource.api</packagename>
                                     <bindingFiles>
                                         <bindingFile>${basedir}/src/main/resources/schemas/jparestresource/core.xjb</bindingFile>
-                                        <bindingFile>${basedir}/src/main/resources/schemas/jparestresource/documents.xjb</bindingFile>
+                                        <bindingFile>${basedir}/src/main/resources/schemas/jparestresource/model.xjb</bindingFile>
                                     </bindingFiles>
                                     <extraargs>
                                         <extraarg>-verbose</extraarg>

@@ -164,6 +164,11 @@
             <version>1.10.13</version>
         </dependency>        -->
         <dependency>
+            <groupId>com.github.marschall</groupId>
+            <artifactId>threeten-jpa</artifactId>
+            <version>1.5.1</version>
+        </dependency>        
+        <dependency>
             <groupId>cglib</groupId>
             <artifactId>cglib-nodep</artifactId>
             <version>3.1</version>
@@ -177,6 +182,12 @@
             <groupId>${project.groupId}</groupId>
             <artifactId>${rootArtifactId}-api</artifactId>
             <version>${version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>${rootArtifactId}-api</artifactId>
+            <version>${version}</version>
+            <classifier>javadoc</classifier>
         </dependency>
         <!-- uncomment to enable @Cacheable support
         <dependency>

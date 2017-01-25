@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <xml-bindings xmlns="http://www.eclipse.org/eclipselink/xsds/persistence/oxm"
-    package-name="ru.ilb.jparestresource.documents"
+    package-name="ru.ilb.jparestresource.model"
     xml-accessor-type="FIELD">
     <java-types>
         <java-type name="Docfile">

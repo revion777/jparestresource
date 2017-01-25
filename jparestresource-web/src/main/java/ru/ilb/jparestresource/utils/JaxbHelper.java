@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ru.ilb.jparestresource.core;
+package ru.ilb.jparestresource.utils;
 
 import java.io.InputStream;
 import java.io.StringWriter;

@@ -1,5 +1,8 @@
+#set( $symbol_pound = '#' )
+#set( $symbol_dollar = '$' )
+#set( $symbol_escape = '\' )
 /*
- * Copyright 2016 slavb.
+ * Copyright 2017 slavb.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,20 +16,29 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ru.ilb.jparestresource.repositories;
+package ${groupId}.web;
 
-import java.util.UUID;
-import org.springframework.data.jpa.repository.JpaRepository;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
 import org.springframework.transaction.annotation.Transactional;
-import ru.ilb.jparestresource.model.Document;
 
 /**
  *
  * @author slavb
  */
-@Transactional
-public interface DocumentRepository extends JpaRepository<Document,Long> { 
-    
-    public Document findByUid(UUID uid);
-    
+@Path("heartbeat")
+public class Heartbeat {
+
+    @PersistenceContext(unitName = "${parentArtifactId}")
+    private EntityManager em;
+
+    @GET
+    @Transactional
+    public String heartbeat() {
+        em.createNativeQuery("SELECT 1").getFirstResult();
+        return "OK";
+    }
+
 }

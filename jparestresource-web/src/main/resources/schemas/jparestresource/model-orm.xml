@@ -2,7 +2,7 @@
 <entity-mappings xmlns="http://www.eclipse.org/eclipselink/xsds/persistence/orm"
                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                  version="2.5">
-    <entity class="ru.ilb.jparestresource.documents.Document">
+    <entity class="ru.ilb.jparestresource.model.Document">
         <attributes>
             <basic name="direction">
                 <column column-definition="int(1)"/>
@@ -17,7 +17,7 @@
             </one-to-many>
         </attributes>
     </entity>
-    <entity class="ru.ilb.jparestresource.documents.Docfile">
+    <entity class="ru.ilb.jparestresource.model.Docfile">
         <attributes>
             <!-- BI-directinal: -->
             <many-to-one name="document">
@@ -28,7 +28,7 @@
         </attributes>
     </entity>
     <object-type-converter name="DirectionTypeConverter"
-                           object-type="ru.ilb.jparestresource.documents.DirectionType" data-type="java.lang.Integer">
+                           object-type="ru.ilb.jparestresource.model.DirectionType" data-type="java.lang.Integer">
         <conversion-value object-value="IN" data-value="0" />
         <conversion-value object-value="OUT" data-value="1" />
     </object-type-converter>

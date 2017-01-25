@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<documents xmlns="urn:ru:ilb:jparestresource:documents" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-               xsi:schemaLocation="urn:ru:ilb:jparestresource:documents ../../../../../../jparestresource-api/src/main/resources/schemas/jparestresource/documents.xsd" >
+<documents xmlns="urn:ru:ilb:jparestresource:model" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+               xsi:schemaLocation="urn:ru:ilb:jparestresource:model ../../../../../../jparestresource-api/src/main/resources/schemas/jparestresource/model.xsd" >
     <document uid="5530460f-760c-4ba1-8dfa-1e27f8e8e9ce">
         <displayName>Subscription documents</displayName>
         <description>Desctiption follows</description>
