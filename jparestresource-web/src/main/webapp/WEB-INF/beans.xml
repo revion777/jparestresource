@@ -77,7 +77,11 @@
     <!--<bean id="corsFilter" class="org.apache.cxf.rs.security.cors.CrossOriginResourceSharingFilter"/>-->
 
     <!-- Configure swagger api support, see also jaxrs:features section in jaxrs:server and maven dependencies -->
+    <bean id="swagger2Serializers" class="org.apache.cxf.jaxrs.swagger.DefaultSwagger2Serializers">
+        <property name="javaDocPath" value="WEB-INF/lib/jparestresource-api-1.0-SNAPSHOT-javadoc.jar"/>
+    </bean>
     <bean id="swagger2Feature" class="org.apache.cxf.jaxrs.swagger.Swagger2Feature">
+        <property name="swagger2Serializers" ref="swagger2Serializers"/>
         <property name="resourcePackage" value="ru.ilb.jparestresource.web"/>
         <property name="scanAllResources" value="true"/>
         <property name="prettyPrint" value="true"/>

@@ -183,6 +183,12 @@
             <artifactId>jparestresource-api</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>jparestresource-api</artifactId>
+            <version>${project.version}</version>
+            <classifier>javadoc</classifier>
+        </dependency>
         <!-- uncomment to enable @Cacheable support
         <dependency>
             <groupId>com.google.guava</groupId>
