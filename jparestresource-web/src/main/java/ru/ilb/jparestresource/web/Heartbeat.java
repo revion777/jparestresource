@@ -15,6 +15,7 @@
  */
 package ru.ilb.jparestresource.web;
 
+import java.sql.Connection;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.ws.rs.GET;
@@ -34,7 +35,9 @@ public class Heartbeat {
     @GET
     @Transactional
     public String heartbeat() {
-        em.createNativeQuery("SELECT 1").getFirstResult();
+        // http://wiki.eclipse.org/EclipseLink/Examples/JPA/EMAPI#Getting_a_JDBC_Connection_from_an_EntityManager
+        // @Transactional required
+        em.unwrap(Connection.class);
         return "OK";
     }
 
