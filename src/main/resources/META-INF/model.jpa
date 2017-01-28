@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<jpa:entity-mappings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:java="http://jcp.org/en/jsr/detail?id=270" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:jpa="http://java.sun.com/xml/ns/persistence/orm" pkg="ru.ilb.jparestresource.model" v="3.1" persistenceUnitName="jparestresource" sm="false" xs="true" id="_14855761330684" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm orm_2_1.xsd">
+    <jpa:entity xre="true" compositePrimaryKeyClass="DocfilePK" abs="false" class="Docfile" v="true" m="false" rootElement="_14855761330684" id="_14855761330685">
+        <jpa:ts e="true"/>
+        <jpa:hc e="true"/>
+        <jpa:eq e="true"/>
+        <jpa:attributes>
+            <jpa:basic optional="true" attribute-type="String" v="true" name="comment" id="_14855761330778">
+                <jpa:bv/>
+                <jpa:column name="COMMENT" unique="false" nullable="true" insertable="true" updatable="true" table="DOCFILE" length="255"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Boolean" v="true" name="confirm" id="_14855761330779">
+                <jpa:bv/>
+                <jpa:column name="CONFIRM" unique="false" nullable="true" insertable="true" updatable="true" table="DOCFILE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="String" v="true" name="userName" id="_148557613307711">
+                <jpa:bv/>
+                <jpa:column name="USERNAME" unique="false" nullable="true" insertable="true" updatable="true" table="DOCFILE" length="255"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="String" v="true" name="userRole" id="_148557613307712">
+                <jpa:bv/>
+                <jpa:column name="USERROLE" unique="false" nullable="true" insertable="true" updatable="true" table="DOCFILE" length="255"/>
+            </jpa:basic>
+            <jpa:many-to-one optional="true" primaryKey="false" connected-entity-id="_14855761330696" connected-attribute-id="_148557613307823" v="true" name="document" id="_148557613307714">
+                <jpa:bv/>
+                <jpa:join-column name="DOCUMENT_ID" rc="ID" unique="false" nullable="true" insertable="true" updatable="true"/>
+            </jpa:many-to-one>
+            <jpa:id attribute-type="Long" v="true" name="id" id="_14855761330767">
+                <jpa:bv/>
+                <jpa:column name="ID" unique="false" nullable="false" insertable="true" updatable="true" table="DOCFILE"/>
+                <jpa:generated-value strategy="AUTO"/>
+            </jpa:id>
+        </jpa:attributes>
+        <jpa:el/>
+        <jpa:table name="DOCFILE">
+            <jpa:unique-constraint>
+                <jpa:column-name>UID</jpa:column-name>
+            </jpa:unique-constraint>
+        </jpa:table>
+    </jpa:entity>
+    <jpa:entity xre="true" compositePrimaryKeyClass="DocumentPK" abs="false" class="Document" v="true" m="false" rootElement="_14855761330684" id="_14855761330696">
+        <jpa:ts e="true"/>
+        <jpa:hc e="true"/>
+        <jpa:eq e="true"/>
+        <jpa:attributes>
+            <jpa:basic optional="true" attribute-type="String" v="true" name="description" id="_148557613307716">
+                <jpa:bv/>
+                <jpa:column name="DESCRIPTION" unique="false" nullable="true" insertable="true" updatable="true" table="DOCUMENT" length="255"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Integer" v="true" name="direction" id="_148557613307717">
+                <jpa:bv/>
+                <jpa:column name="DIRECTION" unique="false" nullable="true" insertable="true" updatable="true" table="DOCUMENT"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="String" v="true" name="displayName" id="_148557613307718">
+                <jpa:bv/>
+                <jpa:column name="DISPLAYNAME" unique="false" nullable="true" insertable="true" updatable="true" table="DOCUMENT" length="255"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="java.util.Date" v="true" name="docDate" id="_148557613307719">
+                <jpa:bv/>
+                <jpa:temporal>DATE</jpa:temporal>
+                <jpa:column name="DOCDATE" unique="false" nullable="true" insertable="true" updatable="true" table="DOCUMENT"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="String" v="true" name="keywords" id="_148557613307820">
+                <jpa:bv/>
+                <jpa:column name="KEYWORDS" unique="false" nullable="true" insertable="true" updatable="true" table="DOCUMENT" length="255"/>
+            </jpa:basic>
+            <jpa:one-to-many orp="false" own="false" collection-type="java.util.List" connected-entity-id="_14855761330685" connected-attribute-id="_148557613307714" v="true" name="docfiles" id="_148557613307823">
+                <jpa:bv/>
+            </jpa:one-to-many>
+            <jpa:id attribute-type="Long" v="true" name="id" id="_148557613307715">
+                <jpa:bv/>
+                <jpa:column name="ID" unique="false" nullable="false" insertable="true" updatable="true" table="DOCUMENT" precision="0"/>
+                <jpa:generated-value strategy="AUTO"/>
+            </jpa:id>
+        </jpa:attributes>
+        <jpa:el/>
+        <jpa:table name="DOCUMENT">
+            <jpa:unique-constraint>
+                <jpa:column-name>UID</jpa:column-name>
+            </jpa:unique-constraint>
+        </jpa:table>
+    </jpa:entity>
+    <jpa:snp loc="BEFORE_PACKAGE" e="true">/**
+ * This file was generated by the JPA Modeler
+ */</jpa:snp>
+    <jpa:inf e="true" n="java.io.Serializable"/>
+    <jpa:diagram>
+        <plane elementRef="_14855761330684">
+            <shape elementRef="_14855761330685">
+                <Bounds x="419.0" y="190.0" width="133.0" height="192.0"/>
+            </shape>
+            <shape elementRef="_14855761330696">
+                <Bounds x="145.0" y="74.0" width="151.0" height="213.0"/>
+            </shape>
+        </plane>
+    </jpa:diagram>
+</jpa:entity-mappings>
