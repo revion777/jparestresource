@@ -178,7 +178,7 @@
             <artifactId>logback-classic</artifactId>
             <version>1.1.3</version>
         </dependency>
-        <dependency>
+<!--        <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>jparestresource-api</artifactId>
             <version>${project.version}</version>
@@ -188,7 +188,7 @@
             <artifactId>jparestresource-api</artifactId>
             <version>${project.version}</version>
             <classifier>javadoc</classifier>
-        </dependency>
+        </dependency>-->
         <!-- uncomment to enable @Cacheable support
         <dependency>
             <groupId>com.google.guava</groupId>
@@ -265,6 +265,110 @@
                 </dependencies>
             </plugin>
             -->
+            <!--            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>jaxb2-maven-plugin</artifactId>
+                <version>2.2</version>
+                <executions>
+                    <execution>
+                        <id>schemagen</id>
+                        <goals>
+                            <goal>schemagen</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <sources>
+                        <source>src/main/java/ru/ilb/jparestresource/model</source>
+                    </sources>             
+                    <schemaSourceExcludeFilters>
+                        <noJaxbIndex implementation="org.codehaus.mojo.jaxb2.shared.filters.pattern.PatternFileFilter">
+                            <patterns>
+                                <pattern>package-info\.java</pattern>
+                            </patterns>
+                        </noJaxbIndex>
+                    </schemaSourceExcludeFilters>
+                    <transformSchemas>
+                        <transformSchema>
+                            <uri>urn:ru:ilb:jparestresource:model</uri>
+                            <toPrefix>view</toPrefix>
+                            <toFile>view.xsd</toFile>
+                        </transformSchema>                        
+                    </transformSchemas>                    
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>com.google.code.maven-replacer-plugin</groupId>
+                <artifactId>replacer</artifactId>
+                <version>1.5.3</version>
+                <executions>
+                    <execution>
+                        <id>replace_Relation</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>replace</goal>
+                        </goals>
+                        <configuration>
+                            <file>${basedir}/target/generated-resources/schemagen/view.xsd</file>
+                            <replacements>
+                                <replacement>
+                                    <token>urn:ru:ilb:jparestresource:model</token>
+                                    <value>urn:ru:ilb:jparestresource:view</value>
+                                </replacement>
+                            </replacements>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>-->
+       
+            <!--            <plugin>
+                <groupId>org.apache.cxf</groupId>
+                <artifactId>cxf-java2wadl-plugin</artifactId>
+                <version>${apache-cxf.version}</version>
+                <executions>
+                    <execution>
+                        <id>parsejavadoc</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>parsejavadoc</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>process-classes</id>
+                        <phase>process-classes</phase>
+                        <goals>
+                            <goal>java2wadl</goal>
+                        </goals>
+                        <configuration>
+                            <classResourceNames>
+                                <classResourceName>ru.ilb.jparestresource.web.DocumentsResourceImpl</classResourceName>
+                            </classResourceNames>
+                            <docProvider>org.apache.cxf.maven_plugin.javatowadl.ResourceMapJavaDocProvider</docProvider>
+                            <attachWadl>true</attachWadl>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>     -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.0.2</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                        <configuration>
+                            <classifier>client</classifier>
+                            <includes>
+                                <include>**/api/*</include>
+                                <include>**/model/*</include>
+                            </includes>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>            
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-failsafe-plugin</artifactId>

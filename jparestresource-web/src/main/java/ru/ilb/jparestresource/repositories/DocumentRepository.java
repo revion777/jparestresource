@@ -27,6 +27,5 @@ import ru.ilb.jparestresource.model.Document;
 @Transactional
 public interface DocumentRepository extends JpaRepository<Document,Long> { 
     
-    public Document findByUid(UUID uid);
     
 }

@@ -4,7 +4,7 @@
     xmlns:xsd="http://www.w3.org/2001/XMLSchema"
     xmlns:html="http://www.w3.org/1999/xhtml"
     xmlns="http://wadl.dev.java.net/2009/02"
-    xmlns:tns="urn:ru:ilb:jparestresource:model"
+    xmlns:view="urn:ru:ilb:jparestresource:view"
     xmlns:core="urn:ru:ilb:jparestresource:core"
 >
 	 
@@ -12,54 +12,54 @@
         jparestresource API
     </doc>
     <grammars>
-        <include href="model.xsd" />
+        <include href="core.xsd" />
     </grammars>
 	
-    <resources base="http://localhost:8080/jparestresource/web">
+    <resources>
         <resource path="documents">
             <doc>
                 documents resource
             </doc>
             <method name="GET" id="list">
                 <request>
-                    <param name="options" type="tns:ReadOptionsType" style="query" repeating="true"/>
-                    <param name="filter" type="xsd:string" style="query"/>
                     <param name="limit" type="xsd:int" style="query"/>
                     <param name="order" type="xsd:string" style="query"/>
                 </request>
                 <doc>List of documents</doc>
                 <response status="200">
-                    <representation mediaType="application/xml" element="tns:documents"/>
+                    <representation mediaType="application/xml" element="view:documents"/>
                     <representation mediaType="application/json"/>
                 </response>
             </method>
             <method name="POST" id="create">
                 <doc>create new document instance</doc>
                 <request>
-                    <representation mediaType="application/xml" element="tns:document"/>
+                    <representation mediaType="application/xml" element="view:document"/>
                     <representation mediaType="application/json"/>
                 </request>
                 <response>
-                    <representation mediaType="text/plain" element="core:UUIDType">
-                        <doc>UUID of created object</doc>
+                    <representation mediaType="text/plain">
+                        <param name="documentId" type="xsd:long">
+                            <doc>ID of created object</doc>
+                        </param>
                     </representation>
                 </response>
             </method>
-            <resource path="{uid}">
-                <param name="uid" type="core:UUIDType" style="template">
-                    <doc>document uid</doc>
+            <resource path="{documentId}">
+                <param name="documentId" type="xsd:long" style="template">
+                    <doc>document id</doc>
                 </param>
                 <method name="GET" id="find">
                     <doc>get document instance</doc>
                     <response status="200">
-                        <representation mediaType="application/xml" element="tns:document"/>
+                        <representation mediaType="application/xml" element="view:document"/>
                         <representation mediaType="application/json"/>
                     </response>
                 </method>
                 <method name="PUT" id="edit">
                     <doc>edit document instance</doc>
                     <request>
-                        <representation mediaType="application/xml" element="tns:document"/>
+                        <representation mediaType="application/xml" element="view:document"/>
                         <representation mediaType="application/json"/>
                     </request>
                     <response status="204"/>
