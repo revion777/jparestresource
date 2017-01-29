@@ -55,9 +55,8 @@
                 <jpa:bv/>
                 <jpa:column name="DISPLAYNAME" unique="false" nullable="true" insertable="true" updatable="true" table="DOCUMENT" length="255"/>
             </jpa:basic>
-            <jpa:basic optional="true" attribute-type="java.util.Date" v="true" name="docDate" id="_148557613307719">
+            <jpa:basic optional="true" attribute-type="java.time.LocalDate" v="true" name="docDate" id="_148557613307719">
                 <jpa:bv/>
-                <jpa:temporal>DATE</jpa:temporal>
                 <jpa:column name="DOCDATE" unique="false" nullable="true" insertable="true" updatable="true" table="DOCUMENT"/>
             </jpa:basic>
             <jpa:basic optional="true" attribute-type="String" v="true" name="keywords" id="_148557613307820">

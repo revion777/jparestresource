@@ -5,7 +5,7 @@
 package ru.ilb.jparestresource.model;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -15,8 +15,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.persistence.UniqueConstraint;
 import javax.xml.bind.annotation.*;
 
@@ -46,8 +44,7 @@ public class Document implements Serializable {
 
     @Column(name="DOCDATE",table="DOCUMENT")
     @Basic
-    @Temporal(TemporalType.DATE)
-    private Date docDate;
+    private LocalDate docDate;
 
     @Column(name="KEYWORDS",table="DOCUMENT")
     @Basic
@@ -89,11 +86,11 @@ public class Document implements Serializable {
         this.displayName = displayName;
     }
 
-    public Date getDocDate() {
+    public LocalDate getDocDate() {
         return this.docDate;
     }
 
-    public void setDocDate(Date docDate) {
+    public void setDocDate(LocalDate docDate) {
         this.docDate = docDate;
     }
 

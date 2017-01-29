@@ -34,7 +34,7 @@ class FiltrableDocumentsTable extends Component {
    *  Загрузка данных о документах
    */
   loadDocuments() {
-    var url = "/jparestresource-web/web/documents";
+    var url = "/jparestresource/web/documents";
     if (this.state.filter.displayName) {
       url += "?filter=displayName==" + this.state.filter.displayName;
     }
@@ -52,8 +52,8 @@ class FiltrableDocumentsTable extends Component {
         return response.json();
       })
       .then((response) => {
-        if (response !== undefined && response.document !== undefined) {
-          this.setState({documents: response.document, errText: null});
+        if (response !== undefined ) {
+          this.setState({documents: response, errText: null});
         }
 
         return;
