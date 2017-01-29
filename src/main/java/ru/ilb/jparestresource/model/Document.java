@@ -25,28 +25,23 @@ import javax.xml.bind.annotation.*;
 @Table(name="DOCUMENT",uniqueConstraints={@UniqueConstraint(columnNames={"UID"})})
 public class Document implements Serializable { 
 
-    @Column(name="ID",table="DOCUMENT",nullable=false)
+    @Column(nullable=false)
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
 
-    @Column(name="DESCRIPTION",table="DOCUMENT")
     @Basic
     private String description;
 
-    @Column(name="DIRECTION",table="DOCUMENT")
     @Basic
     private Integer direction;
 
-    @Column(name="DISPLAYNAME",table="DOCUMENT")
     @Basic
     private String displayName;
 
-    @Column(name="DOCDATE",table="DOCUMENT")
     @Basic
     private LocalDate docDate;
 
-    @Column(name="KEYWORDS",table="DOCUMENT")
     @Basic
     private String keywords;
 

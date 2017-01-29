@@ -24,29 +24,25 @@ import javax.xml.bind.annotation.*;
 @Table(name="DOCFILE",uniqueConstraints={@UniqueConstraint(columnNames={"UID"})})
 public class Docfile implements Serializable { 
 
-    @Column(name="ID",table="DOCFILE",nullable=false)
+    @Column(nullable=false)
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
 
-    @Column(name="COMMENT",table="DOCFILE")
     @Basic
     private String comment;
 
-    @Column(name="CONFIRM",table="DOCFILE")
     @Basic
     private Boolean confirm;
 
-    @Column(name="USERNAME",table="DOCFILE")
     @Basic
     private String userName;
 
-    @Column(name="USERROLE",table="DOCFILE")
     @Basic
     private String userRole;
 
     @ManyToOne(targetEntity = Document.class)
-    @JoinColumn(name="DOCUMENT_ID",referencedColumnName="ID")
+    @JoinColumn(name="DOCUMENT_ID",referencedColumnName="ID",nullable=false)
     private Document document;
 
     public Long getId() {
