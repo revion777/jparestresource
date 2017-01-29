@@ -244,11 +244,6 @@
 
     <build>
         <finalName>${project.name}</finalName>
-        <resources>
-            <resource>
-                <directory>docs</directory>
-            </resource>
-        </resources>
         <pluginManagement>
             <plugins>
                 <plugin>
