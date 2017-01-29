@@ -1,10 +1,11 @@
-#react frontend
-install netbeans support for .nbigonre plugin, or node_modules background scanning will never end
+#React frontend
+Install netbeans support for .nbigonre plugin, or node_modules background scanning will never end
 https://netbeans.org/bugzilla/show_bug.cgi?id=238709#c36
 direct link http://deadlock.netbeans.org/job/nbms-and-javadoc/lastSuccessfulBuild/artifact/nbbuild/nbms/extra/org-netbeans-modules-nbignore.nbm
 
 
-# migration from multi-module pom (separate -api, -web)
+# Migration from multi-module pom (separate -api, -web)
+
 1. open "-web" module pom.xml, remove <parent></parent>, add <groupId></groupId>
 2. merge parent's and "-api" module pom.xml into "-web" pom.xml
 3. copy schemas from "-api" module
@@ -12,6 +13,7 @@ direct link http://deadlock.netbeans.org/job/nbms-and-javadoc/lastSuccessfulBuil
 5. delete parent pom.xml and "-api" module
 6. optionally: rename project, remove "-web" suffix, move sources to parent
 7. separate client jar generation
+
 ```xml
 <plugin>
     <groupId>org.apache.maven.plugins</groupId>
@@ -39,6 +41,7 @@ direct link http://deadlock.netbeans.org/job/nbms-and-javadoc/lastSuccessfulBuil
 
 ##make implementation class
 jaxb:baseType required for List<> properties
+```xml
 <jaxb:bindings node="//xsd:complexType[@name='DocumentType']">
     <jaxb:class  implClass="package.Document"/>
 </jaxb:bindings>
@@ -47,8 +50,11 @@ jaxb:baseType required for List<> properties
         <jaxb:baseType name="Document"/>
     </jaxb:property>
 </jaxb:bindings>
+```
 
 #JPA
+## Attribute converter
+```xml
     <basic name="direction">
         <column column-definition="int(1)"/>
         <convert>DirectionTypeConverter</convert>
@@ -59,11 +65,11 @@ jaxb:baseType required for List<> properties
         <conversion-value object-value="IN" data-value="0" />
         <conversion-value object-value="OUT" data-value="1" />
     </object-type-converter>
-
+```
 #maven
 
 ## cxf-wadl2java-plugin
-
+```xml
 <plugin>
     <groupId>org.apache.cxf</groupId>
     <artifactId>cxf-wadl2java-plugin</artifactId>
@@ -133,13 +139,15 @@ jaxb:baseType required for List<> properties
         </dependency>
     </dependencies>
 </plugin>
-
+```
 ### catalog.xml
+```xml
 <extraarg>-catalog</extraarg>
 <extraarg>${basedir}/src/main/resources/schemas/jparesresource/catalog.xml</extraarg>
+```
 
 ### jaxb-xew-plugin
-
+```xml
 <extraarg>-xjc-Xxew</extraarg>
 <extraarg>-xjc-Xxew:instantiate lazy</extraarg>
 
@@ -148,13 +156,16 @@ jaxb:baseType required for List<> properties
     <artifactId>jaxb-xew-plugin</artifactId>
     <version>1.4</version>
 </dependency>
+```
 
 ### episode file
-
+```xml
 <extraarg>-xjc-episode</extraarg>
 <extraArg>-xjc${project.build.directory}/classes/schemas/jparestresource/jparestresource.episode</extraArg>
+```
 
 ## file tasks (delete, create, copy...)
+```xml
 <plugin>
     <groupId>org.apache.maven.plugins</groupId>
     <artifactId>maven-antrun-plugin</artifactId>
@@ -175,8 +186,9 @@ jaxb:baseType required for List<> properties
         </execution>
     </executions>
 </plugin>
-
+```
 ## generate swagger.json
+```xml
 <plugin>
     <groupId>com.github.kongchen</groupId>
     <artifactId>swagger-maven-plugin</artifactId>
@@ -249,8 +261,9 @@ jaxb:baseType required for List<> properties
         </dependency>
     </dependencies>
 </plugin>
-
+```
 ## generate swagger client
+```xml
 <plugin>
     <groupId>io.swagger</groupId>
     <artifactId>swagger-codegen-maven-plugin</artifactId>
@@ -270,9 +283,10 @@ jaxb:baseType required for List<> properties
         </execution>
     </executions>
 </plugin>
-
+```
 
 ## schemagen
+```xml
 <plugin>
     <groupId>org.codehaus.mojo</groupId>
     <artifactId>jaxb2-maven-plugin</artifactId>
@@ -305,8 +319,10 @@ jaxb:baseType required for List<> properties
         </transformSchemas>                    
     </configuration>
 </plugin>
+```
 
 ## replace in files
+```xml
 <plugin>
     <groupId>com.google.code.maven-replacer-plugin</groupId>
     <artifactId>replacer</artifactId>
@@ -319,19 +335,20 @@ jaxb:baseType required for List<> properties
                 <goal>replace</goal>
             </goals>
             <configuration>
-                <file>${basedir}/target/generated-resources/schemagen/view.xsd</file>
+                <file>${basedir}/target/generated-resources/schemagen/model.xsd</file>
                 <replacements>
                     <replacement>
-                        <token>urn:ru:ilb:jparesresource:model</token>
-                        <value>urn:ru:ilb:jparesresource:view</value>
+                        <token>search</token>
+                        <value>replace</value>
                     </replacement>
                 </replacements>
             </configuration>
         </execution>
     </executions>
 </plugin>
-
+```
 ##java2wadl
+```xml
 <plugin>
     <groupId>org.apache.cxf</groupId>
     <artifactId>cxf-java2wadl-plugin</artifactId>
@@ -360,3 +377,4 @@ jaxb:baseType required for List<> properties
         </execution>
     </executions>
 </plugin>
+```
