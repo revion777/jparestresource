@@ -1,3 +1,9 @@
+#react frontend
+install netbeans support for .nbigonre plugin, or node_modules background scanning will never end
+https://netbeans.org/bugzilla/show_bug.cgi?id=238709#c36
+direct link http://deadlock.netbeans.org/job/nbms-and-javadoc/lastSuccessfulBuild/artifact/nbbuild/nbms/extra/org-netbeans-modules-nbignore.nbm
+
+
 # migration from multi-module pom (separate -api, -web)
 1. open "-web" module pom.xml, remove <parent></parent>, add <groupId></groupId>
 2. merge parent's and "-api" module pom.xml into "-web" pom.xml
@@ -27,7 +33,36 @@
                 </executions>
             </plugin>            
 
-# cxf-wadl2java-plugin
+
+#JAXB binding
+
+##make implementation class
+jaxb:baseType required for List<> properties
+<jaxb:bindings node="//xsd:complexType[@name='DocumentType']">
+    <jaxb:class  implClass="package.Document"/>
+</jaxb:bindings>
+<jaxb:bindings multiple="true" node="//xsd:element[@ref='document']">
+    <jaxb:property>
+        <jaxb:baseType name="Document"/>
+    </jaxb:property>
+</jaxb:bindings>
+
+#JPA
+    <basic name="direction">
+        <column column-definition="int(1)"/>
+        <convert>DirectionTypeConverter</convert>
+    </basic>
+
+    <object-type-converter name="DirectionTypeConverter"
+                           object-type="ru.ilb.jparestresource.model.DirectionType" data-type="java.lang.Integer">
+        <conversion-value object-value="IN" data-value="0" />
+        <conversion-value object-value="OUT" data-value="1" />
+    </object-type-converter>
+
+#maven
+
+## cxf-wadl2java-plugin
+
 <plugin>
     <groupId>org.apache.cxf</groupId>
     <artifactId>cxf-wadl2java-plugin</artifactId>
@@ -52,8 +87,6 @@
                             <extraarg>-xjc-Xjavadoc</extraarg>
                             <extraarg>-tMap</extraarg>
                             <extraarg>{urn:ru:ilb:jparesresource:core}uuid=java.util.UUID</extraarg>
-<!--                                        <extraarg>-catalog</extraarg>
-                            <extraarg>${basedir}/src/main/resources/schemas/jparesresource/catalog.xml</extraarg>-->
                             <extraarg>-beanValidation</extraarg>
                             <extraarg>-xjc-Xannotate</extraarg>
                             <extraarg>-xjc-Xinheritance</extraarg>
@@ -100,8 +133,11 @@
     </dependencies>
 </plugin>
 
+### catalog.xml
+<extraarg>-catalog</extraarg>
+<extraarg>${basedir}/src/main/resources/schemas/jparesresource/catalog.xml</extraarg>
 
-## jaxb-xew-plugin
+### jaxb-xew-plugin
 
 <extraarg>-xjc-Xxew</extraarg>
 <extraarg>-xjc-Xxew:instantiate lazy</extraarg>
@@ -112,37 +148,11 @@
     <version>1.4</version>
 </dependency>
 
-##episode file
+### episode file
 
 <extraarg>-xjc-episode</extraarg>
 <extraArg>-xjc${project.build.directory}/classes/schemas/jparestresource/jparestresource.episode</extraArg>
 
-#JAXB
-
-##make implementation class
-jaxb:baseType required for List<> properties
-<jaxb:bindings node="//xsd:complexType[@name='DocumentType']">
-    <jaxb:class  implClass="package.Document"/>
-</jaxb:bindings>
-<jaxb:bindings multiple="true" node="//xsd:element[@ref='document']">
-    <jaxb:property>
-        <jaxb:baseType name="Document"/>
-    </jaxb:property>
-</jaxb:bindings>
-
-#JPA
-    <basic name="direction">
-        <column column-definition="int(1)"/>
-        <convert>DirectionTypeConverter</convert>
-    </basic>
-
-    <object-type-converter name="DirectionTypeConverter"
-                           object-type="ru.ilb.jparestresource.model.DirectionType" data-type="java.lang.Integer">
-        <conversion-value object-value="IN" data-value="0" />
-        <conversion-value object-value="OUT" data-value="1" />
-    </object-type-converter>
-
-#maven
 ## file tasks (delete, create, copy...)
 <plugin>
     <groupId>org.apache.maven.plugins</groupId>
@@ -319,8 +329,6 @@ jaxb:baseType required for List<> properties
         </execution>
     </executions>
 </plugin>
-
-##wadl2java
 
 ##java2wadl
 <plugin>
