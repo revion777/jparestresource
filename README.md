@@ -12,27 +12,28 @@ direct link http://deadlock.netbeans.org/job/nbms-and-javadoc/lastSuccessfulBuil
 5. delete parent pom.xml and "-api" module
 6. optionally: rename project, remove "-web" suffix, move sources to parent
 7. separate client jar generation
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <version>3.0.2</version>
-                <executions>
-                    <execution>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>jar</goal>
-                        </goals>
-                        <configuration>
-                            <classifier>client</classifier>
-                            <includes>
-                                <include>**/api/*</include>
-                                <include>**/model/*</include>
-                            </includes>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>            
-
+```xml
+<plugin>
+    <groupId>org.apache.maven.plugins</groupId>
+    <artifactId>maven-jar-plugin</artifactId>
+    <version>3.0.2</version>
+    <executions>
+        <execution>
+            <phase>package</phase>
+            <goals>
+                <goal>jar</goal>
+            </goals>
+            <configuration>
+                <classifier>client</classifier>
+                <includes>
+                    <include>**/api/*</include>
+                    <include>**/model/*</include>
+                </includes>
+            </configuration>
+        </execution>
+    </executions>
+</plugin>            
+```
 
 #JAXB binding
 
