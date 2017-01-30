@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
-import { Checkbox, Form, Table, Message } from 'semantic-ui-react'
-//import Link from 'react-router';
+import { Checkbox, Form, Table, Message, Button } from 'semantic-ui-react';
+import { Link } from 'react-router';
 //import './css/Documents.css';
 
 class FiltrableDocumentsTable extends Component {
-
   componentDidMount() {
-    this.loadDocuments();
+    const { documents, error, loading } = this.state;
+    const { client } = this.props;
+    if (!documents && !error && !loading && client) {
+      this.loadDocuments();
+    }
   }
 
   constructor(props) {
@@ -14,61 +17,45 @@ class FiltrableDocumentsTable extends Component {
     let query = this.props.location.query;
     this.state = {
       documents: null,
-      errText: null,
+      loading: null,
+      error: null,
       filter: {
         displayName: query.displayName ? query.displayName : '',
         showDeleted: query.showDeleted === 'on',
+        limit: 100,
       }
     };
-  }
-  checkStatus(response) {
-    if (response.status >= 200 && response.status < 300) {
-      return response;
-    } else {
-      var error = new Error(response.statusText);
-      error.response = response;
-      throw error;
-    }
   }
   /**
    *  Загрузка данных о документах
    */
   loadDocuments() {
-    var url = "/jparestresource/web/documents";
-    if (this.state.filter.displayName) {
-      url += "?filter=displayName==" + this.state.filter.displayName;
-    }
-    console.log("fetch url:" + url);
-
-    fetch(url, {
-      method: "GET",
-      credentials: 'same-origin',
-      headers: {
-        "Accept": "application/json"
+    const { client } = this.props;
+    const { filter } = this.state;
+    this.setState({ documents: null, loading: true, error: null });
+    client.documents.list({ ...filter },
+      success => {
+        this.setState({ documents: success.obj, loading: false });
+      },
+      error => {
+        this.setState({ error, loading: false });
       }
-    })
-      .then(this.checkStatus)
-      .then((response) => {
-        return response.json();
-      })
-      .then((response) => {
-        if (response !== undefined ) {
-          this.setState({documents: response, errText: null});
-        }
+    );
+  };
 
-        return;
-      })
-      .catch((ex) => {
-
-        if (ex.response !== undefined) {
-          ex.response.text().then((errorMsg) => {
-            this.setState({errText: errorMsg});
-          });
-        } else {
-          this.setState({errText: ex.message});
+  removeDocument = (documentId) => {
+    const { client } = this.props;
+    if (documentId && confirm('Are you sure you want to remove this document?')) {
+      client.documents.remove({ documentId },
+        success => {
+          this.loadDocuments();
+        },
+        error => {
+          alert(`${error.status}: ${error.statusText}`);
         }
-      });
-  }
+      );
+    }
+  };
 
   filterOnChangeHandler = (name, value) => {
     const filter = Object.assign(this.state.filter, { [name]: value } );
@@ -76,7 +63,6 @@ class FiltrableDocumentsTable extends Component {
   };
 
   render() {
-    //console.log(this.state.documents);
     return (
       <div>
         <SearchBar
@@ -86,10 +72,12 @@ class FiltrableDocumentsTable extends Component {
         {(this.state.documents) &&
           <DocumentsTable
             documents={this.state.documents}
+            removeDocument={this.removeDocument}
+            openDocument={this.openDocument}
           />
         }
-        {this.state.errText &&
-          <Message error>Ошибка запроса списка документов: {this.state.errText}</Message>
+        {this.state.error &&
+          <Message error>Ошибка запроса списка документов: {this.state.error}</Message>
         }
 
       </div>
@@ -125,22 +113,32 @@ function DocumentsTable (props) {
     return (<Message warning>Документы не найдены</Message>);
   }
   return (
-    <Table striped celled>
+    <Table striped celled selectable compact size="small">
       <caption>List of Documents</caption>
       <Table.Header>
         <Table.Row>
-          <Table.HeaderCell>Date</Table.HeaderCell>
+          <Table.HeaderCell collapsing>Id</Table.HeaderCell>
+          <Table.HeaderCell collapsing>Date</Table.HeaderCell>
           <Table.HeaderCell>Name</Table.HeaderCell>
+          <Table.HeaderCell collapsing/>
         </Table.Row>
       </Table.Header>
       <Table.Body>
         {props.documents.map((document, index) => (
           <Table.Row key={index}>
             <Table.Cell>
+              {document.id}
+            </Table.Cell>
+            <Table.Cell>
               {document.docDate.split('-').reverse().join('.')}
             </Table.Cell>
             <Table.Cell>
-              {document.displayName}
+              <Link to={`/documents/${document.id}`} activeStyle={{ color: 'red' }}>{document.displayName || '-'}</Link>
+            </Table.Cell>
+            <Table.Cell>
+              <Button icon="remove" color="red" size="mini" fluid
+                onClick={props.removeDocument.bind(null, document.id)}
+              />
             </Table.Cell>
           </Table.Row>
         ))}
