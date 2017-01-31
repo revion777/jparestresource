@@ -27,8 +27,6 @@ import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.transform.Source;
 import javax.xml.transform.stream.StreamSource;
-import org.eclipse.persistence.jaxb.MarshallerProperties;
-import org.eclipse.persistence.jaxb.UnmarshallerProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -47,7 +45,7 @@ public class JaxbHelper {
         try {
             JAXBElement<T> result;
             Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
-            unmarshaller.setProperty(UnmarshallerProperties.MEDIA_TYPE, mediaType);
+            unmarshaller.setProperty("eclipselink.media-type", mediaType);
             Source source = new StreamSource(new java.io.StringReader(data));
             result = (JAXBElement<T>) unmarshaller.unmarshal(source, type);
 
@@ -63,7 +61,7 @@ public class JaxbHelper {
         try {
             T result;
             Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
-            unmarshaller.setProperty(UnmarshallerProperties.MEDIA_TYPE, mediaType);
+            unmarshaller.setProperty("eclipselink.media-type", mediaType);
             result = (T) unmarshaller.unmarshal(data);
 
             return result;
@@ -83,9 +81,9 @@ public class JaxbHelper {
             JAXBContext jaxbContext = jaxbContextResolver.getContext(obj.getClass());
             Marshaller marshaller = jaxbContext.createMarshaller();
             marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-            marshaller.setProperty(MarshallerProperties.MEDIA_TYPE, mediaType);
+            marshaller.setProperty("eclipselink.media-type", mediaType);
             if (MediaType.APPLICATION_JSON.equals(mediaType)) {
-                marshaller.setProperty(MarshallerProperties.JSON_INCLUDE_ROOT, false);
+                marshaller.setProperty("eclipselink.json.include-root", false);
             }
             marshaller.marshal(obj, sw);
         } catch (JAXBException ex) {
