@@ -10,7 +10,7 @@ mvn -DarchetypeGroupId=ru.ilb.jparestresource -DarchetypeArtifactId=jparestresou
 
 1. File -> New Project, choose Maven -> Project from archetype, click Next
 2. Start typing jparesresource in Search field and choose jparestresource-archetype, click Next
-3. Enter Project name (sampleapplication), Group Id and Package must *equals*, enter in both fields ru.ilb.sampleapplication. You may also configure object_urn and object_class properties. Click Next.
+3. Enter Project name (sampleapplication), Group Id and Package must *equals*, enter in both fields ru.ilb.sampleapplication. Click Next.
 
 Project will be created. Before first run database should be created and access to web application granted (see schema.sql);
 
@@ -506,6 +506,7 @@ jaxb:baseType required for List<> properties
 </plugin>
 ```
 ## common dependencies
+```xml
 <!-- jettison JSON provider -->
 <dependency>
     <groupId>org.codehaus.jettison</groupId>
@@ -530,10 +531,11 @@ jaxb:baseType required for List<> properties
     <artifactId>spring-data-jpa-entity-graph</artifactId>
     <version>1.10.13</version>
 </dependency>
+```
 
 # Migration from multi-module pom (separate -api, -web)
 
-1. open "-web" module pom.xml, remove parent link, add groupId
+1. open "-web" module pom.xml, remove parent tag, add groupId tag
 2. merge parent's and "-api" module pom.xml into "-web" pom.xml
 3. copy schemas from "-api" module
 4. remove "-api" module dependency from "-web" module
