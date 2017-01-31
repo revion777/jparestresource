@@ -3,13 +3,13 @@ JAX-RS + JPA application
 
 ##Example project creation based on this archetype in command line
 
-mvn -DarchetypeGroupId=ru.ilb.bankaccounting -DarchetypeArtifactId=bankaccounting-archetype -DarchetypeVersion=1.0-SNAPSHOT -DgroupId=ru.ilb.sampleapplication -DartifactId=sampleapplication -Dversion=1.0-SNAPSHOT -Dpackage=ru.ilb.sampleapplication -Ddomain_packageName=accounting -Ddomain_objectName=Document -Darchetype.interactive=false --batch-mode --update-snapshots archetype:generate
+mvn -DarchetypeGroupId=ru.ilb.jparestresource -DarchetypeArtifactId=jparestresource-archetype -DarchetypeVersion=1.0-SNAPSHOT -DgroupId=ru.ilb.sampleapplication -DartifactId=sampleapplication -Dversion=1.0-SNAPSHOT -Dpackage=ru.ilb.sampleapplication -Darchetype.interactive=false --batch-mode --update-snapshots archetype:generate
 
 
 ##Example project creation based on this archetype in Netbeans
 
 1. File -> New Project, choose Maven -> Project from archetype, click Next
-2. Start typing jparesresource in Search field and choose bankaccounting-archetype, click Next
+2. Start typing jparesresource in Search field and choose jparestresource-archetype, click Next
 3. Enter Project name (sampleapplication), Group Id and Package must *equals*, enter in both fields ru.ilb.sampleapplication. You may also configure object_urn and object_class properties. Click Next.
 
 Project will be created. Before first run database should be created and access to web application granted (see schema.sql);
@@ -28,48 +28,19 @@ uncomment this line with org.springframework.instrument.classloading.tomcat.Tomc
 and place spring-instrument-tomcat-4.3.2.RELEASE.jar in ${catalina.base}/lib
 
 
-#React frontend
-Install netbeans support for .nbigonre plugin, or node_modules background scanning will never end
+##React frontend
+Install netbeans support for .nbigonre plugin, or node_modules background scanning will never end:
 https://netbeans.org/bugzilla/show_bug.cgi?id=238709#c36
-direct link http://deadlock.netbeans.org/job/nbms-and-javadoc/lastSuccessfulBuild/artifact/nbbuild/nbms/extra/org-netbeans-modules-nbignore.nbm
 
+Direct link: http://deadlock.netbeans.org/job/nbms-and-javadoc/lastSuccessfulBuild/artifact/nbbuild/nbms/extra/org-netbeans-modules-nbignore.nbm
 
-# Migration from multi-module pom (separate -api, -web)
+## JPA modeler plugin for Netbeans
+Download and install JPA modeler
+http://jpamodeler.github.io/
 
-1. open "-web" module pom.xml, remove <parent></parent>, add <groupId></groupId>
-2. merge parent's and "-api" module pom.xml into "-web" pom.xml
-3. copy schemas from "-api" module
-4. remove "-api" module dependency from "-web" module
-5. delete parent pom.xml and "-api" module
-6. optionally: rename project, remove "-web" suffix, move sources to parent
-7. separate client jar generation
+#Code snippets
 
-```xml
-<plugin>
-    <groupId>org.apache.maven.plugins</groupId>
-    <artifactId>maven-jar-plugin</artifactId>
-    <version>3.0.2</version>
-    <executions>
-        <execution>
-            <phase>package</phase>
-            <goals>
-                <goal>jar</goal>
-            </goals>
-            <configuration>
-                <classifier>client</classifier>
-                <includes>
-                    <include>**/api/*</include>
-                    <include>**/model/*</include>
-                </includes>
-            </configuration>
-        </execution>
-    </executions>
-</plugin>            
-```
-
-#JAXB binding
-
-##make implementation class
+##make implementation class in JAXB binding
 jaxb:baseType required for List<> properties
 ```xml
 <jaxb:bindings node="//xsd:complexType[@name='DocumentType']">
@@ -82,8 +53,7 @@ jaxb:baseType required for List<> properties
 </jaxb:bindings>
 ```
 
-#JPA
-## Attribute converter
+## JPA Attribute converter
 ```xml
     <basic name="direction">
         <column column-definition="int(1)"/>
@@ -96,9 +66,8 @@ jaxb:baseType required for List<> properties
         <conversion-value object-value="OUT" data-value="1" />
     </object-type-converter>
 ```
-#maven
 
-## cxf-wadl2java-plugin
+## Generate interfaces from java using cxf-wadl2java-plugin
 ```xml
 <plugin>
     <groupId>org.apache.cxf</groupId>
@@ -170,13 +139,13 @@ jaxb:baseType required for List<> properties
     </dependencies>
 </plugin>
 ```
-### catalog.xml
+### use catalog.xml
 ```xml
 <extraarg>-catalog</extraarg>
 <extraarg>${basedir}/src/main/resources/schemas/jparesresource/catalog.xml</extraarg>
 ```
 
-### jaxb-xew-plugin
+### use jaxb-xew-plugin
 ```xml
 <extraarg>-xjc-Xxew</extraarg>
 <extraarg>-xjc-Xxew:instantiate lazy</extraarg>
@@ -188,7 +157,7 @@ jaxb:baseType required for List<> properties
 </dependency>
 ```
 
-### episode file
+### use episode file
 ```xml
 <extraarg>-xjc-episode</extraarg>
 <extraArg>-xjc${project.build.directory}/classes/schemas/jparestresource/jparestresource.episode</extraArg>
@@ -377,7 +346,7 @@ jaxb:baseType required for List<> properties
     </executions>
 </plugin>
 ```
-##java2wadl
+##generate wadl
 ```xml
 <plugin>
     <groupId>org.apache.cxf</groupId>
@@ -536,7 +505,7 @@ jaxb:baseType required for List<> properties
     </executions>
 </plugin>
 ```
-## other dependencies
+## common dependencies
 <!-- jettison JSON provider -->
 <dependency>
     <groupId>org.codehaus.jettison</groupId>
@@ -561,3 +530,36 @@ jaxb:baseType required for List<> properties
     <artifactId>spring-data-jpa-entity-graph</artifactId>
     <version>1.10.13</version>
 </dependency>
+
+# Migration from multi-module pom (separate -api, -web)
+
+1. open "-web" module pom.xml, remove parent link, add groupId
+2. merge parent's and "-api" module pom.xml into "-web" pom.xml
+3. copy schemas from "-api" module
+4. remove "-api" module dependency from "-web" module
+5. delete parent pom.xml and "-api" module
+6. optionally: rename project, remove "-web" suffix, move sources to parent
+7. separate client jar generation
+
+```xml
+<plugin>
+    <groupId>org.apache.maven.plugins</groupId>
+    <artifactId>maven-jar-plugin</artifactId>
+    <version>3.0.2</version>
+    <executions>
+        <execution>
+            <phase>package</phase>
+            <goals>
+                <goal>jar</goal>
+            </goals>
+            <configuration>
+                <classifier>client</classifier>
+                <includes>
+                    <include>**/api/*</include>
+                    <include>**/model/*</include>
+                </includes>
+            </configuration>
+        </execution>
+    </executions>
+</plugin>            
+```
