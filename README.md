@@ -283,7 +283,38 @@ jaxb:baseType required for List<> properties
     </executions>
 </plugin>
 ```
+## package org.eclipse.persistence.jaxb.rs.MOXyJsonProvider
+required becouse of javax.ws.rs-api conflicts
+```xml
+<plugin>
+    <groupId>org.apache.maven.plugins</groupId>
+    <artifactId>maven-dependency-plugin</artifactId>
+    <version>2.1</version>
+    <executions>
+        <execution>
+            <id>unpack</id>
+            <phase>validate</phase>
+            <goals>
+                <goal>unpack</goal>
+            </goals>
+            <configuration>
+                <artifactItems>
+                    <artifactItem>
+                        <groupId>org.eclipse.persistence</groupId>
+                        <artifactId>eclipselink</artifactId>
+                        <version>${eclipselink.version}</version>
+                        <type>jar</type>
+                        <overWrite>false</overWrite>
+                        <outputDirectory>${project.build.directory}/classes</outputDirectory>
+                        <includes>org/eclipse/persistence/jaxb/rs/*.class</includes>
+                    </artifactItem>
+                </artifactItems>
+            </configuration>
+        </execution>                    
+    </executions>            
+</plugin>
 
+```
 ## schemagen
 ```xml
 <plugin>
