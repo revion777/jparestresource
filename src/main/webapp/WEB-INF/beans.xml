@@ -217,7 +217,7 @@
         </jaxrs:outInterceptors>        
         <jaxrs:extensionMappings>
             <entry key="xml" value="application/xml;charset=UTF-8"/>
-            <entry key="json_" value="application/json;charset=UTF-8"/>
+            <entry key="json" value="application/json;charset=UTF-8"/>
         </jaxrs:extensionMappings>
     </jaxrs:server>
     
