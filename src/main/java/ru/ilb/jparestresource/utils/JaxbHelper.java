@@ -17,6 +17,7 @@ package ru.ilb.jparestresource.utils;
 
 import java.io.InputStream;
 import java.io.StringWriter;
+import java.util.List;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.ext.ContextResolver;
 import javax.xml.bind.JAXBContext;
@@ -27,6 +28,7 @@ import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.transform.Source;
 import javax.xml.transform.stream.StreamSource;
+import org.eclipse.persistence.jaxb.UnmarshallerProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -39,30 +41,45 @@ public class JaxbHelper {
 
     @Autowired ContextResolver<JAXBContext> jaxbContextResolver;
 
-    public <T> T unmarshal(String data, Class<T> type, String mediaType) {
-
-        JAXBContext jaxbContext = jaxbContextResolver.getContext(type);
-        try {
-            JAXBElement<T> result;
-            Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
-            unmarshaller.setProperty("eclipselink.media-type", mediaType);
-            Source source = new StreamSource(new java.io.StringReader(data));
-            result = (JAXBElement<T>) unmarshaller.unmarshal(source, type);
-
-            return result.getValue();
-
-        } catch (JAXBException ex) {
-            throw new RuntimeException(ex);
-        }
-    }
-    public <T> T unmarshal(InputStream data, Class<T> type, String mediaType) {
+    /**
+     * unmarshalls object instance
+     * @param <T>
+     * @param source example from String: new StreamSource(new java.io.StringReader(string)), from InputStream: new StreamSource(is)
+     * @param type
+     * @param mediaType
+     * @return 
+     */
+    public <T> T unmarshal(Source source, Class<T> type, String mediaType) {
 
         JAXBContext jaxbContext = jaxbContextResolver.getContext(type);
         try {
             T result;
             Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
-            unmarshaller.setProperty("eclipselink.media-type", mediaType);
-            result = (T) unmarshaller.unmarshal(data);
+            unmarshaller.setProperty(UnmarshallerProperties.MEDIA_TYPE, mediaType);
+            result = (T) unmarshaller.unmarshal(source, type);
+
+            return result;
+
+        } catch (JAXBException ex) {
+            throw new RuntimeException(ex);
+        }
+    }
+    /**
+     * unmarshalls list of object instances
+     * @param <T>
+     * @param source example from String: new StreamSource(new java.io.StringReader(string)), from InputStream: new StreamSource(is)
+     * @param type
+     * @param mediaType
+     * @return 
+     */
+    public <T> List<T> unmarshalList(Source source, Class<T> type, String mediaType) {
+
+        JAXBContext jaxbContext = jaxbContextResolver.getContext(type);
+        try {
+            List<T> result;
+            Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
+            unmarshaller.setProperty(UnmarshallerProperties.MEDIA_TYPE, mediaType);
+            result=(List<T>) unmarshaller.unmarshal(source, type).getValue();
 
             return result;
 

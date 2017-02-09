@@ -11,6 +11,7 @@ import javax.annotation.PostConstruct;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
+import javax.xml.transform.stream.StreamSource;
 import org.apache.cxf.jaxrs.ext.search.SearchContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -74,13 +75,13 @@ public class DocumentsResourceImpl implements DocumentsResource {
     }
 
     /**
-     * Example data initialisation
+     * Example data initialization
      */
     @PostConstruct
     @Transactional
     public void init() {
-//        Documents documents = jaxbHelper.unmarshal(getClass().getResourceAsStream("/META-INF/xml/testdata.xml"), Documents.class,MediaType.APPLICATION_XML);
-//        documentRepository.save(documents.getDocuments());
+//        List<Document> documents = jaxbHelper.unmarshalList(new StreamSource(getClass().getResourceAsStream("/META-INF/data/testdata.json")), Document.class,"application/json");
+//        documentRepository.save(documents);
 
     }
 
