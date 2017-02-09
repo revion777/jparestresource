@@ -52,6 +52,10 @@
     </scm>
     -->
     <distributionManagement>
+        <site>
+            <id>docsserver</id>
+            <url>dav:https://docs.net.ilb.ru/apps/jparestresource/</url>
+        </site>
         <snapshotRepository>
             <id>ossrh</id>
             <name>Sonatype Nexus snapshot repository</name>
@@ -217,12 +221,115 @@
                 <executions>
                     <execution>
                         <id>attach-javadocs</id>
+                        <phase>prepare-package</phase>
                         <goals>
                             <goal>jar</goal>
                         </goals>
                     </execution>
                 </executions>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <version>1.7</version>
+                <executions>
+                    <execution>
+                        <id>copy-javadoc</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <target name="copy javadoc to web project">
+                                <copy file="${project.build.directory}/${project.artifactId}-javadoc.jar" tofile="${project.build.directory}/${project.artifactId}/WEB-INF/lib/${project.artifactId}-javadoc.jar" />
+                            </target>
+                        </configuration>                       
+                    </execution>
+                </executions>
+            </plugin>            
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>xml-maven-plugin</artifactId>
+                <version>1.0.1</version>
+                <executions>
+                    <execution>
+                        <phase>pre-site</phase>
+                        <goals>
+                            <goal>transform</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <transformationSets>
+                        <transformationSet>
+                            <dir>${basedir}/src/main/resources/META-INF</dir>
+                            <includes>
+                                <include>model.jpa</include>
+                            </includes>                            
+                            <stylesheet>${basedir}/src/site/jpa_stylesheets/jpa_documentation.xsl</stylesheet>
+                            <parameters>
+                                <parameter>
+                                    <name>model_image</name>
+                                    <value>model.jpa.png</value>
+                                </parameter>
+                            </parameters>                            
+                            <outputDir>${basedir}/src/site/xhtml</outputDir>
+                            <fileMappers>
+                                <fileMapper implementation="org.codehaus.plexus.components.io.filemappers.FileExtensionMapper">
+                                    <targetExtension>.xhtml</targetExtension>
+                                </fileMapper>
+                            </fileMappers>                            
+                        </transformationSet>
+<!--                        <transformationSet>
+                            <dir>src/main/resources/schemas/jparestresource</dir>
+                            <includes>
+                                <include>application.wadl</include>
+                            </includes>                            
+                            <stylesheet>${basedir}/src/site/wadl_stylesheets/wadl_documentation-2009-02.xsl</stylesheet>
+                            <outputDir>${basedir}/src/site/xhtml</outputDir>
+                            <fileMappers>
+                                <fileMapper implementation="org.codehaus.plexus.components.io.filemappers.FileExtensionMapper">
+                                    <targetExtension>.xhtml</targetExtension>
+                                </fileMapper>
+                            </fileMappers>                            
+                        </transformationSet>-->
+                        
+                    </transformationSets>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>net.sf.saxon</groupId>
+                        <artifactId>saxon</artifactId>
+                        <version>8.7</version>
+                    </dependency>
+                </dependencies>                
+            </plugin>            
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>2.6</version>
+                <executions>
+                    <execution>
+                        <id>copy-resources</id>
+                        <phase>site</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${basedir}/target/site</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>${basedir}/src/main/resources/META-INF</directory>
+                                    <includes>
+                                        <include>*png</include>
+                                    </includes>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>            
+            
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
@@ -278,7 +385,7 @@
                             <artifactItems>
                                 <artifactItem>
                                     <groupId>org.eclipse.persistence</groupId>
-                                    <artifactId>eclipselink</artifactId>
+                                    <artifactId>org.eclipse.persistence.moxy</artifactId>
                                     <version>${eclipselink.version}</version>
                                     <type>jar</type>
                                     <overWrite>false</overWrite>
@@ -317,8 +424,74 @@
                     </execution>
                 </executions>
             </plugin>            
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>properties-maven-plugin</artifactId>
+                <version>1.0-alpha-2</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>set-system-properties</goal>
+                        </goals>
+                        <configuration>
+                            <properties>
+                                <javax.net.ssl.trustStore>${javax.net.ssl.trustStore}</javax.net.ssl.trustStore>
+                                <javax.net.ssl.keyStore>${javax.net.ssl.keyStore}</javax.net.ssl.keyStore>
+                                <javax.net.ssl.keyStorePassword>${javax.net.ssl.keyStorePassword}</javax.net.ssl.keyStorePassword>
+                                <!-- FIX I/O exception (javax.net.ssl.SSLProtocolException) caught when processing request: handshake alert:  unrecognized_name on site-deploy -->
+                                <jsse.enableSNIExtension>false</jsse.enableSNIExtension>
+                            </properties>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>            
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-site-plugin</artifactId>
+                <version>3.6</version>
+                <configuration>
+                    <inputEncoding>UTF-8</inputEncoding>
+                    <outputEncoding>UTF-8</outputEncoding>
+                    <locales>ru</locales>
+                </configuration>
+            </plugin>            
+            
         </plugins>
     </build>
+    <reporting>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-project-info-reports-plugin</artifactId>
+                <version>2.9</version>
+                <reportSets>
+                    <reportSet>
+                        <reports>
+                            <report>index</report>
+                            <report>project-team</report>
+                            <report>scm</report>
+                            <report>summary</report>
+                        </reports>
+                    </reportSet>
+                </reportSets>
+            </plugin>            
+            
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>${maven-javadoc-plugin.version}</version>
+            </plugin>
+<!--            <plugin>
+                <artifactId>maven-changelog-plugin</artifactId>
+                <version>2.3</version>
+                <configuration>
+                    <type>range</type>
+                    <range>15</range>
+                </configuration>                
+            </plugin>            -->
+        </plugins>
+    </reporting>
+    
     <profiles>
         <profile>
             <id>release</id>

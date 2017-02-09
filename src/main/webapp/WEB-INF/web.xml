@@ -26,6 +26,14 @@
         <res-auth>Container</res-auth>
         <res-sharing-scope>Shareable</res-sharing-scope>
     </resource-ref>
+    <env-entry>
+        <description>Server admin email for critical errors</description>
+        <env-entry-name>SERVER_ADMIN</env-entry-name>
+        <env-entry-type>java.lang.String</env-entry-type>
+        <env-entry-value>root</env-entry-value>
+    </env-entry>
+    
+    
     <!-- uncomment for xslt support, see also beans.xml for uriResolver and xsltProvider
     To make xslt templates refresh on the fly, you need yo override variable refreshTemplates
     in local ${catalina.base}/conf/context.xml with value "true", example:

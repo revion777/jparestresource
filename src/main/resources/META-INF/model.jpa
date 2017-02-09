@@ -1,20 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <jpa:entity-mappings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:java="http://jcp.org/en/jsr/detail?id=270" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:jpa="http://java.sun.com/xml/ns/persistence/orm" pkg="ru.ilb.jparestresource.model" v="3.1" persistenceUnitName="jparestresource" sm="false" xs="true" id="_14855761330684" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm orm_2_1.xsd">
+    <jpa:description>jparestresource model</jpa:description>
     <jpa:entity xre="true" compositePrimaryKeyClass="DocfilePK" abs="false" class="Docfile" v="true" m="false" rootElement="_14855761330684" id="_14855761330685">
         <jpa:ts e="true"/>
         <jpa:hc e="true"/>
         <jpa:eq e="true"/>
         <jpa:attributes>
             <jpa:basic optional="true" attribute-type="String" v="true" name="comment" id="_14855761330778">
+                <jpa:des>File comment</jpa:des>
                 <jpa:bv/>
             </jpa:basic>
             <jpa:basic optional="true" attribute-type="Boolean" v="true" name="confirm" id="_14855761330779">
+                <jpa:des>Confirmation status</jpa:des>
                 <jpa:bv/>
             </jpa:basic>
             <jpa:basic optional="true" attribute-type="String" v="true" name="userName" id="_148557613307711">
-                <jpa:bv/>
-            </jpa:basic>
-            <jpa:basic optional="true" attribute-type="String" v="true" name="userRole" id="_148557613307712">
+                <jpa:des>User created</jpa:des>
                 <jpa:bv/>
             </jpa:basic>
             <jpa:many-to-one optional="true" primaryKey="false" connected-entity-id="_14855761330696" connected-attribute-id="_148557613307823" v="true" name="document" id="_148557613307714">
@@ -23,7 +24,7 @@
             </jpa:many-to-one>
             <jpa:id attribute-type="Long" v="true" name="id" id="_14855761330767">
                 <jpa:bv/>
-                <jpa:column unique="false" nullable="false" insertable="true" updatable="true"/>
+                <jpa:column unique="false" nullable="false" insertable="true" updatable="true" length="255" precision="0" scale="0"/>
                 <jpa:generated-value strategy="AUTO"/>
             </jpa:id>
         </jpa:attributes>
@@ -39,19 +40,16 @@
         <jpa:hc e="true"/>
         <jpa:eq e="true"/>
         <jpa:attributes>
-            <jpa:basic optional="true" attribute-type="String" v="true" name="description" id="_148557613307716">
-                <jpa:bv/>
-            </jpa:basic>
-            <jpa:basic optional="true" attribute-type="Integer" v="true" name="direction" id="_148557613307717">
-                <jpa:bv/>
-            </jpa:basic>
             <jpa:basic optional="true" attribute-type="String" v="true" name="displayName" id="_148557613307718">
+                <jpa:des>Document name</jpa:des>
+                <jpa:bv/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="String" v="true" name="description" id="_148557613307716">
+                <jpa:des>Document description</jpa:des>
                 <jpa:bv/>
             </jpa:basic>
             <jpa:basic optional="true" attribute-type="java.time.LocalDate" v="true" name="docDate" id="_148557613307719">
-                <jpa:bv/>
-            </jpa:basic>
-            <jpa:basic optional="true" attribute-type="String" v="true" name="keywords" id="_148557613307820">
+                <jpa:des>Document date</jpa:des>
                 <jpa:bv/>
             </jpa:basic>
             <jpa:one-to-many orp="false" own="false" collection-type="java.util.List" connected-entity-id="_14855761330685" connected-attribute-id="_148557613307714" v="true" name="docfiles" id="_148557613307823">
@@ -59,7 +57,7 @@
             </jpa:one-to-many>
             <jpa:id attribute-type="Long" v="true" name="id" id="_148557613307715">
                 <jpa:bv/>
-                <jpa:column unique="false" nullable="false" insertable="true" updatable="true" precision="0"/>
+                <jpa:column unique="false" nullable="false" insertable="true" updatable="true" length="255" precision="0" scale="0"/>
                 <jpa:generated-value strategy="AUTO"/>
             </jpa:id>
         </jpa:attributes>
@@ -83,10 +81,10 @@
     <jpa:diagram>
         <plane elementRef="_14855761330684">
             <shape elementRef="_14855761330685">
-                <Bounds x="419.0" y="190.0" width="133.0" height="192.0"/>
+                <Bounds x="419.0" y="190.0" width="133.0" height="171.0"/>
             </shape>
             <shape elementRef="_14855761330696">
-                <Bounds x="145.0" y="74.0" width="151.0" height="213.0"/>
+                <Bounds x="145.0" y="74.0" width="151.0" height="171.0"/>
             </shape>
         </plane>
     </jpa:diagram>

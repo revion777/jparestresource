@@ -78,7 +78,7 @@
 
     <!-- Configure swagger api support, see also jaxrs:features section in jaxrs:server and maven dependencies -->
     <bean id="swagger2Serializers" class="org.apache.cxf.jaxrs.swagger.DefaultSwagger2Serializers">
-        <property name="javaDocPath" value="WEB-INF/lib/jparestresource-api-1.0-SNAPSHOT-javadoc.jar"/>
+        <property name="javaDocPath" value="WEB-INF/lib/jparestresource-javadoc.jar"/>
     </bean>
     <bean id="swagger2Feature" class="org.apache.cxf.jaxrs.swagger.Swagger2Feature">
         <property name="swagger2Serializers" ref="swagger2Serializers"/>
@@ -165,8 +165,7 @@
     </bean>
     <!-- Provider to mail fatal errors to server admin -->
     <bean id="exceptionHandler" class="ru.ilb.common.jaxrs.exceptionhandler.SendMailExceptionHandler">
-        <!-- specify SERVER_ADMIN  using -DSERVER_ADMIN=user@host.domain -->
-        <!--<property name="mailTo" value="${SERVER_ADMIN}"/>-->
+        <property name="mailTo" value="${SERVER_ADMIN}"/>
     </bean>
     
     <!-- inbound request logging -->

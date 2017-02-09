@@ -29,17 +29,23 @@ public class Docfile implements Serializable {
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
 
+    /**
+ * File comment
+ */
     @Basic
     private String comment;
 
+    /**
+ * Confirmation status
+ */
     @Basic
     private Boolean confirm;
 
+    /**
+ * User created
+ */
     @Basic
     private String userName;
-
-    @Basic
-    private String userRole;
 
     @ManyToOne(targetEntity = Document.class)
     @JoinColumn(name="DOCUMENT_ID",referencedColumnName="ID",nullable=false)
@@ -75,14 +81,6 @@ public class Docfile implements Serializable {
 
     public void setUserName(String userName) {
         this.userName = userName;
-    }
-
-    public String getUserRole() {
-        return this.userRole;
-    }
-
-    public void setUserRole(String userRole) {
-        this.userRole = userRole;
     }
 
     public Document getDocument() {

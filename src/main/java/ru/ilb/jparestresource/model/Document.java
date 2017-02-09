@@ -30,20 +30,23 @@ public class Document implements Serializable {
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
 
-    @Basic
-    private String description;
-
-    @Basic
-    private Integer direction;
-
+    /**
+ * Document name
+ */
     @Basic
     private String displayName;
 
+    /**
+ * Document description
+ */
+    @Basic
+    private String description;
+
+    /**
+ * Document date
+ */
     @Basic
     private LocalDate docDate;
-
-    @Basic
-    private String keywords;
 
     @XmlTransient
     @OneToMany(targetEntity = Docfile.class,mappedBy = "document")
@@ -57,22 +60,6 @@ public class Document implements Serializable {
         this.id = id;
     }
 
-    public String getDescription() {
-        return this.description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public Integer getDirection() {
-        return this.direction;
-    }
-
-    public void setDirection(Integer direction) {
-        this.direction = direction;
-    }
-
     public String getDisplayName() {
         return this.displayName;
     }
@@ -81,20 +68,20 @@ public class Document implements Serializable {
         this.displayName = displayName;
     }
 
+    public String getDescription() {
+        return this.description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     public LocalDate getDocDate() {
         return this.docDate;
     }
 
     public void setDocDate(LocalDate docDate) {
         this.docDate = docDate;
-    }
-
-    public String getKeywords() {
-        return this.keywords;
-    }
-
-    public void setKeywords(String keywords) {
-        this.keywords = keywords;
     }
 
     public List<Docfile> getDocfiles() {
