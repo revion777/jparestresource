@@ -178,15 +178,9 @@
             <entry key="skip.default.json.provider.registration" value="true"/>
         </cxf:properties>
     </cxf:bus>
-    <!-- clean up xml -->
-    <!--    <bean id="replaceOutInterceptor" class="ru.ilb.common.jaxrs.interceptors.ReplaceOutInterceptor">
-        <property name="mediaType" value="application/xml"/>
-        <property name="replacements">
-            <util:map>
-                <entry key="\p{Cc}" value=""/>
-            </util:map>
-        </property>
-    </bean>-->
+    <bean id="authorizationHandler" class="ru.ilb.jparestresource.providers.AuthorizationHandler">
+        <!--<property name="xremoteUsersGroup" value="ru.bystrobank.apps.jparestresource.xremoteusers"/>-->
+    </bean>
 
     <!-- auto register @Component annotated classes -->
     <context:component-scan base-package="ru.ilb.jparestresource.web,ru.ilb.jparestresource.core,ru.ilb.jparestresource.utils"/>
@@ -199,7 +193,7 @@
             <ref bean="searchContextProvider"/>
             <ref bean="exceptionHandler"/>
             <ref bean="validationExceptionMapper"/>
-            <!--<ref bean="replaceOutInterceptor"/>-->
+            <ref bean="authorizationHandler"/>
             <!-- uncomment to enable CORS support -->
             <!--<ref bean="corsFilter" />-->
         </jaxrs:providers>

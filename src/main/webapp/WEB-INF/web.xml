@@ -19,6 +19,25 @@
         <servlet-name>CXFServlet</servlet-name>
         <url-pattern>/web/*</url-pattern>
     </servlet-mapping>
+    <security-constraint>
+        <display-name>Tomcat Server Configuration Security Constraint</display-name>
+        <web-resource-collection>
+            <web-resource-name>jparestresource</web-resource-name>
+            <url-pattern>/web/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>*</role-name>
+        </auth-constraint>
+    </security-constraint>
+    <login-config>
+        <auth-method>BASIC</auth-method>
+        <realm-name>jparestresource</realm-name>
+    </login-config>
+    <security-role>
+        <description>anyrole</description>
+        <role-name>*</role-name>
+    </security-role>
+    
     <resource-ref>
         <description>jparestresource</description>
         <res-ref-name>jdbc/jparestresource</res-ref-name>
