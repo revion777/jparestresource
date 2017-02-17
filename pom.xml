@@ -618,7 +618,7 @@
                                                 <extraarg>-beanValidation</extraarg>
                                                 <extraarg>-xjc-Xannotate</extraarg>
                                                 <extraarg>-xjc-Xinheritance</extraarg>
-                                                <extraarg>-xjc-XenumValue</extraarg>
+                                                <!--<extraarg>-xjc-XenumValue</extraarg>-->
                                                 <extraarg>-xjc-Xsetters</extraarg>
                                                 <extraarg>-xjc-Xsetters-mode=direct</extraarg>
                                                 <extraarg>-xjc-Xfluent-api</extraarg>
