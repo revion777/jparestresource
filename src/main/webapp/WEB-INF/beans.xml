@@ -222,7 +222,15 @@
             <entry key="json" value="application/json;charset=UTF-8"/>
         </jaxrs:extensionMappings>
     </jaxrs:server>
-    
+    <!-- playing with jpa-rs 
+    <jaxrs:server address="/persistance" basePackages="org.eclipse.persistence.jpa.rs.resources">
+        <jaxrs:providers>
+            <ref bean="jaxbContextResolver"/>
+            <ref bean="jaxbProvider"/>
+            <ref bean="jsonProvider"/>
+        </jaxrs:providers>
+    </jaxrs:server>    
+    -->
     <http-conf:conduit name="*.http-conduit">
 <!--        <http-conf:tlsClientParameters>
             <sec:keyManagers keyPassword="${javax.net.ssl.keyStorePassword}">

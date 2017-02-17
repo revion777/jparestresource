@@ -193,6 +193,13 @@
             <version>${eclipselink.version}</version>
             <scope>provided</scope>
         </dependency>
+        <!-- playing with jpa-rs
+        <dependency>
+            <groupId>org.eclipse.persistence</groupId>
+            <artifactId>org.eclipse.persistence.dbws</artifactId>
+            <version>${eclipselink.version}</version>
+            <type>jar</type>
+        </dependency>-->
         
         <!-- uncomment to enable @Cacheable support
         <dependency>
@@ -399,6 +406,14 @@
                                     <outputDirectory>${project.build.directory}/classes</outputDirectory>
                                     <includes>org/eclipse/persistence/jaxb/rs/*.class</includes>
                                 </artifactItem>
+<!--                                <artifactItem>
+                                    <groupId>org.eclipse.persistence</groupId>
+                                    <artifactId>org.eclipse.persistence.dbws</artifactId>
+                                    <version>${eclipselink.version}</version>
+                                    <type>jar</type>
+                                    <overWrite>false</overWrite>
+                                    <outputDirectory>${project.build.directory}/classes</outputDirectory>
+                                </artifactItem>-->
                             </artifactItems>
                         </configuration>
                     </execution>                    
