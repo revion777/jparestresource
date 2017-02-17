@@ -25,6 +25,9 @@ public interface DocumentsResource {
 
     /**
      * List of documents
+     * @param limit limit number of documents returned
+     * @param order order of documents
+     * @return list of documents
      */
     @GET
     @Produces({"application/xml", "application/json" })
@@ -33,6 +36,8 @@ public interface DocumentsResource {
 
     /**
      * create new document instance
+     * @param document document data
+     * @return id of crated document
      */
     @POST
     @Consumes({"application/xml", "application/json" })
@@ -40,8 +45,19 @@ public interface DocumentsResource {
     long create(@Valid Document document);
 
     /**
+     * create batch document instances
+     * @param documents documents data
+     */
+    @POST
+    @Consumes({"application/xml", "application/json" })
+    @Produces("text/plain")
+    @Path("batch")
+    void createBatch(@Valid List<Document> documents);
+    
+    /**
      * get document instance
      * @param documentId document id
+     * @return document data
      */
     @GET
     @Produces({"application/xml", "application/json" })
@@ -52,6 +68,7 @@ public interface DocumentsResource {
     /**
      * edit document instance
      * @param documentId document id
+     * @param document document data
      */
     @PUT
     @Consumes({"application/xml", "application/json" })

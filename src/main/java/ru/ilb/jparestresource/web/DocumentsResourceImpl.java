@@ -75,21 +75,15 @@ public class DocumentsResourceImpl implements DocumentsResource {
         documentRepository.delete(documentId);
     }
 
-    /**
-     * Example data initialization
-     */
-    @PostConstruct
-    @Transactional
-    public void init() {
-//        List<Document> documents = jaxbHelper.unmarshalList(new StreamSource(getClass().getResourceAsStream("/META-INF/data/testdata.json")), Document.class,"application/json");
-//        documentRepository.save(documents);
-
+    @Override
+    public List<Document> list(Integer limit, String order) {
+        return documentRepository.findAll();
     }
 
     @Override
-    @XMLName("{ru:ilb:jparestresource:model}documents") // representing explicit JAXB collections in generated wadl
-    public List<Document> list(Integer limit, String order) {
-        return documentRepository.findAll();
+    @Transactional
+    public void createBatch(List<Document> documents) {
+        documentRepository.save(documents);
     }
 
 }

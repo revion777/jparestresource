@@ -108,7 +108,7 @@
     <bean id="searchContextProvider" class="org.apache.cxf.jaxrs.ext.search.SearchContextProvider"/>
 
     <util:map id="namespaceMap" map-class="java.util.Hashtable">
-        <entry key="urn:ru:ilb:jparestresource:model" value="m"/>
+        <entry key="urn:ru:ilb:jparestresource:model" value="model"/>
     </util:map>
     <bean id="jaxbContextResolver" class="ru.ilb.common.jaxrs.jaxb.JaxbContextResolver" >
         <property name="contextProperties" ref="contextProperties"/>
