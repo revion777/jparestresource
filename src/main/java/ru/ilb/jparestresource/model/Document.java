@@ -52,6 +52,7 @@ public class Document implements Serializable {
     @OneToMany(targetEntity = Docfile.class,mappedBy = "document")
     private List<Docfile> docfiles;
 
+
     public Long getId() {
         return this.id;
     }
@@ -91,5 +92,6 @@ public class Document implements Serializable {
     public void setDocfiles(List<Docfile> docfiles) {
         this.docfiles = docfiles;
     }
+
 
 }

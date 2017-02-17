@@ -51,6 +51,7 @@ public class Docfile implements Serializable {
     @JoinColumn(name="DOCUMENT_ID",referencedColumnName="ID",nullable=false)
     private Document document;
 
+
     public Long getId() {
         return this.id;
     }
@@ -90,5 +91,6 @@ public class Docfile implements Serializable {
     public void setDocument(Document document) {
         this.document = document;
     }
+
 
 }
