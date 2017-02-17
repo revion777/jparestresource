@@ -583,6 +583,88 @@
             </build>
         </profile>
         <profile>
+            <id>wadl2java</id>
+            <activation>
+                <file>
+                    <exists>${basedir}/src/main/resources/schemas/jparesresource/application.wadl</exists>
+                </file>
+            </activation>            
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.cxf</groupId>
+                        <artifactId>cxf-wadl2java-plugin</artifactId>
+                        <version>${apache-cxf.version}</version>
+                        <executions>
+                            <execution>
+                                <id>generate-sources</id>
+                                <phase>generate-sources</phase>
+                                <configuration>
+                                    <sourceRoot>${project.build.directory}/generated-sources/xjc</sourceRoot>
+                                    <wadlOptions>
+                                        <wadlOption>
+                                            <wadl>${basedir}/src/main/resources/schemas/jparesresource/application.wadl</wadl>
+                                            <packagename>ru.ilb.jparesresource.api</packagename>
+                                            <bindingFiles>
+                                                <bindingFile>${basedir}/src/main/resources/schemas/jparesresource/core.xjb</bindingFile>
+                                            </bindingFiles>
+                                            <extraargs>
+                                                <extraarg>-verbose</extraarg>
+                                                <extraarg>-inheritResourceParams</extraarg>
+                                                <extraarg>-javaDocs</extraarg>
+                                                <extraarg>-xjc-Xjavadoc</extraarg>
+                                                <extraarg>-tMap</extraarg>
+                                                <extraarg>{urn:ru:ilb:jparesresource:core}uuid=java.util.UUID</extraarg>
+                                                <extraarg>-beanValidation</extraarg>
+                                                <extraarg>-xjc-Xannotate</extraarg>
+                                                <extraarg>-xjc-Xinheritance</extraarg>
+                                                <extraarg>-xjc-XenumValue</extraarg>
+                                                <extraarg>-xjc-Xsetters</extraarg>
+                                                <extraarg>-xjc-Xsetters-mode=direct</extraarg>
+                                                <extraarg>-xjc-Xfluent-api</extraarg>
+                                                <extraarg>-xjc-enableIntrospection</extraarg>
+                                                <extraarg>-xjc-XBeanVal</extraarg>
+                                            </extraargs>
+                                        </wadlOption>
+                                    </wadlOptions>
+                                </configuration>
+                                <goals>
+                                    <goal>wadl2java</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <dependencies>
+                            <dependency>
+                                <groupId>org.jvnet.jaxb2_commons</groupId>
+                                <artifactId>jaxb2-basics</artifactId>
+                                <version>0.9.4</version>
+                            </dependency>
+                            <dependency>
+                                <groupId>org.jvnet.jaxb2_commons</groupId>
+                                <artifactId>jaxb2-fluent-api</artifactId>
+                                <version>3.0</version>
+                            </dependency>
+                            <dependency>
+                                <groupId>org.jvnet.jaxb2_commons</groupId>
+                                <artifactId>jaxb2-basics-annotate</artifactId>
+                                <version>1.0.1</version>
+                            </dependency>
+                            <dependency>
+                                <groupId>org.apache.cxf.xjcplugins</groupId>
+                                <artifactId>cxf-xjc-javadoc</artifactId>
+                                <version>3.0.5</version>
+                            </dependency>                    
+                            <dependency>
+                                <groupId>org.eclipse.persistence</groupId>
+                                <artifactId>org.eclipse.persistence.moxy</artifactId>
+                                <version>${eclipselink.version}</version>
+                            </dependency>
+                        </dependencies>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
             <id>standalone</id>
             <dependencies>
                 <dependency>
@@ -603,5 +685,6 @@
             </dependencies>
         </profile>
     </profiles>
+    
     
 </project>
