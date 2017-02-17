@@ -42,7 +42,9 @@
         <jpa:attributes>
             <jpa:basic optional="true" attribute-type="String" v="true" name="displayName" id="_148557613307718">
                 <jpa:des>Document name</jpa:des>
-                <jpa:bv/>
+                <jpa:bv>
+                    <jpa:si mi="1" ma="255" m="must be beweeen 1 and 255 chars"/>
+                </jpa:bv>
             </jpa:basic>
             <jpa:basic optional="true" attribute-type="String" v="true" name="description" id="_148557613307716">
                 <jpa:des>Document description</jpa:des>

@@ -16,6 +16,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.*;
 
 
@@ -34,6 +35,7 @@ public class Document implements Serializable {
  * Document name
  */
     @Basic
+    @Size(min=1,max=255,message="must be beweeen 1 and 255 chars")
     private String displayName;
 
     /**

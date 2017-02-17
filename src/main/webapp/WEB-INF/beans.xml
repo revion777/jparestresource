@@ -93,6 +93,11 @@
     </bean>
     <bean id="wadlGenerator" class="org.apache.cxf.jaxrs.model.wadl.WadlGenerator">
         <property name="documentationProvider" ref="documentationProvider"/>
+        <property name="contextProperties">
+            <util:map>
+                <entry key="eclipselink.beanvalidation.facets" value="true" value-type="java.lang.Boolean"/>
+            </util:map>
+        </property>
     </bean>
 
     <!-- Configure xslt support, see also web.xml for refreshTemplates env-entry
@@ -146,6 +151,7 @@
     <util:map id="contextProperties">
         <!--<entry key="eclipselink-oxm-xml" value="schemas/jparestresource/model-oxm.xml"/>-->
         <entry key="com.sun.xml.bind.XmlAccessorFactory" value="true" value-type="java.lang.Boolean"/>
+        <entry key="eclipselink.beanvalidation.facets" value="true" value-type="java.lang.Boolean"/>
     </util:map>
     
     <!-- bean validation support, @Valid  annotations required, add -beanValidation flag to cxf-wadl2java-plugin 
@@ -232,7 +238,7 @@
     </jaxrs:server>    
     -->
     <http-conf:conduit name="*.http-conduit">
-<!--        <http-conf:tlsClientParameters>
+        <!--        <http-conf:tlsClientParameters>
             <sec:keyManagers keyPassword="${javax.net.ssl.keyStorePassword}">
                 <sec:keyStore type="${javax.net.ssl.keyStoreType:JKS}" password="${javax.net.ssl.keyStorePassword}" 
                               file="${javax.net.ssl.keyStore}"/>

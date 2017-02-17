@@ -14,6 +14,20 @@
             </properties>
         </action>
         <action>
+            <actionName>CUSTOM-SchemaGenerator</actionName>
+            <displayName>SchemaGenerator</displayName>
+            <goals>
+                <goal>exec:java</goal>
+            </goals>
+            <properties>
+                <jpda.listen>maven</jpda.listen>
+                <exec.mainClass>ru.ilb.jparestresource.runners.SchemaGenerator</exec.mainClass>
+            </properties>
+            <activatedProfiles>
+                <activatedProfile>standalone</activatedProfile>
+            </activatedProfiles>
+        </action>
+        <action>
             <actionName>CUSTOM-site</actionName>
             <displayName>site</displayName>
             <goals>
