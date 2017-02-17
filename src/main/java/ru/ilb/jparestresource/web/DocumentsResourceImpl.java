@@ -13,6 +13,7 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.xml.transform.stream.StreamSource;
 import org.apache.cxf.jaxrs.ext.search.SearchContext;
+import org.apache.cxf.jaxrs.ext.xml.XMLName;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
@@ -86,6 +87,7 @@ public class DocumentsResourceImpl implements DocumentsResource {
     }
 
     @Override
+    @XMLName("{ru:ilb:jparestresource:model}documents") // representing explicit JAXB collections in generated wadl
     public List<Document> list(Integer limit, String order) {
         return documentRepository.findAll();
     }
