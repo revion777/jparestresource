@@ -294,8 +294,8 @@
                                 </fileMapper>
                             </fileMappers>                            
                         </transformationSet>
-<!--                        <transformationSet>
-                            <dir>src/main/resources/schemas/jparestresource</dir>
+                        <transformationSet>
+                            <dir>${basedir}/target/generated/wadl</dir>
                             <includes>
                                 <include>application.wadl</include>
                             </includes>                            
@@ -306,7 +306,7 @@
                                     <targetExtension>.xhtml</targetExtension>
                                 </fileMapper>
                             </fileMappers>                            
-                        </transformationSet>-->
+                        </transformationSet>
                         
                     </transformationSets>
                 </configuration>
@@ -406,7 +406,7 @@
                                     <outputDirectory>${project.build.directory}/classes</outputDirectory>
                                     <includes>org/eclipse/persistence/jaxb/rs/*.class</includes>
                                 </artifactItem>
-<!--                                <artifactItem>
+                                <!--                                <artifactItem>
                                     <groupId>org.eclipse.persistence</groupId>
                                     <artifactId>org.eclipse.persistence.dbws</artifactId>
                                     <version>${eclipselink.version}</version>
@@ -503,7 +503,7 @@
                 <artifactId>maven-javadoc-plugin</artifactId>
                 <version>${maven-javadoc-plugin.version}</version>
             </plugin>
-<!--            <plugin>
+            <!--            <plugin>
                 <artifactId>maven-changelog-plugin</artifactId>
                 <version>2.3</version>
                 <configuration>
@@ -536,6 +536,49 @@
                             </execution>
                         </executions>
                     </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>java2wadl</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.cxf</groupId>
+                        <artifactId>cxf-java2wadl-plugin</artifactId>
+                        <version>${apache-cxf.version}</version>
+                        <executions>
+                            <execution>
+                                <id>parsejavadoc</id>
+                                <phase>generate-sources</phase>
+                                <goals>
+                                    <goal>parsejavadoc</goal>
+                                </goals>
+                            </execution>
+                            <execution>
+                                <id>process-classes</id>
+                                <phase>process-classes</phase>
+                                <goals>
+                                    <goal>java2wadl</goal>
+                                </goals>
+                                <configuration>
+                                    <classResourceNames>
+                                        <classResourceName>ru.ilb.jparestresource.web.DocumentsResourceImpl</classResourceName>
+                                        <classResourceName>ru.ilb.jparestresource.web.Heartbeat</classResourceName>
+                                    </classResourceNames>
+                                    <docProvider>org.apache.cxf.maven_plugin.javatowadl.ResourceMapJavaDocProvider</docProvider>
+                                    <attachWadl>true</attachWadl>
+                                </configuration>
+                            </execution>
+                        </executions>
+                        <dependencies>
+                            <dependency>
+                                <groupId>org.eclipse.persistence</groupId>
+                                <artifactId>javax.persistence</artifactId>
+                                <version>${javax-persistence.version}</version>
+                            </dependency>
+                        </dependencies>
+                    </plugin>                     
                 </plugins>
             </build>
         </profile>
