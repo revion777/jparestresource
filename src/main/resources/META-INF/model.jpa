@@ -40,8 +40,9 @@
         <jpa:hc e="true"/>
         <jpa:eq e="true"/>
         <jpa:attributes>
-            <jpa:basic optional="true" attribute-type="String" v="true" name="displayName" id="_148557613307718">
+            <jpa:basic optional="true" attribute-type="String" v="true" xvt="E" name="displayName" id="_148557613307718">
                 <jpa:des>Document name</jpa:des>
+                <jpa:xe nillable="false" required="false"/>
                 <jpa:bv>
                     <jpa:si mi="1" ma="255" m="must be beweeen 1 and 255 chars"/>
                 </jpa:bv>

@@ -34,6 +34,7 @@ public class Document implements Serializable {
     /**
  * Document name
  */
+    @XmlElement
     @Basic
     @Size(min=1,max=255,message="must be beweeen 1 and 255 chars")
     private String displayName;
