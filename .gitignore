@@ -1,3 +1,4 @@
 /target/
 .svn
 /src/site/xhtml/model.xhtml
+/frontend/nbproject/private/
