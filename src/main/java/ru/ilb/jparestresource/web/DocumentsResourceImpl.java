@@ -7,13 +7,10 @@ package ru.ilb.jparestresource.web;
 
 import io.swagger.annotations.Api;
 import java.util.List;
-import javax.annotation.PostConstruct;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
-import javax.xml.transform.stream.StreamSource;
 import org.apache.cxf.jaxrs.ext.search.SearchContext;
-import org.apache.cxf.jaxrs.ext.xml.XMLName;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
@@ -23,10 +20,14 @@ import ru.ilb.jparestresource.api.DocumentsResource;
 import ru.ilb.jparestresource.utils.JaxbHelper;
 import ru.ilb.jparestresource.repositories.DocumentRepository;
 import ru.ilb.jparestresource.model.Document;
+import ru.ilb.jparestresource.providers.AuthorizationHandler;
 
 @Path("documents")
 @Api("documents")
 public class DocumentsResourceImpl implements DocumentsResource {
+    
+    @Autowired 
+    AuthorizationHandler authorizationHandler;
 
     @Autowired
     JaxbHelper jaxbHelper;
