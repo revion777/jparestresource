@@ -93,11 +93,12 @@
     </bean>
     <bean id="wadlGenerator" class="org.apache.cxf.jaxrs.model.wadl.WadlGenerator">
         <property name="documentationProvider" ref="documentationProvider"/>
-        <property name="contextProperties">
+        <!-- since cxf 3.1.11 -->
+<!--        <property name="jaxbContextProperties">
             <util:map>
                 <entry key="eclipselink.beanvalidation.facets" value="true" value-type="java.lang.Boolean"/>
             </util:map>
-        </property>
+        </property>-->
     </bean>
 
     <!-- Configure xslt support, see also web.xml for refreshTemplates env-entry
