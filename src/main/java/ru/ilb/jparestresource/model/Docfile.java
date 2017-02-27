@@ -15,6 +15,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+import org.eclipse.persistence.oxm.annotations.XmlInverseReference;
 import javax.xml.bind.annotation.*;
 
 
@@ -47,6 +48,7 @@ public class Docfile implements Serializable {
     @Basic
     private String userName;
 
+    @XmlInverseReference(mappedBy="docfiles")
     @ManyToOne(targetEntity = Document.class)
     @JoinColumn(name="DOCUMENT_ID",referencedColumnName="ID",nullable=false)
     private Document document;
