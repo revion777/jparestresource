@@ -14,7 +14,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
 import org.eclipse.persistence.oxm.annotations.XmlInverseReference;
 import javax.xml.bind.annotation.*;
 
@@ -22,7 +21,7 @@ import javax.xml.bind.annotation.*;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement
 @Entity
-@Table(name="DOCFILE",uniqueConstraints={@UniqueConstraint(columnNames={"UID"})})
+@Table(name="DOCFILE")
 public class Docfile implements Serializable { 
 
     @Column(nullable=false)

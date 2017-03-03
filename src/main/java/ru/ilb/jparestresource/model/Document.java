@@ -15,7 +15,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.*;
 
@@ -23,7 +22,7 @@ import javax.xml.bind.annotation.*;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement
 @Entity
-@Table(name="DOCUMENT",uniqueConstraints={@UniqueConstraint(columnNames={"UID"})})
+@Table(name="DOCUMENT")
 public class Document implements Serializable { 
 
     @Column(nullable=false)
