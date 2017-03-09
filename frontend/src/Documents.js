@@ -130,12 +130,12 @@ function DocumentsTable (props) {
               {document.id}
             </Table.Cell>
             <Table.Cell>
-              {document.docDate.split('-').reverse().join('.')}
+              {(document.docDate || '').split('-').reverse().join('.')}
             </Table.Cell>
             <Table.Cell>
               <Link to={`/documents/${document.id}`} activeStyle={{ color: 'red' }}>{document.displayName || '-'}</Link>
             </Table.Cell>
-            <Table.Cell>
+            <Table.Cell width="1">
               <Button icon="remove" color="red" size="mini" fluid
                 onClick={props.removeDocument.bind(null, document.id)}
               />

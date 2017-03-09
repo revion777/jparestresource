@@ -63,7 +63,7 @@ function DocumentInfo (props) {
     return (<Message warning>Документ не найден</Message>);
   }
   return (
-    <Table striped celled compact size="small">
+    <Table striped celled compact definition size="small">
       <caption>Document</caption>
       <Table.Body>
         {Object.keys(document).map(key => (
