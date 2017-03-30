@@ -186,6 +186,9 @@
     <!-- inbound request logging -->
     <bean id="logInbound" class="org.apache.cxf.interceptor.LoggingInInterceptor"/>
     
+    <!-- new logging feature -->
+    <bean id="loggingFeature" class="org.apache.cxf.ext.logging.LoggingFeature"/>
+    
     <cxf:bus>
         <cxf:properties>
             <entry key="skip.default.json.provider.registration" value="true"/>
@@ -214,11 +217,14 @@
         <jaxrs:features>
             <!-- swagger api support -->
             <ref bean="swagger2Feature" />
+            <ref bean="loggingFeature"/>
         </jaxrs:features>
         <jaxrs:inInterceptors>
             <!--uncomment to enable inbound request logging--> 
-            <ref bean="logInbound"/>
+            <!--<ref bean="logInbound"/>-->
             <ref bean="validationInInterceptor" />
+            <!-- override default encoding  "ISO-8859-1" -->
+            <bean class="ru.ilb.common.jaxrs.interceptors.EncodingInInterceptor"/>
         </jaxrs:inInterceptors>
         <jaxrs:outInterceptors>
             <!--uncomment to enable response validation --> 
