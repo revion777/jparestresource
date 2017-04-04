@@ -5,6 +5,7 @@
         <jpa:ts e="true"/>
         <jpa:hc e="true"/>
         <jpa:eq e="true"/>
+        <jpa:annotation e="true" n="@org.eclipse.persistence.annotations.Customizer(ru.ilb.jparestresource.persistance.HistoryCustomizer.class)"/>
         <jpa:attributes>
             <jpa:basic optional="true" attribute-type="String" v="true" name="comment" id="_14855761330778">
                 <jpa:des>File comment</jpa:des>
@@ -31,10 +32,11 @@
         <jpa:el/>
         <jpa:table name="DOCFILE"/>
     </jpa:entity>
-    <jpa:entity xre="true" compositePrimaryKeyClass="DocumentPK" abs="false" class="Document" v="true" m="false" rootElement="_14855761330684" id="_14855761330696">
+    <jpa:entity lbl-ref="_148557613307718" xre="true" compositePrimaryKeyClass="DocumentPK" abs="false" class="Document" v="true" m="false" rootElement="_14855761330684" id="_14855761330696">
         <jpa:ts e="true"/>
         <jpa:hc e="true"/>
         <jpa:eq e="true"/>
+        <jpa:annotation e="true" n="@org.eclipse.persistence.annotations.Customizer(ru.ilb.jparestresource.persistance.HistoryCustomizer.class)"/>
         <jpa:attributes>
             <jpa:basic optional="true" attribute-type="String" v="true" xvt="E" name="displayName" id="_148557613307718">
                 <jpa:des>Document name</jpa:des>

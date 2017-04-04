@@ -14,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import org.eclipse.persistence.annotations.Customizer;
 import org.eclipse.persistence.oxm.annotations.XmlInverseReference;
 import javax.xml.bind.annotation.*;
 
@@ -22,6 +23,7 @@ import javax.xml.bind.annotation.*;
 @XmlRootElement
 @Entity
 @Table(name="DOCFILE")
+    @Customizer(ru.ilb.jparestresource.persistance.HistoryCustomizer.class)
 public class Docfile implements Serializable { 
 
     @Column(nullable=false)
