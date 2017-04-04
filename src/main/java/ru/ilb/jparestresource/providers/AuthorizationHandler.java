@@ -16,13 +16,12 @@
 package ru.ilb.jparestresource.providers;
 
 import java.io.IOException;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import javax.ws.rs.container.ContainerRequestContext;
 import javax.ws.rs.container.ContainerRequestFilter;
 import javax.ws.rs.core.SecurityContext;
 
 /**
+ * 
  *
  * @author slavb
  */
@@ -36,8 +35,6 @@ public class AuthorizationHandler implements ContainerRequestFilter {
         this.xremoteUsersGroup = xremoteUsersGroup;
     }
 
-
-
     public String getCurrentAuditor() {
         return (String) currentAuditor.get();
     }
@@ -45,11 +42,15 @@ public class AuthorizationHandler implements ContainerRequestFilter {
     @Override
     public void filter(ContainerRequestContext requestContext) throws IOException {
         SecurityContext securityContext = requestContext.getSecurityContext();
-        String userName = securityContext.getUserPrincipal().getName();
-        if (xremoteUsersGroup!=null && securityContext.isUserInRole(xremoteUsersGroup)) {
-            String xremoteUserName = requestContext.getHeaderString("X-Remote-User");
-            if (xremoteUserName != null) {
-                userName = xremoteUserName;
+        String userName = null;
+        //uncomment container security block in web.xml to work
+        if (securityContext.getUserPrincipal() != null) {
+            userName = securityContext.getUserPrincipal().getName();
+            if (xremoteUsersGroup != null && securityContext.isUserInRole(xremoteUsersGroup)) {
+                String xremoteUserName = requestContext.getHeaderString("X-Remote-User");
+                if (xremoteUserName != null) {
+                    userName = xremoteUserName;
+                }
             }
         }
         currentAuditor.set(userName);
