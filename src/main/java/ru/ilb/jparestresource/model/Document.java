@@ -14,7 +14,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.Table;
 import javax.validation.constraints.Size;
 import org.eclipse.persistence.annotations.Customizer;
 import javax.xml.bind.annotation.*;
@@ -23,7 +22,6 @@ import javax.xml.bind.annotation.*;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement
 @Entity
-@Table(name="DOCUMENT")
     @Customizer(ru.ilb.jparestresource.persistance.HistoryCustomizer.class)
 public class Document implements Serializable { 
 

@@ -29,9 +29,9 @@ public class HistoryCustomizer implements DescriptorCustomizer {
     public void customize(ClassDescriptor descriptor) {
         HistoryPolicy policy = new HistoryPolicy();
         String primaryTable = descriptor.getTableName();
-        policy.addStartFieldName(primaryTable + ".ROW_START");
-        policy.addEndFieldName(primaryTable + ".ROW_END");
-        policy.addHistoryTableName(primaryTable, primaryTable + "_HIST");
+        policy.addStartFieldName(primaryTable + ".ROWSTART");
+        policy.addEndFieldName(primaryTable + ".ROWEND");
+        policy.addHistoryTableName(primaryTable, primaryTable + "HIST");
         descriptor.setHistoryPolicy(policy);
     }
 }
