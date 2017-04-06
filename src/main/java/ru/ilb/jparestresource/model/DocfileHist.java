@@ -7,7 +7,6 @@ package ru.ilb.jparestresource.model;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import javax.persistence.Basic;
-import javax.persistence.Column;
 import javax.persistence.ConstraintMode;
 import javax.persistence.Entity;
 import javax.persistence.ForeignKey;
@@ -16,55 +15,36 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import org.eclipse.persistence.oxm.annotations.XmlInverseReference;
 import javax.xml.bind.annotation.*;
 
+/**
+ * @author slavb
+ */
 
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlRootElement
 @Entity
-public class DocfileHist implements Serializable { 
+public class DocfileHist extends DocfileBase implements Serializable { 
 
-    @Column(nullable=false)
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long histId;
-    
+
     @Basic
     private LocalDateTime rowStart;
 
     @Basic
     private LocalDateTime rowEnd;
-    
-    
+
     @Basic
     private Long id;
 
-    /**
- * File comment
- */
-    @Basic
-    private String comment;
-
-    /**
- * Confirmation status
- */
-    @Basic
-    private Boolean confirm;
-
-    /**
- * User created
- */
-    @Basic
-    private String userName;
-
-    @XmlInverseReference(mappedBy="docfiles")
     @ManyToOne(targetEntity = Document.class)
-    @JoinColumn(name="DOCUMENT_ID",referencedColumnName="ID",nullable=false,foreignKey=@ForeignKey(value=ConstraintMode.NO_CONSTRAINT))
+    @JoinColumn(name="DOCUMENT_ID",foreignKey=@ForeignKey(value=ConstraintMode.NO_CONSTRAINT))
     private Document document;
 
+
     public Long getHistId() {
-        return histId;
+        return this.histId;
     }
 
     public void setHistId(Long histId) {
@@ -72,7 +52,7 @@ public class DocfileHist implements Serializable {
     }
 
     public LocalDateTime getRowStart() {
-        return rowStart;
+        return this.rowStart;
     }
 
     public void setRowStart(LocalDateTime rowStart) {
@@ -80,13 +60,12 @@ public class DocfileHist implements Serializable {
     }
 
     public LocalDateTime getRowEnd() {
-        return rowEnd;
+        return this.rowEnd;
     }
 
     public void setRowEnd(LocalDateTime rowEnd) {
         this.rowEnd = rowEnd;
     }
-
 
     public Long getId() {
         return this.id;
@@ -94,30 +73,6 @@ public class DocfileHist implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getComment() {
-        return this.comment;
-    }
-
-    public void setComment(String comment) {
-        this.comment = comment;
-    }
-
-    public Boolean isConfirm() {
-        return this.confirm;
-    }
-
-    public void setConfirm(Boolean confirm) {
-        this.confirm = confirm;
-    }
-
-    public String getUserName() {
-        return this.userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
     }
 
     public Document getDocument() {

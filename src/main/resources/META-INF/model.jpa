@@ -139,7 +139,7 @@
         </jpa:nq>
         <jpa:el/>
     </jpa:entity>
-    <jpa:entity lbl-ref="_14914686403681759" xre="false" compositePrimaryKeyClass="DocFileHistPK" abs="false" class="DocFileHist" superclassId="_1491468627682" v="true" m="false" rootElement="_14855761330684" id="_1491468837419">
+    <jpa:entity lbl-ref="_14914686403681759" xre="false" compositePrimaryKeyClass="DocfileHistPK" abs="false" class="DocfileHist" superclassId="_1491468627682" v="true" m="false" rootElement="_14855761330684" id="_1491468837419">
         <jpa:ts e="true"/>
         <jpa:hc e="true"/>
         <jpa:eq e="true"/>
@@ -149,6 +149,9 @@
                 <jpa:bv/>
             </jpa:basic>
             <jpa:basic attribute-type="java.time.LocalDateTime" v="true" name="rowEnd" id="_14914689428131767">
+                <jpa:bv/>
+            </jpa:basic>
+            <jpa:basic attribute-type="Long" v="true" name="id" id="_14914699061281809">
                 <jpa:bv/>
             </jpa:basic>
             <jpa:many-to-one optional="true" primaryKey="false" connected-entity-id="_14855761330696" v="true" name="document" id="_14914689999081768">
@@ -162,14 +165,17 @@
                 <jpa:generated-value strategy="IDENTITY"/>
             </jpa:id>
         </jpa:attributes>
-        <jpa:nq e="false" name="DocFileHist.findAll">
-            <jpa:query>Select e from DocFileHist e</jpa:query>
+        <jpa:nq e="false" name="DocfileHist.findAll">
+            <jpa:query>Select e from DocfileHist e</jpa:query>
         </jpa:nq>
-        <jpa:nq e="false" name="DocFileHist.findByRowStart">
-            <jpa:query>Select d from DocFileHist d where d.rowStart=:rowStart</jpa:query>
+        <jpa:nq e="false" name="DocfileHist.findByRowStart">
+            <jpa:query>Select d from DocfileHist d where d.rowStart=:rowStart</jpa:query>
         </jpa:nq>
-        <jpa:nq e="false" name="DocFileHist.findByRowEnd">
-            <jpa:query>Select d from DocFileHist d where d.rowEnd=:rowEnd</jpa:query>
+        <jpa:nq e="false" name="DocfileHist.findByRowEnd">
+            <jpa:query>Select d from DocfileHist d where d.rowEnd=:rowEnd</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="DocfileHist.findById">
+            <jpa:query>Select d from DocfileHist d where d.id=:id</jpa:query>
         </jpa:nq>
         <jpa:el/>
     </jpa:entity>
@@ -187,7 +193,7 @@
         <jpa:ws n="Main" id="_14881688460591">
             <i ref="_1491468627682" x="555" y="169"/>
             <i ref="_1491468474874" x="145" y="152"/>
-            <i ref="_1491468837419" x="555" y="326"/>
+            <i ref="_1491468837419" x="557" y="325"/>
             <i ref="_1491468539018" x="147" y="305"/>
             <i ref="_14855761330685" x="568" y="8"/>
             <i ref="_14855761330696" x="158" y="8"/>
