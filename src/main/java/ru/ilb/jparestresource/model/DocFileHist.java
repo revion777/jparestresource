@@ -7,10 +7,14 @@ package ru.ilb.jparestresource.model;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import javax.persistence.Basic;
+import javax.persistence.ConstraintMode;
 import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.xml.bind.annotation.*;
 
 /**
@@ -19,20 +23,21 @@ import javax.xml.bind.annotation.*;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @Entity
-public class DocumentHist extends DocumentBase implements Serializable { 
+public class DocFileHist extends DocfileBase implements Serializable { 
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long histId;
 
     @Basic
-    private Long id;
-
-    @Basic
     private LocalDateTime rowStart;
 
     @Basic
     private LocalDateTime rowEnd;
+
+    @ManyToOne(targetEntity = Document.class)
+    @JoinColumn(name="DOCUMENT_ID",foreignKey=@ForeignKey(value=ConstraintMode.NO_CONSTRAINT))
+    private Document document;
 
 
     public Long getHistId() {
@@ -41,14 +46,6 @@ public class DocumentHist extends DocumentBase implements Serializable {
 
     public void setHistId(Long histId) {
         this.histId = histId;
-    }
-
-    public Long getId() {
-        return this.id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public LocalDateTime getRowStart() {
@@ -65,6 +62,14 @@ public class DocumentHist extends DocumentBase implements Serializable {
 
     public void setRowEnd(LocalDateTime rowEnd) {
         this.rowEnd = rowEnd;
+    }
+
+    public Document getDocument() {
+        return this.document;
+    }
+
+    public void setDocument(Document document) {
+        this.document = document;
     }
 
 

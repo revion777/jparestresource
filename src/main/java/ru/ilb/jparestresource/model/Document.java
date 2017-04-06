@@ -5,16 +5,13 @@
 package ru.ilb.jparestresource.model;
 
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.util.List;
-import javax.persistence.Basic;
-import javax.persistence.Column;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.validation.constraints.Size;
 import org.eclipse.persistence.annotations.Customizer;
 import javax.xml.bind.annotation.*;
 
@@ -23,35 +20,14 @@ import javax.xml.bind.annotation.*;
 @XmlRootElement
 @Entity
     @Customizer(ru.ilb.jparestresource.persistance.HistoryCustomizer.class)
-public class Document implements Serializable { 
+public class Document extends DocumentBase implements Serializable { 
 
-    @Column(nullable=false)
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
 
-    /**
- * Document name
- */
     @XmlElement
-    @Basic
-    @Size(min=1,max=255,message="must be beweeen 1 and 255 chars")
-    private String displayName;
-
-    /**
- * Document description
- */
-    @Basic
-    private String description;
-
-    /**
- * Document date
- */
-    @Basic
-    private LocalDate docDate;
-
-    @XmlTransient
-    @OneToMany(targetEntity = Docfile.class,mappedBy = "document")
+    @OneToMany(cascade={CascadeType.ALL},targetEntity = Docfile.class,mappedBy = "document")
     private List<Docfile> docfiles;
 
 
@@ -61,30 +37,6 @@ public class Document implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getDisplayName() {
-        return this.displayName;
-    }
-
-    public void setDisplayName(String displayName) {
-        this.displayName = displayName;
-    }
-
-    public String getDescription() {
-        return this.description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public LocalDate getDocDate() {
-        return this.docDate;
-    }
-
-    public void setDocDate(LocalDate docDate) {
-        this.docDate = docDate;
     }
 
     public List<Docfile> getDocfiles() {
