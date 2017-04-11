@@ -5,6 +5,7 @@
 package ru.ilb.jparestresource.model;
 
 import java.io.Serializable;
+import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,21 +13,39 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import org.eclipse.persistence.annotations.Customizer;
 import org.eclipse.persistence.oxm.annotations.XmlInverseReference;
+import ru.ilb.common.jpa.history.AutoHistory;
 import javax.xml.bind.annotation.*;
 
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement
 @Entity
-    @Customizer(ru.ilb.jparestresource.persistance.HistoryCustomizer.class)
-public class Docfile extends DocfileBase implements Serializable { 
+    @AutoHistory
+public class Docfile implements Serializable { 
 
     @Column(nullable=false)
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
+
+    /**
+ * File comment
+ */
+    @Basic
+    private String comment;
+
+    /**
+ * Confirmation status
+ */
+    @Basic
+    private Boolean confirm;
+
+    /**
+ * User created
+ */
+    @Basic
+    private String userName;
 
     @XmlInverseReference(mappedBy="docfiles")
     @ManyToOne(targetEntity = Document.class)
@@ -40,6 +59,30 @@ public class Docfile extends DocfileBase implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getComment() {
+        return this.comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
+
+    public Boolean isConfirm() {
+        return this.confirm;
+    }
+
+    public void setConfirm(Boolean confirm) {
+        this.confirm = confirm;
+    }
+
+    public String getUserName() {
+        return this.userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public Document getDocument() {

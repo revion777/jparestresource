@@ -7,7 +7,9 @@ package ru.ilb.jparestresource.web;
 
 import io.swagger.annotations.Api;
 import java.util.List;
+import javax.ws.rs.BadRequestException;
 import javax.ws.rs.Path;
+import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import org.apache.cxf.jaxrs.ext.search.SearchContext;
@@ -78,7 +80,8 @@ public class DocumentsResourceImpl implements DocumentsResource {
 
     @Override
     public List<Document> list(Integer limit, String order) {
-        return documentRepository.findAll();
+        throw new WebApplicationException("  Нет доступа   \nТТТТ",451);
+        //return documentRepository.findAll();
     }
 
     @Override

@@ -8,9 +8,6 @@
     <class>com.github.marschall.threeten.jpa.LocalDateTimeConverter</class>
     <class>ru.ilb.jparestresource.model.Docfile</class>
     <class>ru.ilb.jparestresource.model.Document</class>
-    <class>ru.ilb.jparestresource.model.DocfileHist</class>
-    <class>ru.ilb.jparestresource.model.DocumentHist</class>
-    <class>ru.ilb.jparestresource.model.DocFileHist</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <!-- ГЕНЕРАЦИЯ МЕТАДАННЫХ НА ОСНОВЕ МОДЕЛИ -->
@@ -43,6 +40,8 @@
       <property name="eclipselink.logging.level" value="FINE"/>
       <property name="eclipselink.jdbc.batch-writing" value="JDBC"/>
       <property name="eclipselink.jdbc.batch-writing.size" value="1000"/>
+      <!-- enable AutoHistory on @AutoHistory annotated entities -->
+      <property name="eclipselink.session.customizer" value="ru.ilb.common.jpa.history.HistorySessionCustomizer"/>
     </properties>
   </persistence-unit>
 </persistence>
