@@ -6,8 +6,8 @@
     <keywords>journals</keywords>
     <docDate>2015-01-01</docDate>
     <direction>IN</direction>
-    <docfiles>
+    <docfile>
         <userName>testuser</userName>
         <confirm>false</confirm>
-    </docfiles>
+    </docfile>
 </document>

@@ -21,7 +21,7 @@ import javax.xml.bind.annotation.*;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement
 @Entity
-    @AutoHistory
+@AutoHistory
 public class Docfile implements Serializable { 
 
     @Column(nullable=false)
@@ -30,20 +30,20 @@ public class Docfile implements Serializable {
     private Long id;
 
     /**
- * File comment
- */
+     * File comment
+     */
     @Basic
     private String comment;
 
     /**
- * Confirmation status
- */
+     * Confirmation status
+     */
     @Basic
     private Boolean confirm;
 
     /**
- * User created
- */
+     * User created
+     */
     @Basic
     private String userName;
 
@@ -51,7 +51,6 @@ public class Docfile implements Serializable {
     @ManyToOne(targetEntity = Document.class)
     @JoinColumn(name="DOCUMENT_ID",referencedColumnName="ID",nullable=false)
     private Document document;
-
 
     public Long getId() {
         return this.id;
@@ -61,6 +60,7 @@ public class Docfile implements Serializable {
         this.id = id;
     }
 
+
     public String getComment() {
         return this.comment;
     }
@@ -68,6 +68,7 @@ public class Docfile implements Serializable {
     public void setComment(String comment) {
         this.comment = comment;
     }
+
 
     public Boolean isConfirm() {
         return this.confirm;
@@ -77,6 +78,7 @@ public class Docfile implements Serializable {
         this.confirm = confirm;
     }
 
+
     public String getUserName() {
         return this.userName;
     }
@@ -84,6 +86,7 @@ public class Docfile implements Serializable {
     public void setUserName(String userName) {
         this.userName = userName;
     }
+
 
     public Document getDocument() {
         return this.document;

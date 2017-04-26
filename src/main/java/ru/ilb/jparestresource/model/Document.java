@@ -8,8 +8,10 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -25,7 +27,7 @@ import javax.xml.bind.annotation.*;
 @XmlRootElement
 @Entity
 @Table(indexes={@Index(columnList="DOCDATE")})
-    @AutoHistory
+@AutoHistory
 public class Document implements Serializable { 
 
     @Column(nullable=false)
@@ -34,29 +36,28 @@ public class Document implements Serializable {
     private Long id;
 
     /**
- * Document name
- */
+     * Document name
+     */
     @XmlElement
     @Basic
     @Size(min=1,max=255,message="must be beweeen 1 and 255 chars")
     private String displayName;
 
     /**
- * Document description
- */
+     * Document description
+     */
     @Basic
     private String description;
 
     /**
- * Document date
- */
+     * Document date
+     */
     @Basic
     private LocalDate docDate;
 
-    @XmlTransient
-    @OneToMany(targetEntity = Docfile.class,mappedBy = "document")
+    @XmlElementRef
+    @OneToMany(cascade={CascadeType.ALL},fetch = FetchType.LAZY,targetEntity = Docfile.class,mappedBy = "document")
     private List<Docfile> docfiles;
-
 
     public Long getId() {
         return this.id;
@@ -66,6 +67,7 @@ public class Document implements Serializable {
         this.id = id;
     }
 
+
     public String getDisplayName() {
         return this.displayName;
     }
@@ -73,6 +75,7 @@ public class Document implements Serializable {
     public void setDisplayName(String displayName) {
         this.displayName = displayName;
     }
+
 
     public String getDescription() {
         return this.description;
@@ -82,6 +85,7 @@ public class Document implements Serializable {
         this.description = description;
     }
 
+
     public LocalDate getDocDate() {
         return this.docDate;
     }
@@ -89,6 +93,7 @@ public class Document implements Serializable {
     public void setDocDate(LocalDate docDate) {
         this.docDate = docDate;
     }
+
 
     public List<Docfile> getDocfiles() {
         return this.docfiles;
