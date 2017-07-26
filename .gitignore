@@ -2,3 +2,5 @@
 .svn
 /src/site/xhtml/model.xhtml
 /frontend/nbproject/private/
+/frontend2/nbproject/private/
+/frontend2/node_modules/

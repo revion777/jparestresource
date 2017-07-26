@@ -80,8 +80,7 @@ public class DocumentsResourceImpl implements DocumentsResource {
 
     @Override
     public List<Document> list(Integer limit, String order) {
-        throw new WebApplicationException("  Нет доступа   \nТТТТ",451);
-        //return documentRepository.findAll();
+        return documentRepository.findAll();
     }
 
     @Override
