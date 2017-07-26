@@ -37,11 +37,11 @@ class EnsureSwagger extends Component {
     if ((!initialized || !this.swaggerClient) && !error && !loading) {
       swaggerInitStart();
       new Swagger({
-        url: 'https://localhost:8080/jparestresource/web/swagger.json',
+        url: '/jparestresource/web/swagger.json',
         usePromise: true,
       })
         .then((client) => {
-          // console.log('client', client);
+          //console.log('client', client);
           this.swaggerClient = client;
           swaggerInitFinish();
         })

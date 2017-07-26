@@ -1,5 +1,5 @@
 {
-  "name": "jparestresource-js",
+  "name": "documenteditor",
   "version": "1.0.0",
   "dependencies": {
     "ansi-regex": {

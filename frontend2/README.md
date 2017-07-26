@@ -1,4 +1,4 @@
-Jparestresource frontend boilerplate
+documenteditor frontend boilerplate
 
 ## Getting started
 

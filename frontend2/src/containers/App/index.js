@@ -4,6 +4,7 @@ import Helmet from 'react-helmet';
 import { Segment, Header } from 'semantic-ui-react';
 import compose from 'recompose/compose';
 import pure from 'recompose/pure';
+import Documents from '../Documents';
 
 class App extends Component {
   render() {
@@ -11,6 +12,7 @@ class App extends Component {
       <Segment>
         <Helmet title="Jparestresource frontend"/>
         <Header content="Jparestresource frontend"/>
+        <Documents/>
       </Segment>
     );
   }

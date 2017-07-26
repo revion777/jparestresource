@@ -1,12 +1,12 @@
 {
-  "name": "jparestresource-js",
+  "name": "documenteditor",
   "version": "1.0.0",
-  "description": "jparestresource frontend",
+  "description": "documenteditor frontend",
   "main": "index.js",
   "scripts": {
-    "start": "NODE_ENV=development PROJECT_PATH=/$USER/jparestresource-js DEBUG=app:*,dbg:*  webpack-dashboard -t 'Jparestresource frontend' -m -- webpack-dev-server-fork --colors --no-info --inline",
-    "prod": "NODE_ENV=production PROJECT_PATH=/$USER/jparestresource-js DEBUG=app:* ./node_modules/webpack-dashboard/bin/webpack-dashboard.js -t 'Preview Mode - React-Redux Boilerplate' -- ./node_modules/webpack-dev-server-fork/bin/webpack-dev-server.js",
-    "build": "rm -rf ./build && NODE_ENV=production PROJECT_PATH=/jparestresource-js DEBUG=app:* webpack",
+    "start": "NODE_ENV=development PROJECT_PATH=/$USER/documenteditor DEBUG=app:*,dbg:*  webpack-dashboard -t 'documenteditor frontend' -m -- webpack-dev-server-fork --colors --no-info --inline",
+    "prod": "NODE_ENV=production PROJECT_PATH=/$USER/documenteditor DEBUG=app:* ./node_modules/webpack-dashboard/bin/webpack-dashboard.js -t 'Preview Mode - React-Redux Boilerplate' -- ./node_modules/webpack-dev-server-fork/bin/webpack-dev-server.js",
+    "build": "rm -rf ./build && NODE_ENV=production PROJECT_PATH=/documenteditor DEBUG=app:* webpack",
     "lint": "eslint ./src ./webpack.config.js -f table --ext .js --ext .jsx || true",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
