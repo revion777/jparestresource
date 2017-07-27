@@ -202,12 +202,22 @@
                 <xsl:value-of select="@name"/>
             </td>
             <td>
-                <xsl:value-of select="@attribute-type"/>
+                <xsl:choose>
+                    <xsl:when test="contains(@attribute-type,'.') and not(starts-with(@attribute-type,'java'))">
+                        <a href="{concat('apidocs/',translate(@attribute-type,'.','/'),'.html')}">
+                            <xsl:value-of select="@attribute-type"/>
+                        </a>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:value-of select="@attribute-type"/>
+                    </xsl:otherwise>
+                </xsl:choose>
                 <xsl:if test="@length">(<xsl:value-of select="@length"/>)</xsl:if>
             </td>
             <td>
                 <xsl:if test="local-name(.)='id'">PK</xsl:if>
                 <xsl:if test="jpa:column/@unique='true'">UQ</xsl:if>
+                <xsl:if test="jpa:column/@nullable='false'">NOT NULL</xsl:if>
             </td>
             <td>
                 <xsl:value-of select="jpa:des"/>
@@ -216,13 +226,13 @@
         
     </xsl:template>
     <xsl:template match="jpa:many-to-one" mode="attributes">
-            <xsl:if test="@optional='false' and not (jpa:join-column/@nullable='false')">
-                <xsl:message terminate="no">
-                    <xsl:value-of select="concat('Warning: ', ancestor-or-self::jpa:entity/@class, '.',@name,' is not optional, but join column is nullable')"/>
-                </xsl:message>
+        <xsl:if test="@optional='false' and not (jpa:join-column/@nullable='false')">
+            <xsl:message terminate="no">
+                <xsl:value-of select="concat('Warning: ', ancestor-or-self::jpa:entity/@class, '.',@name,' is not optional, but join column is nullable')"/>
+            </xsl:message>
 
                 
-            </xsl:if>
+        </xsl:if>
         
         <tr>
             <td>
@@ -234,7 +244,7 @@
                 </xsl:call-template>
             </td>
             <td>
-                
+                <xsl:if test="jpa:join-column/@nullable='false'">NOT NULL</xsl:if>
             </td>
             <td>
                 <xsl:value-of select="jpa:des"/>
@@ -277,10 +287,10 @@
     <xsl:template name="get-entity-name">
         <xsl:choose>
             <xsl:when test="jpa:des and contains(jpa:des, '&#10;')">
-                <xsl:value-of select="substring-before(jpa:des, '&#10;')"/>
+                <xsl:value-of select="concat(substring-before(jpa:des, '&#10;'), ' (',@class,')')"/>
             </xsl:when>
             <xsl:when test="jpa:des">
-                <xsl:value-of select="jpa:des"/>
+                <xsl:value-of select="concat(jpa:des, ' (',@class,')')"/>
             </xsl:when>
             <xsl:otherwise>
                 <xsl:value-of select="@class"/>
@@ -297,6 +307,13 @@
             <xsl:otherwise>
             </xsl:otherwise>
         </xsl:choose>
+        <xsl:if test="@superclassId">
+            Наследует 
+            <xsl:call-template name="get-entity-link">
+                <xsl:with-param name="id" select="@superclassId"/>
+            </xsl:call-template>
+                
+        </xsl:if>
     </xsl:template>
 
     <!-- entity-encode markup for display -->
