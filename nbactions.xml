@@ -25,6 +25,7 @@
             </properties>
             <activatedProfiles>
                 <activatedProfile>standalone</activatedProfile>
+                <activatedProfile>server</activatedProfile>
             </activatedProfiles>
         </action>
         <action>

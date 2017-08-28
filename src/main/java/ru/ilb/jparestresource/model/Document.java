@@ -53,6 +53,7 @@ public class Document implements Serializable {
      * Document date
      */
     @Basic
+    @XmlSchemaType(name="date")
     private LocalDate docDate;
 
     @XmlElementRef
