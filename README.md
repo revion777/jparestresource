@@ -39,43 +39,8 @@ Install Jeddict from  https://jeddict.github.io
 
 #Code snippets
 
-##make implementation class in JAXB binding
-jaxb:baseType required for List<> properties
-```xml
-<jaxb:bindings node="//xsd:complexType[@name='DocumentType']">
-    <jaxb:class  implClass="package.Document"/>
-</jaxb:bindings>
-<jaxb:bindings multiple="true" node="//xsd:element[@ref='document']">
-    <jaxb:property>
-        <jaxb:baseType name="Document"/>
-    </jaxb:property>
-</jaxb:bindings>
-```
-
-## file tasks (delete, create, copy...)
-```xml
-<plugin>
-    <groupId>org.apache.maven.plugins</groupId>
-    <artifactId>maven-antrun-plugin</artifactId>
-    <version>1.7</version>
-    <executions>
-        <execution>
-            <phase>generate-sources</phase>
-            <goals>
-                <goal>run</goal>
-            </goals>
-            <configuration>
-                <tasks>
-                    <delete>
-                        <fileset dir="${project.build.directory}/..." includes="*" />
-                    </delete>
-                </tasks>
-            </configuration>
-        </execution>
-    </executions>
-</plugin>
-```
 ## generate swagger.json
+
 ```xml
 <plugin>
     <groupId>com.github.kongchen</groupId>
@@ -151,6 +116,7 @@ jaxb:baseType required for List<> properties
 </plugin>
 ```
 ## generate swagger client
+
 ```xml
 <plugin>
     <groupId>io.swagger</groupId>
@@ -173,6 +139,7 @@ jaxb:baseType required for List<> properties
 </plugin>
 ```
 ## schemagen
+
 ```xml
 <plugin>
     <groupId>org.codehaus.mojo</groupId>
@@ -209,6 +176,7 @@ jaxb:baseType required for List<> properties
 ```
 
 ## replace in files
+
 ```xml
 <plugin>
     <groupId>com.google.code.maven-replacer-plugin</groupId>
@@ -275,6 +243,7 @@ jaxb:baseType required for List<> properties
 </plugin>
 ```
 ## tomcat intergration tests 
+
 ```xml
 <plugin>
     <groupId>org.apache.maven.plugins</groupId>
@@ -344,6 +313,7 @@ jaxb:baseType required for List<> properties
 ```
 
 ## common dependencies
+
 ```xml
 <!-- jettison JSON provider -->
 <dependency>
@@ -371,35 +341,41 @@ jaxb:baseType required for List<> properties
 </dependency>
 ```
 
-# Migration from multi-module pom (separate -api, -web)
+## make implementation class in JAXB binding
 
-1. open "-web" module pom.xml, remove parent tag, add groupId tag
-2. merge parent's and "-api" module pom.xml into "-web" pom.xml
-3. copy schemas from "-api" module
-4. remove "-api" module dependency from "-web" module
-5. delete parent pom.xml and "-api" module
-6. optionally: rename project, remove "-web" suffix, move sources to parent
-7. separate client jar generation
+jaxb:baseType required for List<> properties
+```xml
+<jaxb:bindings node="//xsd:complexType[@name='DocumentType']">
+    <jaxb:class  implClass="package.Document"/>
+</jaxb:bindings>
+<jaxb:bindings multiple="true" node="//xsd:element[@ref='document']">
+    <jaxb:property>
+        <jaxb:baseType name="Document"/>
+    </jaxb:property>
+</jaxb:bindings>
+```
+
+## file tasks (delete, create, copy...)
 
 ```xml
 <plugin>
     <groupId>org.apache.maven.plugins</groupId>
-    <artifactId>maven-jar-plugin</artifactId>
-    <version>3.0.2</version>
+    <artifactId>maven-antrun-plugin</artifactId>
+    <version>1.7</version>
     <executions>
         <execution>
-            <phase>package</phase>
+            <phase>generate-sources</phase>
             <goals>
-                <goal>jar</goal>
+                <goal>run</goal>
             </goals>
             <configuration>
-                <classifier>client</classifier>
-                <includes>
-                    <include>**/api/*</include>
-                    <include>**/model/*</include>
-                </includes>
+                <tasks>
+                    <delete>
+                        <fileset dir="${project.build.directory}/..." includes="*" />
+                    </delete>
+                </tasks>
             </configuration>
         </execution>
     </executions>
-</plugin>            
+</plugin>
 ```
