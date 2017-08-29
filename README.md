@@ -235,7 +235,8 @@ jaxb:baseType required for List<> properties
 </plugin>
 ```
 
-##eclipselink modelgen
+## eclipselink modelgen
+
 ```xml
 <plugin>
     <groupId>org.bsc.maven</groupId>
