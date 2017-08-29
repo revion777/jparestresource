@@ -612,7 +612,7 @@
         <profile>
             <id>java2wadl</id>
             <activation>
-                <activeByDefault>true</activeByDefault>
+                <activeByDefault>false</activeByDefault>
             </activation>            
             <build>
                 <plugins>
@@ -770,6 +770,309 @@
                 </dependency>            
             </dependencies>
         </profile>
+        <profile>
+            <id>swagger</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>            
+            <build>
+                <plugins>
+        
+                    <plugin>
+                        <groupId>com.github.kongchen</groupId>
+                        <artifactId>swagger-maven-plugin</artifactId>
+                        <version>3.1.5</version>
+                        <configuration>
+                            <apiSources>
+                                <apiSource>
+                                    <springmvc>false</springmvc>
+                                    <locations>
+                                        <location>ru.ilb.jparestresource.web</location>
+                                    </locations>
+                                    <schemes>
+                                        <scheme>http</scheme>
+                                        <scheme>https</scheme>
+                                    </schemes>
+                                    <host>localhost:8080</host>
+                                    <basePath>/web</basePath>
+                                    <info>
+                                        <title>jparestresource</title>
+                                        <version>v1</version>
+                                        <description>
+                                            This is a sample.
+                                        </description>
+                                        <termsOfService>
+                                            https://github.com/ilb/jparestresource
+                                        </termsOfService>
+                                        <contact>
+                                            <email>slavb18@gmail.com</email>
+                                            <name>Viacheslav Borisov</name>
+                                        </contact>
+                                        <license>
+                                            <url>http://www.apache.org/licenses/LICENSE-2.0.html</url>
+                                            <name>Apache 2.0</name>
+                                        </license>
+                                    </info>
+                                    <!--                                    <securityDefinitions>
+                                        <securityDefinition>
+                                            <name>basicAuth</name>
+                                            <type>basic</type>
+                                        </securityDefinition>
+                                        <securityDefinition>
+                                            <json>/securityDefinition.json</json>
+                                        </securityDefinition>
+                                    </securityDefinitions>-->
+                                    <templatePath>${basedir}/swagger/strapdown.html.hbs</templatePath>
+                                    <outputPath>${basedir}/target/generated/swagger.html</outputPath>
+                                    <swaggerDirectory>${basedir}/target/generated/swagger-ui</swaggerDirectory>
+                                    <attachSwaggerArtifact>true</attachSwaggerArtifact>
+                                    <!--                                    <modelConverters>
+                                        <modelConverter>io.swagger.validator.BeanValidator</modelConverter>
+                                    </modelConverters>-->
+                                </apiSource>
+                            </apiSources>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <phase>compile</phase>
+                                <goals>
+                                    <goal>generate</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <dependencies>
+                            <!--                            <dependency>
+                                <groupId>io.swagger</groupId>
+                                <artifactId>swagger-hibernate-validations</artifactId>
+                                <version>1.5.6</version>
+                            </dependency>-->
+                        </dependencies>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>swaggerclient</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>            
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>io.swagger</groupId>
+                        <artifactId>swagger-codegen-maven-plugin</artifactId>
+                        <version>2.2.1</version>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>generate</goal>
+                                </goals>
+                                <configuration>
+                                    <inputSpec>${basedir}/target/generated/swagger-ui/swagger.json</inputSpec>
+                                    <language>html</language>
+                                    <configOptions>
+                                        <sourceFolder>src/gen/java/main</sourceFolder>
+                                    </configOptions>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>        
+        <profile>
+            <id>schemagen</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>            
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>jaxb2-maven-plugin</artifactId>
+                        <version>2.3.1</version>
+                        <executions>
+                            <execution>
+                                <id>schemagen</id>
+                                <goals>
+                                    <goal>schemagen</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <sources>
+                                <source>${basedir}/src/main/java/ru/ilb/jparestresource/model</source>
+                            </sources>             
+                            <schemaSourceExcludeFilters>
+                                <noJaxbIndex implementation="org.codehaus.mojo.jaxb2.shared.filters.pattern.PatternFileFilter">
+                                    <patterns>
+                                        <pattern>package-info\.java</pattern>
+                                    </patterns>
+                                </noJaxbIndex>
+                            </schemaSourceExcludeFilters>
+                            <transformSchemas>
+                                <transformSchema>
+                                    <uri>urn:ru:ilb:jparestresource:model</uri>
+                                    <toPrefix>model</toPrefix>
+                                    <toFile>model.xsd</toFile>
+                                </transformSchema>                        
+                            </transformSchemas>                    
+                        </configuration>
+                    </plugin>
+                    <plugin>
+                        <groupId>com.google.code.maven-replacer-plugin</groupId>
+                        <artifactId>replacer</artifactId>
+                        <version>1.5.3</version>
+                        <executions>
+                            <execution>
+                                <id>replace_Relation</id>
+                                <phase>process-resources</phase>
+                                <goals>
+                                    <goal>replace</goal>
+                                </goals>
+                                <configuration>
+                                    <file>${basedir}/target/generated-resources/schemagen/model.xsd</file>
+                                    <replacements>
+                                        <replacement>
+                                            <token>xs:</token>
+                                            <value>xsd:</value>
+                                        </replacement>
+                                        <replacement>
+                                            <token>xmlns:xs</token>
+                                            <value>xmlns:xsd</value>
+                                        </replacement>                                        
+                                        
+                                    </replacements>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    
+                </plugins>
+            </build>
+        </profile>        
+        <profile>
+            <id>modelgen</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>            
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.bsc.maven</groupId>
+                        <artifactId>maven-processor-plugin</artifactId>
+                        <version>3.2.0</version>
+                        <executions>
+                            <execution>
+                                <id>eclipselink-jpa-metamodel</id>
+                                <goals>
+                                    <goal>process</goal>
+                                </goals>
+                                <phase>process-resources</phase>
+                                <configuration>
+
+                                    <processors>
+                                        <processor>org.eclipse.persistence.internal.jpa.modelgen.CanonicalModelProcessor</processor>
+                                    </processors>
+                                    <appendSourceArtifacts>true</appendSourceArtifacts>
+                                    <processSourceArtifacts>
+                                        <processSourceArtifact>ru.ilb.common:common-jpa</processSourceArtifact>
+                                    </processSourceArtifacts>
+
+                                    <outputDirectory>${project.build.directory}/generated-sources/meta-model</outputDirectory>
+                                </configuration>
+                            </execution>
+                        </executions>
+                        <dependencies>
+                            <dependency>
+                                <groupId>org.eclipse.persistence</groupId>
+                                <artifactId>org.eclipse.persistence.jpa.modelgen.processor</artifactId>
+                                <version>${eclipselink.version}</version>
+                                <scope>compile</scope>
+                            </dependency>
+                        </dependencies>
+                    </plugin>
+                    
+                </plugins>
+            </build>
+        </profile>        
+        <profile>
+            <id>integration-test</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>            
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-failsafe-plugin</artifactId>
+                        <version>2.17</version>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>integration-test</goal>
+                                    <goal>verify</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.tomcat.maven</groupId>
+                        <artifactId>tomcat7-maven-plugin</artifactId>
+
+                        <version>2.2</version>
+
+                        <configuration>
+                            <path>/jparestresource</path>
+                            <contextFile>${basedir}/src/test/resources/tomcat/context.xml</contextFile>
+                            <useTestClasspath>true</useTestClasspath>
+                        </configuration>
+
+                        <executions>
+                            <!-- At pre-integration-test phase, run the war in an embedded Tomcat server. -->
+                            <execution>
+                                <id>start-tomcat</id>
+                                <phase>pre-integration-test</phase>
+                                <goals>
+                                    <goal>run-war-only</goal>
+                                </goals>
+                                <configuration>
+                                    <port>59190</port>
+                                    <fork>true</fork>
+                                </configuration>
+                            </execution>
+                            <!-- At post-integration-test phase, stop the embedded Tomcat server. -->
+                            <execution>
+                                <id>stop-tomcat</id>
+                                <phase>post-integration-test</phase>
+                                <goals>
+                                    <goal>shutdown</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <dependencies>
+                            <dependency>
+                                <groupId>mysql</groupId>
+                                <artifactId>mysql-connector-java</artifactId>
+                                <version>${mysql-connector.version}</version>
+                            </dependency>
+                            <dependency>
+                                <groupId>org.eclipse.persistence</groupId>
+                                <artifactId>javax.persistence</artifactId>
+                                <version>${javax-persistence.version}</version>
+                            </dependency>
+                            <dependency>
+                                <groupId>org.eclipse.persistence</groupId>
+                                <artifactId>eclipselink</artifactId>
+                                <version>${eclipselink.version}</version>
+                            </dependency>
+                        </dependencies>
+                    </plugin>
+                    
+                </plugins>
+            </build>
+        </profile>        
+        
     </profiles>
     
     
