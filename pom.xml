@@ -348,6 +348,7 @@
                                 </goals>
                                 <configuration>
                                     <artifactItems>
+                                        <!-- packaging org.eclipse.persistence.jaxb.rs.MOXyJsonProvider required becouse of javax.ws.rs-api conflicts -->
                                         <artifactItem>
                                             <groupId>org.eclipse.persistence</groupId>
                                             <artifactId>org.eclipse.persistence.moxy</artifactId>
@@ -588,7 +589,7 @@
             <id>release</id>
             <build>
                 <plugins>
-<!--                    <plugin>
+                    <!--                    <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-gpg-plugin</artifactId>
                         <version>${maven-gpg-plugin.version}</version>
@@ -688,6 +689,15 @@
                                                 <extraarg>-tMap</extraarg>
                                                 <extraarg>{urn:ru:ilb:jparesresource:core}uuid=java.util.UUID</extraarg>
                                                 <extraarg>-beanValidation</extraarg>
+                                                <!--
+                                                <extraarg>-catalog</extraarg>
+                                                <extraarg>${basedir}/src/main/resources/schemas/jparesresource/catalog.xml</extraarg>
+                                                -->
+                                                <!-- requires depedency com.github.jaxb-xew-plugin:jaxb-xew-plugin:1.4
+                                                <extraarg>-xjc-Xxew</extraarg>
+                                                <extraarg>-xjc-Xxew:instantiate lazy</extraarg>
+                                                -->
+                                                
                                                 <extraarg>-xjc-Xannotate</extraarg>
                                                 <extraarg>-xjc-Xinheritance</extraarg>
                                                 <!--<extraarg>-xjc-XenumValue</extraarg>-->
@@ -696,6 +706,10 @@
                                                 <extraarg>-xjc-Xfluent-api</extraarg>
                                                 <extraarg>-xjc-enableIntrospection</extraarg>
                                                 <extraarg>-xjc-XBeanVal</extraarg>
+                                                <!-- generate episode file
+                                                <extraarg>-xjc-episode</extraarg>
+                                                <extraArg>-xjc${project.build.directory}/classes/schemas/jparestresource/jparestresource.episode</extraArg>
+                                                -->
                                             </extraargs>
                                         </wadlOption>
                                     </wadlOptions>

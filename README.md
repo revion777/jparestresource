@@ -34,9 +34,8 @@ https://netbeans.org/bugzilla/show_bug.cgi?id=238709#c36
 
 Direct link: http://deadlock.netbeans.org/job/nbms-and-javadoc/lastSuccessfulBuild/artifact/nbbuild/nbms/extra/org-netbeans-modules-nbignore.nbm
 
-## JPA modeler plugin for Netbeans
-Download and install JPA modeler
-http://jpamodeler.github.io/
+## Jeddict plugin for Netbeans
+Install Jeddict from  https://jeddict.github.io
 
 #Code snippets
 
@@ -51,116 +50,6 @@ jaxb:baseType required for List<> properties
         <jaxb:baseType name="Document"/>
     </jaxb:property>
 </jaxb:bindings>
-```
-
-## JPA Attribute converter
-```xml
-    <basic name="direction">
-        <column column-definition="int(1)"/>
-        <convert>DirectionTypeConverter</convert>
-    </basic>
-
-    <object-type-converter name="DirectionTypeConverter"
-                           object-type="ru.ilb.jparestresource.model.DirectionType" data-type="java.lang.Integer">
-        <conversion-value object-value="IN" data-value="0" />
-        <conversion-value object-value="OUT" data-value="1" />
-    </object-type-converter>
-```
-
-## Generate interfaces from java using cxf-wadl2java-plugin
-```xml
-<plugin>
-    <groupId>org.apache.cxf</groupId>
-    <artifactId>cxf-wadl2java-plugin</artifactId>
-    <version>${apache-cxf.version}</version>
-    <executions>
-        <execution>
-            <id>generate-sources</id>
-            <phase>generate-sources</phase>
-            <configuration>
-                <sourceRoot>${project.build.directory}/generated-sources/xjc</sourceRoot>
-                <wadlOptions>
-                    <wadlOption>
-                        <wadl>${basedir}/src/main/resources/schemas/jparesresource/application.wadl</wadl>
-                        <packagename>ru.ilb.jparesresource.api</packagename>
-                        <bindingFiles>
-                            <bindingFile>${basedir}/src/main/resources/schemas/jparesresource/core.xjb</bindingFile>
-                        </bindingFiles>
-                        <extraargs>
-                            <extraarg>-verbose</extraarg>
-                            <extraarg>-inheritResourceParams</extraarg>
-                            <extraarg>-javaDocs</extraarg>
-                            <extraarg>-xjc-Xjavadoc</extraarg>
-                            <extraarg>-tMap</extraarg>
-                            <extraarg>{urn:ru:ilb:jparesresource:core}uuid=java.util.UUID</extraarg>
-                            <extraarg>-beanValidation</extraarg>
-                            <extraarg>-xjc-Xannotate</extraarg>
-                            <extraarg>-xjc-Xinheritance</extraarg>
-                            <extraarg>-xjc-XenumValue</extraarg>
-                            <extraarg>-xjc-Xsetters</extraarg>
-                            <extraarg>-xjc-Xsetters-mode=direct</extraarg>
-                            <extraarg>-xjc-Xfluent-api</extraarg>
-                            <extraarg>-xjc-enableIntrospection</extraarg>
-                        </extraargs>
-                    </wadlOption>
-                </wadlOptions>
-            </configuration>
-            <goals>
-                <goal>wadl2java</goal>
-            </goals>
-        </execution>
-    </executions>
-    <dependencies>
-        <dependency>
-            <groupId>org.jvnet.jaxb2_commons</groupId>
-            <artifactId>jaxb2-basics</artifactId>
-            <version>0.9.4</version>
-        </dependency>
-        <dependency>
-            <groupId>org.jvnet.jaxb2_commons</groupId>
-            <artifactId>jaxb2-fluent-api</artifactId>
-            <version>3.0</version>
-        </dependency>
-        <dependency>
-            <groupId>org.jvnet.jaxb2_commons</groupId>
-            <artifactId>jaxb2-basics-annotate</artifactId>
-            <version>1.0.1</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.cxf.xjcplugins</groupId>
-            <artifactId>cxf-xjc-javadoc</artifactId>
-            <version>3.0.5</version>
-        </dependency>                    
-        <dependency>
-            <groupId>com.github.krasa</groupId>
-            <artifactId>krasa-jaxb-tools</artifactId>
-            <version>1.5</version>
-        </dependency>
-    </dependencies>
-</plugin>
-```
-### use catalog.xml
-```xml
-<extraarg>-catalog</extraarg>
-<extraarg>${basedir}/src/main/resources/schemas/jparesresource/catalog.xml</extraarg>
-```
-
-### use jaxb-xew-plugin
-```xml
-<extraarg>-xjc-Xxew</extraarg>
-<extraarg>-xjc-Xxew:instantiate lazy</extraarg>
-
-<dependency>
-    <groupId>com.github.jaxb-xew-plugin</groupId>
-    <artifactId>jaxb-xew-plugin</artifactId>
-    <version>1.4</version>
-</dependency>
-```
-
-### use episode file
-```xml
-<extraarg>-xjc-episode</extraarg>
-<extraArg>-xjc${project.build.directory}/classes/schemas/jparestresource/jparestresource.episode</extraArg>
 ```
 
 ## file tasks (delete, create, copy...)
@@ -283,38 +172,6 @@ jaxb:baseType required for List<> properties
     </executions>
 </plugin>
 ```
-## package org.eclipse.persistence.jaxb.rs.MOXyJsonProvider
-required becouse of javax.ws.rs-api conflicts
-```xml
-<plugin>
-    <groupId>org.apache.maven.plugins</groupId>
-    <artifactId>maven-dependency-plugin</artifactId>
-    <version>2.1</version>
-    <executions>
-        <execution>
-            <id>unpack</id>
-            <phase>validate</phase>
-            <goals>
-                <goal>unpack</goal>
-            </goals>
-            <configuration>
-                <artifactItems>
-                    <artifactItem>
-                        <groupId>org.eclipse.persistence</groupId>
-                        <artifactId>eclipselink</artifactId>
-                        <version>${eclipselink.version}</version>
-                        <type>jar</type>
-                        <overWrite>false</overWrite>
-                        <outputDirectory>${project.build.directory}/classes</outputDirectory>
-                        <includes>org/eclipse/persistence/jaxb/rs/*.class</includes>
-                    </artifactItem>
-                </artifactItems>
-            </configuration>
-        </execution>                    
-    </executions>            
-</plugin>
-
-```
 ## schemagen
 ```xml
 <plugin>
@@ -377,37 +234,7 @@ required becouse of javax.ws.rs-api conflicts
     </executions>
 </plugin>
 ```
-##generate wadl
-```xml
-<plugin>
-    <groupId>org.apache.cxf</groupId>
-    <artifactId>cxf-java2wadl-plugin</artifactId>
-    <version>${apache-cxf.version}</version>
-    <executions>
-        <execution>
-            <id>parsejavadoc</id>
-            <phase>generate-sources</phase>
-            <goals>
-                <goal>parsejavadoc</goal>
-            </goals>
-        </execution>
-        <execution>
-            <id>process-classes</id>
-            <phase>process-classes</phase>
-            <goals>
-                <goal>java2wadl</goal>
-            </goals>
-            <configuration>
-                <classResourceNames>
-                    <classResourceName>ru.ilb.jparesresource.web.DocumentsResourceImpl</classResourceName>
-                </classResourceNames>
-                <docProvider>org.apache.cxf.maven_plugin.javatowadl.ResourceMapJavaDocProvider</docProvider>
-                <attachWadl>true</attachWadl>
-            </configuration>
-        </execution>
-    </executions>
-</plugin>
-```
+
 ##eclipselink modelgen
 ```xml
 <plugin>
@@ -514,28 +341,7 @@ required becouse of javax.ws.rs-api conflicts
     </dependencies>
 </plugin>
 ```
-## set system properties
-```xml
-<plugin>
-    <groupId>org.codehaus.mojo</groupId>
-    <artifactId>properties-maven-plugin</artifactId>
-    <version>1.0-alpha-2</version>
-    <executions>
-        <execution>
-            <goals>
-                <goal>set-system-properties</goal>
-            </goals>
-            <configuration>
-                <properties>
-                    <javax.net.ssl.trustStore>${javax.net.ssl.trustStore}</javax.net.ssl.trustStore>
-                    <javax.net.ssl.keyStore>${javax.net.ssl.keyStore}</javax.net.ssl.keyStore>
-                    <javax.net.ssl.keyStorePassword>${javax.net.ssl.keyStorePassword}</javax.net.ssl.keyStorePassword>
-                </properties>
-            </configuration>
-        </execution>
-    </executions>
-</plugin>
-```
+
 ## common dependencies
 ```xml
 <!-- jettison JSON provider -->
