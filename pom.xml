@@ -17,7 +17,7 @@
         <maven-source-plugin.version>2.4</maven-source-plugin.version>
         <maven-javadoc-plugin.version>2.10.3</maven-javadoc-plugin.version>
         <maven-gpg-plugin.version>1.6</maven-gpg-plugin.version>
-        <ilb-common.version>1.15</ilb-common.version>
+        <ilb-common.version>1.17-SNAPSHOT</ilb-common.version>
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
         <mysql-connector.version>5.1.31</mysql-connector.version>
         <eclipselink.version>2.6.4</eclipselink.version>
@@ -251,7 +251,7 @@
                 </dependency>
                 <dependency>
                     <groupId>ru.ilb.common</groupId>
-                    <artifactId>common-jpa</artifactId>
+                    <artifactId>common-jpa-jaxb</artifactId>
                     <version>${ilb-common.version}</version>
                 </dependency>
                 <!-- swagger api and ui support -->
@@ -952,6 +952,7 @@
             </build>
         </profile>        
         <profile>
+            <!-- requires: switch to system maven in netbeans, repalce common-jpa-jaxb with common-jpa, remove com.sun.xml.internal.bind from package-info.java -->
             <id>modelgen</id>
             <activation>
                 <activeByDefault>false</activeByDefault>
@@ -978,7 +979,6 @@
                                     <processSourceArtifacts>
                                         <processSourceArtifact>ru.ilb.common:common-jpa</processSourceArtifact>
                                     </processSourceArtifacts>
-
                                     <outputDirectory>${project.build.directory}/generated-sources/meta-model</outputDirectory>
                                 </configuration>
                             </execution>
