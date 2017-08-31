@@ -1072,6 +1072,54 @@
                 </plugins>
             </build>
         </profile>        
+        <profile>
+
+
+            <id>static-weaving</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>            
+
+            <build>
+                <plugins>
+
+                    <!-- Static weaver for EclipseLink 
+                    1. comment <context:load-time-weaver/> [beans.xml]
+                    2. uncomment <property name="eclipselink.weaving" value="static"/> [persistance.xml]
+                    3. switch activeByDefault=true
+                    -->
+                    <plugin>
+                        <groupId>com.ethlo.persistence.tools</groupId>
+                        <artifactId>eclipselink-maven-plugin</artifactId>
+                        <version>2.6.4.2</version>
+                        <executions>
+                            <execution>
+                                <phase>process-classes</phase>
+                                <goals>
+                                    <goal>weave</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+
+                        <dependencies>
+                            <dependency>
+                                <groupId>javax.ws.rs</groupId>
+                                <artifactId>javax.ws.rs-api</artifactId>
+                                <version>2.0.1</version>
+                            </dependency>
+                            
+                            <dependency>
+                                <groupId>org.eclipse.persistence</groupId>
+                                <artifactId>org.eclipse.persistence.jpa</artifactId>
+                                <version>${eclipselink.version}</version>
+                            </dependency>
+                        </dependencies>
+
+                    </plugin>
+                </plugins>
+            </build>
+
+        </profile>
         
     </profiles>
     
