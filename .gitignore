@@ -5,3 +5,6 @@
 /frontend2/nbproject/private/
 /frontend2/node_modules/
 /src/main/resources/client/target/
+/jparestresource-web/src/main/resources/client/target/
+/jparestresource-web/target/
+/jparestresource-api/target/

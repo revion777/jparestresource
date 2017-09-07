@@ -1,30 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>ru.ilb.jparestresource</groupId>
+        <artifactId>jparestresource</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    
     <groupId>ru.ilb.jparestresource</groupId>
     <artifactId>jparestresource-api</artifactId>
-    <version>1.7-SNAPSHOT</version>
     <packaging>jar</packaging>
     <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>1.7</maven.compiler.source>
-        <maven.compiler.target>1.7</maven.compiler.target>
-        <additionalparam>-Xdoclint:none</additionalparam>
-        <apache-cxf.version>3.1.9</apache-cxf.version>
-        <ilb-common.version>1.11</ilb-common.version>
-        <maven-source-plugin.version>2.4</maven-source-plugin.version>
-        <maven-javadoc-plugin.version>2.10.3</maven-javadoc-plugin.version>
+        <eclipselink.version>2.6.4</eclipselink.version>
     </properties>
     <name>jparestresource-api</name>
-    <scm>
-        <connection>scm:svn:https://svn.ilb.ru/repos/orgTree/trunk/web/schemas</connection>
-    </scm>
     <dependencies>
-        <dependency>
-            <groupId>javax.ws.rs</groupId>
-            <artifactId>javax.ws.rs-api</artifactId>
-            <version>2.0</version>
-        </dependency>
         <dependency>
             <groupId>ru.ilb.common</groupId>
             <artifactId>common-jaxb</artifactId>
@@ -39,18 +29,11 @@
             <groupId>javax</groupId>
             <artifactId>javaee-web-api</artifactId>
             <version>7.0</version>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
     <build>
         <finalName>${project.name}</finalName>
-        <pluginManagement>
-            <plugins>
-                <plugin>
-                    <artifactId>maven-deploy-plugin</artifactId>
-                    <version>2.8.2</version>
-                </plugin>
-            </plugins>
-        </pluginManagement>
         <plugins>
             <plugin>
                 <groupId>org.apache.cxf</groupId>
@@ -61,26 +44,43 @@
                         <id>generate-sources</id>
                         <phase>generate-sources</phase>
                         <configuration>
-                            <sourceRoot>${project.build.directory}/generated-sources/jaxws-rs</sourceRoot>
+                            <sourceRoot>${project.build.directory}/generated-sources/xjc</sourceRoot>
                             <wadlOptions>
                                 <wadlOption>
-                                    <wadl>${basedir}/application.wadl</wadl>
+                                    <wadl>${basedir}/src/main/resources/schemas/jparestresource/application.wadl</wadl>
                                     <packagename>ru.ilb.jparestresource.api</packagename>
                                     <bindingFiles>
-                                        <bindingFile>${basedir}/binding.xjb</bindingFile>
+                                        <bindingFile>${basedir}/src/main/resources/schemas/jparestresource/core.xjb</bindingFile>
                                     </bindingFiles>
-
                                     <extraargs>
                                         <extraarg>-verbose</extraarg>
-                                        <extraarg>-noVoidForEmptyResponses</extraarg>
-                                        <extraarg>-generateEnums</extraarg>
+                                        <extraarg>-inheritResourceParams</extraarg>
                                         <extraarg>-javaDocs</extraarg>
                                         <extraarg>-xjc-Xjavadoc</extraarg>
-                                        <!--<extraarg>-xjc-Xannotate</extraarg>-->
+                                        <extraarg>-tMap</extraarg>
+                                        <extraarg>{urn:ru:ilb:jparestresource:core}uuid=java.util.UUID</extraarg>
+                                        <extraarg>-beanValidation</extraarg>
+                                        <!--
+                                        <extraarg>-catalog</extraarg>
+                                        <extraarg>${basedir}/src/main/resources/schemas/jparestresource/catalog.xml</extraarg>
+                                        -->
+                                        <!-- requires depedency com.github.jaxb-xew-plugin:jaxb-xew-plugin:1.4
+                                        <extraarg>-xjc-Xxew</extraarg>
+                                        <extraarg>-xjc-Xxew:instantiate lazy</extraarg>
+                                        -->
+                                                
+                                        <extraarg>-xjc-Xannotate</extraarg>
+                                        <extraarg>-xjc-Xinheritance</extraarg>
+                                        <!--<extraarg>-xjc-XenumValue</extraarg>-->
                                         <extraarg>-xjc-Xsetters</extraarg>
                                         <extraarg>-xjc-Xsetters-mode=direct</extraarg>
-                                        <!--<extraarg>-xjc-Xvalue-constructor</extraarg>-->
+                                        <extraarg>-xjc-Xfluent-api</extraarg>
                                         <extraarg>-xjc-enableIntrospection</extraarg>
+                                        <extraarg>-xjc-XBeanVal</extraarg>
+                                        <!-- generate episode file
+                                        <extraarg>-xjc-episode</extraarg>
+                                        <extraArg>-xjc${project.build.directory}/classes/schemas/jparestresource/jparestresource.episode</extraArg>
+                                        -->
                                     </extraargs>
                                 </wadlOption>
                             </wadlOptions>
@@ -94,23 +94,28 @@
                     <dependency>
                         <groupId>org.jvnet.jaxb2_commons</groupId>
                         <artifactId>jaxb2-basics</artifactId>
-                        <version>0.6.5</version>
+                        <version>0.9.4</version>
                     </dependency>
-<!--                    <dependency>
+                    <dependency>
                         <groupId>org.jvnet.jaxb2_commons</groupId>
-                        <artifactId>jaxb2-value-constructor</artifactId>
+                        <artifactId>jaxb2-fluent-api</artifactId>
                         <version>3.0</version>
-                    </dependency>-->
-<!--                    <dependency>
+                    </dependency>
+                    <dependency>
                         <groupId>org.jvnet.jaxb2_commons</groupId>
                         <artifactId>jaxb2-basics-annotate</artifactId>
-                        <version>0.6.5</version>
-                    </dependency>-->
+                        <version>1.0.1</version>
+                    </dependency>
                     <dependency>
                         <groupId>org.apache.cxf.xjcplugins</groupId>
                         <artifactId>cxf-xjc-javadoc</artifactId>
                         <version>3.0.5</version>
                     </dependency>                    
+                    <dependency>
+                        <groupId>org.eclipse.persistence</groupId>
+                        <artifactId>org.eclipse.persistence.moxy</artifactId>
+                        <version>${eclipselink.version}</version>
+                    </dependency>
                 </dependencies>
             </plugin>
             <plugin>

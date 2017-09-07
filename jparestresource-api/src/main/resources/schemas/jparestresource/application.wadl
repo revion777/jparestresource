@@ -1,0 +1,109 @@
+<application xmlns="http://wadl.dev.java.net/2009/02" 
+             xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+             xmlns:command="urn:ru:ilb:jparestresource:command"
+             xmlns:view="urn:ru:ilb:jparestresource:view"
+             xmlns:core="urn:ru:ilb:jparestresource:core"
+>    
+    <grammars>
+        <include href="command.xsd" />
+        <include href="view.xsd" />
+    </grammars>
+    <resources base="/">
+        <resource path="/documents">
+            <method name="GET" id="list">
+                <doc>List of documents</doc>
+                <request>
+                    <param name="limit" style="query" type="xsd:int">
+                        <doc>limit number of documents returned</doc>
+                    </param>
+                    <param name="order" style="query" type="xsd:string">
+                        <doc>order of documents</doc>
+                    </param>
+                </request>
+                <response>
+                    <representation mediaType="application/xml" element="view:documents">
+                        <doc>list of documents</doc>
+                    </representation>
+                    <representation mediaType="application/json">
+                        <doc>list of documents</doc>
+                    </representation>
+                </response>
+            </method>
+            <method name="POST" id="create">
+                <doc>create new document instance</doc>
+                <request>
+                    <representation mediaType="application/xml" element="view:document">
+                        <doc>document data</doc>
+                    </representation>
+                    <representation mediaType="application/json">
+                        <doc>document data</doc>
+                    </representation>
+                </request>
+                <response>
+                    <representation mediaType="text/plain">
+                        <param name="result" style="plain" type="xsd:long">
+                            <doc>document data</doc>
+                        </param>
+                    </representation>
+                </response>
+            </method>
+            <resource path="/batch">
+                <method name="POST" id="createBatch">
+                    <doc>create batch document instances</doc>
+                    <request>
+                        <representation mediaType="application/xml" element="view:documents">
+                            <doc>documents data</doc>
+                        </representation>
+                        <representation mediaType="application/json">
+                            <doc>documents data</doc>
+                        </representation>
+                    </request>
+                    <response status="204"></response>
+                </method>
+            </resource>
+            <resource path="/{documentId}">
+                <param name="documentId" style="template" type="xsd:long">
+                    <doc>document id</doc>
+                </param>
+                <method name="DELETE" id="remove">
+                    <doc>remove document instance</doc>
+                    <request></request>
+                    <response status="204"></response>
+                </method>
+                <method name="GET" id="find">
+                    <doc>get document instance</doc>
+                    <request></request>
+                    <response>
+                        <representation mediaType="application/xml" element="view:document">
+                            <doc>document data</doc>
+                        </representation>
+                        <representation mediaType="application/json">
+                            <doc>document data</doc>
+                        </representation>
+                    </response>
+                </method>
+                <method name="PUT" id="edit">
+                    <doc>edit document instance</doc>
+                    <request>
+                        <representation mediaType="application/xml" element="view:document">
+                            <doc>document data</doc>
+                        </representation>
+                        <representation mediaType="application/json">
+                            <doc>document data</doc>
+                        </representation>
+                    </request>
+                    <response status="204"></response>
+                </method>
+            </resource>
+        </resource>
+        <resource path="/heartbeat">
+            <method name="GET" id="heartbeat">
+                <response>
+                    <representation mediaType="*/*">
+                        <param name="result" style="plain" type="xsd:string"></param>
+                    </representation>
+                </response>
+            </method>
+        </resource>
+    </resources>
+</application>
