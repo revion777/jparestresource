@@ -8,7 +8,7 @@
         <include href="command.xsd" />
         <include href="view.xsd" />
     </grammars>
-    <resources base="/">
+    <resources>
         <resource path="/documents">
             <method name="GET" id="list">
                 <doc>List of documents</doc>

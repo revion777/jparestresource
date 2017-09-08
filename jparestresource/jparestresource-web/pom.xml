@@ -358,7 +358,7 @@
                         <version>1.0.1</version>
                         <executions>
                             <execution>
-                                <phase>pre-site</phase>
+                                <!--<phase>pre-site</phase>-->
                                 <goals>
                                     <goal>transform</goal>
                                 </goals>
@@ -385,20 +385,6 @@
                                         </fileMapper>
                                     </fileMappers>                            
                                 </transformationSet>
-                                <transformationSet>
-                                    <dir>${basedir}/target/generated/wadl</dir>
-                                    <includes>
-                                        <include>application.wadl</include>
-                                    </includes>                            
-                                    <stylesheet>${basedir}/src/site/wadl_stylesheets/wadl_documentation-2009-02.xsl</stylesheet>
-                                    <outputDir>${basedir}/src/site/xhtml</outputDir>
-                                    <fileMappers>
-                                        <fileMapper implementation="org.codehaus.plexus.components.io.filemappers.FileExtensionMapper">
-                                            <targetExtension>.xhtml</targetExtension>
-                                        </fileMapper>
-                                    </fileMappers>                            
-                                </transformationSet>
-                        
                             </transformationSets>
                         </configuration>
                         <dependencies>
