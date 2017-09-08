@@ -70,6 +70,14 @@
                 </plugin>
             </plugins>
         </pluginManagement>        
+        <!-- to publish site to webdav endpoint -->
+        <extensions>
+            <extension>
+                <groupId>org.apache.maven.wagon</groupId>
+                <artifactId>wagon-webdav-jackrabbit</artifactId>
+                <version>2.9</version>
+            </extension>
+        </extensions>      
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
