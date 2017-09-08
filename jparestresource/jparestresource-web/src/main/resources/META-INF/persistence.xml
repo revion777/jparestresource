@@ -6,6 +6,7 @@
     <class>com.github.marschall.threeten.jpa.LocalTimeConverter</class>
     <class>com.github.marschall.threeten.jpa.LocalDateConverter</class>
     <class>com.github.marschall.threeten.jpa.LocalDateTimeConverter</class>
+    <class>ru.ilb.common.jpa.converters.UUIDConverterBytes</class>
     <class>ru.ilb.jparestresource.model.Docfile</class>
     <class>ru.ilb.jparestresource.model.Document</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>

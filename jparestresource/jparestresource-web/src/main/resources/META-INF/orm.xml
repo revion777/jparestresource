@@ -9,5 +9,5 @@
             </entity-listeners>
         </persistence-unit-defaults>
     </persistence-unit-metadata>      
-    <converter class="ru.ilb.common.jpa.converters.UUIDConverterBytes" auto-apply="true"/>
+    <!--<converter class="ru.ilb.common.jpa.converters.UUIDConverterBytes" auto-apply="true"/>-->
 </entity-mappings>
