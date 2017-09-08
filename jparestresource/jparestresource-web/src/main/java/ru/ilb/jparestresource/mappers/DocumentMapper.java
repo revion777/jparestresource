@@ -28,9 +28,9 @@ import ru.ilb.jparestresource.view.Documents;
 @Mapper(uses = {DocfileMapper.class}, componentModel = "spring")
 public interface DocumentMapper {
 
-    Document createFrom(ru.ilb.jparestresource.model.Document entity);
+    Document createFromEntity(ru.ilb.jparestresource.model.Document entity);
 
-    ru.ilb.jparestresource.model.Document createFrom(Document dto);
+    ru.ilb.jparestresource.model.Document createFromDto(Document dto);
 
     void updateEntity(@MappingTarget ru.ilb.jparestresource.model.Document entity, Document dto);
 

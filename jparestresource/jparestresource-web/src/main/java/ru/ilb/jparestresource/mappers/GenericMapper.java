@@ -16,22 +16,22 @@
 package ru.ilb.jparestresource.mappers;
 
 import java.util.List;
-import org.mapstruct.Mapper;
-import ru.ilb.jparestresource.view.Docfile;
+import org.mapstruct.MappingTarget;
 
 /**
  *
  * @author slavb
  */
-@Mapper(componentModel = "spring")
-public interface DocfileMapper {
+public interface GenericMapper<E,D> {
+    
+    D createFromEntity(E entity);
 
-    Docfile createFromEntity(ru.ilb.jparestresource.model.Docfile entity);
-    
-    ru.ilb.jparestresource.model.Docfile createFromDto(Docfile dto);
-    
-    List<Docfile> createFromEntities(List<ru.ilb.jparestresource.model.Docfile> entities);
-    
-    List<ru.ilb.jparestresource.model.Docfile> createFromDtos(List<Docfile> dtos);
+    E createFromDto(D dto);
 
+    void updateEntity(@MappingTarget E entity, D dto);
+
+    List<D> createFromEntities(List<E> entities);
+
+    List<E> createFromDtos(List<D> dtos);
+    
 }
