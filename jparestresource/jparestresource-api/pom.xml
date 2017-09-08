@@ -51,6 +51,7 @@
                                     <packagename>ru.ilb.jparestresource.api</packagename>
                                     <bindingFiles>
                                         <bindingFile>${basedir}/src/main/resources/schemas/jparestresource/core.xjb</bindingFile>
+                                        <bindingFile>${basedir}/src/main/resources/schemas/jparestresource/view.xjb</bindingFile>
                                     </bindingFiles>
                                     <extraargs>
                                         <extraarg>-verbose</extraarg>

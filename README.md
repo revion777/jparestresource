@@ -69,20 +69,6 @@ Install Jeddict from  https://jeddict.github.io
 </dependency>
 ```
 
-## make implementation class in JAXB binding
-
-jaxb:baseType required for List<> properties
-```xml
-<jaxb:bindings node="//xsd:complexType[@name='DocumentType']">
-    <jaxb:class  implClass="package.Document"/>
-</jaxb:bindings>
-<jaxb:bindings multiple="true" node="//xsd:element[@ref='document']">
-    <jaxb:property>
-        <jaxb:baseType name="Document"/>
-    </jaxb:property>
-</jaxb:bindings>
-```
-
 ## file tasks (delete, create, copy...)
 
 ```xml
