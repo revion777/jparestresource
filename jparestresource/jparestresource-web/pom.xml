@@ -61,6 +61,12 @@
             <version>${project.version}</version>        
         </dependency>
         <dependency>
+            <groupId>ru.ilb.jparestresource</groupId>
+            <artifactId>jparestresource-api</artifactId>
+            <version>${project.version}</version>        
+            <classifier>javadoc</classifier>
+        </dependency>
+        <dependency>
             <groupId>javax</groupId>
             <artifactId>javaee-web-api</artifactId>
             <version>7.0</version>

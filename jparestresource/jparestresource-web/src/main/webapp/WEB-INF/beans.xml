@@ -85,7 +85,8 @@
 
     <!-- Configure swagger api support, see also jaxrs:features section in jaxrs:server and maven dependencies -->
     <bean id="documentationProvider" class="org.apache.cxf.jaxrs.model.doc.JavaDocProvider">
-        <constructor-arg value="WEB-INF/lib/jparestresource-javadoc.jar"/>
+        <!-- not need anymore, javadoc is in clasppath -->
+        <!--<constructor-arg value="WEB-INF/lib/jparestresource-javadoc.jar"/>-->
     </bean>
     <bean id="swagger2Serializers" class="org.apache.cxf.jaxrs.swagger.DefaultSwagger2Serializers">
         <property name="javadocProvider" ref="documentationProvider"/>
