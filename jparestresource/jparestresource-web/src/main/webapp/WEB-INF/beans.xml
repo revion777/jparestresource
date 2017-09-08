@@ -203,7 +203,7 @@
     </bean>
 
     <!-- auto register @Component annotated classes -->
-    <context:component-scan base-package="ru.ilb.jparestresource.web,ru.ilb.jparestresource.core,ru.ilb.jparestresource.utils"/>
+    <context:component-scan base-package="ru.ilb.jparestresource.web,ru.ilb.jparestresource.core,ru.ilb.jparestresource.utils,ru.ilb.jparestresource.mappers"/>
     <jaxrs:server address="/" basePackages="ru.ilb.jparestresource.web,ru.ilb.common.jaxrs.providers,ru.ilb.common.jaxrs.exceptionhandler">
         <jaxrs:providers>
             <ref bean="jaxbContextResolver"/>

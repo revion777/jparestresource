@@ -14,6 +14,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import ru.ilb.jparestresource.api.DocumentsResource;
+import ru.ilb.jparestresource.mappers.DocumentMapper;
 import ru.ilb.jparestresource.utils.JaxbHelper;
 import ru.ilb.jparestresource.repositories.DocumentRepository;
 import ru.ilb.jparestresource.providers.AuthorizationHandler;
@@ -29,7 +30,10 @@ public class DocumentsResourceImpl implements DocumentsResource {
 
     @Autowired
     JaxbHelper jaxbHelper;
-
+    
+    @Autowired
+    private DocumentMapper documentMapper;
+    
     private UriInfo uriInfo;
 
     @Context
@@ -87,7 +91,7 @@ public class DocumentsResourceImpl implements DocumentsResource {
 
     @Override
     public Documents list(Integer limit, String order) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return documentMapper.createWrapperFromEntities(documentRepository.findAll());
     }
 
     @Override
