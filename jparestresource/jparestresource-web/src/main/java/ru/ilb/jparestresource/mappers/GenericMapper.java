@@ -21,6 +21,8 @@ import org.mapstruct.MappingTarget;
 /**
  *
  * @author slavb
+ * @param <E> entity class
+ * @param <D> dto class
  */
 public interface GenericMapper<E,D> {
     
