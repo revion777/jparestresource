@@ -7,3 +7,6 @@
 /jparestresource/target/
 /jparestresource/jparestresource-api/target/
 /jparestresource/jparestresource-web/target/
+/jparestresource/jparestresource-web/src/site/xhtml/application.xhtml
+/jparestresource/jparestresource-web/src/site/xhtml/model.xhtml
+/archetype/sampleapplication
