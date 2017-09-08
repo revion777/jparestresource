@@ -15,7 +15,6 @@
  */
 package ru.ilb.jparestresource.mappers;
 
-import java.util.List;
 import org.mapstruct.Mapper;
 import ru.ilb.jparestresource.view.Docfile;
 
@@ -24,14 +23,6 @@ import ru.ilb.jparestresource.view.Docfile;
  * @author slavb
  */
 @Mapper(componentModel = "spring")
-public interface DocfileMapper {
-
-    Docfile createFromEntity(ru.ilb.jparestresource.model.Docfile entity);
-    
-    ru.ilb.jparestresource.model.Docfile createFromDto(Docfile dto);
-    
-    List<Docfile> createFromEntities(List<ru.ilb.jparestresource.model.Docfile> entities);
-    
-    List<ru.ilb.jparestresource.model.Docfile> createFromDtos(List<Docfile> dtos);
+public interface DocfileMapper extends GenericMapper<ru.ilb.jparestresource.model.Docfile,Docfile>{
 
 }

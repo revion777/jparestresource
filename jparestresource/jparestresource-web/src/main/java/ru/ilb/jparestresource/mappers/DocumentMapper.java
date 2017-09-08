@@ -17,7 +17,6 @@ package ru.ilb.jparestresource.mappers;
 
 import java.util.List;
 import org.mapstruct.Mapper;
-import org.mapstruct.MappingTarget;
 import ru.ilb.jparestresource.view.Document;
 import ru.ilb.jparestresource.view.Documents;
 
@@ -26,17 +25,7 @@ import ru.ilb.jparestresource.view.Documents;
  * @author slavb
  */
 @Mapper(uses = {DocfileMapper.class}, componentModel = "spring")
-public interface DocumentMapper {
-
-    Document createFromEntity(ru.ilb.jparestresource.model.Document entity);
-
-    ru.ilb.jparestresource.model.Document createFromDto(Document dto);
-
-    void updateEntity(@MappingTarget ru.ilb.jparestresource.model.Document entity, Document dto);
-
-    List<Document> createFromEntities(List<ru.ilb.jparestresource.model.Document> entities);
-
-    List<ru.ilb.jparestresource.model.Document> createFromDtos(List<Document> dtos);
+public interface DocumentMapper extends GenericMapper<ru.ilb.jparestresource.model.Document,Document>{
 
     default Documents createWrapperFromEntities(List<ru.ilb.jparestresource.model.Document> entities) {
         Documents documents = new Documents();
