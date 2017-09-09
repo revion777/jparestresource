@@ -1,0 +1,506 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <head>
+      <title>My Web Application</title>
+      <meta charset="utf-8"/>
+      <style type="text/css">
+                    body {
+                        font-family: sans-serif;
+                        font-size: 0.85em;
+                        margin: 2em 8em;
+                    }
+                    .methods {
+                        background-color: #eef;
+                        padding: 1em;
+                    }
+                    h1 {
+                        font-size: 2.5em;
+                    }
+                    h2 {
+                        border-bottom: 1px solid black;
+                        margin-top: 1em;
+                        margin-bottom: 0.5em;
+                        font-size: 2em;
+                       }
+                    h3 {
+                        color: orange;
+                        font-size: 1.75em;
+                        margin-top: 1.25em;
+                        margin-bottom: 0em;
+                    }
+                    h4 {
+                        margin: 0em;
+                        padding: 0em;
+                        border-bottom: 2px solid white;
+                    }
+                    h6 {
+                        font-size: 1.1em;
+                        color: #99a;
+                        margin: 0.5em 0em 0.25em 0em;
+                    }
+                    dd {
+                        margin-left: 1em;
+                    }
+                    tt {
+                        font-size: 1.2em;
+                    }
+                    table {
+                        margin-bottom: 0.5em;
+                    }
+                    th {
+                        text-align: left;
+                        font-weight: normal;
+                        color: black;
+                        border-bottom: 1px solid black;
+                        padding: 3px 6px;
+                    }
+                    td {
+                        padding: 3px 6px;
+                        vertical-align: top;
+                        background-color: f6f6ff;
+                        font-size: 0.85em;
+                    }
+                    td p {
+                        margin: 0px;
+                    }
+                    ul {
+                        padding-left: 1.75em;
+                    }
+                    p + ul, p + ol, p + dl {
+                        margin-top: 0em;
+                    }
+                    .optional {
+                        font-weight: normal;
+                        opacity: 0.75;
+                    }
+                </style>
+      <script type="text/javascript">
+                    window.onload = function() {
+                        if (location.hash){
+                            location = location.hash;
+                        }
+                    }
+                </script>
+   </head>
+   <body>
+      <h1>My Web Application</h1>
+      <ul>
+         <li>
+            <a href="#resources">Resources</a>
+            <ul>
+               <li>
+                  <a href="#/documents">//documents</a>
+                  <ul>
+                     <li>
+                        <a href="#/documents_/batch">//documents//batch</a>
+                     </li>
+                     <li>
+                        <a href="#/documents_/{documentId}">//documents//{documentId}</a>
+                     </li>
+                  </ul>
+               </li>
+               <li>
+                  <a href="#/heartbeat">//heartbeat</a>
+               </li>
+            </ul>
+         </li>
+         <li>
+            <a href="#representations">Representations</a>
+            <ul>
+               <li>
+                  <a href="#d2e27">application/xml (<abbr title="{urn:ru:ilb:jparestresource:view} documents">view:documents</abbr>)</a>
+               </li>
+               <li>
+                  <a href="#d2e33">application/json<abbr title="{http://wadl.dev.java.net/2009/02} "/>
+                  </a>
+               </li>
+               <li>
+                  <a href="#d2e48">application/xml (<abbr title="{urn:ru:ilb:jparestresource:view} document">view:document</abbr>)</a>
+               </li>
+               <li>
+                  <a href="#d2e54">application/json<abbr title="{http://wadl.dev.java.net/2009/02} "/>
+                  </a>
+               </li>
+               <li>
+                  <a href="#d2e63">text/plain<abbr title="{http://wadl.dev.java.net/2009/02} "/>
+                  </a>
+               </li>
+               <li>
+                  <a href="#d2e83">application/xml (<abbr title="{urn:ru:ilb:jparestresource:view} documents">view:documents</abbr>)</a>
+               </li>
+               <li>
+                  <a href="#d2e89">application/json<abbr title="{http://wadl.dev.java.net/2009/02} "/>
+                  </a>
+               </li>
+               <li>
+                  <a href="#d2e127">application/xml (<abbr title="{urn:ru:ilb:jparestresource:view} document">view:document</abbr>)</a>
+               </li>
+               <li>
+                  <a href="#d2e133">application/json<abbr title="{http://wadl.dev.java.net/2009/02} "/>
+                  </a>
+               </li>
+               <li>
+                  <a href="#d2e148">application/xml (<abbr title="{urn:ru:ilb:jparestresource:view} document">view:document</abbr>)</a>
+               </li>
+               <li>
+                  <a href="#d2e154">application/json<abbr title="{http://wadl.dev.java.net/2009/02} "/>
+                  </a>
+               </li>
+               <li>
+                  <a href="#d2e172">*/*<abbr title="{http://wadl.dev.java.net/2009/02} "/>
+                  </a>
+               </li>
+            </ul>
+         </li>
+      </ul>
+      <h2 id="resources">Resources</h2>
+      <div class="resource">
+         <h3 id="/documents">//documents<span class="optional">?limit</span>
+            <span class="optional">&amp;order</span>
+         </h3>
+         <h6>Methods</h6>
+         <div class="methods">
+            <div class="method">
+               <h4 id="/documents_list">
+                  <a href="#/documents_list">GET</a>
+               </h4>
+               <p>List of documents</p>
+               <h6>request query parameters</h6>
+               <table>
+                  <tr>
+                     <th>parameter</th>
+                     <th>value</th>
+                     <th>description</th>
+                  </tr>
+                  <tr>
+                     <td>
+                        <p>
+                           <strong>limit</strong>
+                        </p>
+                     </td>
+                     <td>
+                        <p>
+                           <em>
+                              <a href="http://www.w3.org/TR/xmlschema-2/#int">int</a>
+                           </em>
+                        </p>
+                     </td>
+                     <td>
+                        <p>limit number of documents returned</p>
+                     </td>
+                  </tr>
+                  <tr>
+                     <td>
+                        <p>
+                           <strong>order</strong>
+                        </p>
+                     </td>
+                     <td>
+                        <p>
+                           <em>
+                              <a href="http://www.w3.org/TR/xmlschema-2/#string">string</a>
+                           </em>
+                        </p>
+                     </td>
+                     <td>
+                        <p>order of documents</p>
+                     </td>
+                  </tr>
+               </table>
+               <p>
+                  <em>available response representations:</em>
+               </p>
+               <ul>
+                  <li>
+                     <a href="#d2e27">application/xml (<abbr title="{urn:ru:ilb:jparestresource:view} documents">view:documents</abbr>)</a>
+                  </li>
+                  <li>
+                     <a href="#d2e33">application/json<abbr title="{http://wadl.dev.java.net/2009/02} "/>
+                     </a>
+                  </li>
+               </ul>
+            </div>
+            <div class="method">
+               <h4 id="/documents_create">
+                  <a href="#/documents_create">POST</a>
+               </h4>
+               <p>create new document instance</p>
+               <p>
+                  <em>acceptable request representations:</em>
+               </p>
+               <ul>
+                  <li>
+                     <a href="#d2e48">application/xml (<abbr title="{urn:ru:ilb:jparestresource:view} document">view:document</abbr>)</a>
+                  </li>
+                  <li>
+                     <a href="#d2e54">application/json<abbr title="{http://wadl.dev.java.net/2009/02} "/>
+                     </a>
+                  </li>
+               </ul>
+               <p>
+                  <em>available response representations:</em>
+               </p>
+               <ul>
+                  <li>
+                     <a href="#d2e63">text/plain<abbr title="{http://wadl.dev.java.net/2009/02} "/>
+                     </a>
+                  </li>
+               </ul>
+            </div>
+         </div>
+      </div>
+      <div class="resource">
+         <h3 id="/documents_/batch">//documents//batch</h3>
+         <h6>Methods</h6>
+         <div class="methods">
+            <div class="method">
+               <h4 id="/documents_createBatch">
+                  <a href="#/documents_createBatch">POST</a>
+               </h4>
+               <p>create batch document instances</p>
+               <p>
+                  <em>acceptable request representations:</em>
+               </p>
+               <ul>
+                  <li>
+                     <a href="#d2e83">application/xml (<abbr title="{urn:ru:ilb:jparestresource:view} documents">view:documents</abbr>)</a>
+                  </li>
+                  <li>
+                     <a href="#d2e89">application/json<abbr title="{http://wadl.dev.java.net/2009/02} "/>
+                     </a>
+                  </li>
+               </ul>
+            </div>
+         </div>
+      </div>
+      <div class="resource">
+         <h3 id="/documents_/{documentId}">//documents//{documentId}</h3>
+         <h6>resource-wide template parameters</h6>
+         <table>
+            <tr>
+               <th>parameter</th>
+               <th>value</th>
+               <th>description</th>
+            </tr>
+            <tr>
+               <td>
+                  <p>
+                     <strong>documentId</strong>
+                  </p>
+               </td>
+               <td>
+                  <p>
+                     <em>
+                        <a href="http://www.w3.org/TR/xmlschema-2/#long">long</a>
+                     </em>
+                  </p>
+               </td>
+               <td>
+                  <p>document id</p>
+               </td>
+            </tr>
+         </table>
+         <h6>Methods</h6>
+         <div class="methods">
+            <div class="method">
+               <h4 id="/documents_remove">
+                  <a href="#/documents_remove">DELETE</a>
+               </h4>
+               <p>remove document instance</p>
+            </div>
+            <div class="method">
+               <h4 id="/documents_find">
+                  <a href="#/documents_find">GET</a>
+               </h4>
+               <p>get document instance</p>
+               <p>
+                  <em>available response representations:</em>
+               </p>
+               <ul>
+                  <li>
+                     <a href="#d2e127">application/xml (<abbr title="{urn:ru:ilb:jparestresource:view} document">view:document</abbr>)</a>
+                  </li>
+                  <li>
+                     <a href="#d2e133">application/json<abbr title="{http://wadl.dev.java.net/2009/02} "/>
+                     </a>
+                  </li>
+               </ul>
+            </div>
+            <div class="method">
+               <h4 id="/documents_edit">
+                  <a href="#/documents_edit">PUT</a>
+               </h4>
+               <p>edit document instance</p>
+               <p>
+                  <em>acceptable request representations:</em>
+               </p>
+               <ul>
+                  <li>
+                     <a href="#d2e148">application/xml (<abbr title="{urn:ru:ilb:jparestresource:view} document">view:document</abbr>)</a>
+                  </li>
+                  <li>
+                     <a href="#d2e154">application/json<abbr title="{http://wadl.dev.java.net/2009/02} "/>
+                     </a>
+                  </li>
+               </ul>
+            </div>
+         </div>
+      </div>
+      <div class="resource">
+         <h3 id="/heartbeat">//heartbeat</h3>
+         <h6>Methods</h6>
+         <div class="methods">
+            <div class="method">
+               <h4 id="/heartbeat_heartbeat">
+                  <a href="#/heartbeat_heartbeat">GET</a>
+               </h4>
+               <p>
+                  <em>available response representations:</em>
+               </p>
+               <ul>
+                  <li>
+                     <a href="#d2e172">*/*<abbr title="{http://wadl.dev.java.net/2009/02} "/>
+                     </a>
+                  </li>
+               </ul>
+            </div>
+         </div>
+      </div>
+      <h2 id="representations">Representations</h2>
+      <h3 id="d2e27">application/xml (<abbr title="{urn:ru:ilb:jparestresource:view} documents">view:documents</abbr>)</h3>
+      <p>list of documents</p>
+      <div class="representation">
+         <h6>XML Schema</h6>
+         <p>
+            <em>Source: <a href="view.xsd">view.xsd</a>
+            </em>
+         </p>
+         <pre>&lt;xsd:element name="documents"&gt;
+        &lt;xsd:complexType&gt;
+            &lt;xsd:sequence&gt;
+                &lt;xsd:element maxOccurs="unbounded" minOccurs="0" ref="document"/&gt;
+            &lt;/xsd:sequence&gt;
+        &lt;/xsd:complexType&gt;
+    &lt;/xsd:element&gt;</pre>
+      </div>
+      <h3 id="d2e33">application/json<abbr title="{http://wadl.dev.java.net/2009/02} "/>
+      </h3>
+      <p>list of documents</p>
+      <h3 id="d2e48">application/xml (<abbr title="{urn:ru:ilb:jparestresource:view} document">view:document</abbr>)</h3>
+      <p>document data</p>
+      <div class="representation">
+         <h6>XML Schema</h6>
+         <p>
+            <em>Source: <a href="view.xsd">view.xsd</a>
+            </em>
+         </p>
+         <pre>&lt;xsd:element name="document" type="document"/&gt;</pre>
+      </div>
+      <h3 id="d2e54">application/json<abbr title="{http://wadl.dev.java.net/2009/02} "/>
+      </h3>
+      <p>document data</p>
+      <h3 id="d2e63">text/plain<abbr title="{http://wadl.dev.java.net/2009/02} "/>
+      </h3>
+      <div class="representation">
+         <h6> plain parameters</h6>
+         <table>
+            <tr>
+               <th>parameter</th>
+               <th>value</th>
+               <th>description</th>
+            </tr>
+            <tr>
+               <td>
+                  <p>
+                     <strong>result</strong>
+                  </p>
+               </td>
+               <td>
+                  <p>
+                     <em>
+                        <a href="http://www.w3.org/TR/xmlschema-2/#long">long</a>
+                     </em>
+                  </p>
+               </td>
+               <td>
+                  <p>document data</p>
+               </td>
+            </tr>
+         </table>
+      </div>
+      <h3 id="d2e83">application/xml (<abbr title="{urn:ru:ilb:jparestresource:view} documents">view:documents</abbr>)</h3>
+      <p>documents data</p>
+      <div class="representation">
+         <h6>XML Schema</h6>
+         <p>
+            <em>Source: <a href="view.xsd">view.xsd</a>
+            </em>
+         </p>
+         <pre>&lt;xsd:element name="documents"&gt;
+        &lt;xsd:complexType&gt;
+            &lt;xsd:sequence&gt;
+                &lt;xsd:element maxOccurs="unbounded" minOccurs="0" ref="document"/&gt;
+            &lt;/xsd:sequence&gt;
+        &lt;/xsd:complexType&gt;
+    &lt;/xsd:element&gt;</pre>
+      </div>
+      <h3 id="d2e89">application/json<abbr title="{http://wadl.dev.java.net/2009/02} "/>
+      </h3>
+      <p>documents data</p>
+      <h3 id="d2e127">application/xml (<abbr title="{urn:ru:ilb:jparestresource:view} document">view:document</abbr>)</h3>
+      <p>document data</p>
+      <div class="representation">
+         <h6>XML Schema</h6>
+         <p>
+            <em>Source: <a href="view.xsd">view.xsd</a>
+            </em>
+         </p>
+         <pre>&lt;xsd:element name="document" type="document"/&gt;</pre>
+      </div>
+      <h3 id="d2e133">application/json<abbr title="{http://wadl.dev.java.net/2009/02} "/>
+      </h3>
+      <p>document data</p>
+      <h3 id="d2e148">application/xml (<abbr title="{urn:ru:ilb:jparestresource:view} document">view:document</abbr>)</h3>
+      <p>document data</p>
+      <div class="representation">
+         <h6>XML Schema</h6>
+         <p>
+            <em>Source: <a href="view.xsd">view.xsd</a>
+            </em>
+         </p>
+         <pre>&lt;xsd:element name="document" type="document"/&gt;</pre>
+      </div>
+      <h3 id="d2e154">application/json<abbr title="{http://wadl.dev.java.net/2009/02} "/>
+      </h3>
+      <p>document data</p>
+      <h3 id="d2e172">*/*<abbr title="{http://wadl.dev.java.net/2009/02} "/>
+      </h3>
+      <div class="representation">
+         <h6> plain parameters</h6>
+         <table>
+            <tr>
+               <th>parameter</th>
+               <th>value</th>
+               <th>description</th>
+            </tr>
+            <tr>
+               <td>
+                  <p>
+                     <strong>result</strong>
+                  </p>
+               </td>
+               <td>
+                  <p>
+                     <em>
+                        <a href="http://www.w3.org/TR/xmlschema-2/#string">string</a>
+                     </em>
+                  </p>
+               </td>
+               <td/>
+            </tr>
+         </table>
+      </div>
+   </body>
+</html>
