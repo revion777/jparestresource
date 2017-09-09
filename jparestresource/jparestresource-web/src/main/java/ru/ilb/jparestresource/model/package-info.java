@@ -1,4 +1,5 @@
 //@javax.xml.bind.annotation.XmlSchema(namespace = "urn:ru:ilb:jparestresource:model", elementFormDefault = javax.xml.bind.annotation.XmlNsForm.QUALIFIED)
+//Requires common-jpa-jaxb dependency
 //@XmlAccessorFactory(LazyAccessorFactoryImpl.class)
 //@XmlJavaTypeAdapters({
 //    @XmlJavaTypeAdapter(type = LocalDate.class, value = LocalDateXmlAdapter.class),

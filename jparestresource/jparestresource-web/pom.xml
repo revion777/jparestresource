@@ -185,7 +185,7 @@
                 </dependency>
                 <dependency>
                     <groupId>ru.ilb.common</groupId>
-                    <artifactId>common-jpa-jaxb</artifactId>
+                    <artifactId>common-jpa</artifactId>
                     <version>${ilb-common.version}</version>
                 </dependency>
                 <!-- swagger api and ui support -->
