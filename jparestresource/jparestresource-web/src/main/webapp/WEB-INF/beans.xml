@@ -63,6 +63,12 @@
     <!-- Configure JPA support, comment if no JPA needed -->
     <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean" >
         <property name="persistenceXmlLocation" value="classpath*:META-INF/persistence.xml"></property>
+        <property name="jpaPropertyMap" ref="jpaPropertyMap"/>
+    </bean>
+    <jee:jndi-lookup id="dataSource" jndi-name="jdbc/jparestresource"/>
+    <bean id="jpaPropertyMap" class="ru.ilb.common.jpa.configurations.PersistancePropertiesFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="model" value="META-INF/model.jpa"/>
     </bean>
     <!-- Configure JPA declarative transaction support for @Transactional annotated classes -->
     <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
