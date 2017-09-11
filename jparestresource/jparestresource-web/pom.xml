@@ -14,10 +14,6 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven-source-plugin.version>2.4</maven-source-plugin.version>
-        <maven-javadoc-plugin.version>2.10.3</maven-javadoc-plugin.version>
-        <maven-gpg-plugin.version>1.6</maven-gpg-plugin.version>
-        <ilb-common.version>1.17</ilb-common.version>
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
         <mysql-connector.version>5.1.31</mysql-connector.version>
         <eclipselink.version>2.6.4</eclipselink.version>
@@ -25,7 +21,6 @@
         <org.springframework.version>4.3.3.RELEASE</org.springframework.version>
         <maven.test.skip>true</maven.test.skip>
         <maven.tomcat.skip>${maven.test.skip}</maven.tomcat.skip>
-        <maven-JarWar-Plugin.Version>2.4</maven-JarWar-Plugin.Version>
         <org.mapstruct.version>1.1.0.Final</org.mapstruct.version>        
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>        
