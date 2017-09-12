@@ -11,6 +11,7 @@
     <packaging>war</packaging>
 
     <name>jparestresource-web</name>
+    <description>REST service</description>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -82,7 +83,7 @@
                 <configuration>
                     <source>${maven.compiler.source}</source>
                     <target>${maven.compiler.target}</target>
-<!--                    <fork>true</fork>
+                    <!--                    <fork>true</fork>
                     <proc>none</proc>
                     <compilerArgs>
                         <arg>-XDignore.symbol.file</arg>
@@ -753,6 +754,61 @@
                 </plugins>
             </build>
         </profile>        
+        <profile>
+            <id>site</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>            
+            <build>
+                <plugins>
+            
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>xml-maven-plugin</artifactId>
+                        <version>1.0.1</version>
+                        <executions>
+                            <execution>
+                                <phase>pre-site</phase>
+                                <goals>
+                                    <goal>transform</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <transformationSets>
+                                <transformationSet>
+                                    <dir>${basedir}/src/main/resources/META-INF</dir>
+                                    <includes>
+                                        <include>model.jpa</include>
+                                    </includes>                            
+                                    <stylesheet>${basedir}/src/site/jpa_stylesheets/jpa_documentation.xsl</stylesheet>
+                                    <parameters>
+                                        <parameter>
+                                            <name>model_image</name>
+                                            <value>model.jpa.png</value>
+                                        </parameter>
+                                    </parameters>                            
+                                    <outputDir>${basedir}/src/site/xhtml</outputDir>
+                                    <fileMappers>
+                                        <fileMapper implementation="org.codehaus.plexus.components.io.filemappers.FileExtensionMapper">
+                                            <targetExtension>.xhtml</targetExtension>
+                                        </fileMapper>
+                                    </fileMappers>                            
+                                </transformationSet>
+                            </transformationSets>
+                        </configuration>
+                        <dependencies>
+                            <dependency>
+                                <groupId>net.sf.saxon</groupId>
+                                <artifactId>saxon</artifactId>
+                                <version>8.7</version>
+                            </dependency>
+                        </dependencies>                
+                    </plugin>            
+                    
+                </plugins>
+            </build>
+        </profile>     
     </profiles>
     <reporting>
         <plugins>
@@ -771,5 +827,4 @@
             </plugin>  
         </plugins>
     </reporting>    
-    
 </project>
