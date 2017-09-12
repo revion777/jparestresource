@@ -35,4 +35,15 @@
                 <goal>site</goal>
             </goals>
         </action>
+        <action>
+            <actionName>CUSTOM-schemagen</actionName>
+            <displayName>schemagen</displayName>
+            <goals>
+                <goal>install</goal>
+            </goals>
+            <activatedProfiles>
+                <activatedProfile>server</activatedProfile>
+                <activatedProfile>schemagen</activatedProfile>
+            </activatedProfiles>
+        </action>        
     </actions>

@@ -545,11 +545,6 @@
                                             <token>xs:</token>
                                             <value>xsd:</value>
                                         </replacement>
-                                        <replacement>
-                                            <token>xmlns:xs</token>
-                                            <value>xmlns:xsd</value>
-                                        </replacement>                                        
-                                        
                                     </replacements>
                                 </configuration>
                             </execution>
