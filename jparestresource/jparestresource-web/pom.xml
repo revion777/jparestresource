@@ -491,7 +491,7 @@
         <profile>
             <id>java2swagger</id>
             <activation>
-                <activeByDefault>false</activeByDefault>
+                <activeByDefault>true</activeByDefault>
             </activation> 
             <build>
                 <plugins>
@@ -505,10 +505,16 @@
                                 <artifactId>guava</artifactId>
                                 <version>20.0</version>
                             </dependency>                     
+                            <dependency>
+                                <groupId>org.eclipse.persistence</groupId>
+                                <artifactId>javax.persistence</artifactId>
+                                <version>${javax-persistence.version}</version>
+                            </dependency>
+                            
                         </dependencies>
                         <configuration>
                             <resourcePackages>
-                                <resourcePackage>${project.build.sourceDirectory}/ru/ilb/jparestresource/web</resourcePackage>
+                                <resourcePackage>ru.ilb.jparestresource.web</resourcePackage>
                             </resourcePackages>
                         </configuration>
                         <executions>
@@ -518,7 +524,7 @@
                                 <goals>
                                     <goal>java2swagger</goal>
                                 </goals>
-                              </execution>
+                            </execution>
                         </executions>
                     </plugin>
                 </plugins>
