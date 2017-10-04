@@ -5,7 +5,7 @@ import { Link } from 'react-router';
 
 
 function DocumentsTable (props) {
-  if (!props.documents || !props.documents.length) {
+  if (!props.documents || !props.documents.document || !props.documents.document.length) {
     return (<Message warning>Документы не найдены</Message>);
   }
   return (
@@ -20,7 +20,7 @@ function DocumentsTable (props) {
         </Table.Row>
       </Table.Header>
       <Table.Body>
-        {props.documents.map((document, index) => (
+        {props.documents.document.map((document, index) => (
           <Table.Row key={index}>
             <Table.Cell>
               {document.id}

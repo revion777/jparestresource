@@ -10,6 +10,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import org.apache.cxf.jaxrs.ext.search.SearchContext;
+import org.apache.cxf.rs.security.cors.CrossOriginResourceSharing;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,17 +24,18 @@ import ru.ilb.jparestresource.view.Documents;
 
 @Path("documents")
 @Api("documents")
+//@CrossOriginResourceSharing(allowOrigins = {"http://area51.mil:31415"},allowCredentials = true)
 public class DocumentsResourceImpl implements DocumentsResource {
-    
-    @Autowired 
+
+    @Autowired
     AuthorizationHandler authorizationHandler;
 
     @Autowired
     JaxbHelper jaxbHelper;
-    
+
     @Autowired
     private DocumentMapper documentMapper;
-    
+
     private UriInfo uriInfo;
 
     @Context
@@ -88,7 +90,6 @@ public class DocumentsResourceImpl implements DocumentsResource {
 //    public void createBatch(List<Document> documents) {
 //        documentRepository.save(documents);
 //    }
-
     @Override
     public Documents list(Integer limit, String order) {
         return documentMapper.createWrapperFromEntities(documentRepository.findAll());
@@ -119,5 +120,4 @@ public class DocumentsResourceImpl implements DocumentsResource {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
- 
 }
