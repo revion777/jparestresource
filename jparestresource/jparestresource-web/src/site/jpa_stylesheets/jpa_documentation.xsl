@@ -18,6 +18,7 @@
     xmlns="http://www.w3.org/1999/xhtml"
     exclude-result-prefixes="xsl xs html ns jpa"
 >
+    <xsl:import href="locales.xsl"/>
     <xsl:import href="markdown.xsl"/>
     <xsl:output 
         method="html" 
@@ -28,7 +29,6 @@
     />
     <xsl:param name="model_image"/>
     
-
     <!-- main template -->
         
     <xsl:template match="/jpa:entity-mappings">   
@@ -39,7 +39,7 @@
                         <xsl:when test="jpa:description">
                             <xsl:value-of select="jpa:description"/>
                         </xsl:when>
-                        <xsl:otherwise>My Model</xsl:otherwise>
+                        <xsl:otherwise>unnamed model</xsl:otherwise>
                     </xsl:choose>                 
                 </title>
                 <meta charset="utf-8"/>
@@ -124,14 +124,18 @@
                         <xsl:when test="jpa:description">
                             <xsl:value-of select="jpa:description"/>
                         </xsl:when>
-                        <xsl:otherwise>My Model</xsl:otherwise>
+                        <xsl:otherwise>unnamed model</xsl:otherwise>
                     </xsl:choose>
                 </h1>
                 <xsl:variable name="package" select="@pkg"/>
                 <ol>
                     <xsl:apply-templates select="jpa:entity" mode="toc"/>
                 </ol>
-                <h2 id="entities">Entities</h2>
+                <h2 id="entities">
+                    <xsl:call-template name="locales-translate">
+                        <xsl:with-param name="source" select="'Entities'"/>
+                    </xsl:call-template>                    
+                </h2>
                 <xsl:if test="$model_image">
                     <img src="{$model_image}"/>
                 </xsl:if>
@@ -149,7 +153,7 @@
             <xsl:call-template name="get-entity-ref"/>
         </xsl:variable>
         <xsl:variable name="name">
-            <xsl:call-template name="get-entity-name"/>
+            <xsl:call-template name="get-entity-name-class"/>
         </xsl:variable>
         
         <li>
@@ -169,25 +173,78 @@
             <xsl:call-template name="get-entity-ref"/>
         </xsl:variable>
         <xsl:variable name="name">
-            <xsl:call-template name="get-entity-name"/>
+            <xsl:call-template name="get-entity-name-class"/>
         </xsl:variable>
         <div class="entity">
+            <xsl:variable name="id" select="@id"/>
             <h3 id="{$ref}">
                 <xsl:value-of select="$name"/>
             </h3>
-            <p>URN: <xsl:value-of select="concat($package,'.',@class)"/></p>
-            <xsl:if test="@superclassId">
-                
-            </xsl:if>
             <p>
                 <xsl:call-template name="get-entity-description"/>
             </p>
+            <p>URN: <xsl:value-of select="concat($package,'.',@class)"/></p>
+            <xsl:if test="//jpa:entity[@superclassId=$id]">
+                <p>
+                    <xsl:call-template name="locales-translate">
+                        <xsl:with-param name="source" select="'See also'"/>
+                    </xsl:call-template>                    
+                    <xsl:text>: </xsl:text>            
+                    <xsl:for-each select="//jpa:entity[@superclassId=$id]">
+                        <xsl:call-template name="get-entity-link">
+                            <xsl:with-param name="id" select="@id"/>
+                        </xsl:call-template>
+                        <xsl:if test="position()!=last()">
+                            <xsl:text>, </xsl:text>
+                        </xsl:if>
+                    </xsl:for-each>
+                </p>
+            </xsl:if>
+            <xsl:if test="@superclassId">
+                <p>
+                    <xsl:call-template name="locales-translate">
+                        <xsl:with-param name="source" select="'Extends'"/>
+                    </xsl:call-template>                    
+                    <xsl:text>: </xsl:text>
+            
+                    <xsl:call-template name="get-entity-link">
+                        <xsl:with-param name="id" select="@superclassId"/>
+                    </xsl:call-template>
+                </p>
+            </xsl:if>
+            <xsl:if test="@abs='true'">
+                <p>
+                    <xsl:call-template name="locales-translate">
+                        <xsl:with-param name="source" select="'Abstract'"/>
+                    </xsl:call-template>                    
+                    <xsl:text>: </xsl:text>
+                    <xsl:call-template name="locales-translate">
+                        <xsl:with-param name="source" select="'Yes'"/>
+                    </xsl:call-template>               
+                </p>
+            </xsl:if>
             <table>
                 <tr>
-                    <th>attribute</th>
-                    <th>type</th>
-                    <th>flags</th>
-                    <th>description</th>
+                    <th>
+                        <xsl:call-template name="locales-translate">
+                            <xsl:with-param name="source" select="'Attribute'"/>
+                        </xsl:call-template>                    
+                    </th>
+                    <th>
+                        <xsl:call-template name="locales-translate">
+                            <xsl:with-param name="source" select="'Description'"/>
+                        </xsl:call-template>                    
+                    </th>
+                    <th>
+                        <xsl:call-template name="locales-translate">
+                            <xsl:with-param name="source" select="'Type'"/>
+                        </xsl:call-template>                    
+                    </th>
+                    <th>
+                        <xsl:call-template name="locales-translate">
+                            <xsl:with-param name="source" select="'Flags'"/>
+                        </xsl:call-template>                    
+                    </th>
                 </tr>
                 <xsl:apply-templates select="jpa:attributes/jpa:*" mode="attributes"/>
 
@@ -196,10 +253,13 @@
         
     </xsl:template>
     
-    <xsl:template match="jpa:basic|jpa:id" mode="attributes">
+    <xsl:template match="jpa:basic" mode="attributes"> <!-- |jpa:id -->
         <tr>
             <td>
                 <xsl:value-of select="@name"/>
+            </td>
+            <td>
+                <xsl:value-of select="jpa:des"/>
             </td>
             <td>
                 <xsl:choose>
@@ -209,22 +269,129 @@
                         </a>
                     </xsl:when>
                     <xsl:otherwise>
-                        <xsl:value-of select="@attribute-type"/>
+                        <xsl:call-template name="locales-translate">
+                            <xsl:with-param name="source" select="@attribute-type"/>
+                        </xsl:call-template>                    
+                        <xsl:if test="jpa:column/@precision">
+                            <xsl:value-of select="concat('(',jpa:column/@precision,',',jpa:column/@scale,')')"/>
+                        </xsl:if>
                     </xsl:otherwise>
                 </xsl:choose>
                 <xsl:if test="@length">(<xsl:value-of select="@length"/>)</xsl:if>
             </td>
             <td>
-                <xsl:if test="local-name(.)='id'">PK</xsl:if>
-                <xsl:if test="jpa:column/@unique='true'">UQ</xsl:if>
-                <xsl:if test="jpa:column/@nullable='false'">NOT NULL</xsl:if>
+                <xsl:if test="local-name(.)='id'">
+                    <span>
+                        <xsl:attribute name="title">
+                            <xsl:call-template name="locales-translate">
+                                <xsl:with-param name="source" select="'Primary key'"/>
+                            </xsl:call-template>                    
+                        </xsl:attribute>
+                        PK
+                    </span>
+                </xsl:if>
+                <xsl:if test="jpa:column/@unique='true'">
+                    <span>
+                        <xsl:attribute name="title">
+                            <xsl:call-template name="locales-translate">
+                                <xsl:with-param name="source" select="'Unique key'"/>
+                            </xsl:call-template>                    
+                        </xsl:attribute>
+                        UQ
+                    </span>                    
+                </xsl:if>
+                <xsl:if test="jpa:column/@nullable='false'">
+                    <span>
+                        <xsl:attribute name="title">
+                            <xsl:call-template name="locales-translate">
+                                <xsl:with-param name="source" select="'Not null'"/>
+                            </xsl:call-template>                    
+                        </xsl:attribute>
+                        NN
+                    </span>
+                </xsl:if>
             </td>
-            <td>
-                <xsl:value-of select="jpa:des"/>
-            </td>            
         </tr>
         
     </xsl:template>
+    <xsl:template match="jpa:one-to-many" mode="attributes">
+        <tr>
+            <td>
+                <xsl:value-of select="@name"/>
+            </td>
+            <td>
+                <xsl:choose>
+                    <xsl:when test="jpa:des">
+                        <xsl:value-of select="jpa:des"/>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:call-template name="get-entity-link-name">
+                            <xsl:with-param name="id" select="@connected-entity-id"/>
+                        </xsl:call-template>
+                    </xsl:otherwise>
+                </xsl:choose>
+            </td>
+            <td>
+                <xsl:call-template name="locales-translate">
+                    <xsl:with-param name="source" select="'List'"/>
+                </xsl:call-template>                    
+                <xsl:text> </xsl:text>
+                <xsl:call-template name="get-entity-link">
+                    <xsl:with-param name="id" select="@connected-entity-id"/>
+                </xsl:call-template>
+            </td>
+            <td>
+                <xsl:if test="jpa:join-column/@nullable='false'">
+                    <span>
+                        <xsl:attribute name="title">
+                            <xsl:call-template name="locales-translate">
+                                <xsl:with-param name="source" select="'Not null'"/>
+                            </xsl:call-template>                    
+                        </xsl:attribute>
+                        NN
+                    </span>
+                </xsl:if>
+            </td>
+        </tr>
+    </xsl:template>
+    <xsl:template match="jpa:one-to-one" mode="attributes">
+        <tr>
+            <td>
+                <xsl:value-of select="@name"/>
+            </td>
+            <td>
+                <xsl:choose>
+                    <xsl:when test="jpa:des">
+                        <xsl:value-of select="jpa:des"/>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:call-template name="get-entity-link-name">
+                            <xsl:with-param name="id" select="@connected-entity-id"/>
+                        </xsl:call-template>
+                    </xsl:otherwise>
+                </xsl:choose>
+            </td>
+            <td>
+                <xsl:text> </xsl:text>
+                <xsl:call-template name="get-entity-link">
+                    <xsl:with-param name="id" select="@connected-entity-id"/>
+                </xsl:call-template>
+            </td>
+            <td>
+                <xsl:if test="jpa:join-column/@nullable='false'">
+                    <span>
+                        <xsl:attribute name="title">
+                            <xsl:call-template name="locales-translate">
+                                <xsl:with-param name="source" select="'Not null'"/>
+                            </xsl:call-template>                    
+                        </xsl:attribute>
+                        NN
+                    </span>
+                </xsl:if>
+            </td>
+        </tr>
+    </xsl:template>
+    
     <xsl:template match="jpa:many-to-one" mode="attributes">
         <xsl:if test="@optional='false' and not (jpa:join-column/@nullable='false')">
             <xsl:message terminate="no">
@@ -239,18 +406,37 @@
                 <xsl:value-of select="@name"/>
             </td>
             <td>
+                <xsl:choose>
+                    <xsl:when test="jpa:des">
+                        <xsl:value-of select="jpa:des"/>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:call-template name="get-entity-link-name">
+                            <xsl:with-param name="id" select="@connected-entity-id"/>
+                        </xsl:call-template>
+                    </xsl:otherwise>
+                </xsl:choose>
+            </td>
+            <td>
                 <xsl:call-template name="get-entity-link">
                     <xsl:with-param name="id" select="@connected-entity-id"/>
                 </xsl:call-template>
             </td>
             <td>
-                <xsl:if test="jpa:join-column/@nullable='false'">NOT NULL</xsl:if>
-            </td>
-            <td>
-                <xsl:value-of select="jpa:des"/>
+                <xsl:if test="jpa:join-column/@nullable='false'">
+                    <span>
+                        <xsl:attribute name="title">
+                            <xsl:call-template name="locales-translate">
+                                <xsl:with-param name="source" select="'Not null'"/>
+                            </xsl:call-template>                    
+                        </xsl:attribute>
+                        NN
+                    </span>
+                </xsl:if>
             </td>
         </tr>
     </xsl:template>
+    
             
     <!-- utilities -->
     <xsl:template name="get-entity-link">
@@ -262,13 +448,20 @@
         </xsl:variable>
         <xsl:variable name="conName">
             <xsl:for-each select="/jpa:entity-mappings/jpa:entity[@id=$id]">
-                <xsl:call-template name="get-entity-name"/>
+                <xsl:call-template name="get-entity-name-class"/>
             </xsl:for-each>
         </xsl:variable>
         <a href="#{$conRef}">
             <xsl:value-of select="$conName"/>
         </a>
     </xsl:template>
+    <xsl:template name="get-entity-link-name">
+        <xsl:param name="id"/>
+        <xsl:for-each select="/jpa:entity-mappings/jpa:entity[@id=$id]">
+            <xsl:call-template name="get-entity-name"/>
+        </xsl:for-each>
+    </xsl:template>
+    
 
     <xsl:template name="get-entity-ref">
         <xsl:choose>
@@ -283,14 +476,22 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
+    
+    <xsl:template name="get-entity-name-class">
+        <xsl:call-template name="get-entity-name">
+        </xsl:call-template>
+        <xsl:if test="jpa:des">
+            <xsl:value-of select="concat(' (',@class,')')"/>
+        </xsl:if>
+    </xsl:template>
 
     <xsl:template name="get-entity-name">
         <xsl:choose>
             <xsl:when test="jpa:des and contains(jpa:des, '&#10;')">
-                <xsl:value-of select="concat(substring-before(jpa:des, '&#10;'), ' (',@class,')')"/>
+                <xsl:value-of select="substring-before(jpa:des, '&#10;')"/>
             </xsl:when>
             <xsl:when test="jpa:des">
-                <xsl:value-of select="concat(jpa:des, ' (',@class,')')"/>
+                <xsl:value-of select="jpa:des"/>
             </xsl:when>
             <xsl:otherwise>
                 <xsl:value-of select="@class"/>
@@ -307,13 +508,6 @@
             <xsl:otherwise>
             </xsl:otherwise>
         </xsl:choose>
-        <xsl:if test="@superclassId">
-            Наследует 
-            <xsl:call-template name="get-entity-link">
-                <xsl:with-param name="id" select="@superclassId"/>
-            </xsl:call-template>
-                
-        </xsl:if>
     </xsl:template>
 
     <!-- entity-encode markup for display -->

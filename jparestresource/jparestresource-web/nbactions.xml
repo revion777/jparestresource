@@ -36,17 +36,6 @@
             </goals>
         </action>
         <action>
-            <actionName>CUSTOM-site</actionName>
-            <displayName>site run</displayName>
-            <goals>
-                <goal>site</goal>
-                <goal>site:run</goal>
-            </goals>
-            <properties>
-                <port>9090</port>
-            </properties>
-        </action>
-        <action>
             <actionName>CUSTOM-schemagen</actionName>
             <displayName>schemagen</displayName>
             <goals>

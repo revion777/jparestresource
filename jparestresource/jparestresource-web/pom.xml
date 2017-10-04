@@ -385,87 +385,6 @@
             </dependencies>
         </profile>
         <profile>
-            <id>swagger</id>
-            <activation>
-                <activeByDefault>false</activeByDefault>
-            </activation>            
-            <build>
-                <plugins>
-        
-                    <plugin>
-                        <groupId>com.github.kongchen</groupId>
-                        <artifactId>swagger-maven-plugin</artifactId>
-                        <version>3.1.5</version>
-                        <configuration>
-                            <apiSources>
-                                <apiSource>
-                                    <springmvc>false</springmvc>
-                                    <locations>
-                                        <location>ru.ilb.jparestresource.web</location>
-                                    </locations>
-                                    <schemes>
-                                        <scheme>http</scheme>
-                                        <scheme>https</scheme>
-                                    </schemes>
-                                    <host>localhost:8080</host>
-                                    <basePath>/web</basePath>
-                                    <info>
-                                        <title>jparestresource</title>
-                                        <version>v1</version>
-                                        <description>
-                                            This is a sample.
-                                        </description>
-                                        <termsOfService>
-                                            https://github.com/ilb/jparestresource
-                                        </termsOfService>
-                                        <contact>
-                                            <email>slavb18@gmail.com</email>
-                                            <name>Viacheslav Borisov</name>
-                                        </contact>
-                                        <license>
-                                            <url>http://www.apache.org/licenses/LICENSE-2.0.html</url>
-                                            <name>Apache 2.0</name>
-                                        </license>
-                                    </info>
-                                    <!--                                    <securityDefinitions>
-                                        <securityDefinition>
-                                            <name>basicAuth</name>
-                                            <type>basic</type>
-                                        </securityDefinition>
-                                        <securityDefinition>
-                                            <json>/securityDefinition.json</json>
-                                        </securityDefinition>
-                                    </securityDefinitions>-->
-                                    <templatePath>${basedir}/swagger/strapdown.html.hbs</templatePath>
-                                    <outputPath>${basedir}/target/generated/swagger.html</outputPath>
-                                    <swaggerDirectory>${basedir}/target/generated/swagger-ui</swaggerDirectory>
-                                    <attachSwaggerArtifact>true</attachSwaggerArtifact>
-                                    <!--                                    <modelConverters>
-                                        <modelConverter>io.swagger.validator.BeanValidator</modelConverter>
-                                    </modelConverters>-->
-                                </apiSource>
-                            </apiSources>
-                        </configuration>
-                        <executions>
-                            <execution>
-                                <phase>compile</phase>
-                                <goals>
-                                    <goal>generate</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                        <dependencies>
-                            <!--                            <dependency>
-                                <groupId>io.swagger</groupId>
-                                <artifactId>swagger-hibernate-validations</artifactId>
-                                <version>1.5.6</version>
-                            </dependency>-->
-                        </dependencies>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-        <profile>
             <id>java2swagger</id>
             <activation>
                 <activeByDefault>true</activeByDefault>
@@ -475,7 +394,7 @@
                     <plugin>
                         <groupId>org.apache.cxf</groupId>
                         <artifactId>cxf-java2swagger-plugin</artifactId>
-                        <version>3.2.0</version>
+                        <version>${apache-cxf.version}</version>
                         <dependencies>
                             <dependency>
                                 <groupId>com.google.guava</groupId>
@@ -825,6 +744,10 @@
                                     <stylesheet>${basedir}/src/site/jpa_stylesheets/jpa_documentation.xsl</stylesheet>
                                     <parameters>
                                         <parameter>
+                                            <name>lang</name>
+                                            <value>ru</value>
+                                        </parameter>
+                                        <parameter>
                                             <name>model_image</name>
                                             <value>model.jpa.png</value>
                                         </parameter>
@@ -886,55 +809,14 @@
                                 </goals>
                                 <configuration>
                                     <tasks>
-                                        <move file="${basedir}/target/site/META-INF/resources/webjars/swagger-ui/${swagger.ui.version}" tofile="${basedir}/target/site/swagger-ui"/>
+                                        <move file="${basedir}/target/site/META-INF/resources/webjars/swagger-ui/${swagger.ui.version}" tofile="${basedir}/target/site/swagger-ui" failonerror="false"/>
+                                        <copy file="${basedir}/src/main/resources/META-INF/model.jpa.png" tofile="${basedir}/target/site/model.jpa.png"/>
+                                        <copy file="${basedir}/target/generated/json/swagger.json" tofile="${basedir}/target/site/swagger.json"/>
                                     </tasks>
                                 </configuration>
                             </execution>
                         </executions>
                     </plugin>                    
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-resources-plugin</artifactId>
-                        <version>2.6</version>
-                        <executions>
-                            <execution>
-                                <id>copy-model-png</id>
-                                <phase>site</phase>
-                                <goals>
-                                    <goal>copy-resources</goal>
-                                </goals>
-                                <configuration>
-                                    <outputDirectory>${basedir}/target/site</outputDirectory>
-                                    <resources>
-                                        <resource>
-                                            <directory>${basedir}/src/main/resources/META-INF</directory>
-                                            <includes>
-                                                <include>*png</include>
-                                            </includes>
-                                        </resource>
-                                    </resources>
-                                </configuration>
-                            </execution>
-                            <execution>
-                                <id>copy-swagger-json</id>
-                                <phase>site</phase>
-                                <goals>
-                                    <goal>copy-resources</goal>
-                                </goals>
-                                <configuration>
-                                    <outputDirectory>${basedir}/target/site/swagger-ui</outputDirectory>
-                                    <resources>
-                                        <resource>
-                                            <directory>${basedir}/target/generated/json</directory>
-                                            <includes>
-                                                <include>swagger.json</include>
-                                            </includes>
-                                        </resource>
-                                    </resources>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>                     
                     <plugin>
                         <groupId>com.google.code.maven-replacer-plugin</groupId>
                         <artifactId>replacer</artifactId>
@@ -953,7 +835,7 @@
 <!--                                            <token>"http://petstore.swagger.io/v2/swagger.json"</token>
                                             <value>document.location.href.replace(/\/index\.html/, '')+'/swagger.json'</value>-->
                                             <token>http://petstore.swagger.io/v2/swagger.json</token>
-                                            <value>swagger.json</value>
+                                            <value>../swagger.json</value>
                                         </replacement>
                                     </replacements>
                                 </configuration>
