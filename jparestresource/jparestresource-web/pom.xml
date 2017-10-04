@@ -20,6 +20,7 @@
         <eclipselink.version>2.6.4</eclipselink.version>
         <javax-persistence.version>2.1.0</javax-persistence.version>
         <org.springframework.version>4.3.3.RELEASE</org.springframework.version>
+        <swagger.ui.version>2.2.10-1</swagger.ui.version>
         <maven.test.skip>true</maven.test.skip>
         <maven.tomcat.skip>${maven.test.skip}</maven.tomcat.skip>
         <org.mapstruct.version>1.1.0.Final</org.mapstruct.version>        
@@ -188,7 +189,7 @@
                 <dependency>
                     <groupId>org.webjars</groupId>
                     <artifactId>swagger-ui</artifactId>
-                    <version>2.2.10-1</version>
+                    <version>${swagger.ui.version}</version>
                 </dependency>        
                 <dependency>
                     <groupId>org.apache.cxf</groupId>
@@ -460,35 +461,6 @@
             </build>
         </profile>
         <profile>
-            <id>swaggerclient</id>
-            <activation>
-                <activeByDefault>false</activeByDefault>
-            </activation>            
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>io.swagger</groupId>
-                        <artifactId>swagger-codegen-maven-plugin</artifactId>
-                        <version>2.2.3</version>
-                        <executions>
-                            <execution>
-                                <goals>
-                                    <goal>generate</goal>
-                                </goals>
-                                <configuration>
-                                    <inputSpec>${basedir}/target/generated/swagger-ui/swagger.json</inputSpec>
-                                    <language>html</language>
-                                    <configOptions>
-                                        <sourceFolder>src/gen/java/main</sourceFolder>
-                                    </configOptions>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile> 
-        <profile>
             <id>java2swagger</id>
             <activation>
                 <activeByDefault>true</activeByDefault>
@@ -530,6 +502,33 @@
                 </plugins>
             </build>
         </profile>       
+        <profile>
+            <id>swaggerclient</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>            
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>io.swagger</groupId>
+                        <artifactId>swagger-codegen-maven-plugin</artifactId>
+                        <version>2.2.3</version>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>generate</goal>
+                                </goals>
+                                <phase>process-classes</phase>
+                                <configuration>
+                                    <inputSpec>${basedir}/target/generated/json/swagger.json</inputSpec>
+                                    <language>php</language>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile> 
         <profile>
             <id>schemagen</id>
             <activation>
@@ -842,13 +841,59 @@
                             </dependency>
                         </dependencies>                
                     </plugin>            
+                   
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-dependency-plugin</artifactId>
+                        <version>2.1</version>
+                        <executions>
+                            <execution>
+                                <id>unpackswagger</id>
+                                <phase>site</phase>
+                                <goals>
+                                    <goal>unpack</goal>
+                                </goals>
+                                <configuration>
+                                    <artifactItems>
+                                        <artifactItem>
+                                            <groupId>org.webjars</groupId>
+                                            <artifactId>swagger-ui</artifactId>
+                                            <version>${swagger.ui.version}</version>                                            
+                                            <type>jar</type>
+                                            <overWrite>false</overWrite>
+                                            <outputDirectory>${basedir}/target/site</outputDirectory>
+                                            <includes>META-INF/resources/webjars/swagger-ui/${swagger.ui.version}/**</includes>
+                                        </artifactItem>
+                                    </artifactItems>
+                                </configuration>
+                            </execution>                    
+                        </executions>            
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-antrun-plugin</artifactId>
+                        <version>1.7</version>
+                        <executions>
+                            <execution>
+                                <phase>site</phase>
+                                <goals>
+                                    <goal>run</goal>
+                                </goals>
+                                <configuration>
+                                    <tasks>
+                                        <move file="${basedir}/target/site/META-INF/resources/webjars/swagger-ui/${swagger.ui.version}" tofile="${basedir}/target/site/swagger-ui"/>
+                                    </tasks>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>                    
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-resources-plugin</artifactId>
                         <version>2.6</version>
                         <executions>
                             <execution>
-                                <id>copy-resources</id>
+                                <id>copy-model-png</id>
                                 <phase>site</phase>
                                 <goals>
                                     <goal>copy-resources</goal>
@@ -865,8 +910,53 @@
                                     </resources>
                                 </configuration>
                             </execution>
+                            <execution>
+                                <id>copy-swagger-json</id>
+                                <phase>site</phase>
+                                <goals>
+                                    <goal>copy-resources</goal>
+                                </goals>
+                                <configuration>
+                                    <outputDirectory>${basedir}/target/site/swagger-ui</outputDirectory>
+                                    <resources>
+                                        <resource>
+                                            <directory>${basedir}/target/generated/json</directory>
+                                            <includes>
+                                                <include>swagger.json</include>
+                                            </includes>
+                                        </resource>
+                                    </resources>
+                                </configuration>
+                            </execution>
                         </executions>
-                    </plugin>                    
+                    </plugin>                     
+                    <plugin>
+                        <groupId>com.google.code.maven-replacer-plugin</groupId>
+                        <artifactId>replacer</artifactId>
+                        <version>1.5.3</version>
+                        <executions>
+                            <execution>
+                                <id>replace-swagger-json</id>
+                                <phase>site</phase>
+                                <goals>
+                                    <goal>replace</goal>
+                                </goals>
+                                <configuration>
+                                    <file>${basedir}/target/site/swagger-ui/index.html</file>
+                                    <replacements>
+                                        <replacement>
+<!--                                            <token>"http://petstore.swagger.io/v2/swagger.json"</token>
+                                            <value>document.location.href.replace(/\/index\.html/, '')+'/swagger.json'</value>-->
+                                            <token>http://petstore.swagger.io/v2/swagger.json</token>
+                                            <value>swagger.json</value>
+                                        </replacement>
+                                    </replacements>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    
+                    
                 </plugins>
             </build>
         </profile>     

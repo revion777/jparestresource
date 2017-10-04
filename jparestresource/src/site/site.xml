@@ -8,13 +8,6 @@
     <body>
         <menu ref="reports" />
         <menu ref="modules"/> 
-        <menu name="Documentation" inherit="bottom">
-            <item href="jparestresource-api/application.html" name="Application resources" />
-            <item href="jparestresource-web/model.html" name="Data model" />
-            <item href="jparestresource-web/example.html" name="Markdown" />
-            
-        </menu>
-        
     </body>
 </project>
 

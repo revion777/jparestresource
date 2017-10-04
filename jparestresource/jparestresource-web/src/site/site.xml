@@ -2,6 +2,13 @@
 <project name="jparestresource-web">
     <body>
         <menu ref="parent"/>
+        <menu name="Documentation">
+            <item href="model.html" name="Data model" />
+            <item href="swagger-ui/" name="Swagger UI" />
+            <item href="example.html" name="Markdown" />
+            
+        </menu>
+        
     </body>
 </project>
 
