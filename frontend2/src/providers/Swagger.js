@@ -38,6 +38,7 @@ class EnsureSwagger extends Component {
       swaggerInitStart();
       new Swagger({
         url: '/jparestresource/web/swagger.json',
+        // url: 'http://localhost:8080/jparestresource-web/web/swagger.json',
         usePromise: true,
       })
         .then((client) => {
