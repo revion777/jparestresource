@@ -152,7 +152,7 @@
         <property name="schemaLocations" ref="schemaLocations"/>
     </bean>-->
     <util:list id="schemaLocations">
-        <value>classpath:schemas/jparestresource/model.xsd</value>
+        <value>classpath:schemas/jparestresource/command.xsd</value>
     </util:list>
     <util:list id="extraClass" value-type="java.lang.Class">
     </util:list>
@@ -182,13 +182,6 @@
         <property name="addMessageToResponse" value="true"/>
     </bean>
     
-    <!-- Configure param converters for jaxrs:server and jaxrs:client -->
-    <util:map id="mapParamConverters">
-        <entry key="java.util.Date" value="ru.ilb.common.jaxrs.converters.DateParamConverter" value-type=""/>
-    </util:map>
-    <bean id="mapParamConverterProvider" class="ru.ilb.common.jaxrs.providers.MapParamConverterProvider">
-        <property name="converters" ref="mapParamConverters"/>
-    </bean>
     <!-- Provider to mail fatal errors to server admin -->
     <bean id="exceptionHandler" class="ru.ilb.common.jaxrs.exceptionhandler.SendMailExceptionHandler">
         <property name="mailTo" value="${SERVER_ADMIN}"/>
