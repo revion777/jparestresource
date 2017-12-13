@@ -76,4 +76,36 @@
         <resource-env-ref-type>javax.jms.Queue</resource-env-ref-type>
     </resource-env-ref>
     -->
+    
+    <!-- task scheduler config, see also web.xml -->
+    <!--
+    <env-entry>
+        <description>taskExecutor corePoolSize</description>
+        <env-entry-name>corePoolSize</env-entry-name>
+        <env-entry-type>java.lang.String</env-entry-type>
+        <env-entry-value>10</env-entry-value>
+    </env-entry>
+    <env-entry>
+        <description>taskExecutor maxPoolSize</description>
+        <env-entry-name>maxPoolSize</env-entry-name>
+        <env-entry-type>java.lang.String</env-entry-type>
+        <env-entry-value>30</env-entry-value>
+    </env-entry>
+    <env-entry>
+        <description>taskExecutor queueCapacity</description>
+        <env-entry-name>queueCapacity</env-entry-name>
+        <env-entry-type>java.lang.String</env-entry-type>
+        <env-entry-value>0</env-entry-value>
+    </env-entry>
+    -->
+    
+    <!-- tasks schedule -->
+    <!--
+    <env-entry>
+        <description>example task description</description>
+        <env-entry-name>scheduleImportItemsSource</env-entry-name>
+        <env-entry-type>java.lang.String</env-entry-type>
+        <env-entry-value>0 0 6 * * ?</env-entry-value> 
+    </env-entry>    
+    -->
 </web-app>
