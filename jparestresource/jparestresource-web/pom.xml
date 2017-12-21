@@ -63,6 +63,12 @@
             <version>${project.version}</version>        
             <classifier>javadoc</classifier>
         </dependency>
+        <!-- Example aspectlock -->
+<!--        <dependency>
+            <groupId>ru.ilb.aspectlock</groupId>
+            <artifactId>redisson-aspect-lock</artifactId>
+            <version>1.1</version>        
+        </dependency> -->
         <dependency>
             <groupId>javax</groupId>
             <artifactId>javaee-web-api</artifactId>
@@ -229,6 +235,11 @@
                 </dependency>
                 <dependency>
                     <groupId>org.springframework</groupId>
+                    <artifactId>spring-aop</artifactId>
+                    <version>${org.springframework.version}</version>
+                </dependency>
+                <dependency>
+                    <groupId>org.springframework</groupId>
                     <artifactId>spring-context-support</artifactId>
                     <version>${org.springframework.version}</version>
                 </dependency>
@@ -387,7 +398,7 @@
         <profile>
             <id>java2swagger</id>
             <activation>
-                <activeByDefault>true</activeByDefault>
+                <activeByDefault>false</activeByDefault>
             </activation> 
             <build>
                 <plugins>
@@ -429,7 +440,7 @@
         <profile>
             <id>swaggerclient</id>
             <activation>
-                <activeByDefault>true</activeByDefault>
+                <activeByDefault>false</activeByDefault>
             </activation>            
             <build>
                 <plugins>
@@ -832,7 +843,7 @@
                                     <file>${basedir}/target/site/swagger-ui/index.html</file>
                                     <replacements>
                                         <replacement>
-<!--                                            <token>"http://petstore.swagger.io/v2/swagger.json"</token>
+                                            <!--                                            <token>"http://petstore.swagger.io/v2/swagger.json"</token>
                                             <value>document.location.href.replace(/\/index\.html/, '')+'/swagger.json'</value>-->
                                             <token>http://petstore.swagger.io/v2/swagger.json</token>
                                             <value>../swagger.json</value>

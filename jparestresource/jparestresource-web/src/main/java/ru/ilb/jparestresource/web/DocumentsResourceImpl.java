@@ -10,11 +10,11 @@ import javax.ws.rs.Path;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import org.apache.cxf.jaxrs.ext.search.SearchContext;
-import org.apache.cxf.rs.security.cors.CrossOriginResourceSharing;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import ru.ilb.jparestresource.api.DocumentsResource;
+import ru.ilb.jparestresource.logic.DocumentLogic;
 import ru.ilb.jparestresource.mappers.DocumentMapper;
 import ru.ilb.jparestresource.utils.JaxbHelper;
 import ru.ilb.jparestresource.repositories.DocumentRepository;
@@ -35,6 +35,9 @@ public class DocumentsResourceImpl implements DocumentsResource {
 
     @Autowired
     private DocumentMapper documentMapper;
+    
+    @Autowired 
+    private DocumentLogic documentLogic;
 
     private UriInfo uriInfo;
 
@@ -55,41 +58,6 @@ public class DocumentsResourceImpl implements DocumentsResource {
 
     private static final Logger LOG = LoggerFactory.getLogger(DocumentsResourceImpl.class);
 
-//    @Override
-//    @Transactional
-//    public Document find(long  documentId) {
-//        return documentRepository.findOne(documentId);
-//    }
-//
-//    @Override
-//    @Transactional
-//    public long create(Document document) {
-//        return documentRepository.save(document).getId();
-//    }
-//
-//    @Override
-//    @Transactional
-//    public void edit(long  documentId, Document document) {
-//        Document doc = documentRepository.findOne(documentId);
-//        BeanUtils.copyProperties(document, doc, new String[]{"id"});
-//    }
-//
-//    @Override
-//    @Transactional
-//    public void remove(long  documentId) {
-//        documentRepository.delete(documentId);
-//    }
-//
-//    @Override
-//    public List<Document> list(Integer limit, String order) {
-//        return documentRepository.findAll();
-//    }
-//
-//    @Override
-//    @Transactional
-//    public void createBatch(List<Document> documents) {
-//        documentRepository.save(documents);
-//    }
     @Override
     public Documents list(Integer limit, String order) {
         return documentMapper.createWrapperFromEntities(documentRepository.findAll());
@@ -112,7 +80,7 @@ public class DocumentsResourceImpl implements DocumentsResource {
 
     @Override
     public Document find(long documentId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return documentMapper.createFromEntity(documentLogic.getDocument(documentId));
     }
 
     @Override

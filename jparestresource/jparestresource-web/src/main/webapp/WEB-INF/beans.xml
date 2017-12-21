@@ -13,6 +13,7 @@
        xmlns:cxf="http://cxf.apache.org/core"
        xmlns:jpa="http://www.springframework.org/schema/data/jpa"
        xmlns:task="http://www.springframework.org/schema/task"
+       xmlns:aop="http://www.springframework.org/schema/aop"
        xsi:schemaLocation="
         http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
@@ -26,8 +27,9 @@
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
         http://cxf.apache.org/core http://cxf.apache.org/schemas/core.xsd
         http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd
-        http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa.xsd" 
-       xmlns:aop="http://www.springframework.org/schema/aop">
+        http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa.xsd
+        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd" 
+       >
 
     <!-- Load defaults from apache cxf -->
     <import resource="classpath:META-INF/cxf/cxf.xml" />
@@ -39,6 +41,8 @@
     <context:annotation-config/>
     <!--Activates @Configurable -->
     <context:spring-configured/>
+    <!-- Activates @Aspect beans --> 
+    <aop:aspectj-autoproxy />
     
     <!-- uncomment to enable @Cacheable support
     <cache:annotation-driven mode="aspectj"/>
@@ -49,6 +53,9 @@
         <property name="cacheBuilder" ref="cacheBuilder"/>
     </bean>
     -->    
+
+    <!-- Example aspectlock -->    
+    <!--<bean class="com.github.sadstool.redissonaspectlock.config.RedissonAspectLockAutoConfiguration"/>-->
     
     <!-- uncomment to enable AsyncTaskManager support -->
     <!--<bean id="asyncTaskManager" class="ru.ilb.common.jaxrs.async.AsyncTaskManager" destroy-method="destroy"/>-->
@@ -225,7 +232,7 @@
     </bean>
 
     <!-- auto register @Component annotated classes -->
-    <context:component-scan base-package="ru.ilb.jparestresource.web,ru.ilb.jparestresource.core,ru.ilb.jparestresource.utils,ru.ilb.jparestresource.mappers"/>
+    <context:component-scan base-package="ru.ilb.jparestresource.web,ru.ilb.jparestresource.core,ru.ilb.jparestresource.utils,ru.ilb.jparestresource.mappers,ru.ilb.jparestresource.logic"/>
     <jaxrs:server address="/" basePackages="ru.ilb.jparestresource.web,ru.ilb.common.jaxrs.providers,ru.ilb.common.jaxrs.exceptionhandler">
         <jaxrs:providers>
             <ref bean="jaxbContextResolver"/>
