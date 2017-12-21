@@ -29,6 +29,16 @@
     </properties>
 
 
+    <dependencyManagement>
+        <dependencies>
+            <!-- fix jcabi-aspects aspectjrt=1.8.7 -->
+            <dependency>
+                <groupId>org.aspectj</groupId>
+                <artifactId>aspectjrt</artifactId>
+                <version>1.8.9</version>
+            </dependency>        
+        </dependencies>
+    </dependencyManagement>        
 
     <dependencies>
         <dependency>
@@ -63,8 +73,14 @@
             <version>${project.version}</version>        
             <classifier>javadoc</classifier>
         </dependency>
-        <!-- Example aspectlock -->
+        <!-- @com.jcabi.aspects.Loggable and other, see http://www.yegor256.com/2014/06/01/aop-aspectj-java-method-logging.html-->
 <!--        <dependency>
+            <groupId>com.jcabi</groupId>
+            <artifactId>jcabi-aspects</artifactId>
+            <version>0.22.6</version>
+        </dependency>        -->
+        <!-- Example aspectlock -->
+        <!--        <dependency>
             <groupId>ru.ilb.aspectlock</groupId>
             <artifactId>redisson-aspect-lock</artifactId>
             <version>1.1</version>        
@@ -781,7 +797,7 @@
                         </dependencies>                
                     </plugin>            
                    
-<!--                    <plugin>
+                    <!--                    <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-dependency-plugin</artifactId>
                         <version>2.1</version>
@@ -828,7 +844,7 @@
                             </execution>
                         </executions>
                     </plugin>                    
-<!--                    <plugin>
+                    <!--                    <plugin>
                         <groupId>com.google.code.maven-replacer-plugin</groupId>
                         <artifactId>replacer</artifactId>
                         <version>1.5.3</version>
