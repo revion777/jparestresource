@@ -781,7 +781,7 @@
                         </dependencies>                
                     </plugin>            
                    
-                    <plugin>
+<!--                    <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-dependency-plugin</artifactId>
                         <version>2.1</version>
@@ -807,7 +807,7 @@
                                 </configuration>
                             </execution>                    
                         </executions>            
-                    </plugin>
+                    </plugin>-->
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-antrun-plugin</artifactId>
@@ -820,15 +820,15 @@
                                 </goals>
                                 <configuration>
                                     <tasks>
-                                        <move file="${basedir}/target/site/META-INF/resources/webjars/swagger-ui/${swagger.ui.version}" tofile="${basedir}/target/site/swagger-ui" failonerror="false"/>
+                                        <!--<move file="${basedir}/target/site/META-INF/resources/webjars/swagger-ui/${swagger.ui.version}" tofile="${basedir}/target/site/swagger-ui" failonerror="false"/>-->
                                         <copy file="${basedir}/src/main/resources/META-INF/model.jpa.png" tofile="${basedir}/target/site/model.jpa.png"/>
-                                        <copy file="${basedir}/target/generated/json/swagger.json" tofile="${basedir}/target/site/swagger.json"/>
+                                        <!--<copy file="${basedir}/target/generated/json/swagger.json" tofile="${basedir}/target/site/swagger.json"/>-->
                                     </tasks>
                                 </configuration>
                             </execution>
                         </executions>
                     </plugin>                    
-                    <plugin>
+<!--                    <plugin>
                         <groupId>com.google.code.maven-replacer-plugin</groupId>
                         <artifactId>replacer</artifactId>
                         <version>1.5.3</version>
@@ -843,8 +843,6 @@
                                     <file>${basedir}/target/site/swagger-ui/index.html</file>
                                     <replacements>
                                         <replacement>
-                                            <!--                                            <token>"http://petstore.swagger.io/v2/swagger.json"</token>
-                                            <value>document.location.href.replace(/\/index\.html/, '')+'/swagger.json'</value>-->
                                             <token>http://petstore.swagger.io/v2/swagger.json</token>
                                             <value>../swagger.json</value>
                                         </replacement>
@@ -852,9 +850,7 @@
                                 </configuration>
                             </execution>
                         </executions>
-                    </plugin>
-                    
-                    
+                    </plugin>-->
                 </plugins>
             </build>
         </profile>     
