@@ -74,7 +74,7 @@
             <classifier>javadoc</classifier>
         </dependency>
         <!-- @com.jcabi.aspects.Loggable and other, see http://www.yegor256.com/2014/06/01/aop-aspectj-java-method-logging.html-->
-<!--        <dependency>
+        <!--        <dependency>
             <groupId>com.jcabi</groupId>
             <artifactId>jcabi-aspects</artifactId>
             <version>0.22.6</version>
@@ -619,9 +619,19 @@
                         <version>2.2</version>
 
                         <configuration>
-                            <path>/jparestresource</path>
+                            <path>/jparestresource-web</path>
                             <contextFile>${basedir}/src/test/resources/tomcat/context.xml</contextFile>
+                            <tomcatUsers>${basedir}/src/test/resources/tomcat/tomcat-users.xml</tomcatUsers>
                             <useTestClasspath>true</useTestClasspath>
+                            <useSeparateTomcatClassLoader>true</useSeparateTomcatClassLoader>
+                            <!--useNaming>true</useNaming-->
+                            <systemProperties>
+                                <java.naming.provider.url>ldaps://devel.net.ilb.ru/c=ru</java.naming.provider.url>
+                                <java.naming.factory.initial>ru.bb.jndi.LdapResourceResolver</java.naming.factory.initial>
+                                <javax.net.ssl.trustStore>${javax.net.ssl.trustStore}</javax.net.ssl.trustStore>
+                                <javax.net.ssl.keyStore>${javax.net.ssl.keyStore}</javax.net.ssl.keyStore>
+                                <javax.net.ssl.keyStorePassword>${javax.net.ssl.keyStorePassword}</javax.net.ssl.keyStorePassword>
+                            </systemProperties>
                         </configuration>
 
                         <executions>
@@ -647,6 +657,7 @@
                             </execution>
                         </executions>
                         <dependencies>
+                            <!-- Used to allow embedded Tomcat to connect to a MySQL database -->
                             <dependency>
                                 <groupId>mysql</groupId>
                                 <artifactId>mysql-connector-java</artifactId>
@@ -661,6 +672,26 @@
                                 <groupId>org.eclipse.persistence</groupId>
                                 <artifactId>eclipselink</artifactId>
                                 <version>${eclipselink.version}</version>
+                            </dependency>
+                            <dependency>
+                                <groupId>ru.bb.tomcat</groupId>
+                                <artifactId>tomcatrealm</artifactId>
+                                <version>3.3</version>
+                            </dependency>
+                            <dependency>
+                                <groupId>org.springframework</groupId>
+                                <artifactId>spring-instrument-tomcat</artifactId>
+                                <version>${org.springframework.version}</version>
+                            </dependency>
+                            <dependency>
+                                <groupId>org.slf4j</groupId>
+                                <artifactId>slf4j-api</artifactId>
+                                <version>1.7.12</version>
+                            </dependency>
+                            <dependency>
+                                <groupId>org.slf4j</groupId>
+                                <artifactId>jul-to-slf4j</artifactId>
+                                <version>1.7.12</version>
                             </dependency>
                         </dependencies>
                     </plugin>

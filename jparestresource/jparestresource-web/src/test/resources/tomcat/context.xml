@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Context antiJARLocking="true" path="/jparestresource">
+<Context path="/jparestresource-web">
+    <Loader loaderClass="org.springframework.instrument.classloading.tomcat.TomcatInstrumentableClassLoader"/>
     <Resource name="jdbc/jparestresource"
               auth="Container" type="javax.sql.DataSource"
               maxActive="10" maxIdle="1" maxWait="20000"
