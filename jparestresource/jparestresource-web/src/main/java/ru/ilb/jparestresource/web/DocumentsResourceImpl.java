@@ -70,7 +70,7 @@ public class DocumentsResourceImpl implements DocumentsResource {
 
     @Override
     public void createBatch(Documents documents) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        documentRepository.save(documentMapper.createFromDtos(documents.getDocuments()));
     }
 
     @Override

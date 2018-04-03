@@ -1,57 +1,65 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<model:documents xmlns:model="urn:ru:ilb:jparestresource:model">
-    <model:document xmlns:model="urn:ru:ilb:jparestresource:model">
-        <model:id>1</model:id>
-        <model:displayName>Subscription documents</model:displayName>
-        <model:description>Desctiption follows</model:description>
-        <model:docDate>2015-01-01</model:docDate>
-    </model:document>
-    <model:document xmlns:model="urn:ru:ilb:jparestresource:model">
-        <model:id>2</model:id>
-        <model:displayName>Loan treaty</model:displayName>
-        <model:description>Some document</model:description>
-        <model:docDate>2015-04-25</model:docDate>
-    </model:document>
-    <model:document xmlns:model="urn:ru:ilb:jparestresource:model">
-        <model:id>3</model:id>
-        <model:displayName>Loan application</model:displayName>
-        <model:description>Client loan application form</model:description>
-        <model:docDate>2015-06-14</model:docDate>
-    </model:document>
-    <model:document xmlns:model="urn:ru:ilb:jparestresource:model">
-        <model:id>4</model:id>
-        <model:displayName>Drivers License</model:displayName>
-        <model:description/>
-        <model:docDate>2015-08-16</model:docDate>
-    </model:document>
-    <model:document xmlns:model="urn:ru:ilb:jparestresource:model">
-        <model:id>5</model:id>
-        <model:displayName>ID Card</model:displayName>
-        <model:description/>
-        <model:docDate>2015-02-01</model:docDate>
-    </model:document>
-    <model:document xmlns:model="urn:ru:ilb:jparestresource:model">
-        <model:id>6</model:id>
-        <model:displayName>Passport</model:displayName>
-        <model:description/>
-        <model:docDate>2015-10-06</model:docDate>
-    </model:document>
-    <model:document xmlns:model="urn:ru:ilb:jparestresource:model">
-        <model:id>7</model:id>
-        <model:displayName>Loan checks</model:displayName>
-        <model:description>Check results</model:description>
-        <model:docDate>2015-04-25</model:docDate>
-    </model:document>
-    <model:document xmlns:model="urn:ru:ilb:jparestresource:model">
-        <model:id>9</model:id>
-        <model:displayName>Questionnaire</model:displayName>
-        <model:description>Client questionnaire</model:description>
-        <model:docDate>2015-01-10</model:docDate>
-    </model:document>
-    <model:document xmlns:model="urn:ru:ilb:jparestresource:model">
-        <model:id>10</model:id>
-        <model:displayName>Subscription documents</model:displayName>
-        <model:description>Desctiption follows</model:description>
-        <model:docDate>2015-01-01</model:docDate>
-    </model:document>
-</model:documents>
+<view:documents xmlns:view="urn:ru:ilb:jparestresource:view">
+    <view:document xmlns:view="urn:ru:ilb:jparestresource:view">
+        <view:id>1</view:id>
+        <view:displayName>Subscription documents</view:displayName>
+        <view:description>Desctiption follows</view:description>
+        <view:docDate>2015-01-01</view:docDate>
+    </view:document>
+    <view:document xmlns:view="urn:ru:ilb:jparestresource:view">
+        <view:id>2</view:id>
+        <view:displayName>Loan treaty</view:displayName>
+        <view:description>Some document</view:description>
+        <view:docDate>2015-04-25</view:docDate>
+    </view:document>
+    <view:document xmlns:view="urn:ru:ilb:jparestresource:view">
+        <view:id>3</view:id>
+        <view:displayName>Loan application</view:displayName>
+        <view:description>Client loan application form</view:description>
+        <view:docDate>2015-06-14</view:docDate>
+    </view:document>
+    <view:document xmlns:view="urn:ru:ilb:jparestresource:view">
+        <view:id>4</view:id>
+        <view:displayName>Drivers License</view:displayName>
+        <view:description/>
+        <view:docDate>2015-08-16</view:docDate>
+        <view:docfile>
+            <view:userName>testuser4</view:userName>
+            <view:confirm>true</view:confirm>
+        </view:docfile>
+    </view:document>
+    <view:document xmlns:view="urn:ru:ilb:jparestresource:view">
+        <view:id>5</view:id>
+        <view:displayName>ID Card</view:displayName>
+        <view:description/>
+        <view:docDate>2015-02-01</view:docDate>
+    </view:document>
+    <view:document xmlns:view="urn:ru:ilb:jparestresource:view">
+        <view:id>6</view:id>
+        <view:displayName>Passport</view:displayName>
+        <view:description/>
+        <view:docDate>2015-10-06</view:docDate>
+    </view:document>
+    <view:document xmlns:view="urn:ru:ilb:jparestresource:view">
+        <view:id>7</view:id>
+        <view:displayName>Loan checks</view:displayName>
+        <view:description>Check results</view:description>
+        <view:docDate>2015-04-25</view:docDate>
+    </view:document>
+    <view:document xmlns:view="urn:ru:ilb:jparestresource:view">
+        <view:id>8</view:id>
+        <view:displayName>Questionnaire</view:displayName>
+        <view:description>Client questionnaire</view:description>
+        <view:docDate>2015-01-10</view:docDate>
+    </view:document>
+    <view:document xmlns:view="urn:ru:ilb:jparestresource:view">
+        <view:id>9</view:id>
+        <view:displayName>Subscription documents</view:displayName>
+        <view:description>Desctiption follows</view:description>
+        <view:docDate>2015-01-01</view:docDate>
+        <view:docfile>
+            <view:userName>testuser9</view:userName>
+            <view:confirm>false</view:confirm>
+        </view:docfile>
+    </view:document>
+</view:documents>

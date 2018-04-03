@@ -78,7 +78,7 @@
                                         <extraarg>-xjc-Xsetters-mode=direct</extraarg>
                                         <extraarg>-xjc-Xfluent-api</extraarg>
                                         <extraarg>-xjc-enableIntrospection</extraarg>
-                                        <extraarg>-xjc-XBeanVal</extraarg>
+                                        <!--extraarg>-xjc-XBeanVal</extraarg-->
                                         <!-- generate episode file
                                         <extraarg>-xjc-episode</extraarg>
                                         <extraArg>-xjc${project.build.directory}/classes/schemas/jparestresource/jparestresource.episode</extraArg>

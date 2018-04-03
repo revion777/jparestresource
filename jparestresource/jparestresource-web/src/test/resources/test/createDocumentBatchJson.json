@@ -1,4 +1,4 @@
-[{
+{"document":[{
         "id": 1,
         "displayName": "Subscription documents",
         "description": "Desctiption follows",
@@ -34,13 +34,13 @@
         "description": "Check results",
         "docDate": "2015-04-25"
     }, {
-        "id": 9,
+        "id": 8,
         "displayName": "Questionnaire",
         "description": "Client questionnaire",
         "docDate": "2015-01-10"
     }, {
-        "id": 10,
+        "id": 9,
         "displayName": "Subscription documents",
         "description": "Desctiption follows",
         "docDate": "2015-01-01"
-    }]
+    }]}
