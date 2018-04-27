@@ -9,7 +9,6 @@
         <!--<aspect name="com.jcabi.aspects.aj.MethodLogger" />-->
     </aspects>
     <weaver options="-XnoInline -Xreweavable -verbose -showWeaveInfo">
-        <include within="ru.ilb.jparestresource..*" />
-        <include within="ru.ilb.common.jpa.jaxb..*" />
+        <include within="ru.ilb..*" />
     </weaver>
 </aspectj>
