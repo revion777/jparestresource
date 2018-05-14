@@ -28,7 +28,7 @@
         http://cxf.apache.org/core http://cxf.apache.org/schemas/core.xsd
         http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd
         http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa.xsd
-        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd" 
+        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd" 
        >
 
     <!-- Load defaults from apache cxf -->
@@ -41,7 +41,7 @@
     <context:annotation-config/>
     <!--Activates @Configurable -->
     <context:spring-configured/>
-    <!-- Activates @Aspect beans --> 
+    <!-- Activates @Aspect beans, spring-aop dependency required --> 
     <aop:aspectj-autoproxy />
     
     <!-- uncomment to enable @Cacheable support
