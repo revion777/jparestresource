@@ -27,7 +27,6 @@
         doctype-public="-//W3C//DTD XHTML 1.0 Transitional//EN"
         doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"
     />
-    <xsl:param name="model_image"/>
     
     <!-- main template -->
         
@@ -136,9 +135,6 @@
                         <xsl:with-param name="source" select="'Entities'"/>
                     </xsl:call-template>                    
                 </h2>
-                <xsl:if test="$model_image">
-                    <img src="{$model_image}"/>
-                </xsl:if>
                 <xsl:apply-templates select="jpa:entity" mode="list">
                     <xsl:with-param name="package" select="$package"/>
                 </xsl:apply-templates>                    
