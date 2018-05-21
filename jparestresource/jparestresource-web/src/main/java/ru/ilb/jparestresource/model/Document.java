@@ -157,9 +157,10 @@ public class Document implements Serializable {
         return this;
     }
 
-    public void addDocfiles(Docfile docfile) {
+    public Document addDocfiles(Docfile docfile) {
         docfile.setDocument(this);
         getDocfiles().add(docfile);
+        return this;
     }
 
 }
