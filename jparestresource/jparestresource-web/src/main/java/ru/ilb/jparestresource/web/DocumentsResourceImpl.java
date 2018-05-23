@@ -5,6 +5,8 @@
  */
 package ru.ilb.jparestresource.web;
 
+import com.github.sadstool.redissonaspectlock.annotation.LockKey;
+import com.github.sadstool.redissonaspectlock.annotation.Lockable;
 import io.swagger.annotations.Api;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Context;
@@ -81,6 +83,7 @@ public class DocumentsResourceImpl implements DocumentsResource {
 
     @Override
     //@Cacheable("find")
+    @Lockable
     public Document find(long documentId) {
         return documentMapper.createFromEntity(documentLogic.getDocument(documentId));
     }
