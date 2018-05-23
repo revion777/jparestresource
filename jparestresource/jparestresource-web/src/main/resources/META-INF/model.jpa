@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<jpa:entity-mappings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:java="http://jcp.org/en/jsr/detail?id=270" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:jpa="http://java.sun.com/xml/ns/persistence/orm" pkg="ru.ilb.jparestresource.model" v="3.1" rws="_14881688460591" Pws="_14881688460591" cws="_14881688460591" persistenceUnitName="jparestresource" sm="false" xs="true" id="_14855761330684" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm orm_2_1.xsd">
+<jpa:entity-mappings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:java="http://jcp.org/en/jsr/detail?id=270" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:jpa="http://java.sun.com/xml/ns/persistence/orm" ptype="MONOLITH" ppkg="ru.ilb.jparestresource" epkg="model" v="3.1" rws="_14881688460591" Pws="_14881688460591" cws="_14881688460591" persistenceUnitName="jparestresource" sm="false" xs="true" id="_14855761330684" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm orm_2_1.xsd">
     <jpa:description>jparestresource model</jpa:description>
     <jpa:entity compositePrimaryKeyClass="DocfilePK" abs="false" class="Docfile" v="true" jbn="false" xre="true" m="false" rootElement="_14855761330684" id="_14855761330685">
         <jpa:annotation e="true" n="@ru.ilb.common.jpa.history.AutoHistory"/>
@@ -19,10 +19,9 @@
                 <jpa:xwm nil="false" req="false"/>
                 <jpa:xm nil="false" req="false"/>
             </jpa:basic>
-            <jpa:many-to-one optional="true" primaryKey="false" connected-entity-id="_14855761330696" connected-attribute-id="_148557613307823" v="true" xvt="I_E" name="document" id="_148557613307714">
-                <jpa:xwm nil="false" req="false"/>
-                <jpa:xm nil="false" req="false"/>
-                <jpa:join-column name="DOCUMENT_ID" rc="ID" unique="false" nullable="false" insertable="true" updatable="true" column-definition="" table=""/>
+            <jpa:many-to-one optional="true" primaryKey="false" connected-entity-id="_14855761330696" connected-attribute-id="_1527073199140125" v="true" xvt="" name="document" id="_1527073199132124">
+                <jpa:xwm/>
+                <jpa:xm/>
             </jpa:many-to-one>
             <jpa:id attribute-type="Long" v="true" xvt="" name="id" id="_14855761330767">
                 <jpa:xwm nil="false" req="false"/>
@@ -53,20 +52,9 @@
                 <jpa:xwm nil="false" req="false"/>
                 <jpa:xm nil="false" req="false"/>
             </jpa:basic>
-            <jpa:one-to-many orp="false" own="false" collection-type="java.util.List" connected-entity-id="_14855761330685" connected-attribute-id="_148557613307714" fetch="LAZY" v="true" xvt="E_R" name="docfiles" id="_148557613307823">
-                <jpa:xwm nil="false" req="false"/>
-                <jpa:xm nil="false" req="false"/>
-                <jpa:snp loc="PRE_GETTER" e="true">        if (this.docfiles == null) {
-            this.docfiles = new ArrayList&lt;&gt;();
-        }</jpa:snp>
-                <jpa:snp loc="AFTER_METHOD" e="true">    public Document addDocfiles(Docfile docfile) {
-        docfile.setDocument(this);
-        getDocfiles().add(docfile);
-        return this;
-    }</jpa:snp>
-                <jpa:cascade>
-                    <jpa:cascade-all/>
-                </jpa:cascade>
+            <jpa:one-to-many orp="false" collection-type="java.util.List" cit="java.util.ArrayList" connected-entity-id="_14855761330685" connected-attribute-id="_1527073199132124" v="true" xvt="" name="docfiles" id="_1527073199140125">
+                <jpa:xwm/>
+                <jpa:xm/>
             </jpa:one-to-many>
             <jpa:id attribute-type="Long" v="true" xvt="" name="id" id="_148557613307715">
                 <jpa:xwm nil="false" req="false"/>

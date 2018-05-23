@@ -5,12 +5,11 @@ package ru.ilb.jparestresource.model;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -38,9 +37,9 @@ public class Document implements Serializable {
     /**
      * Document name
      */
-    @XmlElement
     @Basic
     @Size(min = 1, max = 255, message = "must be beweeen 1 and 255 chars")
+    @XmlElement
     private String displayName;
 
     /**
@@ -55,8 +54,8 @@ public class Document implements Serializable {
     @Basic
     private LocalDate docDate;
 
-    @XmlElementRef
-    @OneToMany(cascade = {CascadeType.ALL}, fetch = FetchType.LAZY, targetEntity = Docfile.class, mappedBy = "document")
+    @OneToMany(mappedBy = "document")
+    @XmlTransient
     private List<Docfile> docfiles;
 
     public Long getId() {
@@ -142,8 +141,8 @@ public class Document implements Serializable {
     }
 
     public List<Docfile> getDocfiles() {
-        if (this.docfiles == null) {
-            this.docfiles = new ArrayList<>();
+        if (docfiles == null) {
+            docfiles = new ArrayList<>();
         }
         return this.docfiles;
     }
@@ -157,10 +156,14 @@ public class Document implements Serializable {
         return this;
     }
 
-    public Document addDocfiles(Docfile docfile) {
-        docfile.setDocument(this);
+    public void addDocfile(Docfile docfile) {
         getDocfiles().add(docfile);
-        return this;
+        docfile.setDocument(this);
+    }
+
+    public void removeDocfile(Docfile docfile) {
+        getDocfiles().remove(docfile);
+        docfile.setDocument(null);
     }
 
 }

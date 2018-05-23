@@ -11,9 +11,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import org.eclipse.persistence.oxm.annotations.XmlInverseReference;
 import ru.ilb.common.jpa.history.AutoHistory;
 import javax.xml.bind.annotation.*;
 import java.util.ArrayList;
@@ -47,9 +45,7 @@ public class Docfile implements Serializable {
     @Basic
     private String userName;
 
-    @XmlInverseReference(mappedBy = "docfiles")
-    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Document.class)
-    @JoinColumn(name = "DOCUMENT_ID", referencedColumnName = "ID", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
     private Document document;
 
     public Long getId() {
