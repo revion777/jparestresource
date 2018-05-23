@@ -75,11 +75,11 @@
             <classifier>javadoc</classifier>
         </dependency>
         <!-- @com.jcabi.aspects.Loggable and other, see http://www.yegor256.com/2014/06/01/aop-aspectj-java-method-logging.html-->
-        <!--        <dependency>
+        <dependency>
             <groupId>com.jcabi</groupId>
             <artifactId>jcabi-aspects</artifactId>
             <version>0.22.6</version>
-        </dependency>        -->
+        </dependency>
         <!-- Example aspectlock -->
         <!--        <dependency>
             <groupId>ru.ilb.aspectlock</groupId>
@@ -727,6 +727,10 @@
                                 <aspectLibrary>
                                     <groupId>org.springframework</groupId>
                                     <artifactId>spring-aspects</artifactId>
+                                </aspectLibrary>
+                                <aspectLibrary>
+                                    <groupId>com.jcabi</groupId>
+                                    <artifactId>jcabi-aspects</artifactId>
                                 </aspectLibrary>
                             </aspectLibraries>
                             <verbose>true</verbose>

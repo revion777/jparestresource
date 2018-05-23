@@ -15,7 +15,7 @@
  */
 package ru.ilb.jparestresource.logic;
 
-//import com.jcabi.aspects.Loggable;
+import com.jcabi.aspects.Loggable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ru.ilb.jparestresource.model.Document;
@@ -30,7 +30,7 @@ public class DocumentLogic {
     @Autowired
     DocumentRepository documentRepository;
     
-    //@Loggable(Loggable.INFO)
+    @Loggable(Loggable.INFO)
     public Document getDocument(long documentId){
         return documentRepository.findOne(documentId);
     }
