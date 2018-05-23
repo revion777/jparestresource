@@ -36,7 +36,7 @@
             <dependency>
                 <groupId>org.aspectj</groupId>
                 <artifactId>aspectjrt</artifactId>
-                <version>1.8.9</version>
+                <version>1.8.13</version>
             </dependency>        
         </dependencies>
     </dependencyManagement>        
@@ -678,68 +678,61 @@
                 </plugins>
             </build>
         </profile>        
+        <!-- Static weaving
+        1. comment <context:load-time-weaver/> [beans.xml]
+        2. uncomment <property name="eclipselink.weaving" value="static"/> [persistance.xml]
+        3. switch activeByDefault=true
+        -->
         <profile>
             <id>static-weaving</id>
             <activation>
-                <activeByDefault>false</activeByDefault>
+                <activeByDefault>true</activeByDefault>
             </activation>            
             <build>
                 <plugins>
-
-                    <!-- Static weaver for EclipseLink 
-                    1. comment <context:load-time-weaver/> [beans.xml]
-                    2. uncomment <property name="eclipselink.weaving" value="static"/> [persistance.xml]
-                    3. switch activeByDefault=true
-                    -->
                     <plugin>
-                        <groupId>com.ethlo.persistence.tools</groupId>
-                        <artifactId>eclipselink-maven-plugin</artifactId>
-                        <version>2.6.4.2</version>
+                        <groupId>de.empulse.eclipselink</groupId>
+                        <artifactId>staticweave-maven-plugin</artifactId>
+                        <version>1.0.0</version>
                         <executions>
                             <execution>
                                 <phase>process-classes</phase>
                                 <goals>
                                     <goal>weave</goal>
                                 </goals>
+                                <configuration>
+                                    <persistenceXMLLocation>META-INF/persistence.xml</persistenceXMLLocation>
+                                    <logLevel>ALL</logLevel>
+                                </configuration>
                             </execution>
                         </executions>
-
                         <dependencies>
-                            <dependency>
-                                <groupId>javax.ws.rs</groupId>
-                                <artifactId>javax.ws.rs-api</artifactId>
-                                <version>${javax.ws.rs-api.version}</version>
-                            </dependency>
-                            
                             <dependency>
                                 <groupId>org.eclipse.persistence</groupId>
                                 <artifactId>org.eclipse.persistence.jpa</artifactId>
                                 <version>${eclipselink.version}</version>
                             </dependency>
                         </dependencies>
-
-                    </plugin>
-                </plugins>
-            </build>
-
-        </profile>
-        <profile>
-            <id>static-aspectj</id>
-            <activation>
-                <activeByDefault>false</activeByDefault>
-            </activation>            
-            <build>
-                <plugins>
+                    </plugin>                    
                     <plugin>
                         <groupId>org.codehaus.mojo</groupId>
                         <artifactId>aspectj-maven-plugin</artifactId>
-                        <version>1.10</version>
+                        <version>1.11</version>
                         <configuration>
                             <complianceLevel>${maven.compiler.source}</complianceLevel>
                             <source>${maven.compiler.source}</source>
                             <target>${maven.compiler.target}</target>
+                            <xmlConfigured>src/main/resources/META-INF/aop.xml</xmlConfigured>
+                            <aspectLibraries>
+                                <aspectLibrary>
+                                    <groupId>org.springframework</groupId>
+                                    <artifactId>spring-aspects</artifactId>
+                                </aspectLibrary>
+                            </aspectLibraries>
+                            <verbose>true</verbose>
+                            <showWeaveInfo>true</showWeaveInfo>
+                            <privateScope>true</privateScope>
                         </configuration>
-                        
                         <executions>
                             <execution>
                                 <goals>
@@ -751,7 +744,7 @@
                     </plugin>                    
                 </plugins>
             </build>
-        </profile>        
+        </profile>
         <profile>
             <id>site</id>
             <activation>
