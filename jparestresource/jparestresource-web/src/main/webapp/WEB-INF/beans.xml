@@ -34,7 +34,7 @@
     <!-- Load defaults from apache cxf -->
     <import resource="classpath:META-INF/cxf/cxf.xml" />
     <!--This switches on the load-time weaving for  @Transactional (in case of mode="aspectj"), @Configurable annotated classes -->
-    <context:load-time-weaver/>
+    <!--<context:load-time-weaver/>-->
     <!-- This switches on resolving System properties and JNDI resources in strings like ${propname} -->
     <context:property-placeholder />
     <!--Activates @Required, @Autowired, @PostConstruct, @PreDestroy and @Resource -->
