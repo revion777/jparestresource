@@ -1,38 +1,52 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <jpa:entity-mappings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:java="http://jcp.org/en/jsr/detail?id=270" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:jpa="http://java.sun.com/xml/ns/persistence/orm" pkg="ru.ilb.jparestresource.model" v="3.1" rws="_14881688460591" Pws="_14881688460591" cws="_14881688460591" persistenceUnitName="jparestresource" sm="false" xs="true" id="_14855761330684" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm orm_2_1.xsd">
     <jpa:description>jparestresource model</jpa:description>
-    <jpa:entity compositePrimaryKeyClass="DocfilePK" abs="false" class="Docfile" v="true" xre="true" m="false" rootElement="_14855761330684" id="_14855761330685">
+    <jpa:entity compositePrimaryKeyClass="DocfilePK" abs="false" class="Docfile" v="true" jbn="false" xre="true" m="false" rootElement="_14855761330684" id="_14855761330685">
         <jpa:annotation e="true" n="@ru.ilb.common.jpa.history.AutoHistory"/>
         <jpa:attributes>
-            <jpa:basic optional="true" attribute-type="String" v="true" name="comment" id="_14855761330778">
+            <jpa:basic optional="true" attribute-type="String" v="true" xvt="" name="comment" id="_14855761330778">
                 <jpa:des>File comment</jpa:des>
+                <jpa:xwm nil="false" req="false"/>
+                <jpa:xm nil="false" req="false"/>
             </jpa:basic>
-            <jpa:basic optional="true" attribute-type="Boolean" v="true" name="confirm" id="_14855761330779">
+            <jpa:basic optional="true" attribute-type="Boolean" v="true" xvt="" name="confirm" id="_14855761330779">
                 <jpa:des>Confirmation status</jpa:des>
+                <jpa:xwm nil="false" req="false"/>
+                <jpa:xm nil="false" req="false"/>
             </jpa:basic>
-            <jpa:basic optional="true" attribute-type="String" v="true" name="userName" id="_148557613307711">
+            <jpa:basic optional="true" attribute-type="String" v="true" xvt="" name="userName" id="_148557613307711">
                 <jpa:des>User created</jpa:des>
+                <jpa:xwm nil="false" req="false"/>
+                <jpa:xm nil="false" req="false"/>
             </jpa:basic>
             <jpa:many-to-one optional="true" primaryKey="false" connected-entity-id="_14855761330696" connected-attribute-id="_148557613307823" v="true" xvt="I_E" name="document" id="_148557613307714">
+                <jpa:xwm nil="false" req="false"/>
+                <jpa:xm nil="false" req="false"/>
                 <jpa:join-column name="DOCUMENT_ID" rc="ID" unique="false" nullable="false" insertable="true" updatable="true" column-definition="" table=""/>
             </jpa:many-to-one>
-            <jpa:id attribute-type="Long" v="true" name="id" id="_14855761330767">
+            <jpa:id attribute-type="Long" v="true" xvt="" name="id" id="_14855761330767">
+                <jpa:xwm nil="false" req="false"/>
+                <jpa:xm nil="false" req="false"/>
                 <jpa:column unique="false" nullable="false" insertable="true" updatable="true" length="255" precision="0" scale="0"/>
                 <jpa:generated-value strategy="AUTO"/>
             </jpa:id>
         </jpa:attributes>
     </jpa:entity>
-    <jpa:entity lbl-ref="_148557613307718" compositePrimaryKeyClass="DocumentPK" abs="false" class="Document" v="true" xre="true" m="false" rootElement="_14855761330684" id="_14855761330696">
+    <jpa:entity lbl-ref="_148557613307718" compositePrimaryKeyClass="DocumentPK" abs="false" class="Document" v="true" jbn="false" xre="true" m="false" rootElement="_14855761330684" id="_14855761330696">
         <jpa:annotation e="true" n="@ru.ilb.common.jpa.history.AutoHistory"/>
         <jpa:attributes>
             <jpa:basic optional="true" attribute-type="String" v="true" xvt="E" name="displayName" id="_148557613307718">
                 <jpa:des>Document name</jpa:des>
+                <jpa:xwm nil="false" req="false"/>
+                <jpa:xm nil="false" req="false"/>
                 <jpa:bv>
                     <jpa:si mi="1" ma="255" m="must be beweeen 1 and 255 chars"/>
                 </jpa:bv>
             </jpa:basic>
-            <jpa:basic optional="true" attribute-type="String" v="true" name="description" id="_148557613307716">
+            <jpa:basic optional="true" attribute-type="String" v="true" xvt="" name="description" id="_148557613307716">
                 <jpa:des>Document description</jpa:des>
+                <jpa:xwm nil="false" req="false"/>
+                <jpa:xm nil="false" req="false"/>
             </jpa:basic>
             <jpa:basic optional="true" attribute-type="java.time.LocalDate" v="true" xvt="" name="docDate" id="_148557613307719">
                 <jpa:des>Document date</jpa:des>
@@ -40,11 +54,23 @@
                 <jpa:xm nil="false" req="false"/>
             </jpa:basic>
             <jpa:one-to-many orp="false" own="false" collection-type="java.util.List" connected-entity-id="_14855761330685" connected-attribute-id="_148557613307714" fetch="LAZY" v="true" xvt="E_R" name="docfiles" id="_148557613307823">
+                <jpa:xwm nil="false" req="false"/>
+                <jpa:xm nil="false" req="false"/>
+                <jpa:snp loc="PRE_GETTER" e="true">        if (this.docfiles == null) {
+            this.docfiles = new ArrayList&lt;&gt;();
+        }</jpa:snp>
+                <jpa:snp loc="AFTER_METHOD" e="true">    public Document addDocfiles(Docfile docfile) {
+        docfile.setDocument(this);
+        getDocfiles().add(docfile);
+        return this;
+    }</jpa:snp>
                 <jpa:cascade>
                     <jpa:cascade-all/>
                 </jpa:cascade>
             </jpa:one-to-many>
-            <jpa:id attribute-type="Long" v="true" name="id" id="_148557613307715">
+            <jpa:id attribute-type="Long" v="true" xvt="" name="id" id="_148557613307715">
+                <jpa:xwm nil="false" req="false"/>
+                <jpa:xm nil="false" req="false"/>
                 <jpa:column unique="false" nullable="false" insertable="true" updatable="true" length="255" precision="0" scale="0"/>
                 <jpa:generated-value strategy="AUTO"/>
             </jpa:id>
@@ -58,12 +84,18 @@
     <jpa:snp loc="BEFORE_PACKAGE" e="true">/**
  * This file was generated by the JPA Modeler
  */</jpa:snp>
+    <jpa:snp loc="IMPORT" e="true">import java.util.ArrayList;</jpa:snp>
     <jpa:inf e="true" n="java.io.Serializable"/>
     <jpa:c>
         <ct>java.util.List</ct>
         <ct>java.util.Set</ct>
         <ct>java.util.Map</ct>
         <ct>java.util.Collection</ct>
+        <cit>java.util.ArrayList</cit>
+        <cit>java.util.LinkedList</cit>
+        <cit>java.util.HashSet</cit>
+        <cit>java.util.TreeSet</cit>
+        <cit>java.util.HashMap</cit>
     </jpa:c>
     <jpa:wsl>
         <jpa:ws n="Main" id="_14881688460591">

@@ -114,7 +114,7 @@
     <bean class = "ru.ilb.common.jpa.history.AutoHistoryEntityUtil">
         <property name="entityManagerFactory" ref="entityManagerFactory"/>
     </bean>
-    
+    <bean class="ru.ilb.common.jpa.tools.RepositoryPopulator"/>
     <!-- uncomment to enable CORS support, see https://cwiki.apache.org/confluence/display/CXF20DOC/JAX-RS+CORS, and pom dependency -->
     <bean id="corsFilter" class="org.apache.cxf.rs.security.cors.CrossOriginResourceSharingFilter"/>
 
