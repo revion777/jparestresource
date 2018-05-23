@@ -29,7 +29,7 @@
         http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd
         http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa.xsd
         http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd" 
-       >
+>
 
     <!-- Load defaults from apache cxf -->
     <import resource="classpath:META-INF/cxf/cxf.xml" />
@@ -44,8 +44,11 @@
     <!-- Activates @Aspect beans, spring-aop dependency required --> 
     <aop:aspectj-autoproxy />
     
-    <!-- uncomment to enable @Cacheable support
+    <!-- uncomment to enable @Cacheable support -->
     <cache:annotation-driven mode="aspectj"/>
+    <bean id="cacheManager" class="org.springframework.cache.caffeine.CaffeineCacheManager"/>
+
+    <!-- uncomment to enable guava cache support 
     <bean id="cacheBuilder" class="com.google.common.cache.CacheBuilder" factory-method="from">
         <constructor-arg value="maximumSize=500, expireAfterAccess=300s, expireAfterWrite=300s" />
     </bean>

@@ -13,6 +13,7 @@ import org.apache.cxf.jaxrs.ext.search.SearchContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import ru.ilb.jparestresource.api.DocumentsResource;
 import ru.ilb.jparestresource.logic.DocumentLogic;
 import ru.ilb.jparestresource.mappers.DocumentMapper;
@@ -79,6 +80,7 @@ public class DocumentsResourceImpl implements DocumentsResource {
     }
 
     @Override
+    //@Cacheable("find")
     public Document find(long documentId) {
         return documentMapper.createFromEntity(documentLogic.getDocument(documentId));
     }
