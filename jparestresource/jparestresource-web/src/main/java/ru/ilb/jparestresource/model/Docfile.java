@@ -11,7 +11,6 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import ru.ilb.common.jpa.history.AutoHistory;
 import javax.xml.bind.annotation.*;
@@ -47,8 +46,6 @@ public class Docfile implements Serializable {
     private String userName;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "DOCUMENT_ID", referencedColumnName = "ID", nullable = false)
-    @XmlTransient
     private Document document;
 
     public Long getId() {
