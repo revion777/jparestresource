@@ -38,9 +38,9 @@ public class Document implements Serializable {
     /**
      * Document name
      */
-    @XmlElement
     @Basic
     @Size(min = 1, max = 255, message = "must be beweeen 1 and 255 chars")
+    @XmlElement
     private String displayName;
 
     /**
@@ -55,8 +55,8 @@ public class Document implements Serializable {
     @Basic
     private LocalDate docDate;
 
-    @XmlElementRef
-    @OneToMany(cascade = {CascadeType.ALL}, fetch = FetchType.LAZY, targetEntity = Docfile.class, mappedBy = "document")
+    @OneToMany(cascade = {CascadeType.ALL}, fetch = FetchType.LAZY, mappedBy = "document")
+    @XmlElement
     private List<Docfile> docfiles;
 
     public Long getId() {
