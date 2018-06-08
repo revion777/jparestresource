@@ -59,6 +59,15 @@
                                         <extraarg>-inheritResourceParams</extraarg>
                                         <extraarg>-javaDocs</extraarg>
                                         <extraarg>-xjc-Xjavadoc</extraarg>
+                                        <!-- repMap examples 
+                                        <extraarg>-repMap</extraarg>
+                                        <extraarg>application/*=java.io.InputStream</extraarg>
+                                        <extraarg>-repMap</extraarg>
+                                        <extraarg>image/*=java.io.InputStream</extraarg>
+                                        <extraarg>-repMap</extraarg>
+                                        <extraarg>application/xml=java.lang.String</extraarg>
+                                        -->
+                                        
                                         <extraarg>-tMap</extraarg>
                                         <extraarg>{urn:ru:ilb:jparestresource:core}uuid=java.util.UUID</extraarg>
                                         <extraarg>-beanValidation</extraarg>
