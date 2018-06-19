@@ -126,11 +126,11 @@
         <!-- not need anymore, javadoc is in clasppath -->
         <!--<constructor-arg value="WEB-INF/lib/jparestresource-javadoc.jar"/>-->
     </bean>
-    <bean id="swagger2Serializers" class="org.apache.cxf.jaxrs.swagger.DefaultSwagger2Serializers">
+    <bean id="swagger2Customizer" class="org.apache.cxf.jaxrs.swagger.Swagger2Customizer">
         <property name="javadocProvider" ref="documentationProvider"/>
     </bean>
     <bean id="swagger2Feature" class="org.apache.cxf.jaxrs.swagger.Swagger2Feature">
-        <property name="swagger2Serializers" ref="swagger2Serializers"/>
+        <property name="customizer" ref="swagger2Customizer"/>
         <property name="resourcePackage" value="ru.ilb.jparestresource.web"/>
         <property name="scanAllResources" value="true"/>
         <property name="prettyPrint" value="true"/>
