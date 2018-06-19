@@ -12,6 +12,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import org.apache.cxf.jaxrs.ext.search.SearchContext;
+import org.apache.cxf.jaxrs.ext.xml.XSLTTransform;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -83,6 +84,7 @@ public class DocumentsResourceImpl implements DocumentsResource {
 
     @Override
     //@Cacheable("find")
+    @XSLTTransform(value = "stylesheets/jparestresource/document.xsl", mediaTypes = "application/xhtml+xml", type = XSLTTransform.TransformType.SERVER)
     @Lockable
     public Document find(long documentId) {
         return documentMapper.createFromEntity(documentLogic.getDocument(documentId));

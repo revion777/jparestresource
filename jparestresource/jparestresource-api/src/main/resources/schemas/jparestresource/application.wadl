@@ -80,6 +80,9 @@
                         <representation mediaType="application/json">
                             <doc>document data</doc>
                         </representation>
+                        <representation mediaType="application/xhtml+xml">
+                            <doc>document data</doc>
+                        </representation>                        
                     </response>
                 </method>
                 <method name="PUT" id="edit">

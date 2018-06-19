@@ -144,7 +144,7 @@
         </property>
     </bean>
 
-    <!-- Configure xslt support, see also web.xml for refreshTemplates env-entry
+    <!-- Configure xslt support, see also web.xml for refreshTemplates env-entry -->
     <bean id="uriResolver" class="ru.ilb.common.jaxrs.xml.transform.ServletContextURIResolver"/>
     <bean id="xsltProvider" class="org.apache.cxf.jaxrs.provider.XSLTJaxbProvider" >
         <property name="resolver" ref="uriResolver"/>
@@ -153,7 +153,7 @@
             <jee:jndi-lookup jndi-name="java:/comp/env/refreshTemplates" />
         </property>
     </bean>
-    -->
+    
     <bean id="searchContextProvider" class="org.apache.cxf.jaxrs.ext.search.SearchContextProvider"/>
 
     <util:map id="namespaceMap" map-class="java.util.Hashtable">
@@ -240,6 +240,7 @@
         <jaxrs:providers>
             <ref bean="jaxbContextResolver"/>
             <ref bean="jaxbProvider"/>
+            <ref bean="xsltProvider"/>
             <ref bean="jsonProvider"/>
             <ref bean="searchContextProvider"/>
             <ref bean="exceptionHandler"/>
@@ -268,6 +269,7 @@
         <jaxrs:extensionMappings>
             <entry key="xml" value="application/xml;charset=UTF-8"/>
             <entry key="json" value="application/json;charset=UTF-8"/>
+            <entry key="xhtml" value="application/xhtml+xml"/>
         </jaxrs:extensionMappings>
     </jaxrs:server>
     <!-- playing with jpa-rs 

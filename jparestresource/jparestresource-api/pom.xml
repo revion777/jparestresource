@@ -26,6 +26,15 @@
             <artifactId>jaxb-java-time-adapters</artifactId>
             <version>1.1.3</version>        
         </dependency>
+        <!-- dependency for <representation mediaType="multipart/form-data" />  
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-frontend-jaxrs</artifactId>
+            <version>${apache-cxf.version}</version>
+            <scope>compile</scope>
+        </dependency>        
+        -->
+        
         <dependency>
             <groupId>javax</groupId>
             <artifactId>javaee-web-api</artifactId>
@@ -59,6 +68,15 @@
                                         <extraarg>-inheritResourceParams</extraarg>
                                         <extraarg>-javaDocs</extraarg>
                                         <extraarg>-xjc-Xjavadoc</extraarg>
+                                        <!-- repMap examples 
+                                        <extraarg>-repMap</extraarg>
+                                        <extraarg>application/*=java.io.InputStream</extraarg>
+                                        <extraarg>-repMap</extraarg>
+                                        <extraarg>image/*=java.io.InputStream</extraarg>
+                                        <extraarg>-repMap</extraarg>
+                                        <extraarg>application/xml=java.lang.String</extraarg>
+                                        -->
+                                        
                                         <extraarg>-tMap</extraarg>
                                         <extraarg>{urn:ru:ilb:jparestresource:core}uuid=java.util.UUID</extraarg>
                                         <extraarg>-beanValidation</extraarg>
