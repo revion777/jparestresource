@@ -69,7 +69,20 @@
             </goals>
             <activatedProfiles>
                 <activatedProfile>server</activatedProfile>
+                <activatedProfile>standalone</activatedProfile>
                 <activatedProfile>schemagen</activatedProfile>
+            </activatedProfiles>
+        </action>
+        <action>
+            <actionName>CUSTOM-java2wadl</actionName>
+            <displayName>java2wadl</displayName>
+            <goals>
+                <goal>install</goal>
+            </goals>
+            <activatedProfiles>
+                <activatedProfile>standalone</activatedProfile>
+                <activatedProfile>server</activatedProfile>
+                <activatedProfile>java2wadl</activatedProfile>
             </activatedProfiles>
         </action>        
     </actions>
