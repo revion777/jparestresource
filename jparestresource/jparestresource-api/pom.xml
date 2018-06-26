@@ -76,7 +76,12 @@
                                         <extraarg>-repMap</extraarg>
                                         <extraarg>application/xml=java.lang.String</extraarg>
                                         -->
-                                        
+                                        <extraarg>-tMap</extraarg>
+                                        <extraarg>{http://www.w3.org/2001/XMLSchema}date=java.time.LocalDate</extraarg>
+                                        <extraarg>-tMap</extraarg>
+                                        <extraarg>{http://www.w3.org/2001/XMLSchema}dateTime=java.time.LocalDateTime</extraarg>
+                                        <extraarg>-tMap</extraarg>
+                                        <extraarg>{http://www.w3.org/2001/XMLSchema}time=java.time.LocalTime</extraarg>
                                         <extraarg>-tMap</extraarg>
                                         <extraarg>{urn:ru:ilb:jparestresource:core}uuid=java.util.UUID</extraarg>
                                         <extraarg>-beanValidation</extraarg>
