@@ -19,7 +19,7 @@
         <mysql-connector.version>5.1.31</mysql-connector.version>
         <eclipselink.version>2.7.1</eclipselink.version>
         <javax-persistence.version>2.1.1</javax-persistence.version>
-        <javax.ws.rs-api.version>2.0.1</javax.ws.rs-api.version>
+        <javax.ws.rs-api.version>2.1</javax.ws.rs-api.version>
         <org.springframework.version>5.0.6.RELEASE</org.springframework.version>
         <swagger.ui.version>2.2.10-1</swagger.ui.version>
         <maven.test.skip>false</maven.test.skip>
