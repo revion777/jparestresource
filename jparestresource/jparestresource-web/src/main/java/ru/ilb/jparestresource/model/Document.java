@@ -8,30 +8,32 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Index;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
-import ru.ilb.common.jpa.history.AutoHistory;
 import javax.xml.bind.annotation.*;
-import java.util.ArrayList;
+import org.eclipse.persistence.annotations.CascadeOnDelete;
+import ru.ilb.common.jpa.history.AutoHistory;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement
 @Entity
-@Table(indexes = {
-    @Index(columnList = "DOCDATE")})
+@Table(indexes = @Index(columnList = "DOCDATE"))
 @AutoHistory
 public class Document implements Serializable {
 
-    @Column(nullable = false)
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(nullable = false)
     private Long id;
 
     /**
@@ -54,12 +56,17 @@ public class Document implements Serializable {
     @Basic
     private LocalDate docDate;
 
-    @OneToMany(mappedBy = "document")
+    @OneToOne(fetch = FetchType.LAZY, orphanRemoval = true, cascade = CascadeType.ALL)
+    @CascadeOnDelete
+    private Document document;
+
+    @OneToMany(mappedBy = "document", orphanRemoval = true, cascade = CascadeType.ALL)
+    @CascadeOnDelete
     @XmlTransient
     private List<Docfile> docfiles;
 
     public Long getId() {
-        return this.id;
+        return id;
     }
 
     public void setId(Long id) {
@@ -77,7 +84,7 @@ public class Document implements Serializable {
      * @return {@link #displayName}
      */
     public String getDisplayName() {
-        return this.displayName;
+        return displayName;
     }
 
     /**
@@ -100,7 +107,7 @@ public class Document implements Serializable {
      * @return {@link #description}
      */
     public String getDescription() {
-        return this.description;
+        return description;
     }
 
     /**
@@ -123,7 +130,7 @@ public class Document implements Serializable {
      * @return {@link #docDate}
      */
     public LocalDate getDocDate() {
-        return this.docDate;
+        return docDate;
     }
 
     /**
@@ -140,11 +147,24 @@ public class Document implements Serializable {
         return this;
     }
 
+    public Document getDocument() {
+        return document;
+    }
+
+    public void setDocument(Document document) {
+        this.document = document;
+    }
+
+    public Document withDocument(Document document) {
+        this.document = document;
+        return this;
+    }
+
     public List<Docfile> getDocfiles() {
         if (docfiles == null) {
             docfiles = new ArrayList<>();
         }
-        return this.docfiles;
+        return docfiles;
     }
 
     public void setDocfiles(List<Docfile> docfiles) {

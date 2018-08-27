@@ -12,9 +12,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import ru.ilb.common.jpa.history.AutoHistory;
 import javax.xml.bind.annotation.*;
-import java.util.ArrayList;
+import ru.ilb.common.jpa.history.AutoHistory;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement
@@ -22,9 +21,9 @@ import java.util.ArrayList;
 @AutoHistory
 public class Docfile implements Serializable {
 
-    @Column(nullable = false)
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(nullable = false)
     private Long id;
 
     /**
@@ -49,7 +48,7 @@ public class Docfile implements Serializable {
     private Document document;
 
     public Long getId() {
-        return this.id;
+        return id;
     }
 
     public void setId(Long id) {
@@ -67,7 +66,7 @@ public class Docfile implements Serializable {
      * @return {@link #comment}
      */
     public String getComment() {
-        return this.comment;
+        return comment;
     }
 
     /**
@@ -90,7 +89,7 @@ public class Docfile implements Serializable {
      * @return {@link #confirm}
      */
     public Boolean isConfirm() {
-        return this.confirm;
+        return confirm;
     }
 
     /**
@@ -113,7 +112,7 @@ public class Docfile implements Serializable {
      * @return {@link #userName}
      */
     public String getUserName() {
-        return this.userName;
+        return userName;
     }
 
     /**
@@ -131,7 +130,7 @@ public class Docfile implements Serializable {
     }
 
     public Document getDocument() {
-        return this.document;
+        return document;
     }
 
     public void setDocument(Document document) {
