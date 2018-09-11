@@ -83,11 +83,10 @@
     -->
 
 
-    <!-- uncomment to enable jdbc transaction support using JdbcTemplate -->
+    <!-- configure alternate jdbc transaction manager. do not dublicate tx:annotation-driven in case of default JPA transaction manager below -->
     <!--
-    <tx:annotation-driven transaction-manager="transactionManager" mode="aspectj"/>
     <jee:jndi-lookup id="dataSource" jndi-name="jdbc/jparesresource"/>
-    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+    <bean id="transactionManagerJdbc" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <property name="dataSource" ref="dataSource"/>
     </bean>
     -->
