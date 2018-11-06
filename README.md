@@ -28,11 +28,5 @@ uncomment line with &lt;Loader loaderClass="org.springframework.instrument.class
 and place spring-instrument-tomcat-4.3.2.RELEASE.jar in ${catalina.base}/lib
 
 
-##React frontend
-Install netbeans support for .nbigonre plugin, or node_modules background scanning will never end:
-https://netbeans.org/bugzilla/show_bug.cgi?id=238709#c36
-
-Direct link: http://deadlock.netbeans.org/job/nbms-and-javadoc/lastSuccessfulBuild/artifact/nbbuild/nbms/extra/org-netbeans-modules-nbignore.nbm
-
 ## Jeddict plugin for Netbeans
 Install Jeddict from  https://jeddict.github.io
