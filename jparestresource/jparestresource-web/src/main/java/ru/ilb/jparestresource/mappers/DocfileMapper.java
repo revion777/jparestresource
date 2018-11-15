@@ -23,6 +23,6 @@ import ru.ilb.jparestresource.view.Docfile;
  * @author slavb
  */
 @Mapper(componentModel = "spring")
-public interface DocfileMapper extends GenericMapper<ru.ilb.jparestresource.model.Docfile,Docfile>{
+public abstract class DocfileMapper implements GenericMapper<ru.ilb.jparestresource.model.Docfile,Docfile>{
 
 }
