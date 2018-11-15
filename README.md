@@ -16,10 +16,12 @@ Project will be created. Before first run database should be created and access 
 
 ## Environment configuration
 Place in ${catalina.base}/lib following jars:
-* eclipselink-2.6.4.jar
+* eclipselink-2.7.1.jar
 * javax.json-1.0.4.jar
-* javax.persistence-2.1.0.jar
+* javax.persistence-2.1.1.jar
+* validation-api-1.1.0.Final.jar
 * mysql-connector-java-5.1.31.jar
+
 
 ##Note about Tomcat before 8.0.33
 TomcatInstrumentableClassLoader is not intended to work on Tomcat 8.0.33+, but required in older versions.
