@@ -55,9 +55,10 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-        <additionalparam>-Xdoclint:none</additionalparam>
-        <apache-cxf.version>3.2.4</apache-cxf.version>
-        <ilb-common.version>1.25</ilb-common.version>
+        <!-- https://blog.joda.org/2014/02/turning-off-doclint-in-jdk-8-javadoc.html -->
+        <doclint>none</doclint>
+        <apache-cxf.version>3.2.7</apache-cxf.version>
+        <ilb-common.version>1.26</ilb-common.version>
         <maven-source-plugin.version>2.4</maven-source-plugin.version>
         <maven-javadoc-plugin.version>3.0.1</maven-javadoc-plugin.version>
     </properties>
@@ -103,6 +104,8 @@
                 <version>${maven-javadoc-plugin.version}</version>
                 <configuration>
                     <notimestamp>true</notimestamp>
+                    <aggregate>true</aggregate>
+                    <doclint>none</doclint>
                     <doclet>ch.raffael.doclets.pegdown.PegdownDoclet</doclet>
                     <docletArtifact>
                         <groupId>ch.raffael.pegdown-doclet</groupId>
@@ -112,6 +115,13 @@
                     <useStandardDocletOptions>true</useStandardDocletOptions>
                 </configuration>
                 <executions>
+                    <execution>
+                        <id>aggregate</id>
+                        <goals>
+                            <goal>aggregate</goal>
+                        </goals>
+                        <phase>site</phase>
+                    </execution>
                     <execution>
                         <id>attach-javadocs</id>
                         <phase>prepare-package</phase>

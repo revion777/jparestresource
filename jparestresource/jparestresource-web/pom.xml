@@ -118,7 +118,15 @@
                             <artifactId>mapstruct-processor</artifactId>
                             <version>${org.mapstruct.version}</version>
                         </path>
-                    </annotationProcessorPaths>                    
+                    </annotationProcessorPaths>
+                    <compilerArgs>
+                        <compilerArg>
+                            -Amapstruct.suppressGeneratorTimestamp=true
+                        </compilerArg>
+                        <compilerArg>
+                            -Amapstruct.suppressGeneratorVersionInfoComment=true
+                        </compilerArg>
+                    </compilerArgs>
                 </configuration>
             </plugin>
             

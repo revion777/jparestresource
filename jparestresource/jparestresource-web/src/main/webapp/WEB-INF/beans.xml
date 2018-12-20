@@ -281,17 +281,17 @@
     </jaxrs:server>    
     -->
     <http-conf:conduit name="*.http-conduit">
-        <!--        <http-conf:tlsClientParameters>
+        <http-conf:tlsClientParameters>
             <sec:keyManagers keyPassword="${javax.net.ssl.keyStorePassword}">
-                <sec:keyStore type="${javax.net.ssl.keyStoreType:JKS}" password="${javax.net.ssl.keyStorePassword}" 
+                <sec:keyStore type="${javax.net.ssl.keyStoreType:JKS}" password="${javax.net.ssl.keyStorePassword}"
                               file="${javax.net.ssl.keyStore}"/>
             </sec:keyManagers>
             <sec:trustManagers>
-                <sec:keyStore type="${javax.net.ssl.trustStoreType:JKS}" file="${javax.net.ssl.trustStore}" password="${javax.net.ssl.trustStorePassword:#{null}}"/>
+                <sec:keyStore type="${javax.net.ssl.trustStoreType:JKS}" file="${javax.net.ssl.trustStore}" /> <!-- password="${javax.net.ssl.trustStorePassword:#{null}}" -->
             </sec:trustManagers>
-        </http-conf:tlsClientParameters>-->
+        </http-conf:tlsClientParameters>
         <!-- disable chunking, not works everywhere -->
         <http-conf:client AllowChunking="false" />
-    </http-conf:conduit>      
+    </http-conf:conduit>
     
 </beans>
