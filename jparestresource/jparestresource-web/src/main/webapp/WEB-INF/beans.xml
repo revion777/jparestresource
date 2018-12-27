@@ -214,9 +214,9 @@
     </bean>
     
     <!-- Provider to mail fatal errors to server admin -->
-    <bean id="exceptionHandler" class="ru.ilb.common.jaxrs.exceptionhandler.SendMailExceptionHandler">
+<!--    <bean id="exceptionHandler" class="ru.ilb.common.jaxrs.exceptionhandler.SendMailExceptionHandler">
         <property name="mailTo" value="${SERVER_ADMIN}"/>
-    </bean>
+    </bean>-->
     
     <!-- inbound request logging -->
     <bean id="logInbound" class="org.apache.cxf.interceptor.LoggingInInterceptor"/>
@@ -242,7 +242,7 @@
             <ref bean="xsltProvider"/>
             <ref bean="jsonProvider"/>
             <ref bean="searchContextProvider"/>
-            <ref bean="exceptionHandler"/>
+            <!--<ref bean="exceptionHandler"/>-->
             <ref bean="validationExceptionMapper"/>
             <ref bean="authorizationHandler"/>
             <ref bean="wadlGenerator"/>
